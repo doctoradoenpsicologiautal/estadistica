@@ -1,6 +1,6 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAME HERE"
+title: "Estadística para todxs"
+author: "Programa de Doctorado en Psicología, Universidad de Talca"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
