@@ -8,4 +8,4 @@ site: bookdown::bookdown_site
 # Down the rabbit-hole
 Este curso se basa en Statistics without tears de Derek Rowntree y Discovering statistics using R de Andy Field, Jeremy Miles y Zoë Field. Este curso también utiliza material del libro "Discovering statistics using R". Este material es accesible aquí.
 
-Este curso asume que no sabes nada de estadística. Sin embargo, si asume que sabes aritmética y fracciones. La base de datos que vamos a utilizar se encuentra aquí.
+Este curso asume que no sabes nada de estadística. Sin embargo, si asume que sabes aritmética y fracciones. La base de datos que vamos a utilizar se encuentra aquí. Test2.
