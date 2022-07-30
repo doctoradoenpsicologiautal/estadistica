@@ -5,14 +5,10 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
 
-# Down the rabbit-hole
-Este curso se basa en Statistics without tears de Derek Rowntree y Discovering statistics using R de Andy Field, Jeremy Miles y Zoë Field. Este curso también utiliza material del libro "Discovering statistics using R". Este material es accesible aquí.
+# Preámbulo
 
-Este curso asume que no sabes nada de estadística. Sin embargo, si asume que sabes aritmética y fracciones. La base de datos que vamos a utilizar se encuentra aquí. Test2.
+Este curso se basa en <a href="https://www.goodreads.com/book/show/578667.Statistics_Without_Tears" target="_blank">Statistics without tears</a> de Derek Rowntree y <a href="https://www.discoveringstatistics.com/books/discovering-statistics-using-r/" target="_blank">Discovering statistics using R</a>  de Andy Field, Jeremy Miles y Zoë Field. Este curso también utiliza material del libro "Discovering statistics using R". Este material es accesible <a href="https://studysites.uk.sagepub.com/dsur/study/articles.htm" target="_blank">aquí.</a>
 
-Este curso se basa en <a href="https://www.goodreads.com/book/show/578667.Statistics_Without_Tears" target="_blank">Statistics without tears</a> de Derek Rowntree y <a href="https://www.discoveringstatistics.com/books/discovering-statistics-using-r/" target="_blank">Discovering statistics using R</a>  de Andy Field, Jeremy Miles y Zoë Field. Dicho eso, cualquier error que puedas encontrar es mi responsabilidad.<br/>
-Este curso también utiliza material del libro "Discovering statistics using R". Este material no me pertenece y es accesible <a href="https://studysites.uk.sagepub.com/dsur/study/articles.htm" target="_blank">aquí.</a>
+Este curso asume que no sabes nada de estadística. Sin embargo, si asume que sabes aritmética básica y fracciones. La base de datos que vamos a utilizar se encuentra <a href="https://github.com/joseluisulloafulgeri/estadistica101_database" target="_blank">aquí.</a>
 
-Este curso asume que no sabes nada de estadística. Sin embargo, si asume que sabes lo básico de aritmética y fracciones. La mejor manera de aprender es que respondas las preguntas clave de cada capítulo. Y que realizes los ejercicios con la ayuda de Jamovi. La base de datos que vamos a utilizar se encuentra <a href="https://github.com/joseluisulloafulgeri/estadistica101_database" target="_blank">aquí.</a> Y las diapositivas están <a href="https://osf.io/6hv75/" target="_blank">aquí.</a>
-
-¡Que disfrutes el curso!
+¡Que disfrutes el curso! </a>
