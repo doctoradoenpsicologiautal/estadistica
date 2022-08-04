@@ -1,2 +1,26 @@
 # ¿Para qué sirve la estadística?
 
+## Una visión general
+Primero vamos a tratar de hacernos una idea general de lo que hace la estadística.
+En nuestra vida corriente queremos averiguar cosas sobre el mundo alrededor nuestro.
+Ese "mundo" (o población) puede ser el mundo entero, puede ser nuestro país o puede ser nuestro colegio. Eso depende de la pregunta que hagamos. Por ejemplo, si se trata de una enfermedad podríamos querer saber el número de afectados de Parkinson en el mundo entero, o podría interesarnos sólo en los afectados por Parkinson en nuestro país. Además, si nos enfocamos en personas podríamos querer saber cuantos de ellos están afectados con Parkinson. Si nos enfocamos en tratamientos nos gustaría saber cuales tratamientos son efectivos. Al tratar de averiguar cosas sobre el mundo debemos buscar una manera de describir estas cosas de una manera que nos haga sentido.
+
+Revisa este <a href="https://www.youtube.com/watch?v=10yOugyLLQg" target="_blank">video</a> para que te hagas una idea de estos conceptos (~ 9 minutos).
+
+## El método científico
+
+## ¿Qué hace una prueba estadística?
+
+## Conceptos estadísticos
+### ¿Qué refleja la significancia? La lógica de la estadística tradicional.
+### Hipótesis de 2 colas versus de 1 cola.
+### Tipos de errores estadísticos.
+### El poder estadístico, el tamaño del efecto y el tamaño de la muestra.
+### ¿Cómo planificar mejor mi estudio? ¿Por qué debo planificar mi análisis ANTES de recolectar los datos?
+
+
+
+
+
+
+
