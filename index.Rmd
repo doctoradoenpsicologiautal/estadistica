@@ -1,6 +1,6 @@
 --- 
 title: "Estadística para todxs"
-author: "Programa de Doctorado en Psicología, Universidad de Talca"
+author: "Facultad de Psicología, Universidad de Talca"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---

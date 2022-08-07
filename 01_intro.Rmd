@@ -1,13 +1,25 @@
-# ¿Para qué sirve la estadística?
+# Introducción a la estadística
 
-## Una visión general
-Primero vamos a tratar de hacernos una idea general de lo que hace la estadística.
-En nuestra vida corriente queremos averiguar cosas sobre el mundo alrededor nuestro.
-Ese "mundo" (o población) puede ser el mundo entero, puede ser nuestro país o puede ser nuestro colegio. Eso depende de la pregunta que hagamos. Por ejemplo, si se trata de una enfermedad podríamos querer saber el número de afectados de Parkinson en el mundo entero, o podría interesarnos sólo en los afectados por Parkinson en nuestro país. Además, si nos enfocamos en personas podríamos querer saber cuantos de ellos están afectados con Parkinson. Si nos enfocamos en tratamientos nos gustaría saber cuales tratamientos son efectivos. Al tratar de averiguar cosas sobre el mundo debemos buscar una manera de describir estas cosas de una manera que nos haga sentido.
+En este capítulo introductorio vamos a ir paso a paso. Vamos a hacernos de una visión general de la estadística y vamos a entender por qué tenemos que hacer "inferencias", es decir, sacar conclusiones de algunos datos que recolectamos para saber algo del mundo alredor nuestro (de una población en particular).
 
-Revisa este <a href="https://www.youtube.com/watch?v=10yOugyLLQg" target="_blank">video</a> para que te hagas una idea de estos conceptos (~ 9 minutos).
+## ¿Que aprenderas aquí?
+- ¿Qué es la estadística descriptiva y la estadística inferencial?
+- ¿Qué es una población y una muestra? ¿Qué son los "parámetros"" y los "estadísticos"?
+- ¿Que tipos de variables nos sirven para describir una muestra?
+- ¿Que significa "definir variables" y operacionalizar?
+- ¿Que es una variable independiente y una variable dependiente?
+- ¿Cómo se construye una hipótesis?
+- ¿Cuál es la diferencia entre un diseño intra-sujetos y un diseño entre-sujetos?
+- ¿Qué es un diseño experimental mixto?
+- ¿Cómo se define un diseño experimental?
 
-## El método científico
+## ¿Para qué sirve la estadística?
+
+### <a href="https://www.youtube.com/watch?v=10yOugyLLQg" target="_blank">Video 1</a> (~ 10 minutos)
+Hacemos inferencias estadísticas (tomamos una muestra representativa de una población) simplemente porque no podemos medir a todas las personas y todos los eventos en el mundo. Para hacer estas inferencias nos ayudamos de las probabiblidades, una rama de las matemáticas qué nos permiten describir la ocurrencia de eventos en el mundo.
+
+### <a href="https://www.youtube.com/watch?v=ZHQsBt2xGkE" target="_blank">Video 2</a> (~ 10 minutos)
+Cuando recolectamos datos es importante saber que de tipo de variables se trata. No es lo mismo, anotar el nombre o el colegio dónde estudio una persona, que anota su edad. Al saber con que tipo de variables contamos podemos diseñar la mejor manera de analizar estos datos.
 
 ## ¿Qué hace una prueba estadística?
 

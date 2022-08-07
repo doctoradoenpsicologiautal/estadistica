@@ -1,6 +1,8 @@
+introducción-a-la-estadística
+que-aprenderas-aquí
 para-qué-sirve-la-estadística
-una-visión-general
-el-método-científico
+video-1-10-minutos
+video-2-10-minutos
 qué-hace-una-prueba-estadística
 conceptos-estadísticos
 qué-refleja-la-significancia-la-lógica-de-la-estadística-tradicional.
@@ -8,6 +10,6 @@ hipótesis-de-2-colas-versus-de-1-cola.
 tipos-de-errores-estadísticos.
 el-poder-estadístico-el-tamaño-del-efecto-y-el-tamaño-de-la-muestra.
 cómo-planificar-mejor-mi-estudio-por-qué-debo-planificar-mi-análisis-antes-de-recolectar-los-datos
-el-método-científico-1
+el-método-científico
 mirar-los-datos
 modelos-estadísticos
