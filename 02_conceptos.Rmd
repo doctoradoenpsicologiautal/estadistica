@@ -1,0 +1,35 @@
+# Conceptos estadísticos
+
+## La significancia
+Revisa este <a href="https://www.youtube.com/watch?v=cOtuIWu9NQ0" target="_blank">video</a> y trata de responder:
+
+- ¿Qué me dice y qué no me dice el valor de p?
+- ¿Cómo se interpreta un resultado estadístico nulo?
+
+## Colas
+Revisa este <a href="https://www.youtube.com/watch?v=dQ0LnqUAVnA" target="_blank">video</a> y trata de responder:
+
+- ¿Cuál es la diferencia entre una hipótesis de una cola y una hipótesis de dos colas?
+- ¿Por qué los criterios de significancia son más altos para una hipótesis de una cola que para una hipótesis de dos colas?
+
+## Errores estadísticos
+Revisa este <a href="https://www.youtube.com/watch?v=AbsXEad0gMQ" target="_blank">video</a> y trata de responder:
+
+- ¿Qué es un error de tipo I?
+- ¿Qué es un error de tipo II?
+- ¿Por qué hay un balance entre el error de tipo I y II?
+- ¿Qué es mas perjudicial para un estudio? ¿Un error de tipo I o II?
+
+## Tamaño & poder
+Revisa este <a href="https://www.youtube.com/watch?v=Xh9-Mt2_WTE" target="_blank">video</a> y trata de responder:
+
+- ¿Qué es el tamaño del efecto?
+- ¿Cómo se contabiliza el tamaño del efecto?
+- ¿Qué es el poder estadístico?
+- ¿Cómo definimos el tamaño de la muestra que necesitamos para un experimento?
+
+## Experimentar
+Revisa este <a href="https://www.youtube.com/watch?v=bumW9zlQJdo" target="_blank">video</a> y trata de responder:
+
+- ¿Cómo planificar mejor mi estudio?
+- ¿Por qué debo planificar mi análisis ANTES de recolectar los datos?
