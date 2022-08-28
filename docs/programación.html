@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 3 Programación | Estadística para todxs</title>
+  <meta name="description" content="Capítulo 3 Programación | Estadística para todxs" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 3 Programación | Estadística para todxs" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 3 Programación | Estadística para todxs" />
+  
+  
+  
+
+<meta name="author" content="Facultad de Psicología, Universidad de Talca" />
+
+
+<meta name="date" content="2022-08-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="conceptos-estadísticos.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Estadística</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preámbulo</a></li>
+<li class="chapter" data-level="1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html"><i class="fa fa-check"></i><b>1</b> Introducción a la estadística</a><ul>
+<li class="chapter" data-level="1.1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#qué-es-la-estadística"><i class="fa fa-check"></i><b>1.1</b> ¿Qué es la estadística?</a></li>
+<li class="chapter" data-level="1.2" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#variables"><i class="fa fa-check"></i><b>1.2</b> ¿Variables?</a></li>
+<li class="chapter" data-level="1.3" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#diseños-experimentales"><i class="fa fa-check"></i><b>1.3</b> Diseños experimentales</a></li>
+<li class="chapter" data-level="1.4" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#qué-medimos"><i class="fa fa-check"></i><b>1.4</b> ¿Qué medimos?</a></li>
+<li class="chapter" data-level="1.5" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#un-prueba-estadística"><i class="fa fa-check"></i><b>1.5</b> Un prueba estadística</a></li>
+<li class="chapter" data-level="1.6" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#que-diseño-usaré"><i class="fa fa-check"></i><b>1.6</b> ¿Que diseño usaré?</a></li>
+<li class="chapter" data-level="1.7" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#una-historia-fantástica"><i class="fa fa-check"></i><b>1.7</b> Una historia fantástica</a></li>
+<li class="chapter" data-level="1.8" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#randomizar"><i class="fa fa-check"></i><b>1.8</b> ¿Randomizar?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html"><i class="fa fa-check"></i><b>2</b> Conceptos estadísticos</a><ul>
+<li class="chapter" data-level="2.1" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#la-significancia"><i class="fa fa-check"></i><b>2.1</b> La significancia</a></li>
+<li class="chapter" data-level="2.2" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#colas"><i class="fa fa-check"></i><b>2.2</b> Colas</a></li>
+<li class="chapter" data-level="2.3" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#errores-estadísticos"><i class="fa fa-check"></i><b>2.3</b> Errores estadísticos</a></li>
+<li class="chapter" data-level="2.4" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#tamaño-poder"><i class="fa fa-check"></i><b>2.4</b> Tamaño &amp; poder</a></li>
+<li class="chapter" data-level="2.5" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#experimentar"><i class="fa fa-check"></i><b>2.5</b> Experimentar</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="programación.html"><a href="programación.html"><i class="fa fa-check"></i><b>3</b> Programación</a><ul>
+<li class="chapter" data-level="3.1" data-path="programación.html"><a href="programación.html#empezando-a-trabajar-en-r"><i class="fa fa-check"></i><b>3.1</b> Empezando a trabajar en R</a></li>
+<li class="chapter" data-level="3.2" data-path="programación.html"><a href="programación.html#including-plots"><i class="fa fa-check"></i><b>3.2</b> Including Plots</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Estadística para todxs</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="programación" class="section level1">
+<h1><span class="header-section-number">Capítulo 3</span> Programación</h1>
+<div id="empezando-a-trabajar-en-r" class="section level2">
+<h2><span class="header-section-number">3.1</span> Empezando a trabajar en R</h2>
+<p>En un script es esencial incluir comentarios. De esta manera puedes acordarte (y otros puedes entender) que está haciendo tu código.<br />
+Para escribir un comentario debes anteponer un #. En el inicio de un script es un buen hábito poner una fecha y tus iniciales. Por ejemplo:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># JLUF 16/08/2022</span></code></pre></div>
+<p>También es buena idea que agregues una breve descripción de lo que hace tu código.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># JLUF 16/08/2022</span>
+<span class="co"># Estadística descriptiva</span></code></pre></div>
+<p>R tiene algunas funciones integradas. Por ejemplo: el promedio (<strong>mean</strong>) y la desviación estándar (<strong>sd</strong>). Para probar estas funciones podemos aplicarlas a una series de números (o vector). Para crear un vector podemos usar la <em>c</em> y un paréntesis. Lo que hacemos con la * c* es concatenar números.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># JLUF 16/08/2022</span>
+<span class="co"># Estadística descriptiva</span>
+
+<span class="co"># Promedio entre 2 y 3</span>
+<span class="kw">mean</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</code></pre></div>
+<pre><code>## [1] 2.5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Deviación estándar entre 2 y 3</span>
+<span class="kw">sd</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</code></pre></div>
+<pre><code>## [1] 0.7071068</code></pre>
+<p>Comúnmente para hacer un cálculo de manera óptima usamos algo que se llama asignación.<br />
+Es decir, creamos una variable y le asignamos un valor.<br />
+Por ejemplo, definimos que <strong>a</strong> equivale a 2 y <strong>b</strong> equivale a 3.<br />
+Luego podemos usar solamente esas variables para hacer cálculos.<br />
+Para asignar ponemos una flecha: &quot;&lt;-&quot;</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">2</span>
+b &lt;-<span class="st"> </span><span class="dv">3</span>
+<span class="kw">mean</span>(<span class="kw">c</span>(a,b))</code></pre></div>
+<pre><code>## [1] 2.5</code></pre>
+<p>También podemos crear variables que contengan texto.<br />
+Por ejemplo, podemos crear una lista con los integrantes de Metallica.<br />
+</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallica &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Lars&quot;</span>, <span class="st">&quot;James&quot;</span>, <span class="st">&quot;Jason&quot;</span>, <span class="st">&quot;Kirk&quot;</span>)
+metallica</code></pre></div>
+<pre><code>## [1] &quot;Lars&quot;  &quot;James&quot; &quot;Jason&quot; &quot;Kirk&quot;</code></pre>
+<p>Este es un vector de carácteres. Además, puedes usar las funciones <strong>str()</strong> y <strong>class()</strong> para averiguar la naturaleza de estas variables.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(metallica)</code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(metallica)</code></pre></div>
+<pre><code>##  chr [1:4] &quot;Lars&quot; &quot;James&quot; &quot;Jason&quot; &quot;Kirk&quot;</code></pre>
+<p>Para inspeccionar cada elemento de esta variable puedes usar el paréntesis cuadrado.<br />
+Esto se llama <em>indexar</em>. Por ejemplo, para ver el primer elemento puedes hacer lo siguiente:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallica[<span class="dv">1</span>]</code></pre></div>
+<pre><code>## [1] &quot;Lars&quot;</code></pre>
+<p>O podrías ver desde el primero al segundo.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallica[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</code></pre></div>
+<pre><code>## [1] &quot;Lars&quot;  &quot;James&quot;</code></pre>
+<p>O podrías ver desde el segundo al tercero.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallica[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]</code></pre></div>
+<pre><code>## [1] &quot;James&quot; &quot;Jason&quot;</code></pre>
+<p>Si te das cuenta que tu lista tiene un elemento incorrecto lo puedes eliminar. Para ello debes crear una nueva variable a partir de <em>metallica</em> pero dentro del paréntesis cuadrado usamos una fórmula lógica. La fórmula nos permite seleccionar ciertos elementos. Por ejemplo, si queremos todos los elementos de la variable metallica excepto el elemento Jason (de ahí viene la parte <em>!=</em>) podemos hacer lo siguente:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">new_metallica &lt;-<span class="st"> </span>metallica[metallica <span class="op">!=</span><span class="st"> &quot;Jason&quot;</span>]
+new_metallica</code></pre></div>
+<pre><code>## [1] &quot;Lars&quot;  &quot;James&quot; &quot;Kirk&quot;</code></pre>
+<p>También puedes eliminar dos elementos indicandole a R que quieres eliminar los elementos del 2 al 3:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallica_duo &lt;-<span class="st"> </span>metallica[<span class="op">-</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>)]
+metallica_duo</code></pre></div>
+<pre><code>## [1] &quot;Lars&quot; &quot;Kirk&quot;</code></pre>
+<p>Lo que podríamos hacer enseguida es agregar un nuevo elemento.<br />
+Para hacer esto concatenamos, usado la <em>c</em>, un variable con otra variable.<br />
+Por ejemplo, para concatenar new_metallica con &quot;Rob&quot; hacemos lo siguiente:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">last_metallica &lt;-<span class="st"> </span><span class="kw">c</span>(new_metallica, <span class="st">&quot;Rob&quot;</span>)
+last_metallica</code></pre></div>
+<pre><code>## [1] &quot;Lars&quot;  &quot;James&quot; &quot;Kirk&quot;  &quot;Rob&quot;</code></pre>
+<p>Incluso podríamos elegir dónde agregar a Rob.<br />
+Por ejemplo, lo podemos agregar al final.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">last_metallica_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Rob&quot;</span>, new_metallica)
+last_metallica_<span class="dv">2</span></code></pre></div>
+<pre><code>## [1] &quot;Rob&quot;   &quot;Lars&quot;  &quot;James&quot; &quot;Kirk&quot;</code></pre>
+<p>O lo podemos agregar en la penúltima posición:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">last_metallica_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">c</span>(new_metallica[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="st">&quot;Rob&quot;</span>, new_metallica[<span class="dv">3</span>])
+last_metallica_<span class="dv">3</span></code></pre></div>
+<pre><code>## [1] &quot;Lars&quot;  &quot;James&quot; &quot;Rob&quot;   &quot;Kirk&quot;</code></pre>
+<p><br />
+<br />
+<br />
+</p>
+<pre><code>Ejercicio:
+Crea una variable que represente a tu banda favorita.
+</code></pre>
+<p><br />
+<br />
+<br />
+Podemos crear variables de distintos tipos (lista de palabras o listas de números):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaNames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Lars&quot;</span>, <span class="st">&quot;James&quot;</span>, <span class="st">&quot;Kirk&quot;</span>, <span class="st">&quot;Rob&quot;</span>)
+metallicaNames</code></pre></div>
+<pre><code>## [1] &quot;Lars&quot;  &quot;James&quot; &quot;Kirk&quot;  &quot;Rob&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaAges &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">47</span>, <span class="dv">47</span>, <span class="dv">48</span>, <span class="dv">46</span>)
+metallicaAges</code></pre></div>
+<pre><code>## [1] 47 47 48 46</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaColor &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Blue&quot;</span>, <span class="st">&quot;Red&quot;</span>, <span class="st">&quot;Yellow&quot;</span>, <span class="st">&quot;Green&quot;</span>)
+metallicaColor</code></pre></div>
+<pre><code>## [1] &quot;Blue&quot;   &quot;Red&quot;    &quot;Yellow&quot; &quot;Green&quot;</code></pre>
+<p>Pero más importante que eso es que podemos reunir estas variables en una estructura mas compleja. Esta estructura se llama <strong>data frame</strong>. Un data frame puede acomodar distintos tipos de datos y los pone en distintas &quot;cajas&quot;. Para crear un data frame usamos la función <strong>data.frame</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame &lt;-<span class="st"> </span><span class="kw">data.frame</span>(metallicaNames, metallicaAges, metallicaColor)
+metallicaDataFrame</code></pre></div>
+<pre><code>##   metallicaNames metallicaAges metallicaColor
+## 1           Lars            47           Blue
+## 2          James            47            Red
+## 3           Kirk            48         Yellow
+## 4            Rob            46          Green</code></pre>
+<p>Fijate que al crear el data frame el nombre de la variable se vuelve el encabezado de esos datos en el dataframe. Si queremos podemos cambiarle el nombre a estos encabezados. Podemos hacer esto usando la función <strong>colnames</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(metallicaDataFrame) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;color&quot;</span>)
+metallicaDataFrame</code></pre></div>
+<pre><code>##    name age  color
+## 1  Lars  47   Blue
+## 2 James  47    Red
+## 3  Kirk  48 Yellow
+## 4   Rob  46  Green</code></pre>
+<p>O mejor aún puedes definirlo al momento de crear la data frame:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Name =</span> metallicaNames, <span class="dt">Age =</span> metallicaAges, <span class="dt">Color =</span> metallicaColor)
+metallicaDataFrame</code></pre></div>
+<pre><code>##    Name Age  Color
+## 1  Lars  47   Blue
+## 2 James  47    Red
+## 3  Kirk  48 Yellow
+## 4   Rob  46  Green</code></pre>
+<p>Mira también la estructura de este data frame. Verás que hay 4 observacions y 3 variables. Dos de estas listas son carácteres. # &quot;Name&quot; has become now a factor, R recognize this automatically</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(metallicaDataFrame)</code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    4 obs. of  3 variables:
+##  $ Name : chr  &quot;Lars&quot; &quot;James&quot; &quot;Kirk&quot; &quot;Rob&quot;
+##  $ Age  : num  47 47 48 46
+##  $ Color: chr  &quot;Blue&quot; &quot;Red&quot; &quot;Yellow&quot; &quot;Green&quot;</code></pre>
+<p>Para mirar cada una de las lista puedes usar el símbolo <strong>$</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame<span class="op">$</span>name</code></pre></div>
+<pre><code>## NULL</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame<span class="op">$</span>age</code></pre></div>
+<pre><code>## NULL</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame<span class="op">$</span>color</code></pre></div>
+<pre><code>## NULL</code></pre>
+<p>Además, podemos eliminar una de estas listas si no nos interesa.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame<span class="op">$</span>color &lt;-<span class="st"> </span><span class="ot">NULL</span>
+metallicaDataFrame</code></pre></div>
+<pre><code>##    Name Age  Color
+## 1  Lars  47   Blue
+## 2 James  47    Red
+## 3  Kirk  48 Yellow
+## 4   Rob  46  Green</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(cars)</code></pre></div>
+<pre><code>##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00</code></pre>
+</div>
+<div id="including-plots" class="section level2">
+<h2><span class="header-section-number">3.2</span> Including Plots</h2>
+<p>You can also embed plots, for example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(pressure)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/pressure-1.png" width="672" /></p>
+<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="conceptos-estadísticos.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/doctoradoenpsicologiautal/estadistica/edit/master/03_programacion.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/doctoradoenpsicologiautal/estadistica/blob/master/03_programacion.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

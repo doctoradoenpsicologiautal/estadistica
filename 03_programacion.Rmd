@@ -1,0 +1,234 @@
+# Programación
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Empezando a trabajar en R
+
+En un script es esencial incluir comentarios.
+De esta manera puedes acordarte (y otros puedes entender) que está haciendo tu código.\
+Para escribir un comentario debes anteponer un #.
+En el inicio de un script es un buen hábito poner una fecha y tus iniciales. Por ejemplo:
+
+```{r}
+# JLUF 16/08/2022
+```
+
+También es buena idea que agregues una breve descripción de lo que hace tu código.
+
+```{r}
+# JLUF 16/08/2022
+# Estadística descriptiva
+```
+
+R tiene algunas funciones integradas. Por ejemplo: el promedio (**mean**) y la desviación estándar (**sd**).
+Para probar estas funciones podemos aplicarlas a una series de números (o vector). Para crear un vector podemos usar la *c* y un paréntesis. Lo que hacemos con la * c* es concatenar números.
+
+```{r}
+# JLUF 16/08/2022
+# Estadística descriptiva
+
+# Promedio entre 2 y 3
+mean(c(2,3))
+
+# Deviación estándar entre 2 y 3
+sd(c(2,3))
+
+```
+
+Comúnmente para hacer un cálculo de manera óptima usamos algo que se llama asignación.\
+Es decir, creamos una variable y le asignamos un valor.\
+Por ejemplo, definimos que **a** equivale a 2 y **b** equivale a 3.\
+Luego podemos usar solamente esas variables para hacer cálculos.\
+Para asignar ponemos una flecha: "<-"
+
+
+```{r}
+a <- 2
+b <- 3
+mean(c(a,b))
+```
+
+También podemos crear variables que contengan texto.\
+Por ejemplo, podemos crear una lista con los integrantes de Metallica.\
+
+```{r}
+metallica <- c("Lars", "James", "Jason", "Kirk")
+metallica
+```
+
+Este es un vector de carácteres.
+Además, puedes usar las funciones **str()** y **class()** para averiguar la naturaleza de estas variables.
+
+```{r}
+class(metallica)
+str(metallica)
+```
+
+Para inspeccionar cada elemento de esta variable puedes usar el paréntesis cuadrado.\
+Esto se llama *indexar*.
+Por ejemplo, para ver el primer elemento puedes hacer lo siguiente:
+
+```{r}
+metallica[1]
+```
+
+O podrías ver desde el primero al segundo.
+
+```{r}
+metallica[1:2]
+```
+
+O podrías ver desde el segundo al tercero.
+
+```{r}
+metallica[2:3]
+```
+
+Si te das cuenta que tu lista tiene un elemento incorrecto lo puedes eliminar.
+Para ello debes crear una nueva variable a partir de *metallica* pero dentro del paréntesis cuadrado usamos una fórmula lógica. La fórmula nos permite seleccionar ciertos elementos.
+Por ejemplo, si queremos todos los elementos de la variable metallica excepto el elemento Jason (de ahí viene la parte *!=*) podemos hacer lo siguente:
+
+```{r}
+new_metallica <- metallica[metallica != "Jason"]
+new_metallica
+```
+
+También puedes eliminar dos elementos indicandole a R que quieres eliminar los elementos del 2 al 3:
+
+```{r}
+metallica_duo <- metallica[-c(2,3)]
+metallica_duo
+```
+
+Lo que podríamos hacer enseguida es agregar un nuevo elemento.\
+Para hacer esto concatenamos, usado la *c*, un variable con otra variable.\
+Por ejemplo, para concatenar new_metallica con "Rob" hacemos lo siguiente:
+
+```{r}
+last_metallica <- c(new_metallica, "Rob")
+last_metallica
+```
+
+Incluso podríamos elegir dónde agregar a Rob.\
+Por ejemplo, lo podemos agregar al final.
+
+```{r}
+last_metallica_2 <- c("Rob", new_metallica)
+last_metallica_2
+```
+
+O lo podemos agregar en la penúltima posición:
+
+```{r}
+last_metallica_3 <- c(new_metallica[1:2], "Rob", new_metallica[3])
+last_metallica_3
+```
+
+\
+\
+\
+
+```
+Ejercicio:
+Crea una variable que represente a tu banda favorita.
+
+```
+
+\
+\
+\
+
+Podemos crear variables de distintos tipos (lista de palabras o listas de números):
+
+```{r}
+metallicaNames <- c("Lars", "James", "Kirk", "Rob")
+metallicaNames
+metallicaAges <- c(47, 47, 48, 46)
+metallicaAges
+metallicaColor <- c("Blue", "Red", "Yellow", "Green")
+metallicaColor
+
+```
+
+Pero más importante que eso es que podemos reunir estas variables en una estructura mas compleja.
+Esta estructura se llama **data frame**.
+Un data frame puede acomodar distintos tipos de datos y los pone en distintas "cajas".
+Para crear un data frame usamos la función **data.frame**
+
+```{r}
+metallicaDataFrame <- data.frame(metallicaNames, metallicaAges, metallicaColor)
+metallicaDataFrame
+```
+
+Fijate que al crear el data frame el nombre de la variable se vuelve el encabezado de esos datos en el dataframe.
+Si queremos podemos cambiarle el nombre a estos encabezados.
+Podemos hacer esto usando la función **colnames**.
+
+```{r}
+colnames(metallicaDataFrame) <- c("name", "age", "color")
+metallicaDataFrame
+```
+
+O mejor aún puedes definirlo al momento de crear la data frame:
+
+```{r}
+metallicaDataFrame <- data.frame(Name = metallicaNames, Age = metallicaAges, Color = metallicaColor)
+metallicaDataFrame
+```
+
+Mira también la estructura de este data frame.
+Verás que hay 4 observacions y 3 variables.
+Dos de estas listas son carácteres.
+# "Name" has become now a factor, R recognize this automatically
+
+```{r}
+str(metallicaDataFrame)
+```
+
+Para mirar cada una de las lista puedes usar el símbolo **$**
+
+```{r}
+metallicaDataFrame$name
+metallicaDataFrame$age
+metallicaDataFrame$color
+
+```
+
+Además, podemos eliminar una de estas listas si no nos interesa.
+
+```{r}
+metallicaDataFrame$color <- NULL
+metallicaDataFrame
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=TRUE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+

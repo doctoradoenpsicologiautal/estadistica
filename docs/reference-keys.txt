@@ -13,3 +13,6 @@ colas
 errores-estadísticos
 tamaño-poder
 experimentar
+programación
+empezando-a-trabajar-en-r
+including-plots
