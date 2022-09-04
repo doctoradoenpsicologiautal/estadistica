@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2022-08-28" />
+<meta name="date" content="2022-09-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -126,7 +126,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="3" data-path="programación.html"><a href="programación.html"><i class="fa fa-check"></i><b>3</b> Programación</a><ul>
 <li class="chapter" data-level="3.1" data-path="programación.html"><a href="programación.html#empezando-a-trabajar-en-r"><i class="fa fa-check"></i><b>3.1</b> Empezando a trabajar en R</a></li>
-<li class="chapter" data-level="3.2" data-path="programación.html"><a href="programación.html#including-plots"><i class="fa fa-check"></i><b>3.2</b> Including Plots</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -264,42 +263,97 @@ metallicaDataFrame</code></pre></div>
 ## 2 James  47    Red
 ## 3  Kirk  48 Yellow
 ## 4   Rob  46  Green</code></pre>
-<p>Mira también la estructura de este data frame. Verás que hay 4 observacions y 3 variables. Dos de estas listas son carácteres. # &quot;Name&quot; has become now a factor, R recognize this automatically</p>
+<p>Mira también la estructura de este data frame. Verás que hay 4 observacions y 3 variables. Dos de estas listas son carácteres.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(metallicaDataFrame)</code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    4 obs. of  3 variables:
 ##  $ Name : chr  &quot;Lars&quot; &quot;James&quot; &quot;Kirk&quot; &quot;Rob&quot;
 ##  $ Age  : num  47 47 48 46
 ##  $ Color: chr  &quot;Blue&quot; &quot;Red&quot; &quot;Yellow&quot; &quot;Green&quot;</code></pre>
 <p>Para mirar cada una de las lista puedes usar el símbolo <strong>$</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame<span class="op">$</span>name</code></pre></div>
-<pre><code>## NULL</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame<span class="op">$</span>age</code></pre></div>
-<pre><code>## NULL</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame<span class="op">$</span>color</code></pre></div>
-<pre><code>## NULL</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame<span class="op">$</span>Name</code></pre></div>
+<pre><code>## [1] &quot;Lars&quot;  &quot;James&quot; &quot;Kirk&quot;  &quot;Rob&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame<span class="op">$</span>Age</code></pre></div>
+<pre><code>## [1] 47 47 48 46</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame<span class="op">$</span>Color</code></pre></div>
+<pre><code>## [1] &quot;Blue&quot;   &quot;Red&quot;    &quot;Yellow&quot; &quot;Green&quot;</code></pre>
 <p>Además, podemos eliminar una de estas listas si no nos interesa.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame<span class="op">$</span>color &lt;-<span class="st"> </span><span class="ot">NULL</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame<span class="op">$</span>Color &lt;-<span class="st"> </span><span class="ot">NULL</span>
 metallicaDataFrame</code></pre></div>
-<pre><code>##    Name Age  Color
-## 1  Lars  47   Blue
-## 2 James  47    Red
-## 3  Kirk  48 Yellow
-## 4   Rob  46  Green</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(cars)</code></pre></div>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
-</div>
-<div id="including-plots" class="section level2">
-<h2><span class="header-section-number">3.2</span> Including Plots</h2>
-<p>You can also embed plots, for example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(pressure)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/pressure-1.png" width="672" /></p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
+<pre><code>##    Name Age
+## 1  Lars  47
+## 2 James  47
+## 3  Kirk  48
+## 4   Rob  46</code></pre>
+<p>Mas importante aún es el hecho que podemos hacer cálculos matemáticos de forma masiva. Primero, agreguemos una columna nueva:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame<span class="op">$</span>ChildAge &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">4</span>, <span class="dv">6</span>)
+metallicaDataFrame</code></pre></div>
+<pre><code>##    Name Age ChildAge
+## 1  Lars  47       12
+## 2 James  47       12
+## 3  Kirk  48        4
+## 4   Rob  46        6</code></pre>
+<p>Luego, podemos calcular la diferencia entre estas dos columnas y la asignamos a una nueva columna:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame<span class="op">$</span>FatherhoodAge &lt;-<span class="st"> </span>metallicaDataFrame<span class="op">$</span>Age <span class="op">-</span><span class="st"> </span>metallicaDataFrame<span class="op">$</span>ChildAge
+metallicaDataFrame</code></pre></div>
+<pre><code>##    Name Age ChildAge FatherhoodAge
+## 1  Lars  47       12            35
+## 2 James  47       12            35
+## 3  Kirk  48        4            44
+## 4   Rob  46        6            40</code></pre>
+<p>Podemos agregar mas datos a partir de otra variable. Y para crear variables podemos concatenar pedazos de datos. Por ejemplo, podríamos querer crear un set de datos de 15 valores que representen 3 condiciones experimentales. Cada condición experimental podría estar repetida 5 veces. Si queremos repetir la condición 1 tres veces hacemos:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">5</span>)</code></pre></div>
+<pre><code>## [1] 1 1 1 1 1</code></pre>
+<p>El primer parámetro dentro de la función <strong>rep</strong> es el número que quieres repetir. El segundo parámetro define las veces que se va a definir ese número.</p>
+<p>Luego, podemos concatenar repeticiones de distintos números.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vector1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">5</span>), <span class="kw">rep</span>(<span class="dv">2</span>,<span class="dv">5</span>), <span class="kw">rep</span>(<span class="dv">3</span>,<span class="dv">5</span>))
+vector1</code></pre></div>
+<pre><code>##  [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3</code></pre>
+<p>Y eso lo podemos agregar luego en una data frame.</p>
+<p>Veamos un ejemplo mas elaborado. Vamos a crear un base de datos sobre el nombre, la fecha de nacimiento y el trabajo de distintas personas. Para que R identifique los números como fechas usamos la función <strong>as.Date</strong>(por defecto el formato es yyyy-mm-dd).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">name &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Ben&quot;</span>, <span class="st">&quot;Martin&quot;</span>,<span class="st">&quot;Andy&quot;</span>,<span class="st">&quot;Paul&quot;</span>, <span class="st">&quot;Graham&quot;</span>,<span class="st">&quot;Carina&quot;</span>,<span class="st">&quot;Karina&quot;</span>,<span class="st">&quot;Doug&quot;</span>,<span class="st">&quot;Mark&quot;</span>, <span class="st">&quot;Zoe&quot;</span>)
+name</code></pre></div>
+<pre><code>##  [1] &quot;Ben&quot;    &quot;Martin&quot; &quot;Andy&quot;   &quot;Paul&quot;   &quot;Graham&quot; &quot;Carina&quot; &quot;Karina&quot; &quot;Doug&quot;   &quot;Mark&quot;   &quot;Zoe&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">birth_date &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">c</span>(<span class="st">&quot;1977-07-03&quot;</span>, <span class="st">&quot;1969-05-24&quot;</span>, <span class="st">&quot;1973-06-21&quot;</span>, <span class="st">&quot;1970-07-16&quot;</span>, <span class="st">&quot;1949-10-10&quot;</span>, <span class="st">&quot;1983-11-05&quot;</span>, <span class="st">&quot;1987-10-08&quot;</span>, <span class="st">&quot;1989-09-16&quot;</span>, <span class="st">&quot;1973-05-20&quot;</span>, <span class="st">&quot;1984-11-12&quot;</span>))
+birth_date</code></pre></div>
+<pre><code>##  [1] &quot;1977-07-03&quot; &quot;1969-05-24&quot; &quot;1973-06-21&quot; &quot;1970-07-16&quot; &quot;1949-10-10&quot; &quot;1983-11-05&quot; &quot;1987-10-08&quot;
+##  [8] &quot;1989-09-16&quot; &quot;1973-05-20&quot; &quot;1984-11-12&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">job &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">5</span>), <span class="kw">rep</span>(<span class="dv">2</span>, <span class="dv">5</span>)) <span class="co"># que es el equivalente a: job &lt;- c(1,1,1,1,1,2,2,2,2,2)</span>
+job</code></pre></div>
+<pre><code>##  [1] 1 1 1 1 1 2 2 2 2 2</code></pre>
+<p>La variable <em>job</em> es categórica. El número 1 indica que es un profesor y el 2 indica que es un estudiante. Para R son sólo números. Para decirle a R que es una variable categórica (o en el lenguaje de R un factor) tenemos que indicarselo usando la función <strong>factor</strong>. Además, podemos crear etiquetas o nombres que nos hagan mas sentido a nosotros. En este caso este factor tiene dos niveles: Lecturer y Student.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">job &lt;-<span class="st"> </span><span class="kw">factor</span>(job, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Lecturer&quot;</span>, <span class="st">&quot;Student&quot;</span>))
+job</code></pre></div>
+<pre><code>##  [1] Lecturer Lecturer Lecturer Lecturer Lecturer Student  Student  Student  Student  Student 
+## Levels: Lecturer Student</code></pre>
+<p>Luego, el paso final es poner todo junto:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataframe1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(name, birth_date, job)
+dataframe1</code></pre></div>
+<pre><code>##      name birth_date      job
+## 1     Ben 1977-07-03 Lecturer
+## 2  Martin 1969-05-24 Lecturer
+## 3    Andy 1973-06-21 Lecturer
+## 4    Paul 1970-07-16 Lecturer
+## 5  Graham 1949-10-10 Lecturer
+## 6  Carina 1983-11-05  Student
+## 7  Karina 1987-10-08  Student
+## 8    Doug 1989-09-16  Student
+## 9    Mark 1973-05-20  Student
+## 10    Zoe 1984-11-12  Student</code></pre>
+<p><br />
+<br />
+<br />
+</p>
+<pre><code>Ejercicio:
+Crea una data frame con los integrantes de tu grupo familiar o de tu curso.
+En tu data frame agrega el nombre, apellido y la edad.
+</code></pre>
+<p><br />
+<br />
+<br />
+La mayoría del tiempo vas a importar más que crear datos. Para ello cuando trabajes en R debes decirle en que carpeta de tu computador están esos archivos. Es decir, debes definir tu directorio de trabajo con la función <strong>setwd</strong></p>
+<p>Por ejemplo, para mí sería algo así:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Stats_UTalca/database_2020_DocPsychol&quot;</span>)</code></pre></div>
+<p>La función <strong>getwd()</strong> (sin nada entre paréntesis) te permite sabes cual es tu directorio actual.</p>
 
 </div>
 </div>
