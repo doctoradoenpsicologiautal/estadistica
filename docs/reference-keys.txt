@@ -15,3 +15,5 @@ tamaño-poder
 experimentar
 programación
 empezando-a-trabajar-en-r
+trabajando-con-data-frames
+importando-datos

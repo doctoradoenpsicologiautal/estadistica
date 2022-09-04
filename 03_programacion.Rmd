@@ -126,19 +126,13 @@ last_metallica_3 <- c(new_metallica[1:2], "Rob", new_metallica[3])
 last_metallica_3
 ```
 
-\
-\
-\
-
 ```
 Ejercicio:
 Crea una variable que represente a tu banda favorita.
 
 ```
 
-\
-\
-\
+## Trabajando con data frames
 
 Podemos crear variables de distintos tipos (lista de palabras o listas de números):
 
@@ -278,10 +272,6 @@ dataframe1
 
 ```
 
-\
-\
-\
-
 ```
 Ejercicio:
 Crea una data frame con los integrantes de tu grupo familiar o de tu curso.
@@ -289,20 +279,30 @@ En tu data frame agrega el nombre, apellido y la edad.
 
 ```
 
-\
-\
-\
+## Importando datos
 
 La mayoría del tiempo vas a importar más que crear datos.
 Para ello cuando trabajes en R debes decirle en que carpeta de tu computador están esos archivos.
 Es decir, debes definir tu directorio de trabajo con la función **setwd**
 
 Por ejemplo, para mí sería algo así:
-
-```{r}
 setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Stats_UTalca/database_2020_DocPsychol")
 
+La función **getwd()** (sin nada entre paréntesis) te permite sabes cual es tu directorio actual.
+
+```{r}
+getwd()
 
 ```
 
-La función **getwd()** (sin nada entre paréntesis) te permite sabes cual es tu directorio actual.
+Para importar datos puedes usar distintas funciones.
+Por ejemplo, para importar datos de tipo .txt debemos usar la función **read.delim**
+
+```{r}
+dat <- read.delim(file = "data/facebook_friends_2.txt")
+dat
+```
+
+Si ejecutas este comando en tu computador y lo comparas con los datos originales te darás cuenta que hay un error.
+Esto occurre porque por defecto esta función asume que tus datos tienen un encabezado.
+Es decir, el parámetro llamado "header" esta seteado en TRUE, que significa que la función espera un encabezado.
