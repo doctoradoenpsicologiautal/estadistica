@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2022-09-04" />
+<meta name="date" content="2022-09-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -128,6 +128,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.1" data-path="programación.html"><a href="programación.html#empezando-a-trabajar-en-r"><i class="fa fa-check"></i><b>3.1</b> Empezando a trabajar en R</a></li>
 <li class="chapter" data-level="3.2" data-path="programación.html"><a href="programación.html#trabajando-con-data-frames"><i class="fa fa-check"></i><b>3.2</b> Trabajando con data frames</a></li>
 <li class="chapter" data-level="3.3" data-path="programación.html"><a href="programación.html#importando-datos"><i class="fa fa-check"></i><b>3.3</b> Importando datos</a></li>
+<li class="chapter" data-level="3.4" data-path="programación.html"><a href="programación.html#seleccionando-datos"><i class="fa fa-check"></i><b>3.4</b> Seleccionando datos</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -313,8 +314,8 @@ name</code></pre></div>
 <pre><code>##  [1] &quot;Ben&quot;    &quot;Martin&quot; &quot;Andy&quot;   &quot;Paul&quot;   &quot;Graham&quot; &quot;Carina&quot; &quot;Karina&quot; &quot;Doug&quot;   &quot;Mark&quot;   &quot;Zoe&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">birth_date &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">c</span>(<span class="st">&quot;1977-07-03&quot;</span>, <span class="st">&quot;1969-05-24&quot;</span>, <span class="st">&quot;1973-06-21&quot;</span>, <span class="st">&quot;1970-07-16&quot;</span>, <span class="st">&quot;1949-10-10&quot;</span>, <span class="st">&quot;1983-11-05&quot;</span>, <span class="st">&quot;1987-10-08&quot;</span>, <span class="st">&quot;1989-09-16&quot;</span>, <span class="st">&quot;1973-05-20&quot;</span>, <span class="st">&quot;1984-11-12&quot;</span>))
 birth_date</code></pre></div>
-<pre><code>##  [1] &quot;1977-07-03&quot; &quot;1969-05-24&quot; &quot;1973-06-21&quot; &quot;1970-07-16&quot; &quot;1949-10-10&quot; &quot;1983-11-05&quot; &quot;1987-10-08&quot; &quot;1989-09-16&quot;
-##  [9] &quot;1973-05-20&quot; &quot;1984-11-12&quot;</code></pre>
+<pre><code>##  [1] &quot;1977-07-03&quot; &quot;1969-05-24&quot; &quot;1973-06-21&quot; &quot;1970-07-16&quot; &quot;1949-10-10&quot; &quot;1983-11-05&quot; &quot;1987-10-08&quot; &quot;1989-09-16&quot; &quot;1973-05-20&quot;
+## [10] &quot;1984-11-12&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">job &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">5</span>), <span class="kw">rep</span>(<span class="dv">2</span>, <span class="dv">5</span>)) <span class="co"># que es el equivalente a: job &lt;- c(1,1,1,1,1,2,2,2,2,2)</span>
 job</code></pre></div>
 <pre><code>##  [1] 1 1 1 1 1 2 2 2 2 2</code></pre>
@@ -350,21 +351,161 @@ En tu data frame agrega el nombre, apellido y la edad.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getwd</span>()</code></pre></div>
 <pre><code>## [1] &quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</code></pre>
 <p>Para importar datos puedes usar distintas funciones. Por ejemplo, para importar datos de tipo .txt debemos usar la función <strong>read.delim</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="dt">file =</span> <span class="st">&quot;data/facebook_friends_2.txt&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
+dat &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="dt">file =</span> <span class="st">&quot;data/facebook_friends_1.txt&quot;</span>)
 dat</code></pre></div>
-<pre><code>##    CASAS
-## 1    108
-## 2    103
-## 3    252
-## 4    121
-## 5     93
-## 6     57
-## 7     40
-## 8     53
-## 9     22
-## 10   116
-## 11    98</code></pre>
-<p>Si ejecutas este comando en tu computador y lo comparas con los datos originales te darás cuenta que hay un error. Esto occurre porque por defecto esta función asume que tus datos tienen un encabezado. Es decir, el parámetro llamado &quot;header&quot; esta seteado en TRUE, que significa que la función espera un encabezado.</p>
+<pre><code>##    X108
+## 1   103
+## 2   252
+## 3   121
+## 4    93
+## 5    57
+## 6    40
+## 7    53
+## 8    22
+## 9   116
+## 10   98</code></pre>
+<p>Si ejecutas este comando en tu computador y lo comparas con los datos originales te darás cuenta que hay un error. Cuando importate tus datos a R perdiste el 108. Esto occurre porque por defecto esta función asume que tus datos tienen un encabezado (el &quot;header&quot;). Es decir, el parámetro llamado &quot;header&quot; esta fijado en &quot;TRUE&quot;&quot;, que significa que la función espera un encabezado. Para corregir esto debes explícitamente decirle a R que no hay header, así:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
+dat &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="dt">file =</span> <span class="st">&quot;data/facebook_friends_1.txt&quot;</span>, <span class="dt">header =</span> <span class="ot">FALSE</span>)
+dat</code></pre></div>
+<pre><code>##     V1
+## 1  108
+## 2  103
+## 3  252
+## 4  121
+## 5   93
+## 6   57
+## 7   40
+## 8   53
+## 9   22
+## 10 116
+## 11  98</code></pre>
+<p>Fijate ahora que R le asigna un nombre a tu columna (V1). Es buena práctica ponerme un nombre a tu columna que haga sentido. Por ejemplo, podemos llamarla &quot;friends&quot;:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(dat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;friends&quot;</span>)
+dat</code></pre></div>
+<pre><code>##    friends
+## 1      108
+## 2      103
+## 3      252
+## 4      121
+## 5       93
+## 6       57
+## 7       40
+## 8       53
+## 9       22
+## 10     116
+## 11      98</code></pre>
+<p>Cuando tus datos ya tienen un encabezado te ahorras estos problemas. Fjate que para importar este otro archivo no necesitas definir que el header a FALSE.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
+dat &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="dt">file =</span> <span class="st">&quot;data/facebook_friends_2.txt&quot;</span>)
+dat</code></pre></div>
+<pre><code>##    AMIGOS
+## 1     108
+## 2     103
+## 3     252
+## 4     121
+## 5      93
+## 6      57
+## 7      40
+## 8      53
+## 9      22
+## 10    116
+## 11     98</code></pre>
+<p>Típicamente vas a importar que has registrado en archivos de tipo Excel (.xls o .xlsx). El archivo Excel se puede transformar en un archivo de tipo csv. Este arhivo csv se importa de la siguiente manera:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
+dat2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/facebook_friends_1.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">FALSE</span>)
+dat2</code></pre></div>
+<pre><code>##     V1
+## 1  108
+## 2  103
+## 3  252
+## 4  121
+## 5   93
+## 6   57
+## 7   40
+## 8   53
+## 9   22
+## 10 116
+## 11  98</code></pre>
+<p>Para importar archivos siempre asegurate que has seteado bien tu directorio de trabajo y que los archivos están ahí.</p>
+<pre><code>Ejercicio:
+Trata de importar algún archivo csv a tu sesión de R.
+</code></pre>
+</div>
+<div id="seleccionando-datos" class="section level2">
+<h2><span class="header-section-number">3.4</span> Seleccionando datos</h2>
+<p>Una vez que tienes datos en tu espacio de trabajo en R la idea es que puedas manipular esos datos. Uno de los aspectos fundamentales de esta manipulación es la selección de datos. Primero, importemos alguna base de datos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
+lecturerDat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/lecturer_data.csv&quot;</span>)
+lecturerDat</code></pre></div>
+<pre><code>##      name birth_date job friends alcohol income neurotic
+## 1     Ben 07/03/1977   1       5      10  20000       10
+## 2  Martin  5/24/1969   1       2      15  40000       17
+## 3    Andy  6/21/1973   1       0      20  35000       14
+## 4    Paul  7/16/1970   1       4       5  22000       13
+## 5  Graham 10/10/1949   1       1      30  50000       21
+## 6  Carina 11/05/1983   2      10      25   5000        7
+## 7  Karina 10/08/1987   2      12      20    100       13
+## 8    Doug  1/23/1989   2      15      16   3000        9
+## 9    Mark  5/20/1973   2      12      17  10000       14
+## 10    Zoe 11/12/1984   2      17      18     10       13</code></pre>
+<p>Antes de proceder vamos a transformar la variable &quot;job&quot; a factor, y vamos a crear rótulos que nos hagan mas sentido. Esto lo podemos hacer porque sabemos que el rótulo 1 corresponde a &quot;Lecturer&quot; y el rótulo 2 corresponde a &quot;Student&quot;.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lecturerDat<span class="op">$</span>job &lt;-<span class="st"> </span><span class="kw">factor</span>(lecturerDat<span class="op">$</span>job,
+                          <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>),
+                          <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Lecturer&quot;</span>, <span class="st">&quot;Student&quot;</span>))
+lecturerDat</code></pre></div>
+<pre><code>##      name birth_date      job friends alcohol income neurotic
+## 1     Ben 07/03/1977 Lecturer       5      10  20000       10
+## 2  Martin  5/24/1969 Lecturer       2      15  40000       17
+## 3    Andy  6/21/1973 Lecturer       0      20  35000       14
+## 4    Paul  7/16/1970 Lecturer       4       5  22000       13
+## 5  Graham 10/10/1949 Lecturer       1      30  50000       21
+## 6  Carina 11/05/1983  Student      10      25   5000        7
+## 7  Karina 10/08/1987  Student      12      20    100       13
+## 8    Doug  1/23/1989  Student      15      16   3000        9
+## 9    Mark  5/20/1973  Student      12      17  10000       14
+## 10    Zoe 11/12/1984  Student      17      18     10       13</code></pre>
+<p>Ahora, imagina que quieres seleccionar datos de aquellos participantes que eran sólo &quot;Lecturer&quot;. Podemos seleccionar esos datos y asignarlos a una nueva variable, así:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">onlyLecturer &lt;-<span class="st"> </span>lecturerDat[lecturerDat<span class="op">$</span>job <span class="op">==</span><span class="st"> &quot;Lecturer&quot;</span>,]
+onlyLecturer</code></pre></div>
+<pre><code>##     name birth_date      job friends alcohol income neurotic
+## 1    Ben 07/03/1977 Lecturer       5      10  20000       10
+## 2 Martin  5/24/1969 Lecturer       2      15  40000       17
+## 3   Andy  6/21/1973 Lecturer       0      20  35000       14
+## 4   Paul  7/16/1970 Lecturer       4       5  22000       13
+## 5 Graham 10/10/1949 Lecturer       1      30  50000       21</code></pre>
+<p>Ahora, imagina que quieres seleccionar datos de aquellos participantes cuyo nivel de alcohol es menor o igual a 15:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lightAlcoholics &lt;-<span class="st"> </span>lecturerDat[lecturerDat<span class="op">$</span>alcohol <span class="op">&lt;=</span><span class="st"> </span><span class="dv">15</span>,]
+lightAlcoholics</code></pre></div>
+<pre><code>##     name birth_date      job friends alcohol income neurotic
+## 1    Ben 07/03/1977 Lecturer       5      10  20000       10
+## 2 Martin  5/24/1969 Lecturer       2      15  40000       17
+## 4   Paul  7/16/1970 Lecturer       4       5  22000       13</code></pre>
+<p>Lo que acabas de hacer es seleccionar sólo algunas filas. Algo que también puedes realizar es seleccionar sólo algunas columnas. Por ejemplo, podrías seleccionar sólo aquellos datos relacionados con las columnas &quot;friends&quot;, &quot;alcohol&quot; y &quot;neurotic&quot;. Para ello puedes hacer:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lecturerPersonality &lt;-<span class="st"> </span>lecturerDat[, <span class="kw">c</span>(<span class="st">&quot;friends&quot;</span>, <span class="st">&quot;alcohol&quot;</span>, <span class="st">&quot;neurotic&quot;</span>)]
+lecturerPersonality</code></pre></div>
+<pre><code>##    friends alcohol neurotic
+## 1        5      10       10
+## 2        2      15       17
+## 3        0      20       14
+## 4        4       5       13
+## 5        1      30       21
+## 6       10      25        7
+## 7       12      20       13
+## 8       15      16        9
+## 9       12      17       14
+## 10      17      18       13</code></pre>
+<p>Incluso puedes combinar la selección de filas y de columnas. Por ejemplo podrías seleccionar las columnas &quot;friends&quot;, &quot;alcohol&quot; y &quot;neurotic&quot; de aquello participantes cuyo nivel de alcohol es menor o igual a 15:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lightAlcoholicsPerso &lt;-<span class="st"> </span>lecturerDat[lecturerDat<span class="op">$</span>alcohol <span class="op">&lt;=</span><span class="st"> </span><span class="dv">15</span>, <span class="kw">c</span>(<span class="st">&quot;friends&quot;</span>, <span class="st">&quot;alcohol&quot;</span>, <span class="st">&quot;neurotic&quot;</span>)]
+lightAlcoholicsPerso</code></pre></div>
+<pre><code>##   friends alcohol neurotic
+## 1       5      10       10
+## 2       2      15       17
+## 4       4       5       13</code></pre>
+<p>Finalmente podrías querer exportar estos datos seleccionados. Para ello puede crear archivos de tipo txt o csv aplicado algunas funciones. Los archivos se crearán en tu actual directorio (para saber cual es puedes hacer <strong>getwd()</strong>)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.table</span>(lightAlcoholics, <span class="st">&quot;datoExportado.txt&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)
+<span class="kw">write.csv</span>(lightAlcoholics, <span class="st">&quot;datoExportado.csv&quot;</span>)</code></pre></div>
 
 </div>
 </div>

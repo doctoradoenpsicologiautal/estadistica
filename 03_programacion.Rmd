@@ -299,10 +299,115 @@ Para importar datos puedes usar distintas funciones.
 Por ejemplo, para importar datos de tipo .txt debemos usar la función **read.delim**
 
 ```{r}
-dat <- read.delim(file = "data/facebook_friends_2.txt")
+setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+dat <- read.delim(file = "data/facebook_friends_1.txt")
 dat
 ```
 
 Si ejecutas este comando en tu computador y lo comparas con los datos originales te darás cuenta que hay un error.
-Esto occurre porque por defecto esta función asume que tus datos tienen un encabezado.
-Es decir, el parámetro llamado "header" esta seteado en TRUE, que significa que la función espera un encabezado.
+Cuando importate tus datos a R perdiste el 108.
+Esto occurre porque por defecto esta función asume que tus datos tienen un encabezado (el "header").
+Es decir, el parámetro llamado "header" esta fijado en "TRUE"", que significa que la función espera un encabezado.
+Para corregir esto debes explícitamente decirle a R que no hay header, así:
+
+```{r}
+setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+dat <- read.delim(file = "data/facebook_friends_1.txt", header = FALSE)
+dat
+```
+
+Fijate ahora que R le asigna un nombre a tu columna (V1).
+Es buena práctica ponerme un nombre a tu columna que haga sentido.
+Por ejemplo, podemos llamarla "friends":
+
+```{r}
+colnames(dat) <- c("friends")
+dat
+```
+
+Cuando tus datos ya tienen un encabezado te ahorras estos problemas.
+Fjate que para importar este otro archivo no necesitas definir que el header a FALSE.
+
+```{r}
+setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+dat <- read.delim(file = "data/facebook_friends_2.txt")
+dat
+```
+
+Típicamente vas a importar que has registrado en archivos de tipo Excel (.xls o .xlsx).
+El archivo Excel se puede transformar en un archivo de tipo csv. Este arhivo csv se importa de la siguiente manera:
+
+```{r}
+setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+dat2 <- read.csv("data/facebook_friends_1.csv", header = FALSE)
+dat2
+```
+
+Para importar archivos siempre asegurate que has seteado bien tu directorio de trabajo y que los archivos están ahí.
+
+```
+Ejercicio:
+Trata de importar algún archivo csv a tu sesión de R.
+
+```
+
+## Seleccionando datos
+
+Una vez que tienes datos en tu espacio de trabajo en R la idea es que puedas manipular esos datos.
+Uno de los aspectos fundamentales de esta manipulación es la selección de datos.
+Primero, importemos alguna base de datos.
+
+```{r}
+setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+lecturerDat <- read.csv("data/lecturer_data.csv")
+lecturerDat
+```
+
+Antes de proceder vamos a transformar la variable "job" a factor, y vamos a crear rótulos que nos hagan mas sentido.
+Esto lo podemos hacer porque sabemos que el rótulo 1 corresponde a "Lecturer" y el rótulo 2 corresponde a "Student".
+
+```{r}
+lecturerDat$job <- factor(lecturerDat$job,
+                          levels = c(1:2),
+                          labels = c("Lecturer", "Student"))
+lecturerDat
+```
+
+Ahora, imagina que quieres seleccionar datos de aquellos participantes que eran sólo "Lecturer".
+Podemos seleccionar esos datos y asignarlos a una nueva variable, así:
+
+```{r}
+onlyLecturer <- lecturerDat[lecturerDat$job == "Lecturer",]
+onlyLecturer
+```
+
+Ahora, imagina que quieres seleccionar datos de aquellos participantes cuyo nivel de alcohol es menor o igual a 15:
+
+```{r}
+lightAlcoholics <- lecturerDat[lecturerDat$alcohol <= 15,]
+lightAlcoholics
+```
+
+Lo que acabas de hacer es seleccionar sólo algunas filas. Algo que también puedes realizar es seleccionar sólo algunas columnas. Por ejemplo, podrías seleccionar sólo aquellos datos relacionados con las columnas "friends", "alcohol" y "neurotic". Para ello puedes hacer:
+
+```{r}
+lecturerPersonality <- lecturerDat[, c("friends", "alcohol", "neurotic")]
+lecturerPersonality
+```
+
+Incluso puedes combinar la selección de filas y de columnas.
+Por ejemplo podrías seleccionar las columnas "friends", "alcohol" y "neurotic" de aquello participantes cuyo nivel de alcohol es menor o igual a 15:
+
+```{r}
+lightAlcoholicsPerso <- lecturerDat[lecturerDat$alcohol <= 15, c("friends", "alcohol", "neurotic")]
+lightAlcoholicsPerso
+```
+
+Finalmente podrías querer exportar estos datos seleccionados.
+Para ello puede crear archivos de tipo txt o csv aplicado algunas funciones.
+Los archivos se crearán en tu actual directorio (para saber cual es puedes hacer **getwd()**)
+
+```{r}
+write.table(lightAlcoholics, "datoExportado.txt", sep="\t")
+write.csv(lightAlcoholics, "datoExportado.csv")
+```
