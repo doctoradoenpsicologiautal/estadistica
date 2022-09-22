@@ -21,3 +21,5 @@ empezando-a-programar
 trabajando-con-data-frames
 importando-datos
 seleccionando-datos
+transformado-datos-en-formato-long-a-wide-y-viceversa
+exportando-datos

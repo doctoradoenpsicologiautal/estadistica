@@ -132,6 +132,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.5" data-path="programación.html"><a href="programación.html#trabajando-con-data-frames"><i class="fa fa-check"></i><b>3.5</b> Trabajando con data frames</a></li>
 <li class="chapter" data-level="3.6" data-path="programación.html"><a href="programación.html#importando-datos"><i class="fa fa-check"></i><b>3.6</b> Importando datos</a></li>
 <li class="chapter" data-level="3.7" data-path="programación.html"><a href="programación.html#seleccionando-datos"><i class="fa fa-check"></i><b>3.7</b> Seleccionando datos</a></li>
+<li class="chapter" data-level="3.8" data-path="programación.html"><a href="programación.html#transformado-datos-en-formato-long-a-wide-y-viceversa"><i class="fa fa-check"></i><b>3.8</b> Transformado datos en formato long a wide y viceversa</a></li>
+<li class="chapter" data-level="3.9" data-path="programación.html"><a href="programación.html#exportando-datos"><i class="fa fa-check"></i><b>3.9</b> Exportando datos</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -530,6 +532,40 @@ lightAlcoholicsPerso</code></pre></div>
 ## 1       5      10       10
 ## 2       2      15       17
 ## 4       4       5       13</code></pre>
+</div>
+<div id="transformado-datos-en-formato-long-a-wide-y-viceversa" class="section level2">
+<h2><span class="header-section-number">3.8</span> Transformado datos en formato long a wide y viceversa</h2>
+<p>Otro aspecto muy importante que debes entender es como transformar de un formato a otro en R. En R hay dos formatos típicos. Cuando hay múltiples mediciones de un mismo sujeto, por ejemplo, a lo largo del tiempo o cuando se realizan distintas mediciones los datos a menudo se anotan en formato <em>wide</em>. En un formato <em>wide</em> la data frame contiene valores que no se repiten en la primera columna. En un formato <em>long</em> la data frame contiene valores que se repiten en la primera columna. Por ejemplo, importemos un set de datos que está en formato <em>wide</em>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
+satisfactionData &lt;-<span class="st">  </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Honeymoon_Period.csv&quot;</span>)
+<span class="kw">head</span>(satisfactionData)</code></pre></div>
+<pre><code>##   Person Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months Satisfaction_18_Months Gender
+## 1      1                 6                     6                      5                      2      0
+## 2      2                 7                     7                      8                      4      1
+## 3      3                 4                     6                      2                      2      1
+## 4      4                 6                     9                      4                      1      0
+## 5      5                 6                     7                      6                      6      0
+## 6      6                 5                    10                      4                      2      1</code></pre>
+<p>Con <strong>head</strong> miramos sólo los primeras 6 filas de la base de datos. En esta data frame están los niveles de satisfacción con la pareja al momento de casarse, y luego de 6, 12 y 18 meses. Además está el género del entrevistado.</p>
+<p>Esta data frame la podemos a transformar a un formato <em>long</em> usando la función <strong>stack</strong>. Esta función la usamos de la siguiente manera: newDataFrame &lt;- stack(oldDataFrame, select = c(variable_list))</p>
+<p>En nuestro ejemplo podemos hacerlo así:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">satisfactionStacked &lt;-<span class="st"> </span><span class="kw">stack</span>(satisfactionData, 
+                             <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;Satisfaction_Base&quot;</span>,
+                                        <span class="st">&quot;Satisfaction_6_Months&quot;</span>,
+                                        <span class="st">&quot;Satisfaction_12_Months&quot;</span>,
+                                        <span class="st">&quot;Satisfaction_18_Months&quot;</span>))
+<span class="kw">head</span>(satisfactionStacked)</code></pre></div>
+<pre><code>##   values               ind
+## 1      6 Satisfaction_Base
+## 2      7 Satisfaction_Base
+## 3      4 Satisfaction_Base
+## 4      6 Satisfaction_Base
+## 5      6 Satisfaction_Base
+## 6      5 Satisfaction_Base</code></pre>
+<p>En esta data frame se puede ver que los valores de satisfacción se ubican en una columna y la condición se ubica en otra columna.</p>
+</div>
+<div id="exportando-datos" class="section level2">
+<h2><span class="header-section-number">3.9</span> Exportando datos</h2>
 <p>Finalmente podrías querer exportar estos datos seleccionados. Para ello puede crear archivos de tipo txt o csv aplicado algunas funciones. Los archivos se crearán en tu actual directorio (para saber cual es puedes hacer <strong>getwd()</strong>)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.table</span>(lightAlcoholics, <span class="st">&quot;datoExportado.txt&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)
 <span class="kw">write.csv</span>(lightAlcoholics, <span class="st">&quot;datoExportado.csv&quot;</span>)</code></pre></div>
