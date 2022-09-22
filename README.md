@@ -1,8 +1,6 @@
 
 ### Render the book
 
-- [ ] 1. Install **bookdown** with `install.packages("bookdown")`. If you already have it, update to the [latest version](https://CRAN.R-project.org/package=bookdown).
-
 - [ ] 2. Render locally with `bookdown::render_book("index.Rmd")`.
 
 - [ ] 3. Use `browseURL("docs/index.html")` to view your book locally (or just open `index.html` in a browser).

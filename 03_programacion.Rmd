@@ -4,7 +4,29 @@
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Empezando a trabajar en R
+En este capítulo te voy a mostrar las primeras ideas para que puedas programar en R.
+
+## ¿Que significa programar?
+Revisa este <a href="https://www.youtube.com/watch?v=oY6OMnVRkjM" target="_blank">video</a> y trata de responder:
+
+- ¿Qué habilidades permite desarrollar el conocimiento de programación?
+- ¿Qué es un algoritmo?
+- ¿Qué es un lenguaje de programación?
+
+## La shell (consola) versus el script
+Revisa este <a href="https://www.youtube.com/watch?v=ryTQ33oOsMw" target="_blank">video</a> y trata de responder:
+
+- ¿Cuál es la diferencia entre un compilador y un intérprete?
+- ¿Cuál es la diferencia entre usar la shell (consola) y usar un script?
+- ¿Qué es el CRAN?
+
+## Video introductorio a la programación
+Revisa este <a href="https://www.youtube.com/watch?v=UREdS1HRKN4" target="_blank">video</a> para comenzar a trabajar en RStudio. Mas abajo repetiré el mismo contenido para que vayas viendo como usar el material que viene  mas abajo.
+
+## Empezando a programar
+
+En lo que sigue te recomiendo que crees un script (lo nombres "Curso_1" o algo así) y que vayas escribiendo o copiando lo que vamos viendo más abajo.
+En general, luego de una línea de código aparece el resultado precedido por ##.
 
 En un script es esencial incluir comentarios.
 De esta manera puedes acordarte (y otros puedes entender) que está haciendo tu código.\
@@ -23,7 +45,7 @@ También es buena idea que agregues una breve descripción de lo que hace tu có
 ```
 
 R tiene algunas funciones integradas. Por ejemplo: el promedio (**mean**) y la desviación estándar (**sd**).
-Para probar estas funciones podemos aplicarlas a una series de números (o vector). Para crear un vector podemos usar la *c* y un paréntesis. Lo que hacemos con la * c* es concatenar números.
+Para probar estas funciones podemos aplicarlas a una series de números (o vector). Para crear un vector podemos usar la *c* y un paréntesis. Lo que hacemos con la *c* es concatenar números.
 
 ```{r}
 # JLUF 16/08/2022

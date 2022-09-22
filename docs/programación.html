@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2022-09-11" />
+<meta name="date" content="2022-09-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -125,10 +125,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.5" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#experimentar"><i class="fa fa-check"></i><b>2.5</b> Experimentar</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="programación.html"><a href="programación.html"><i class="fa fa-check"></i><b>3</b> Programación</a><ul>
-<li class="chapter" data-level="3.1" data-path="programación.html"><a href="programación.html#empezando-a-trabajar-en-r"><i class="fa fa-check"></i><b>3.1</b> Empezando a trabajar en R</a></li>
-<li class="chapter" data-level="3.2" data-path="programación.html"><a href="programación.html#trabajando-con-data-frames"><i class="fa fa-check"></i><b>3.2</b> Trabajando con data frames</a></li>
-<li class="chapter" data-level="3.3" data-path="programación.html"><a href="programación.html#importando-datos"><i class="fa fa-check"></i><b>3.3</b> Importando datos</a></li>
-<li class="chapter" data-level="3.4" data-path="programación.html"><a href="programación.html#seleccionando-datos"><i class="fa fa-check"></i><b>3.4</b> Seleccionando datos</a></li>
+<li class="chapter" data-level="3.1" data-path="programación.html"><a href="programación.html#que-significa-programar"><i class="fa fa-check"></i><b>3.1</b> ¿Que significa programar?</a></li>
+<li class="chapter" data-level="3.2" data-path="programación.html"><a href="programación.html#la-shell-consola-versus-el-script"><i class="fa fa-check"></i><b>3.2</b> La shell (consola) versus el script</a></li>
+<li class="chapter" data-level="3.3" data-path="programación.html"><a href="programación.html#video-introductorio-a-la-programación"><i class="fa fa-check"></i><b>3.3</b> Video introductorio a la programación</a></li>
+<li class="chapter" data-level="3.4" data-path="programación.html"><a href="programación.html#empezando-a-programar"><i class="fa fa-check"></i><b>3.4</b> Empezando a programar</a></li>
+<li class="chapter" data-level="3.5" data-path="programación.html"><a href="programación.html#trabajando-con-data-frames"><i class="fa fa-check"></i><b>3.5</b> Trabajando con data frames</a></li>
+<li class="chapter" data-level="3.6" data-path="programación.html"><a href="programación.html#importando-datos"><i class="fa fa-check"></i><b>3.6</b> Importando datos</a></li>
+<li class="chapter" data-level="3.7" data-path="programación.html"><a href="programación.html#seleccionando-datos"><i class="fa fa-check"></i><b>3.7</b> Seleccionando datos</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -151,15 +154,39 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="programación" class="section level1">
 <h1><span class="header-section-number">Capítulo 3</span> Programación</h1>
-<div id="empezando-a-trabajar-en-r" class="section level2">
-<h2><span class="header-section-number">3.1</span> Empezando a trabajar en R</h2>
+<p>En este capítulo te voy a mostrar las primeras ideas para que puedas programar en R.</p>
+<div id="que-significa-programar" class="section level2">
+<h2><span class="header-section-number">3.1</span> ¿Que significa programar?</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=oY6OMnVRkjM" target="_blank">video</a> y trata de responder:</p>
+<ul>
+<li>¿Qué habilidades permite desarrollar el conocimiento de programación?</li>
+<li>¿Qué es un algoritmo?</li>
+<li>¿Qué es un lenguaje de programación?</li>
+</ul>
+</div>
+<div id="la-shell-consola-versus-el-script" class="section level2">
+<h2><span class="header-section-number">3.2</span> La shell (consola) versus el script</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=ryTQ33oOsMw" target="_blank">video</a> y trata de responder:</p>
+<ul>
+<li>¿Cuál es la diferencia entre un compilador y un intérprete?</li>
+<li>¿Cuál es la diferencia entre usar la shell (consola) y usar un script?</li>
+<li>¿Qué es el CRAN?</li>
+</ul>
+</div>
+<div id="video-introductorio-a-la-programación" class="section level2">
+<h2><span class="header-section-number">3.3</span> Video introductorio a la programación</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=UREdS1HRKN4" target="_blank">video</a> para comenzar a trabajar en RStudio. Mas abajo repetiré el mismo contenido para que vayas viendo como usar el material que viene mas abajo.</p>
+</div>
+<div id="empezando-a-programar" class="section level2">
+<h2><span class="header-section-number">3.4</span> Empezando a programar</h2>
+<p>En lo que sigue te recomiendo que crees un script (lo nombres &quot;Curso_1&quot; o algo así) y que vayas escribiendo o copiando lo que vamos viendo más abajo. En general, luego de una línea de código aparece el resultado precedido por ##.</p>
 <p>En un script es esencial incluir comentarios. De esta manera puedes acordarte (y otros puedes entender) que está haciendo tu código.<br />
 Para escribir un comentario debes anteponer un #. En el inicio de un script es un buen hábito poner una fecha y tus iniciales. Por ejemplo:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># JLUF 16/08/2022</span></code></pre></div>
 <p>También es buena idea que agregues una breve descripción de lo que hace tu código.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># JLUF 16/08/2022</span>
 <span class="co"># Estadística descriptiva</span></code></pre></div>
-<p>R tiene algunas funciones integradas. Por ejemplo: el promedio (<strong>mean</strong>) y la desviación estándar (<strong>sd</strong>). Para probar estas funciones podemos aplicarlas a una series de números (o vector). Para crear un vector podemos usar la <em>c</em> y un paréntesis. Lo que hacemos con la * c* es concatenar números.</p>
+<p>R tiene algunas funciones integradas. Por ejemplo: el promedio (<strong>mean</strong>) y la desviación estándar (<strong>sd</strong>). Para probar estas funciones podemos aplicarlas a una series de números (o vector). Para crear un vector podemos usar la <em>c</em> y un paréntesis. Lo que hacemos con la <em>c</em> es concatenar números.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># JLUF 16/08/2022</span>
 <span class="co"># Estadística descriptiva</span>
 
@@ -227,7 +254,7 @@ Crea una variable que represente a tu banda favorita.
 </code></pre>
 </div>
 <div id="trabajando-con-data-frames" class="section level2">
-<h2><span class="header-section-number">3.2</span> Trabajando con data frames</h2>
+<h2><span class="header-section-number">3.5</span> Trabajando con data frames</h2>
 <p>Podemos crear variables de distintos tipos (lista de palabras o listas de números):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaNames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Lars&quot;</span>, <span class="st">&quot;James&quot;</span>, <span class="st">&quot;Kirk&quot;</span>, <span class="st">&quot;Rob&quot;</span>)
 metallicaNames</code></pre></div>
@@ -314,8 +341,8 @@ name</code></pre></div>
 <pre><code>##  [1] &quot;Ben&quot;    &quot;Martin&quot; &quot;Andy&quot;   &quot;Paul&quot;   &quot;Graham&quot; &quot;Carina&quot; &quot;Karina&quot; &quot;Doug&quot;   &quot;Mark&quot;   &quot;Zoe&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">birth_date &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">c</span>(<span class="st">&quot;1977-07-03&quot;</span>, <span class="st">&quot;1969-05-24&quot;</span>, <span class="st">&quot;1973-06-21&quot;</span>, <span class="st">&quot;1970-07-16&quot;</span>, <span class="st">&quot;1949-10-10&quot;</span>, <span class="st">&quot;1983-11-05&quot;</span>, <span class="st">&quot;1987-10-08&quot;</span>, <span class="st">&quot;1989-09-16&quot;</span>, <span class="st">&quot;1973-05-20&quot;</span>, <span class="st">&quot;1984-11-12&quot;</span>))
 birth_date</code></pre></div>
-<pre><code>##  [1] &quot;1977-07-03&quot; &quot;1969-05-24&quot; &quot;1973-06-21&quot; &quot;1970-07-16&quot; &quot;1949-10-10&quot; &quot;1983-11-05&quot; &quot;1987-10-08&quot; &quot;1989-09-16&quot; &quot;1973-05-20&quot;
-## [10] &quot;1984-11-12&quot;</code></pre>
+<pre><code>##  [1] &quot;1977-07-03&quot; &quot;1969-05-24&quot; &quot;1973-06-21&quot; &quot;1970-07-16&quot; &quot;1949-10-10&quot; &quot;1983-11-05&quot; &quot;1987-10-08&quot; &quot;1989-09-16&quot;
+##  [9] &quot;1973-05-20&quot; &quot;1984-11-12&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">job &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">5</span>), <span class="kw">rep</span>(<span class="dv">2</span>, <span class="dv">5</span>)) <span class="co"># que es el equivalente a: job &lt;- c(1,1,1,1,1,2,2,2,2,2)</span>
 job</code></pre></div>
 <pre><code>##  [1] 1 1 1 1 1 2 2 2 2 2</code></pre>
@@ -344,7 +371,7 @@ En tu data frame agrega el nombre, apellido y la edad.
 </code></pre>
 </div>
 <div id="importando-datos" class="section level2">
-<h2><span class="header-section-number">3.3</span> Importando datos</h2>
+<h2><span class="header-section-number">3.6</span> Importando datos</h2>
 <p>La mayoría del tiempo vas a importar más que crear datos. Para ello cuando trabajes en R debes decirle en que carpeta de tu computador están esos archivos. Es decir, debes definir tu directorio de trabajo con la función <strong>setwd</strong></p>
 <p>Por ejemplo, para mí sería algo así: setwd(&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Stats_UTalca/database_2020_DocPsychol&quot;)</p>
 <p>La función <strong>getwd()</strong> (sin nada entre paréntesis) te permite sabes cual es tu directorio actual.</p>
@@ -434,7 +461,7 @@ Trata de importar algún archivo csv a tu sesión de R.
 </code></pre>
 </div>
 <div id="seleccionando-datos" class="section level2">
-<h2><span class="header-section-number">3.4</span> Seleccionando datos</h2>
+<h2><span class="header-section-number">3.7</span> Seleccionando datos</h2>
 <p>Una vez que tienes datos en tu espacio de trabajo en R la idea es que puedas manipular esos datos. Uno de los aspectos fundamentales de esta manipulación es la selección de datos. Primero, importemos alguna base de datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
 lecturerDat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/lecturer_data.csv&quot;</span>)

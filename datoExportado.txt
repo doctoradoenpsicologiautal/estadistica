@@ -1,0 +1,4 @@
+"name"	"birth_date"	"job"	"friends"	"alcohol"	"income"	"neurotic"
+"1"	"Ben"	"07/03/1977"	"Lecturer"	5	10	20000	10
+"2"	"Martin"	"5/24/1969"	"Lecturer"	2	15	40000	17
+"4"	"Paul"	"7/16/1970"	"Lecturer"	4	5	22000	13
