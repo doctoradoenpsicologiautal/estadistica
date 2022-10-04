@@ -451,14 +451,82 @@ satisfactionStacked <- stack(satisfactionData,
                                         "Satisfaction_6_Months",
                                         "Satisfaction_12_Months",
                                         "Satisfaction_18_Months"))
+
+colnames(satisfactionStacked) <- c("Values", "SatisfType") # cambiamos los encabezados
+
 head(satisfactionStacked)
 ```
 
-En esta data frame se puede ver que los valores de satisfacción se ubican en una columna y la condición se ubica en otra columna.
+En esta data frame se puede ver que los valores de satisfacción se ubican en una columna y la condición se ubica en otra columna. El problema con esta transformación es que perdemos la información de género y el número de la persona. Más adelante veremos una manera de hacer esta transformación sin perder esta información.
+
+Esta data frame la podemos reconvertir en formato wide con la función **unstack**.
+Esta función la usamos de la siguiente manera:
+newDataFrame <- unstack(oldDataFrame, scores ~ columns)
+O simplemente: newDataFrame <- unstack(oldDataFrame)
+
+En nuestro ejemplo podemos hacerlo así:
+
+```{r}
+satisfactionUnstacked <- unstack(satisfactionStacked)
+
+head(satisfactionUnstacked)
 
 
+satisfactionUnstacked2 <- unstack(satisfactionStacked,
+                                  Values ~ SatisfType)
+
+head(satisfactionUnstacked2)
+```
+
+Otra manera de transformar datos a formato *long* es usando la función **melt**.
+Para ello necesitamos cargar la librería **reshape**.
+
+Esta función la usamos de la siguiente manera:
+newDataFrame <- melt(oldDataFrame,
+                     id = c(constant_variables),
+                     measured = c(variables_that_change_across_columns))
+
+En nuestro ejemplo podemos hacerlo así:
+
+```{r}
+library(reshape)
+restructuredData <- melt(satisfactionData,
+                         id = c("Person", "Gender"),
+                         measured = c("Satisfaction_Base",
+                                      "Satisfaction_6_Months",
+                                      "Satisfaction_12_Months",
+                                      "Satisfaction_18_Months"))
+
+colnames(restructuredData)[3:4] <- c("SatisfType", "Values") # cambiamos los encabezados
+
+head(restructuredData)
+```
 
 
+Bonus.También podemos aprovechar de reordenar los datos.
+Para ello usamos la función **order**.
+
+```{r}
+reorder2 <- restructuredData[order(restructuredData$Person),]
+
+head(reorder2)
+```
+
+En esta data frame se puede ver que los valores de satisfacción se ubican en una columna y la condición se ubica en otra columna. La ventaja de **melt** es que conserva la información de género y el número de la persona.
+
+Por último, esta data frame la podemos reconvertir en formato wide con la función **cast**.
+Esta función la usamos de la siguiente manera:
+newData <- cast(longData,
+           variables_coded_within_a_single_column ~ variables_coded_across_many_columns,
+           value = "outcome_variable")
+
+En nuestro ejemplo podemos hacerlo así:
+
+```{r}
+wideData <- cast(restructuredData, Person + Gender ~ SatisfType, value = "Values")
+
+head(wideData)
+```
 
 ## Exportando datos
 

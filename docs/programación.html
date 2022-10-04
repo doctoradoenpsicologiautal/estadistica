@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2022-09-22" />
+<meta name="date" content="2022-10-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -554,15 +554,86 @@ satisfactionData &lt;-<span class="st">  </span><span class="kw">read.csv</span>
                                         <span class="st">&quot;Satisfaction_6_Months&quot;</span>,
                                         <span class="st">&quot;Satisfaction_12_Months&quot;</span>,
                                         <span class="st">&quot;Satisfaction_18_Months&quot;</span>))
+
+<span class="kw">colnames</span>(satisfactionStacked) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Values&quot;</span>, <span class="st">&quot;SatisfType&quot;</span>) <span class="co"># cambiamos los encabezados</span>
+
 <span class="kw">head</span>(satisfactionStacked)</code></pre></div>
-<pre><code>##   values               ind
+<pre><code>##   Values        SatisfType
 ## 1      6 Satisfaction_Base
 ## 2      7 Satisfaction_Base
 ## 3      4 Satisfaction_Base
 ## 4      6 Satisfaction_Base
 ## 5      6 Satisfaction_Base
 ## 6      5 Satisfaction_Base</code></pre>
-<p>En esta data frame se puede ver que los valores de satisfacción se ubican en una columna y la condición se ubica en otra columna.</p>
+<p>En esta data frame se puede ver que los valores de satisfacción se ubican en una columna y la condición se ubica en otra columna. El problema con esta transformación es que perdemos la información de género y el número de la persona. Más adelante veremos una manera de hacer esta transformación sin perder esta información.</p>
+<p>Esta data frame la podemos reconvertir en formato wide con la función <strong>unstack</strong>. Esta función la usamos de la siguiente manera: newDataFrame &lt;- unstack(oldDataFrame, scores ~ columns) O simplemente: newDataFrame &lt;- unstack(oldDataFrame)</p>
+<p>En nuestro ejemplo podemos hacerlo así:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">satisfactionUnstacked &lt;-<span class="st"> </span><span class="kw">unstack</span>(satisfactionStacked)
+
+<span class="kw">head</span>(satisfactionUnstacked)</code></pre></div>
+<pre><code>##   Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months Satisfaction_18_Months
+## 1                 6                     6                      5                      2
+## 2                 7                     7                      8                      4
+## 3                 4                     6                      2                      2
+## 4                 6                     9                      4                      1
+## 5                 6                     7                      6                      6
+## 6                 5                    10                      4                      2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">satisfactionUnstacked2 &lt;-<span class="st"> </span><span class="kw">unstack</span>(satisfactionStacked,
+                                  Values <span class="op">~</span><span class="st"> </span>SatisfType)
+
+<span class="kw">head</span>(satisfactionUnstacked2)</code></pre></div>
+<pre><code>##   Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months Satisfaction_18_Months
+## 1                 6                     6                      5                      2
+## 2                 7                     7                      8                      4
+## 3                 4                     6                      2                      2
+## 4                 6                     9                      4                      1
+## 5                 6                     7                      6                      6
+## 6                 5                    10                      4                      2</code></pre>
+<p>Otra manera de transformar datos a formato <em>long</em> es usando la función <strong>melt</strong>. Para ello necesitamos cargar la librería <strong>reshape</strong>.</p>
+<p>Esta función la usamos de la siguiente manera: newDataFrame &lt;- melt(oldDataFrame, id = c(constant_variables), measured = c(variables_that_change_across_columns))</p>
+<p>En nuestro ejemplo podemos hacerlo así:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(reshape)
+restructuredData &lt;-<span class="st"> </span><span class="kw">melt</span>(satisfactionData,
+                         <span class="dt">id =</span> <span class="kw">c</span>(<span class="st">&quot;Person&quot;</span>, <span class="st">&quot;Gender&quot;</span>),
+                         <span class="dt">measured =</span> <span class="kw">c</span>(<span class="st">&quot;Satisfaction_Base&quot;</span>,
+                                      <span class="st">&quot;Satisfaction_6_Months&quot;</span>,
+                                      <span class="st">&quot;Satisfaction_12_Months&quot;</span>,
+                                      <span class="st">&quot;Satisfaction_18_Months&quot;</span>))
+
+<span class="kw">colnames</span>(restructuredData)[<span class="dv">3</span><span class="op">:</span><span class="dv">4</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;SatisfType&quot;</span>, <span class="st">&quot;Values&quot;</span>) <span class="co"># cambiamos los encabezados</span>
+
+<span class="kw">head</span>(restructuredData)</code></pre></div>
+<pre><code>##   Person Gender        SatisfType Values
+## 1      1      0 Satisfaction_Base      6
+## 2      2      1 Satisfaction_Base      7
+## 3      3      1 Satisfaction_Base      4
+## 4      4      0 Satisfaction_Base      6
+## 5      5      0 Satisfaction_Base      6
+## 6      6      1 Satisfaction_Base      5</code></pre>
+<p>Bonus.También podemos aprovechar de reordenar los datos. Para ello usamos la función <strong>order</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">reorder2 &lt;-<span class="st"> </span>restructuredData[<span class="kw">order</span>(restructuredData<span class="op">$</span>Person),]
+
+<span class="kw">head</span>(reorder2)</code></pre></div>
+<pre><code>##     Person Gender             SatisfType Values
+## 1        1      0      Satisfaction_Base      6
+## 116      1      0  Satisfaction_6_Months      6
+## 231      1      0 Satisfaction_12_Months      5
+## 346      1      0 Satisfaction_18_Months      2
+## 2        2      1      Satisfaction_Base      7
+## 117      2      1  Satisfaction_6_Months      7</code></pre>
+<p>En esta data frame se puede ver que los valores de satisfacción se ubican en una columna y la condición se ubica en otra columna. La ventaja de <strong>melt</strong> es que conserva la información de género y el número de la persona.</p>
+<p>Por último, esta data frame la podemos reconvertir en formato wide con la función <strong>cast</strong>. Esta función la usamos de la siguiente manera: newData &lt;- cast(longData, variables_coded_within_a_single_column ~ variables_coded_across_many_columns, value = &quot;outcome_variable&quot;)</p>
+<p>En nuestro ejemplo podemos hacerlo así:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wideData &lt;-<span class="st"> </span><span class="kw">cast</span>(restructuredData, Person <span class="op">+</span><span class="st"> </span>Gender <span class="op">~</span><span class="st"> </span>SatisfType, <span class="dt">value =</span> <span class="st">&quot;Values&quot;</span>)
+
+<span class="kw">head</span>(wideData)</code></pre></div>
+<pre><code>##   Person Gender Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months Satisfaction_18_Months
+## 1      1      0                 6                     6                      5                      2
+## 2      2      1                 7                     7                      8                      4
+## 3      3      1                 4                     6                      2                      2
+## 4      4      0                 6                     9                      4                      1
+## 5      5      0                 6                     7                      6                      6
+## 6      6      1                 5                    10                      4                      2</code></pre>
 </div>
 <div id="exportando-datos" class="section level2">
 <h2><span class="header-section-number">3.9</span> Exportando datos</h2>
