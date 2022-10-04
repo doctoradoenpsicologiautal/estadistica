@@ -1,0 +1,46 @@
+# Gráficos
+
+En este capítulo vamos a revisar algunos aspectos básicos para hacer gráficos en R.
+
+## ¿Cómo graficamos en R?
+Revisa este <a href="https://www.youtube.com/watch?v=7Fr30ForPjI" target="_blank">video</a> y trata de responder:
+
+- ¿Cómo se hace un buen gráfico?
+- ¿Qué significa que se usen capas para hacer gráficos en R?
+
+## Gráficos de dispersión
+
+Primero seteamos nuestro directorio de trabajo.
+
+Para graficar cargamos la librería **ggplot2** (que tiene que haber sido previamente instalada).
+Al mismo tiempo se cargan otras librerías que nos serviran. Si no tienes estas librerías debes instalarlas.
+Finalmente importamos un set de datos y lo miramos.
+
+```{r}
+setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+
+library(ggplot2)
+library(reshape)
+library(plyr)
+library(Rmisc)
+
+facebookData <- read.delim("data/FacebookNarcissism.dat", header = TRUE) # load data
+head(facebookData)
+```
+
+En este estudio se recolectaron una serie de datos de los participantes relacioandos con rasgos de personalidad y niveles de narcisimo.
+*id* indica la identidad del participante.
+*NPQC_R_Total* indica la puntuación total en el cuestionario de narcisismo.
+*Rating_Type* una característica de personalidad y *Rating* indica la calificación (en una escala de 1 a 5) de esa característica de personalidad.
+
+Hagamos un primer gráfico de dipersión.
+Ubcaremos *NPQC_R_Total* en el eje X y *Rating* en el eje Y.
+
+```{r}
+graph <- ggplot(facebookData, aes(NPQC_R_Total, Rating))
+graph + geom_point() + labs(title = "plot 1")
+```
+
+
+
+
