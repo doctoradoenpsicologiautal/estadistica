@@ -25,4 +25,7 @@ transformado-datos-en-formato-long-a-wide-y-viceversa
 exportando-datos
 gráficos
 cómo-graficamos-en-r
-gráficos-de-dispersión
+gráfico-de-puntos
+gráfico-de-dispersión
+histograma
+boxplot

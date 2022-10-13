@@ -8,7 +8,7 @@ Revisa este <a href="https://www.youtube.com/watch?v=7Fr30ForPjI" target="_blank
 - ¿Cómo se hace un buen gráfico?
 - ¿Qué significa que se usen capas para hacer gráficos en R?
 
-## Gráficos de dispersión
+## Gráfico de puntos
 
 Primero seteamos nuestro directorio de trabajo.
 
@@ -28,19 +28,537 @@ facebookData <- read.delim("data/FacebookNarcissism.dat", header = TRUE) # load 
 head(facebookData)
 ```
 
-En este estudio se recolectaron una serie de datos de los participantes relacioandos con rasgos de personalidad y niveles de narcisimo.
+En este estudio se recolectaron una serie de datos de los participantes relacionados con rasgos de personalidad y niveles de narcisimo.
 *id* indica la identidad del participante.
 *NPQC_R_Total* indica la puntuación total en el cuestionario de narcisismo.
 *Rating_Type* una característica de personalidad y *Rating* indica la calificación (en una escala de 1 a 5) de esa característica de personalidad.
 
-Hagamos un primer gráfico de dipersión.
 Ubcaremos *NPQC_R_Total* en el eje X y *Rating* en el eje Y.
+Acuérdate que para crear gráficos con ggplot debes crear un objeto dónde se encuentra la estructura base.
+Para visualizar el gráfico se debe invocar el objeto y al mismo debes agregar las distintas capas que constituyen el gráfico. Por ejemplo, un capa de puntos.
 
 ```{r}
 graph <- ggplot(facebookData, aes(NPQC_R_Total, Rating))
-graph + geom_point() + labs(title = "plot 1")
+graph + geom_point()
 ```
 
+Además, puedes ir agregando otras capas. Por ejemplo, el título.
+
+```{r}
+graph <- ggplot(facebookData, aes(NPQC_R_Total, Rating))
+graph + geom_point() + labs(title = "Figura 1")
+```
+
+Podemos cambiar los puntos por triángulos, usando el parámetro **shape**.
+
+```{r}
+graph + geom_point(shape = 17)
+```
+
+O podemos cambiar el tamaño de los puntos, usando el parámetro **size**.
+
+```{r}
+graph + geom_point(size = 6)
+```
+
+También podemos colorear los puntos en función de los diferentes puntajes.
+Para ello debemos definir un color dentro del parámetro **aes**.
+
+```{r}
+graph + geom_point(aes(colour = Rating_Type))
+```
+
+Por último, podríamos tener un problema de "sobreploteo", es decir, dado que hay un limitado número de respuestas que la personas podrían dar para valores equivalentes no se van a observar puntos diferentes.
+Para evitar esto podemos cambiar el parámetro *position* para agregar un retraso (o "jitter).
+
+```{r}
+graph + geom_point(aes(colour = Rating_Type), position = "jitter")
+```
+
+## Gráfico de dispersión
+
+En un gráfico de dispersión se dibuja la puntuación de una una variable frente a la puntuación de otra variable.
+
+En este ejemplo un psicólogo estaba interesado en entender los efectos que produce el estrés sobre el rendimiento en este examen. Se diseñó y se validó un cuestionario para evaluar el estado de ansiedad relacionado con los exámenes (llamado Cuestionario de Ansiedad ante los Exámenes, o EAQ). Esta escala produce un puntaje de ansiedad desd 1 a 100. La ansiedad se midió antes de un examen, y la calificación de cada estudiante en el examen se utilizó para medir el rendimiento del examen.
+
+Primero, importemos los datos.
+No es necesario que carguemos la librerías si ya están cargadas.
+
+```{r}
+examData <- read.delim("data/ExamAnxiety.dat", header = TRUE)
+head(examData)
+```
+
+Fíjate que en la data frame hay 5 variables:
+Code: Un número que indica la identidad del participante.
+Revise: El total de horas que los participantes dedicaron para estudiar.
+Exam: La nota en el examen que tuvo el participante (como porcentaje).
+Anxiety: La puntuación en la esclala de ansiedad.
+Gender: El género (masculino o femenino).
+
+Primero, vamos a crear la estructura base del gráfico.
+
+```{r}
+scatter <- ggplot(examData, aes(Anxiety, Exam))
+```
+
+Fíjate que la estuctura base definimos que vamos a gráficar la relación entre la ansiedad (Anxiety) y las notas (Exam).
+
+Luego, podemos ir agregando las capas. Por ejemplo, los puntos que relfejan cada participante y los títulos en los ejes.
+
+```{r}
+scatter + 
+  geom_point() + 
+  labs(x = "Exam Anxiety", y = "Exam Performance %")
+```
+
+En general, en los gráficos de dispersión agregamos una línea de tendencia que resume la relación entre las variables. La sombra asociada a la línea representa un intervalo de confianza (CI) al 95%.
+
+```{r}
+scatter + 
+  geom_point() + 
+  geom_smooth() + 
+  labs(x = "Exam Anxiety", y = "Exam Performance %")
+```
+
+Pero, en general, se agrega una linea recta. Para ello usamos la función **geom_smooth**.
+
+```{r}
+scatter +
+  geom_point() +
+  geom_smooth(method = "lm", colour = "Red") +
+  labs(x = "Exam Anxiety", y = "Exam Performance %")
+```
+
+Opcionalmente se puede omitir la sombra.
+
+```{r}
+scatter +
+  geom_point() + 
+  geom_smooth(method = "lm", colour = "Green", se = FALSE) +
+  labs(x = "Exam Anxiety", y = "Exam Performance %")
+```
+
+Además, podemos cambiar la transparencia de la línea, cambiando el parámetro *alpha*.
+Y también podamos cambiar el relleno ("fill") de la sombra.
+
+```{r}
+scatter +
+  geom_point() + 
+  geom_smooth(method = "lm", alpha = 0.1, fill = "Blue") +
+  labs(x = "Exam Anxiety", y = "Exam Performance %")
+```
+
+¿Qué pasa si queremos hacer gráficos de dispersión en función de más de una variable?
+Por ejemplo, podríamos querer ver las distintas relaciones entre ansiedad y puntajes en la prueba, en función del género (hombres versus mujeres). Para ello debemos re-definir la estructura base del gráfico, y debemmos agregar la variable género dentro del parámetro aes.
+
+```{r}
+scatter <- ggplot(examData, aes(Anxiety, Exam, colour = Gender))
+```
+
+Luego podemos hacer un nuevo gráfico.
+
+```{r}
+scatter + 
+  geom_point() + 
+  geom_smooth(method = "lm")
+```
+
+También podemos dibujar las líneas de acuerdo al género (y además podemos hacer las líneas transparentes).
+Para ello debemos definir un parámetro aes dentro de la función geom_smooth.
+
+```{r}
+scatter + 
+  geom_point() + 
+  geom_smooth(method = "lm", alpha = 0.1, aes(fill = Gender)) +
+  labs(x = "Exam Anxiety", y = "Exam Performance %", colour = "Gender")
+```
+
+## Histograma
+
+Un histograma es una representación gráfica de una variable en forma de barras, donde la superficie de cada barra es proporcional a la frecuencia de los valores representados.
+
+En este ejemplo un biólogo estaba preocupado por los posibles efectos en la salud de los festivales de música. Un año fue al Download Music Festival y midió los niveles de higiene de 810 asistentes al concierto durante los tres días del festival. Dado que era difícil rastrear a todas las personas en esta base de datos faltaban algunos datos en los días 2 y 3. La higiene se midió utilizando una técnica estandarizada que da como resultado una puntuación que oscila entre 0 (hueles como un cadáver) y 4 (hueles a rosas dulces en un día fresco de primavera).
+
+Primero, importemos los datos.
+No es necesario que carguemos la librerías si ya están cargadas.
+
+```{r}
+festivalData <- read.delim("data/DownloadFestival.dat", header = TRUE)
+head(festivalData)
+```
+
+Primero, vamos a crear la estructura base del gráfico.
+
+```{r}
+festivalHistogram <- ggplot(festivalData, aes(day1))
+```
+
+Y luego hacemos el gráfico.
+
+```{r}
+festivalHistogram + geom_histogram()
+```
+
+Por defecto se realizan los agrupamientos (o "bins) en grupos de 30 puntos.
+Hay varias cosas que podemos observar en este gráfico.
+Se observa inmediatamente que hay una valor mucho más alto que el resto de los valores. Podría ser un potencial outlier.
+También nos damos cuenta que podríamos usar una mejor definición de bins. Para ello podemos modificar el parámetro **bindwith**.
+Además, le podemos agregar unos títulos a los ejes.
+
+```{r}
+festivalHistogram +
+  geom_histogram(binwidth = 0.4) +
+  labs(x = "Hygiene (Day 1 of Festival)", y = "Frequency")
+```
+
+Para lidiar con el outlier tenemos 2 opciones.
+Podemos eliminarlo de archivo original. O sea importamos un nuevo archivo.
+
+```{r}
+# import data
+festivalDataAlt <- read.delim("data/DownloadFestival_NoOutlier.dat", header = TRUE)
+
+# define base graph
+festivalHistogramAlt <- ggplot(festivalDataAlt, aes(day1))
+
+# add layers
+festivalHistogramAlt +
+  geom_histogram(binwidth = 0.6) +
+  labs(x = "Hygiene (Day 1 of Festival)", y = "Frequency")
+```
+
+Mejor aún. Como una segunda opción podemos ubicar el outlier en la data frame.
+Para ello usamos la función **order** para order los datos de menor a mayor.
+Luego usamos la función **tail** para ver los últimos puntos de los datos.
+
+```{r}
+# import data
+festivalData <- festivalData[order(festivalData$day1),]
+tail(festivalData)
+```
+
+Aquí nos fijamos que hay un valor exageradamente alto. Se escribe 20.02, y es probable que sea un error de registro. Lo que podemos hacer es eliminar manualmente el valor o modificarlo a 2.02.
+
+```{r}
+festivalDataGood <- festivalData
+festivalDataGood$day1[810] <- 2.02
+```
+
+Y podemos re-hacer el gráfico.
+
+```{r}
+festivalHistogramGood <- ggplot(festivalDataGood, aes(day1))
+
+festivalHistogramGood +
+  geom_histogram(binwidth = 0.4) +
+  labs(x = "Hygiene (Day 1 of Festival)", y = "Frequency")
+
+```
+
+## Boxplot
+
+En un boxplot (o gráfico de cajas y bigotes) visualizamos la distribución y la asimetría en los datos mostrando los promedios y cuartiles (o percentiles) del set de datos.
+Vamos a usar los mismos que usamos antes.
+Veamos los datos originales, pero esta veámoslo en función del género.
+Debemos re-hacer la estructura base.
+
+```{r}
+festivalBoxplot <- ggplot(festivalData, aes(gender, day1))
+
+festivalBoxplot + 
+  geom_boxplot() + 
+  labs(x = "Gender", y = "Hygiene (Day 1 of Festival)")
+```
+
+En este tipo de gráfico también se puede visualizar el outlier.
+Ya habíamos lidiado con este problema transformando el valor del oulier.
+Podemos hacer un boxplot con la nueva data frame.
+
+```{r}
+# define base graph
+festivalBoxplotAlt <- ggplot(festivalDataAlt, aes(gender, day1))
+
+# add layers
+festivalBoxplotAlt + 
+  geom_boxplot() + 
+  labs(x = "Gender", y = "Hygiene (Day 1 of Festival)")
+```
+
+Por último, podemos hacer los boxplots para el día 2.
+
+```{r}
+festivalBoxplot <- ggplot(festivalData, aes(gender, day2))
+festivalBoxplot + geom_boxplot() + labs(x = "Gender", y = "Hygiene (Day 2 of Festival)")
+```
+
+Y para el día 3.
+
+```{r}
+festivalBoxplot <- ggplot(festivalData, aes(gender, day3))
+festivalBoxplot + geom_boxplot() + labs(x = "Gender", y = "Hygiene (Day 3 of Festival)")
+```
+
+## Gráfico de barras
+
+El gráfico de barras es el más común de las visualizaciones.
+
+En este ejemplo un el director de una compañía cinematográfica estuvo interesado en saber si realmente existía el efecto llamado "chick flick", es decir, el hecho que hay películas  que atraen más a las mujeres que a los hombres. Para investigar esta pregunta reclutó a 20 hombres y 20 mujeres y les mostró a la mitad de cada grupo una película que se suponía era para chicas ("El diario de Bridget Jones), y a la otra mitad de cada grupo una película que no caía en esta categoría de película (Memento). En todos los casos midió la excitación fisiológica (la conductancia de la piel) como indicador de cuánto disfrutaron la película los participantes.
+
+Como siempre, primero importemos los datos.
+No es necesario que carguemos la librerías si ya están cargadas.
+
+```{r}
+chickFlick <- read.csv("data/chick_flick.csv", header = TRUE)
+head(chickFlick)
+# cambiemos los nombres
+colnames(chickFlick) <- c("gender", "film", "arousal")
+head(chickFlick)
+```
+
+Fíjate que hay variables:
+gender: El género del participante.
+film: La película que estaba vió el participante.
+arousal: El nivel de excitación del participante.
+
+Antes de crear la estructura base del gráfico vamos a hacer algunos cálculos.
+Para ello nos vamos a valer de algunas funciones estadísticas.
+La función **summarySE** nos permite calcular varias métricas estadísticas (N, promedio, SD, SE, CI) en función de otra variable. En este caso vamos a calcular el arousal promedio en función del tipo de film.
+Está función necesita de la librería Rmisc que ya está cargada.
+
+```{r}
+dataSumm <- summarySE(chickFlick, measurevar="arousal", groupvars = c("film"))
+dataSumm
+```
+
+Y luego hacemos el gráfico.
+
+```{r}
+# usamos la tabla que recién creamos y graficamos el promedio del arousal (eje Y) en fución del film (eje X)
+ggplot(dataSumm, aes(x=film, y=arousal)) + 
+  
+  # agregamos las barras dónde estan los promedios
+  # dodge permite crear un pequeño desfase entre la posición dónde se ubican los promedios
+  geom_bar(position = position_dodge(width = 0.9), stat="identity",
+           color="black", fill="green", show.legend=FALSE) +
+  
+  # agregamos las barras de error
+  # dodge permite crear un pequeño desfase entre la posición dónde se ubican los promedios
+  # podemos modificar el ancho de las barras de error con "width"
+  # podemos definir los mínimos y máximos de las barras de error, tipicamente el error se muestra hacia arriba
+  geom_errorbar(position = position_dodge(width=0.9), width=0.25,
+                aes(ymin=arousal, ymax=arousal+se)) +
+  
+  # creamos un fondo blanco para que se vea mejor
+  # se elimina la rejilla que aparece en el fondo
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black")) + 
+  
+  # podemos cambiar los límites y las separaciones del eje Y
+  scale_y_continuous(limits = c(0,30), breaks = seq(0, 30, 5)) +
+  
+  # también podemos renombrar la etiqueta de los ejes
+  ylab("Arousal") +
+  xlab("Film")
+```
+
+Para entender mejor el rol de estos parámetros en la configuración del gráfico, cámbialos.
+
+Además, podríamos querer visualizar los valores de excitación no sólo en función de las películas, sino que también en función del género.
+
+Usamos la función **summarySE** para calcular el arousal promedio en función del tipo de film y del género.
+
+```{r}
+dataSumm <- summarySE(chickFlick, measurevar="arousal", groupvars = c("film", "gender"))
+dataSumm
+```
+
+Luego graficamos.
+
+```{r}
+# Aquí debemos definir como ver el género dento del parámetro aes.
+ggplot(dataSumm, aes(x=film, y=arousal, fill=gender)) + 
+  
+  geom_bar(position = position_dodge(width = 0.9), stat="identity",
+           color="black") +
+  
+  geom_errorbar(position = position_dodge(width=0.9), width=0.25,
+                aes(ymin=arousal, ymax=arousal+se)) +
+  
+  # podemos cambiar los colores de relleno
+  scale_fill_manual(values=c("white", "black")) +
+  
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black")) + 
+  scale_y_continuous(limits = c(0,30), breaks = seq(0, 30, 5)) +
+  ylab("Arousal") +
+  xlab("Film")
+```
+
+## Gráfico de líneas (1 factor)
+
+El gráfico de líneas es también muy común para visualizar datos.
+
+En este ejemplo se reclutaron 15 personas con hipo y durante un ataque de hipo se administraron tres procedimientos para detener el hipo (recibir un susto, ingerir un poco de azúcar y respirar en una bolsa) en orden aleatorio y a intervalos de 5 minutos. Además, se tomó una línea de base de cuántos hipo tuvieron por minuto. Durante al aplicación de los procedimientos para detener el hipo se contaron el numero de hipos por minuto.
+
+Como siempre, primero importemos los datos.
+
+```{r}
+hiccupsData <- read.csv("data/hipo.csv", header = TRUE)
+head(hiccupsData)
+
+colnames(hiccupsData)[2] <- "Base"
+head(hiccupsData)
+```
+
+Hay cuatro tratamientos:
+Base: el número de hipos sin ningún tratamiento.
+Susto: número de hipos al recibir un susto.
+Azucar: número de hipo al ingerir un poco de azúcar.
+Bolsa: número de hipos al respirar en una bolsa.
+
+Cada fila en la base de datos representa a una persona diferente. Esto refleja un diseño de medidas repetidas. Cada columna representa una condición de tratamiento diferente. Y cada persona que se somete a cada uno de los tratamientos.
+
+Antes de graficar con ggplot debemos cambiar el formato de la base de datos.
+El ID no nos interesa y nos podemos deshacer de él.
+
+```{r}
+hiccupsData$ID <- NULL
+
+hiccups <- stack(hiccupsData)
+head(hiccups)
+
+colnames(hiccups) <- c("Hipos","Tratamiento")
+head(hiccups)
+```
+
+Para graficar una variable categórica en ggplot debemos transformarla a factor.
+A veces R automáticamente identifica esta variables como categóricas.
+
+Además, podemos cambiar el orden en que aparecen las condiciones en el gráfico,
+
+```{r}
+# Si una variable es categórica se puede ver hacia el final de los datos que existen niveles.
+# En este caso la variable "Tratamieto" tiene 4 niveles.
+hiccups$Tratamiento
+
+hiccups$Tratamiento2 <- factor(hiccups$Tratamiento,
+                                levels(hiccups$Tratamiento)[c(1, 4, 2, 3)])
 
 
+hiccups$Tratamiento2
+```
+
+Usamos la función **summarySE** para calcular el número de hipos promedio en función del tratamiento.
+
+```{r}
+dataSumm <- summarySE(hiccups, measurevar="Hipos", groupvars="Tratamiento")
+dataSumm
+```
+
+Luego graficamos.
+
+```{r}
+# Para hacer un gráfico de línea debemos setear en el aes una estética de grupo igual a 1
+# Esto nos permite agrupar puntos promedio dentro de un grupo en una línea
+ggplot(dataSumm, aes(x=Tratamiento, y=Hipos, group=1)) +
+  
+  # agregamos las barras de error
+  geom_errorbar(width=0.1, aes(ymin=Hipos-se, ymax=Hipos+se)) +
+  
+  # agregamos las líneas que unen los puntos
+  geom_line(colour = "Red", linetype = "dashed") + 
+  
+  # agregamos los puntos que indican los promedios
+  geom_point() +
+  ylab("Número de hipos") +
+  
+  # coord_cartesian(ylim = c(830, 900)) +
+  
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"))
+```
+
+## Gráfico de líneas (2 factores)
+
+Imagina que llevamos a cabo un experimento en el que a un grupo de 25 niños se les pidió enviar mensajes de texto vía sus teléfonos móviles durante un período de seis meses. A un segundo grupo de 25 niños se le prohibió enviar mensajes de texto por el mismo período. A estos dos grupos se les aplicó una pueba gramatical para medir el efecto de enviar mensajes de texto sobre su habilidades gramaticales.
+
+La primera variable independiente fue el uso de mensajes de texto (uso de mensajes de texto versus controles) y la segunda variable independiente fue el tiempo (línea de base versus después de 6 meses).
+
+Importemos los datos.
+
+```{r}
+textData <- read.csv("data/usuarios_de_whatsapp.csv", header = TRUE)
+head(textData)
+
+# missing something!
+colnames(textData) <- c("Group", "Baseline", "Six_months")
+head(textData)
+```
+
+Hay 3 variables:
+
+Grupo: especifica si estaban en el grupo de mensajes de texto o en el grupo de control.
+Baseline: puntajes de gramática en la línea de base.
+Six_months: puntajes de gramática después de 6 meses.
+
+Cada fila en la base de datos representa a una persona diferente. Estos datos están nuevamente en el formato incorrecto para ggplot. En lugar del formato wide actual necesitamos los datos en formato long. Entonces necesitamos reestructurar los datos a una nueva data frame.
+
+```{r}
+textMessages <- melt(textData,
+                     id = c("Group"),
+                     measured = c("Baseline", "Six_months"))
+head(textMessages)
+
+colnames(textMessages)[c(2,3)] <- c("Time", "Grammar_Score")
+head(textMessages)
+```
+
+A esta altura podríamos querer cambiar los nombres de las condiciones.
+También podemos hacer eso.
+
+```{r}
+head(textMessages)
+
+textMessages$Time <- factor(textMessages$Time, labels = c("Baseline", "6 Months"))
+tail(textMessages)
+```
+
+En esta base de datos tenemos las siguientes variables:
+Grupo: especifica si estaban en el grupo de mensajes de texto o en el grupo de control.
+Time: especifica si la puntuación se relaciona con la línea de base o después de 6 meses.
+Grammar_Score: especifica las puntuaciones de gramática.
+
+Enseguida, Usamos la función **summarySE** para calcular los puntajes de grámatica promedio en función de la condición y el tiempo.
+
+```{r}
+dataSumm <- summarySE(textMessages, measurevar="Grammar_Score", groupvars=c("Group", "Time"))
+dataSumm
+```
+
+Luego graficamos.
+
+```{r}
+# En este caso debemos decirle a R que coloree las líneas en función de las condiciones experimentales.
+ggplot(dataSumm, aes(x=Time, y=Grammar_Score, colour=Group)) +
+  
+  # agregamos las barras de error
+  geom_errorbar(aes(ymin=Grammar_Score-se, ymax=Grammar_Score+se), 
+                width=.1, position=position_dodge(0.1)) +
+  
+  # agregamos las líneas que unen los puntos
+  geom_line(position=position_dodge(0.1),
+            aes(group=Group), show.legend=FALSE) +
+  
+  # agregamos los puntos que indican los promedios
+  geom_point(position=position_dodge(0.1),
+             aes(group=Group), show.legend=FALSE) + 
+  
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black")) +
+  
+  ylab("Mean Grammar Score") +
+  scale_colour_manual(values=c("red", "blue")) +
+  coord_cartesian(ylim = c(45, 70))
+```
 
