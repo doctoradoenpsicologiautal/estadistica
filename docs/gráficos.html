@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2022-10-11" />
+<meta name="date" content="2022-10-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -141,6 +141,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.3" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-dispersión"><i class="fa fa-check"></i><b>4.3</b> Gráfico de dispersión</a></li>
 <li class="chapter" data-level="4.4" data-path="gráficos.html"><a href="gráficos.html#histograma"><i class="fa fa-check"></i><b>4.4</b> Histograma</a></li>
 <li class="chapter" data-level="4.5" data-path="gráficos.html"><a href="gráficos.html#boxplot"><i class="fa fa-check"></i><b>4.5</b> Boxplot</a></li>
+<li class="chapter" data-level="4.6" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-barras"><i class="fa fa-check"></i><b>4.6</b> Gráfico de barras</a></li>
+<li class="chapter" data-level="4.7" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-líneas-1-factor"><i class="fa fa-check"></i><b>4.7</b> Gráfico de líneas (1 factor)</a></li>
+<li class="chapter" data-level="4.8" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-líneas-2-factores"><i class="fa fa-check"></i><b>4.8</b> Gráfico de líneas (2 factores)</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -178,12 +181,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Para graficar cargamos la librería <strong>ggplot2</strong> (que tiene que haber sido previamente instalada). Al mismo tiempo se cargan otras librerías que nos serviran. Si no tienes estas librerías debes instalarlas. Finalmente importamos un set de datos y lo miramos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
 
-<span class="kw">library</span>(ggplot2)
-<span class="kw">library</span>(reshape)
-<span class="kw">library</span>(plyr)
-<span class="kw">library</span>(Rmisc)
-
-facebookData &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;data/FacebookNarcissism.dat&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span>
+<span class="kw">library</span>(ggplot2)</code></pre></div>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.1.3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(reshape)
+<span class="kw">library</span>(plyr)</code></pre></div>
+<pre><code>## Warning: package &#39;plyr&#39; was built under R version 4.1.3</code></pre>
+<pre><code>## 
+## Attaching package: &#39;plyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:reshape&#39;:
+## 
+##     rename, round_any</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Rmisc)</code></pre></div>
+<pre><code>## Warning: package &#39;Rmisc&#39; was built under R version 4.1.3</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">facebookData &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;data/FacebookNarcissism.dat&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span>
 <span class="kw">head</span>(facebookData)</code></pre></div>
 <pre><code>##   id NPQC_R_Total Rating_Type Rating
 ## 1  1           31  Attractive      2
@@ -196,23 +207,23 @@ facebookData &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<s
 <p>Ubcaremos <em>NPQC_R_Total</em> en el eje X y <em>Rating</em> en el eje Y. Acuérdate que para crear gráficos con ggplot debes crear un objeto dónde se encuentra la estructura base. Para visualizar el gráfico se debe invocar el objeto y al mismo debes agregar las distintas capas que constituyen el gráfico. Por ejemplo, un capa de puntos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">graph &lt;-<span class="st"> </span><span class="kw">ggplot</span>(facebookData, <span class="kw">aes</span>(NPQC_R_Total, Rating))
 graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <p>Además, puedes ir agregando otras capas. Por ejemplo, el título.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">graph &lt;-<span class="st"> </span><span class="kw">ggplot</span>(facebookData, <span class="kw">aes</span>(NPQC_R_Total, Rating))
 graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Figura 1&quot;</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 <p>Podemos cambiar los puntos por triángulos, usando el parámetro <strong>shape</strong>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">17</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 <p>O podemos cambiar el tamaño de los puntos, usando el parámetro <strong>size</strong>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">6</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 <p>También podemos colorear los puntos en función de los diferentes puntajes. Para ello debemos definir un color dentro del parámetro <strong>aes</strong>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> Rating_Type))</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
 <p>Por último, podríamos tener un problema de &quot;sobreploteo&quot;, es decir, dado que hay un limitado número de respuestas que la personas podrían dar para valores equivalentes no se van a observar puntos diferentes. Para evitar esto podemos cambiar el parámetro <em>position</em> para agregar un retraso (o &quot;jitter).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> Rating_Type), <span class="dt">position =</span> <span class="st">&quot;jitter&quot;</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-83-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 </div>
 <div id="gráfico-de-dispersión" class="section level2">
 <h2><span class="header-section-number">4.3</span> Gráfico de dispersión</h2>
@@ -236,35 +247,35 @@ graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_po
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scatter <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Exam Anxiety&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Exam Performance %&quot;</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
 <p>En general, en los gráficos de dispersión agregamos una línea de tendencia que resume la relación entre las variables. La sombra asociada a la línea representa un intervalo de confianza (CI) al 95%.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scatter <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_smooth</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Exam Anxiety&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Exam Performance %&quot;</span>)</code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
 <p>Pero, en general, se agrega una linea recta. Para ello usamos la función <strong>geom_smooth</strong>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scatter <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;Red&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Exam Anxiety&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Exam Performance %&quot;</span>)</code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-88-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
 <p>Opcionalmente se puede omitir la sombra.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scatter <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;Green&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Exam Anxiety&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Exam Performance %&quot;</span>)</code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-89-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
 <p>Además, podemos cambiar la transparencia de la línea, cambiando el parámetro <em>alpha</em>. Y también podamos cambiar el relleno (&quot;fill&quot;) de la sombra.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scatter <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">fill =</span> <span class="st">&quot;Blue&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Exam Anxiety&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Exam Performance %&quot;</span>)</code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-90-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
 <p>¿Qué pasa si queremos hacer gráficos de dispersión en función de más de una variable? Por ejemplo, podríamos querer ver las distintas relaciones entre ansiedad y puntajes en la prueba, en función del género (hombres versus mujeres). Para ello debemos re-definir la estructura base del gráfico, y debemmos agregar la variable género dentro del parámetro aes.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scatter &lt;-<span class="st"> </span><span class="kw">ggplot</span>(examData, <span class="kw">aes</span>(Anxiety, Exam, <span class="dt">colour =</span> Gender))</code></pre></div>
 <p>Luego podemos hacer un nuevo gráfico.</p>
@@ -272,14 +283,14 @@ graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_po
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)</code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
 <p>También podemos dibujar las líneas de acuerdo al género (y además podemos hacer las líneas transparentes). Para ello debemos definir un parámetro aes dentro de la función geom_smooth.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scatter <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="kw">aes</span>(<span class="dt">fill =</span> Gender)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Exam Anxiety&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Exam Performance %&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;Gender&quot;</span>)</code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
 </div>
 <div id="histograma" class="section level2">
 <h2><span class="header-section-number">4.4</span> Histograma</h2>
@@ -300,12 +311,12 @@ graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_po
 <p>Y luego hacemos el gráfico.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">festivalHistogram <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 <p>Por defecto se realizan los agrupamientos (o &quot;bins) en grupos de 30 puntos. Hay varias cosas que podemos observar en este gráfico. Se observa inmediatamente que hay una valor mucho más alto que el resto de los valores. Podría ser un potencial outlier. También nos damos cuenta que podríamos usar una mejor definición de bins. Para ello podemos modificar el parámetro <strong>bindwith</strong>. Además, le podemos agregar unos títulos a los ejes.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">festivalHistogram <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.4</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Hygiene (Day 1 of Festival)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-97-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
 <p>Para lidiar con el outlier tenemos 2 opciones. Podemos eliminarlo de archivo original. O sea importamos un nuevo archivo.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># import data</span>
 festivalDataAlt &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;data/DownloadFestival_NoOutlier.dat&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
@@ -317,7 +328,7 @@ festivalHistogramAlt &lt;-<span class="st"> </span><span class="kw">ggplot</span
 festivalHistogramAlt <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.6</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Hygiene (Day 1 of Festival)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
 <p>Mejor aún. Como una segunda opción podemos ubicar el outlier en la data frame. Para ello usamos la función <strong>order</strong> para order los datos de menor a mayor. Luego usamos la función <strong>tail</strong> para ver los últimos puntos de los datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># import data</span>
 festivalData &lt;-<span class="st"> </span>festivalData[<span class="kw">order</span>(festivalData<span class="op">$</span>day1),]
@@ -338,7 +349,7 @@ festivalDataGood<span class="op">$</span>day1[<span class="dv">810</span>] &lt;-
 festivalHistogramGood <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.4</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Hygiene (Day 1 of Festival)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-101-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
 </div>
 <div id="boxplot" class="section level2">
 <h2><span class="header-section-number">4.5</span> Boxplot</h2>
@@ -348,7 +359,7 @@ festivalHistogramGood <span class="op">+</span>
 festivalBoxplot <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Gender&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Hygiene (Day 1 of Festival)&quot;</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-102-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
 <p>En este tipo de gráfico también se puede visualizar el outlier. Ya habíamos lidiado con este problema transformando el valor del oulier. Podemos hacer un boxplot con la nueva data frame.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define base graph</span>
 festivalBoxplotAlt &lt;-<span class="st"> </span><span class="kw">ggplot</span>(festivalDataAlt, <span class="kw">aes</span>(gender, day1))
@@ -357,17 +368,299 @@ festivalBoxplotAlt &lt;-<span class="st"> </span><span class="kw">ggplot</span>(
 festivalBoxplotAlt <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Gender&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Hygiene (Day 1 of Festival)&quot;</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-103-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
 <p>Por último, podemos hacer los boxplots para el día 2.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">festivalBoxplot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(festivalData, <span class="kw">aes</span>(gender, day2))
 festivalBoxplot <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Gender&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Hygiene (Day 2 of Festival)&quot;</span>)</code></pre></div>
 <pre><code>## Warning: Removed 546 rows containing non-finite values (stat_boxplot).</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-104-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
 <p>Y para el día 3.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">festivalBoxplot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(festivalData, <span class="kw">aes</span>(gender, day3))
 festivalBoxplot <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Gender&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Hygiene (Day 3 of Festival)&quot;</span>)</code></pre></div>
 <pre><code>## Warning: Removed 687 rows containing non-finite values (stat_boxplot).</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-105-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
+</div>
+<div id="gráfico-de-barras" class="section level2">
+<h2><span class="header-section-number">4.6</span> Gráfico de barras</h2>
+<p>El gráfico de barras es el más común de las visualizaciones.</p>
+<p>En este ejemplo un el director de una compañía cinematográfica estuvo interesado en saber si realmente existía el efecto llamado &quot;chick flick&quot;, es decir, el hecho que hay películas que atraen más a las mujeres que a los hombres. Para investigar esta pregunta reclutó a 20 hombres y 20 mujeres y les mostró a la mitad de cada grupo una película que se suponía era para chicas (&quot;El diario de Bridget Jones), y a la otra mitad de cada grupo una película que no caía en esta categoría de película (Memento). En todos los casos midió la excitación fisiológica (la conductancia de la piel) como indicador de cuánto disfrutaron la película los participantes.</p>
+<p>Como siempre, primero importemos los datos. No es necesario que carguemos la librerías si ya están cargadas.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chickFlick &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/chick_flick.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
+<span class="kw">head</span>(chickFlick)</code></pre></div>
+<pre><code>##   genero             pelicula estado.de.alerta
+## 1 Hombre Bridget Jones&#39; Diary               22
+## 2 Hombre Bridget Jones&#39; Diary               13
+## 3 Hombre Bridget Jones&#39; Diary               16
+## 4 Hombre Bridget Jones&#39; Diary               10
+## 5 Hombre Bridget Jones&#39; Diary               18
+## 6 Hombre Bridget Jones&#39; Diary               24</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># cambiemos los nombres</span>
+<span class="kw">colnames</span>(chickFlick) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;film&quot;</span>, <span class="st">&quot;arousal&quot;</span>)
+<span class="kw">head</span>(chickFlick)</code></pre></div>
+<pre><code>##   gender                 film arousal
+## 1 Hombre Bridget Jones&#39; Diary      22
+## 2 Hombre Bridget Jones&#39; Diary      13
+## 3 Hombre Bridget Jones&#39; Diary      16
+## 4 Hombre Bridget Jones&#39; Diary      10
+## 5 Hombre Bridget Jones&#39; Diary      18
+## 6 Hombre Bridget Jones&#39; Diary      24</code></pre>
+<p>Fíjate que hay variables: gender: El género del participante. film: La película que estaba vió el participante. arousal: El nivel de excitación del participante.</p>
+<p>Antes de crear la estructura base del gráfico vamos a hacer algunos cálculos. Para ello nos vamos a valer de algunas funciones estadísticas. La función <strong>summarySE</strong> nos permite calcular varias métricas estadísticas (N, promedio, SD, SE, CI) en función de otra variable. En este caso vamos a calcular el arousal promedio en función del tipo de film. Está función necesita de la librería Rmisc que ya está cargada.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataSumm &lt;-<span class="st"> </span><span class="kw">summarySE</span>(chickFlick, <span class="dt">measurevar=</span><span class="st">&quot;arousal&quot;</span>, <span class="dt">groupvars =</span> <span class="kw">c</span>(<span class="st">&quot;film&quot;</span>))
+dataSumm</code></pre></div>
+<pre><code>##                   film  N arousal       sd       se       ci
+## 1 Bridget Jones&#39; Diary 20   14.80 5.727128 1.280625 2.680379
+## 2              Memento 20   25.25 7.129442 1.594192 3.336682</code></pre>
+<p>Y luego hacemos el gráfico.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># usamos la tabla que recién creamos y graficamos el promedio del arousal (eje Y) en fución del film (eje X)</span>
+<span class="kw">ggplot</span>(dataSumm, <span class="kw">aes</span>(<span class="dt">x=</span>film, <span class="dt">y=</span>arousal)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span>
+<span class="st">  </span><span class="co"># agregamos las barras dónde estan los promedios</span>
+<span class="st">  </span><span class="co"># dodge permite crear un pequeño desfase entre la posición dónde se ubican los promedios</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>), <span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>,
+           <span class="dt">color=</span><span class="st">&quot;black&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;green&quot;</span>, <span class="dt">show.legend=</span><span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">  </span>
+<span class="st">  </span><span class="co"># agregamos las barras de error</span>
+<span class="st">  </span><span class="co"># dodge permite crear un pequeño desfase entre la posición dónde se ubican los promedios</span>
+<span class="st">  </span><span class="co"># podemos modificar el ancho de las barras de error con &quot;width&quot;</span>
+<span class="st">  </span><span class="co"># podemos definir los mínimos y máximos de las barras de error, tipicamente el error se muestra hacia arriba</span>
+<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width=</span><span class="fl">0.9</span>), <span class="dt">width=</span><span class="fl">0.25</span>,
+                <span class="kw">aes</span>(<span class="dt">ymin=</span>arousal, <span class="dt">ymax=</span>arousal<span class="op">+</span>se)) <span class="op">+</span>
+<span class="st">  </span>
+<span class="st">  </span><span class="co"># creamos un fondo blanco para que se vea mejor</span>
+<span class="st">  </span><span class="co"># se elimina la rejilla que aparece en el fondo</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span>
+<span class="st">  </span><span class="co"># podemos cambiar los límites y las separaciones del eje Y</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">30</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">5</span>)) <span class="op">+</span>
+<span class="st">  </span>
+<span class="st">  </span><span class="co"># también podemos renombrar la etiqueta de los ejes</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Arousal&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Film&quot;</span>)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
+<p>Para entender mejor el rol de estos parámetros en la configuración del gráfico, cámbialos.</p>
+<p>Además, podríamos querer visualizar los valores de excitación no sólo en función de las películas, sino que también en función del género.</p>
+<p>Usamos la función <strong>summarySE</strong> para calcular el arousal promedio en función del tipo de film y del género.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataSumm &lt;-<span class="st"> </span><span class="kw">summarySE</span>(chickFlick, <span class="dt">measurevar=</span><span class="st">&quot;arousal&quot;</span>, <span class="dt">groupvars =</span> <span class="kw">c</span>(<span class="st">&quot;film&quot;</span>, <span class="st">&quot;gender&quot;</span>))
+dataSumm</code></pre></div>
+<pre><code>##                   film gender  N arousal       sd       se       ci
+## 1 Bridget Jones&#39; Diary Hombre 10    17.2 4.779586 1.511438 3.419110
+## 2 Bridget Jones&#39; Diary  Mujer 10    12.4 5.796551 1.833030 4.146603
+## 3              Memento Hombre 10    25.8 7.238784 2.289105 5.178314
+## 4              Memento  Mujer 10    24.7 7.364328 2.328805 5.268123</code></pre>
+<p>Luego graficamos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Aquí debemos definir como ver el género dento del parámetro aes.</span>
+<span class="kw">ggplot</span>(dataSumm, <span class="kw">aes</span>(<span class="dt">x=</span>film, <span class="dt">y=</span>arousal, <span class="dt">fill=</span>gender)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>), <span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>,
+           <span class="dt">color=</span><span class="st">&quot;black&quot;</span>) <span class="op">+</span>
+<span class="st">  </span>
+<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width=</span><span class="fl">0.9</span>), <span class="dt">width=</span><span class="fl">0.25</span>,
+                <span class="kw">aes</span>(<span class="dt">ymin=</span>arousal, <span class="dt">ymax=</span>arousal<span class="op">+</span>se)) <span class="op">+</span>
+<span class="st">  </span>
+<span class="st">  </span><span class="co"># podemos cambiar los colores de relleno</span>
+<span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;black&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">30</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">5</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Arousal&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Film&quot;</span>)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
+</div>
+<div id="gráfico-de-líneas-1-factor" class="section level2">
+<h2><span class="header-section-number">4.7</span> Gráfico de líneas (1 factor)</h2>
+<p>El gráfico de líneas es también muy común para visualizar datos.</p>
+<p>En este ejemplo se reclutaron 15 personas con hipo y durante un ataque de hipo se administraron tres procedimientos para detener el hipo (recibir un susto, ingerir un poco de azúcar y respirar en una bolsa) en orden aleatorio y a intervalos de 5 minutos. Además, se tomó una línea de base de cuántos hipo tuvieron por minuto. Durante al aplicación de los procedimientos para detener el hipo se contaron el numero de hipos por minuto.</p>
+<p>Como siempre, primero importemos los datos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hiccupsData &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/hipo.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
+<span class="kw">head</span>(hiccupsData)</code></pre></div>
+<pre><code>##   ID Linea.base Susto Azucar Bolsa
+## 1  1         15     9      7     2
+## 2  2         13    18      7     4
+## 3  3          9    17      5     4
+## 4  4          7    15     10     5
+## 5  5         11    18      7     4
+## 6  6         14     8     10     3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(hiccupsData)[<span class="dv">2</span>] &lt;-<span class="st"> &quot;Base&quot;</span>
+<span class="kw">head</span>(hiccupsData)</code></pre></div>
+<pre><code>##   ID Base Susto Azucar Bolsa
+## 1  1   15     9      7     2
+## 2  2   13    18      7     4
+## 3  3    9    17      5     4
+## 4  4    7    15     10     5
+## 5  5   11    18      7     4
+## 6  6   14     8     10     3</code></pre>
+<p>Hay cuatro tratamientos: Base: el número de hipos sin ningún tratamiento. Susto: número de hipos al recibir un susto. Azucar: número de hipo al ingerir un poco de azúcar. Bolsa: número de hipos al respirar en una bolsa.</p>
+<p>Cada fila en la base de datos representa a una persona diferente. Esto refleja un diseño de medidas repetidas. Cada columna representa una condición de tratamiento diferente. Y cada persona que se somete a cada uno de los tratamientos.</p>
+<p>Antes de graficar con ggplot debemos cambiar el formato de la base de datos. El ID no nos interesa y nos podemos deshacer de él.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hiccupsData<span class="op">$</span>ID &lt;-<span class="st"> </span><span class="ot">NULL</span>
+
+hiccups &lt;-<span class="st"> </span><span class="kw">stack</span>(hiccupsData)
+<span class="kw">head</span>(hiccups)</code></pre></div>
+<pre><code>##   values  ind
+## 1     15 Base
+## 2     13 Base
+## 3      9 Base
+## 4      7 Base
+## 5     11 Base
+## 6     14 Base</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(hiccups) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Hipos&quot;</span>,<span class="st">&quot;Tratamiento&quot;</span>)
+<span class="kw">head</span>(hiccups)</code></pre></div>
+<pre><code>##   Hipos Tratamiento
+## 1    15        Base
+## 2    13        Base
+## 3     9        Base
+## 4     7        Base
+## 5    11        Base
+## 6    14        Base</code></pre>
+<p>Para graficar una variable categórica en ggplot debemos transformarla a factor. A veces R automáticamente identifica esta variables como categóricas.</p>
+<p>Además, podemos cambiar el orden en que aparecen las condiciones en el gráfico,</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Si una variable es categórica se puede ver hacia el final de los datos que existen niveles.</span>
+<span class="co"># En este caso la variable &quot;Tratamieto&quot; tiene 4 niveles.</span>
+hiccups<span class="op">$</span>Tratamiento</code></pre></div>
+<pre><code>##  [1] Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base  
+## [16] Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto 
+## [31] Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar
+## [46] Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa 
+## Levels: Base Susto Azucar Bolsa</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hiccups<span class="op">$</span>Tratamiento2 &lt;-<span class="st"> </span><span class="kw">factor</span>(hiccups<span class="op">$</span>Tratamiento,
+                                <span class="kw">levels</span>(hiccups<span class="op">$</span>Tratamiento)[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">3</span>)])
+
+
+hiccups<span class="op">$</span>Tratamiento2</code></pre></div>
+<pre><code>##  [1] Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base  
+## [16] Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto 
+## [31] Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar
+## [46] Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa 
+## Levels: Base Bolsa Susto Azucar</code></pre>
+<p>Usamos la función <strong>summarySE</strong> para calcular el número de hipos promedio en función del tratamiento.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataSumm &lt;-<span class="st"> </span><span class="kw">summarySE</span>(hiccups, <span class="dt">measurevar=</span><span class="st">&quot;Hipos&quot;</span>, <span class="dt">groupvars=</span><span class="st">&quot;Tratamiento&quot;</span>)
+dataSumm</code></pre></div>
+<pre><code>##   Tratamiento  N     Hipos        sd        se        ci
+## 1        Base 15 13.133333 4.8383390 1.2492537 2.6793828
+## 2       Susto 15 12.800000 5.4142669 1.3979577 2.9983211
+## 3      Azucar 15  8.733333 2.3441924 0.6052679 1.2981705
+## 4       Bolsa 15  3.533333 0.8338094 0.2152887 0.4617482</code></pre>
+<p>Luego graficamos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Para hacer un gráfico de línea debemos setear en el aes una estética de grupo igual a 1</span>
+<span class="co"># Esto nos permite agrupar puntos promedio dentro de un grupo en una línea</span>
+<span class="kw">ggplot</span>(dataSumm, <span class="kw">aes</span>(<span class="dt">x=</span>Tratamiento, <span class="dt">y=</span>Hipos, <span class="dt">group=</span><span class="dv">1</span>)) <span class="op">+</span>
+<span class="st">  </span>
+<span class="st">  </span><span class="co"># agregamos las barras de error</span>
+<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">width=</span><span class="fl">0.1</span>, <span class="kw">aes</span>(<span class="dt">ymin=</span>Hipos<span class="op">-</span>se, <span class="dt">ymax=</span>Hipos<span class="op">+</span>se)) <span class="op">+</span>
+<span class="st">  </span>
+<span class="st">  </span><span class="co"># agregamos las líneas que unen los puntos</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">colour =</span> <span class="st">&quot;Red&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span>
+<span class="st">  </span><span class="co"># agregamos los puntos que indican los promedios</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Número de hipos&quot;</span>) <span class="op">+</span>
+<span class="st">  </span>
+<span class="st">  </span><span class="co"># coord_cartesian(ylim = c(830, 900)) +</span>
+<span class="st">  </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
+</div>
+<div id="gráfico-de-líneas-2-factores" class="section level2">
+<h2><span class="header-section-number">4.8</span> Gráfico de líneas (2 factores)</h2>
+<p>Imagina que llevamos a cabo un experimento en el que a un grupo de 25 niños se les pidió enviar mensajes de texto vía sus teléfonos móviles durante un período de seis meses. A un segundo grupo de 25 niños se le prohibió enviar mensajes de texto por el mismo período. A estos dos grupos se les aplicó una pueba gramatical para medir el efecto de enviar mensajes de texto sobre su habilidades gramaticales.</p>
+<p>La primera variable independiente fue el uso de mensajes de texto (uso de mensajes de texto versus controles) y la segunda variable independiente fue el tiempo (línea de base versus después de 6 meses).</p>
+<p>Importemos los datos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">textData &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/usuarios_de_whatsapp.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
+<span class="kw">head</span>(textData)</code></pre></div>
+<pre><code>##                 Grupo Linea.base X6.meses
+## 1 Usarios de Whatsapp         52       32
+## 2 Usarios de Whatsapp         68       48
+## 3 Usarios de Whatsapp         85       62
+## 4 Usarios de Whatsapp         47       16
+## 5 Usarios de Whatsapp         73       63
+## 6 Usarios de Whatsapp         57       53</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># missing something!</span>
+<span class="kw">colnames</span>(textData) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Group&quot;</span>, <span class="st">&quot;Baseline&quot;</span>, <span class="st">&quot;Six_months&quot;</span>)
+<span class="kw">head</span>(textData)</code></pre></div>
+<pre><code>##                 Group Baseline Six_months
+## 1 Usarios de Whatsapp       52         32
+## 2 Usarios de Whatsapp       68         48
+## 3 Usarios de Whatsapp       85         62
+## 4 Usarios de Whatsapp       47         16
+## 5 Usarios de Whatsapp       73         63
+## 6 Usarios de Whatsapp       57         53</code></pre>
+<p>Hay 3 variables:</p>
+<p>Grupo: especifica si estaban en el grupo de mensajes de texto o en el grupo de control. Baseline: puntajes de gramática en la línea de base. Six_months: puntajes de gramática después de 6 meses.</p>
+<p>Cada fila en la base de datos representa a una persona diferente. Estos datos están nuevamente en el formato incorrecto para ggplot. En lugar del formato wide actual necesitamos los datos en formato long. Entonces necesitamos reestructurar los datos a una nueva data frame.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">textMessages &lt;-<span class="st"> </span><span class="kw">melt</span>(textData,
+                     <span class="dt">id =</span> <span class="kw">c</span>(<span class="st">&quot;Group&quot;</span>),
+                     <span class="dt">measured =</span> <span class="kw">c</span>(<span class="st">&quot;Baseline&quot;</span>, <span class="st">&quot;Six_months&quot;</span>))
+<span class="kw">head</span>(textMessages)</code></pre></div>
+<pre><code>##                 Group variable value
+## 1 Usarios de Whatsapp Baseline    52
+## 2 Usarios de Whatsapp Baseline    68
+## 3 Usarios de Whatsapp Baseline    85
+## 4 Usarios de Whatsapp Baseline    47
+## 5 Usarios de Whatsapp Baseline    73
+## 6 Usarios de Whatsapp Baseline    57</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(textMessages)[<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Time&quot;</span>, <span class="st">&quot;Grammar_Score&quot;</span>)
+<span class="kw">head</span>(textMessages)</code></pre></div>
+<pre><code>##                 Group     Time Grammar_Score
+## 1 Usarios de Whatsapp Baseline            52
+## 2 Usarios de Whatsapp Baseline            68
+## 3 Usarios de Whatsapp Baseline            85
+## 4 Usarios de Whatsapp Baseline            47
+## 5 Usarios de Whatsapp Baseline            73
+## 6 Usarios de Whatsapp Baseline            57</code></pre>
+<p>A esta altura podríamos querer cambiar los nombres de las condiciones. También podemos hacer eso.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(textMessages)</code></pre></div>
+<pre><code>##                 Group     Time Grammar_Score
+## 1 Usarios de Whatsapp Baseline            52
+## 2 Usarios de Whatsapp Baseline            68
+## 3 Usarios de Whatsapp Baseline            85
+## 4 Usarios de Whatsapp Baseline            47
+## 5 Usarios de Whatsapp Baseline            73
+## 6 Usarios de Whatsapp Baseline            57</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">textMessages<span class="op">$</span>Time &lt;-<span class="st"> </span><span class="kw">factor</span>(textMessages<span class="op">$</span>Time, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Baseline&quot;</span>, <span class="st">&quot;6 Months&quot;</span>))
+<span class="kw">tail</span>(textMessages)</code></pre></div>
+<pre><code>##         Group     Time Grammar_Score
+## 95  Controles 6 Months            78
+## 96  Controles 6 Months            62
+## 97  Controles 6 Months            71
+## 98  Controles 6 Months            55
+## 99  Controles 6 Months            46
+## 100 Controles 6 Months            79</code></pre>
+<p>En esta base de datos tenemos las siguientes variables: Grupo: especifica si estaban en el grupo de mensajes de texto o en el grupo de control. Time: especifica si la puntuación se relaciona con la línea de base o después de 6 meses. Grammar_Score: especifica las puntuaciones de gramática.</p>
+<p>Enseguida, Usamos la función <strong>summarySE</strong> para calcular los puntajes de grámatica promedio en función de la condición y el tiempo.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataSumm &lt;-<span class="st"> </span><span class="kw">summarySE</span>(textMessages, <span class="dt">measurevar=</span><span class="st">&quot;Grammar_Score&quot;</span>, <span class="dt">groupvars=</span><span class="kw">c</span>(<span class="st">&quot;Group&quot;</span>, <span class="st">&quot;Time&quot;</span>))
+dataSumm</code></pre></div>
+<pre><code>##                 Group     Time  N Grammar_Score        sd       se       ci
+## 1           Controles Baseline 25         65.60 10.835897 2.167179 4.472839
+## 2           Controles 6 Months 25         61.84  9.410455 1.882091 3.884445
+## 3 Usarios de Whatsapp Baseline 25         64.84 10.679732 2.135946 4.408377
+## 4 Usarios de Whatsapp 6 Months 25         52.96 16.331156 3.266231 6.741170</code></pre>
+<p>Luego graficamos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># En este caso debemos decirle a R que coloree las líneas en función de las condiciones experimentales.</span>
+<span class="kw">ggplot</span>(dataSumm, <span class="kw">aes</span>(<span class="dt">x=</span>Time, <span class="dt">y=</span>Grammar_Score, <span class="dt">colour=</span>Group)) <span class="op">+</span>
+<span class="st">  </span>
+<span class="st">  </span><span class="co"># agregamos las barras de error</span>
+<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>Grammar_Score<span class="op">-</span>se, <span class="dt">ymax=</span>Grammar_Score<span class="op">+</span>se), 
+                <span class="dt">width=</span>.<span class="dv">1</span>, <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.1</span>)) <span class="op">+</span>
+<span class="st">  </span>
+<span class="st">  </span><span class="co"># agregamos las líneas que unen los puntos</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.1</span>),
+            <span class="kw">aes</span>(<span class="dt">group=</span>Group), <span class="dt">show.legend=</span><span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">  </span>
+<span class="st">  </span><span class="co"># agregamos los puntos que indican los promedios</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.1</span>),
+             <span class="kw">aes</span>(<span class="dt">group=</span>Group), <span class="dt">show.legend=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Mean Grammar Score&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_colour_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">45</span>, <span class="dv">70</span>))</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-91-1.png" width="672" /></p>
 
 </div>
 </div>

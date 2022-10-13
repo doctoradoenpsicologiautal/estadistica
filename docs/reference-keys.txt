@@ -29,3 +29,6 @@ gráfico-de-puntos
 gráfico-de-dispersión
 histograma
 boxplot
+gráfico-de-barras
+gráfico-de-líneas-1-factor
+gráfico-de-líneas-2-factores
