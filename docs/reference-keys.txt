@@ -32,3 +32,12 @@ boxplot
 gráfico-de-barras
 gráfico-de-líneas-1-factor
 gráfico-de-líneas-2-factores
+caracterizar-datos
+visualizar-los-datos
+la-curva-normal
+la-curva-normal-en-la-práctica-1
+la-curva-normal-en-la-práctica-2
+de-la-muestra-a-la-población
+la-muestra-en-la-vida-real
+los-intervalos-de-confianza-1
+los-intervalos-de-confianza-2
