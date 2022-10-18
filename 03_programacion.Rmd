@@ -7,21 +7,21 @@ knitr::opts_chunk$set(echo = TRUE)
 En este capítulo te voy a mostrar las primeras ideas para que puedas programar en R.
 
 ## ¿Que significa programar?
-Revisa este <a href="https://www.youtube.com/watch?v=oY6OMnVRkjM" target="_blank">video</a> y trata de responder:
+Revisa este <a href="https://www.youtube.com/watch?v=oY6OMnVRkjM" target="_blank">video (8')</a> y trata de responder:
 
 - ¿Qué habilidades permite desarrollar el conocimiento de programación?
 - ¿Qué es un algoritmo?
 - ¿Qué es un lenguaje de programación?
 
 ## La shell (consola) versus el script
-Revisa este <a href="https://www.youtube.com/watch?v=ryTQ33oOsMw" target="_blank">video</a> y trata de responder:
+Revisa este <a href="https://www.youtube.com/watch?v=ryTQ33oOsMw" target="_blank">video (6')</a> y trata de responder:
 
 - ¿Cuál es la diferencia entre un compilador y un intérprete?
 - ¿Cuál es la diferencia entre usar la shell (consola) y usar un script?
 - ¿Qué es el CRAN?
 
-## Video introductorio a la programación
-Revisa este <a href="https://www.youtube.com/watch?v=UREdS1HRKN4" target="_blank">video</a> para comenzar a trabajar en RStudio. Mas abajo repetiré el mismo contenido para que vayas viendo como usar el material que viene  mas abajo.
+## Intro a la programación
+Revisa este <a href="https://www.youtube.com/watch?v=UREdS1HRKN4" target="_blank">video (16')</a> para comenzar a trabajar en RStudio. Mas abajo repetiré el mismo contenido para que vayas viendo como usar el material que viene  mas abajo. La idea es que vayas trabajando tus propios scripts ordenadamente en tu computador.
 
 ## Empezando a programar
 

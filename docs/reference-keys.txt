@@ -12,11 +12,11 @@ la-significancia
 colas
 errores-estadísticos
 tamaño-poder
-experimentar
+planificar-mi-estudio
 programación
 que-significa-programar
 la-shell-consola-versus-el-script
-video-introductorio-a-la-programación
+intro-a-la-programación
 empezando-a-programar
 trabajando-con-data-frames
 importando-datos

@@ -3,14 +3,14 @@
 En este capítulo vamos a revisar algunos elementos relacionados con la estadística inferencial. Para entender estas ideas primero vamos a hablar sobre como caracterizamos y visualizamos nuestros datos.
 
 ## Visualizar los datos
-Revisa este <a href="https://www.youtube.com/watch?v=IFNrCATEjxY" target="_blank">video</a> y trata de responder:
+Revisa este <a href="https://www.youtube.com/watch?v=IFNrCATEjxY" target="_blank">video (17')</a> y trata de responder:
 
 - ¿Por qué es importante graficar los datos?
 - ¿Cómo se calcula la desviación estándar?
 - ¿Qué es la suma de cuadrados (o suma de los errores al cuadrado)?
 
 ## La curva normal
-Revisa este <a href="https://www.youtube.com/watch?v=AdPw4jita2o" target="_blank">video</a> y trata de responder:
+Revisa este <a href="https://www.youtube.com/watch?v=AdPw4jita2o" target="_blank">video (10')</a> y trata de responder:
 
 - ¿Cómo se puede visualizar la "forma" de los datos?
 - ¿Qué características tiene la curva normal?
@@ -18,20 +18,20 @@ Revisa este <a href="https://www.youtube.com/watch?v=AdPw4jita2o" target="_blank
 - ¿Qué porcentaje de los datos esta entre -1 SD y 1 SD?
 
 ## La curva normal en la práctica (1)
-Revisa este <a href="https://www.youtube.com/watch?v=kcxyC1b-QZM" target="_blank">video</a> y trata de responder:
+Revisa este <a href="https://www.youtube.com/watch?v=kcxyC1b-QZM" target="_blank">video (8')</a> y trata de responder:
 
 - ¿Cuantos vehículos anduvieron a exceso de velocidad? PAUSA el video para responder
 - ¿Qué porcentaje de los datos esta entre -2 SD y 2 SD?
 - ¿Qué porcentaje de los datos esta entre -2.5 SD y 2.5 SD?
 
 ## La curva normal en la práctica (2)
-Revisa este <a href="https://www.youtube.com/watch?v=zKnxXD9C-78" target="_blank">video</a> y trata de responder:
+Revisa este <a href="https://www.youtube.com/watch?v=zKnxXD9C-78" target="_blank">video (9')</a> y trata de responder:
 
 - ¿Entre cuantas SD tenemos prácticamente todos los puntos de un set de datos?
 - ¿Entre Linda y Bill quien saco mejor puntaje dentro de su cohorte? PAUSA el video para responder
 
 ## De la muestra a la población
-Revisa este <a href="https://www.youtube.com/watch?v=BpH3_BJf5do" target="_blank">video</a> y trata de responder:
+Revisa este <a href="https://www.youtube.com/watch?v=BpH3_BJf5do" target="_blank">video (17')</a> y trata de responder:
 
 - ¿Qué significa generalizar nuestros hallazgos?
 - ¿Qué son los parámetros?
@@ -40,20 +40,20 @@ Revisa este <a href="https://www.youtube.com/watch?v=BpH3_BJf5do" target="_blank
 - ¿Qué representa el promedio de los promedios de las muestras?
 
 ## La muestra en la vida real
-Revisa este <a href="https://www.youtube.com/watch?v=SF4vsowPyrw" target="_blank">video</a> y trata de responder:
+Revisa este <a href="https://www.youtube.com/watch?v=SF4vsowPyrw" target="_blank">video (10')</a> y trata de responder:
 
 - ¿Qué pasa en la vida con respecto a la distribución de los promedios de las muestras?
 - ¿Qué es el error estándar y como se calcula?
 
 ## Los intervalos de confianza (1)
-Revisa este <a href="https://www.youtube.com/watch?v=WPgwrvY8SEw" target="_blank">video</a> y trata de responder:
+Revisa este <a href="https://www.youtube.com/watch?v=WPgwrvY8SEw" target="_blank">video (13')</a> y trata de responder:
 
 - ¿Cómo se calcula el SE?
-- ¿Cómo se estima del promedio de la población?
+- ¿Cómo se estima el promedio de la población?
 - ¿Qué son los intervalos de confianza?
 
 ## Los intervalos de confianza (2)
-Revisa este <a href="https://www.youtube.com/watch?v=tHovt9mI7Xg" target="_blank">video</a> y trata de responder:
+Revisa este <a href="https://www.youtube.com/watch?v=tHovt9mI7Xg" target="_blank">video (6')</a> y trata de responder:
 
 - ¿Qué significa que cálculemos un promedio con un intervalo de confianza al 68%?
 - ¿Qué significa que cálculemos un promedio con un intervalo de confianza al 95%?

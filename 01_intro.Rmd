@@ -3,7 +3,7 @@
 En este capítulo introductorio vamos a ir paso a paso. Vamos a hacernos de una visión general de la estadística y vamos a entender por qué tenemos que hacer "inferencias", es decir, sacar conclusiones de algunos datos que recolectamos para saber algo del mundo alredor nuestro (de una población en particular).
 
 ## ¿Qué es la estadística?
-Revisa este <a href="https://www.youtube.com/watch?v=10yOugyLLQg" target="_blank">video</a> y trata de responder:
+Revisa este <a href="https://www.youtube.com/watch?v=10yOugyLLQg" target="_blank">video (9')</a> y trata de responder:
 
 - ¿Qué es la estadística descriptiva y la estadística inferencial?  
 - ¿Qué es una población y una muestra? ¿Qué son los "parámetros"" y los "estadísticos"?
@@ -11,7 +11,7 @@ Revisa este <a href="https://www.youtube.com/watch?v=10yOugyLLQg" target="_blank
 - ¿Por qué necesitamos las probabilidades para realizar análisis estadísticos?
 
 ## ¿Variables?
-Revisa este <a href="https://www.youtube.com/watch?v=ZHQsBt2xGkE" target="_blank">video</a> y trata de responder:
+Revisa este <a href="https://www.youtube.com/watch?v=ZHQsBt2xGkE" target="_blank">video (9')</a> y trata de responder:
 
 - ¿Qué tipos de variables existen?
 - ¿Que significa definir variables y operacionalizar?
@@ -19,13 +19,13 @@ Revisa este <a href="https://www.youtube.com/watch?v=ZHQsBt2xGkE" target="_blank
 - ¿Cómo se construye una hipótesis?
 
 ## Diseños experimentales
-Revisa este <a href="https://www.youtube.com/watch?v=R6qDgUyJDJY" target="_blank">video</a> y trata de responder:
+Revisa este <a href="https://www.youtube.com/watch?v=R6qDgUyJDJY" target="_blank">video (4')</a> y trata de responder:
 
 - ¿Qué tipos de diseño experimental existen?
 - ¿Cuáles son las ventajas y desventajas de cada uno de ellos?
 
 ## ¿Qué medimos?
-Revisa este <a href="https://www.youtube.com/watch?v=JdhW8gV9dOI" target="_blank">video</a> y trata de responder:
+Revisa este <a href="https://www.youtube.com/watch?v=JdhW8gV9dOI" target="_blank">video (7')</a> y trata de responder:
 
 - ¿Qué aspectos son importantes a la hora de diseñar un experimento?
 - ¿Qué es la validez de una medición?
@@ -33,7 +33,7 @@ Revisa este <a href="https://www.youtube.com/watch?v=JdhW8gV9dOI" target="_blank
 - ¿Qué es un factor confundente?
 
 ## Un prueba estadística
-Revisa este <a href="https://www.youtube.com/watch?v=BsXkMAIRaLQ" target="_blank">video</a> y trata de responder:
+Revisa este <a href="https://www.youtube.com/watch?v=BsXkMAIRaLQ" target="_blank">video (14')</a> y trata de responder:
 
 - ¿Por qué es tan importante evaluar como cambian (o varían) las variables?
 - ¿Qué hace un prueba estadística (en términos de los cambios que experimenta una variable)?
@@ -41,19 +41,19 @@ Revisa este <a href="https://www.youtube.com/watch?v=BsXkMAIRaLQ" target="_blank
 - Sí una manipulación experimental produce un efecto genuino como será la razón VS/VNS?
 
 ## ¿Que diseño usaré?
-Revisa este <a href="https://www.youtube.com/watch?v=ZDrbXr_VJOA" target="_blank">video</a> y trata de responder:
+Revisa este <a href="https://www.youtube.com/watch?v=ZDrbXr_VJOA" target="_blank">video (4')</a> y trata de responder:
 
 - ¿Cuál es la diferencia entre un diseño intra-sujetos y un diseño entre-sujetos?
 - ¿Cuál es la relación entre un diseño experimental y su análisis estadístico asociado?
 
 ## Una historia fantástica
-Revisa este <a href="https://www.youtube.com/watch?v=0vNh-JNx2b0" target="_blank">video</a> y trata de responder:
+Revisa este <a href="https://www.youtube.com/watch?v=0vNh-JNx2b0" target="_blank">video (9')</a> y trata de responder:
 
 - ¿Quién fué Roland Fisher?
 - ¿Dé dónde viene el 5% (o p = 0.05) que usamos en estadística?
 
 ## ¿Randomizar?
-Revisa este <a href="https://www.youtube.com/watch?v=-ktM6xENx-U" target="_blank">video</a> y trata de responder:
+Revisa este <a href="https://www.youtube.com/watch?v=-ktM6xENx-U" target="_blank">video (6')</a> y trata de responder:
 
 - ¿Para que se usa la randomización?
 - ¿Qué son los efectos de práctica y de aburrimiento en un diseño intra-sujetos?

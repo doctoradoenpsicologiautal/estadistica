@@ -3,7 +3,7 @@
 En este capítulo vamos a revisar algunos aspectos básicos para hacer gráficos en R.
 
 ## ¿Cómo graficamos en R?
-Revisa este <a href="https://www.youtube.com/watch?v=7Fr30ForPjI" target="_blank">video</a> y trata de responder:
+Revisa este <a href="https://www.youtube.com/watch?v=7Fr30ForPjI" target="_blank">video (16')</a> y trata de responder:
 
 - ¿Cómo se hace un buen gráfico?
 - ¿Qué significa que se usen capas para hacer gráficos en R?
