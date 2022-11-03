@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2022-10-18" />
+<meta name="date" content="2022-11-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -191,12 +191,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Para graficar cargamos la librería <strong>ggplot2</strong> (que tiene que haber sido previamente instalada). Al mismo tiempo se cargan otras librerías que nos serviran. Si no tienes estas librerías debes instalarlas. Finalmente importamos un set de datos y lo miramos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
 
-<span class="kw">library</span>(ggplot2)
-<span class="kw">library</span>(reshape)
-<span class="kw">library</span>(plyr)
-<span class="kw">library</span>(Rmisc)
-
-facebookData &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;data/FacebookNarcissism.dat&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span>
+<span class="kw">library</span>(ggplot2)</code></pre></div>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.1.3</code></pre>
+<pre><code>## Need help? Try Stackoverflow: https://stackoverflow.com/tags/ggplot2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(reshape)
+<span class="kw">library</span>(plyr)</code></pre></div>
+<pre><code>## Warning: package &#39;plyr&#39; was built under R version 4.1.3</code></pre>
+<pre><code>## 
+## Attaching package: &#39;plyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:reshape&#39;:
+## 
+##     rename, round_any</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Rmisc)</code></pre></div>
+<pre><code>## Warning: package &#39;Rmisc&#39; was built under R version 4.1.3</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">facebookData &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;data/FacebookNarcissism.dat&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span>
 <span class="kw">head</span>(facebookData)</code></pre></div>
 <pre><code>##   id NPQC_R_Total Rating_Type Rating
 ## 1  1           31  Attractive      2
@@ -522,20 +531,20 @@ hiccups &lt;-<span class="st"> </span><span class="kw">stack</span>(hiccupsData)
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Si una variable es categórica se puede ver hacia el final de los datos que existen niveles.</span>
 <span class="co"># En este caso la variable &quot;Tratamieto&quot; tiene 4 niveles.</span>
 hiccups<span class="op">$</span>Tratamiento</code></pre></div>
-<pre><code>##  [1] Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Susto 
-## [17] Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Azucar Azucar
-## [33] Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Bolsa  Bolsa  Bolsa 
-## [49] Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa 
+<pre><code>##  [1] Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base  
+## [16] Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto 
+## [31] Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar
+## [46] Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa 
 ## Levels: Base Susto Azucar Bolsa</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hiccups<span class="op">$</span>Tratamiento2 &lt;-<span class="st"> </span><span class="kw">factor</span>(hiccups<span class="op">$</span>Tratamiento,
                                 <span class="kw">levels</span>(hiccups<span class="op">$</span>Tratamiento)[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">3</span>)])
 
 
 hiccups<span class="op">$</span>Tratamiento2</code></pre></div>
-<pre><code>##  [1] Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Susto 
-## [17] Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Azucar Azucar
-## [33] Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Bolsa  Bolsa  Bolsa 
-## [49] Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa 
+<pre><code>##  [1] Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base  
+## [16] Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto 
+## [31] Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar
+## [46] Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa 
 ## Levels: Base Bolsa Susto Azucar</code></pre>
 <p>Usamos la función <strong>summarySE</strong> para calcular el número de hipos promedio en función del tratamiento.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataSumm &lt;-<span class="st"> </span><span class="kw">summarySE</span>(hiccups, <span class="dt">measurevar=</span><span class="st">&quot;Hipos&quot;</span>, <span class="dt">groupvars=</span><span class="st">&quot;Tratamiento&quot;</span>)

@@ -9,6 +9,6 @@ site: bookdown::bookdown_site
 
 Este curso se basa en <a href="https://www.goodreads.com/book/show/578667.Statistics_Without_Tears" target="_blank">Statistics without tears</a> de Derek Rowntree y <a href="https://www.discoveringstatistics.com/books/discovering-statistics-using-r/" target="_blank">Discovering statistics using R</a>  de Andy Field, Jeremy Miles y Zoë Field. Este curso también utiliza material del libro "Discovering statistics using R". Este material es accesible <a href="https://studysites.uk.sagepub.com/dsur/study/articles.htm" target="_blank">aquí.</a>
 
-Este curso asume que no sabes nada de estadística. Sin embargo, si asume que sabes aritmética básica y fracciones. La base de datos que vamos a utilizar se encuentra <a href="https://github.com/joseluisulloafulgeri/estadistica101_database" target="_blank">aquí.</a>
+Este curso asume que no sabes nada de estadística. Sin embargo, si asume que sabes aritmética básica y fracciones. La base de datos que vamos a utilizar se encuentra <a href="https://github.com/doctoradoenpsicologiautal/estadistica/tree/master/data" target="_blank">aquí.</a>
 
 ¡Que disfrutes el curso! </a>
