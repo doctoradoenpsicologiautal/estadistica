@@ -1,5 +1,5 @@
 --- 
-title: "Estadística para todxs"
+title: "Estadística con R"
 author: "Facultad de Psicología, Universidad de Talca"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
