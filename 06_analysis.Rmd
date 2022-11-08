@@ -1,0 +1,204 @@
+# Analizar datos
+
+En este capítulo vamos a revisar los análisis estadísticos básicos.
+
+## Análizar proporciones
+
+Imagina que estás analizando una base de datos dónde los participantes tenían que elegir entre dos tipos de chocolates.
+
+Primero seteamos nuestro directorio de trabajo y graficar los datos. Cargamos la librería **ggplot2** y otras librerías que nos serviran. Si no tienes estas librerías debes instalarlas. Luego importamos nuestro set de datos y lo miramos.
+
+```{r}
+setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+
+prefsAB <- read.csv("data/prefsAB.csv")
+prefsAB$Participante <- factor(prefsAB$Participante) # convertimos Participante a factor
+prefsAB$Preferencia <- factor(prefsAB$Preferencia) # convertimos Preferencia a factor
+head(prefsAB)
+```
+
+Luego realizamos un gráfico para visualizar diferencias en las preferencias.
+
+```{r}
+library(ggplot2)
+
+ggplot(prefsAB, aes(Preferencia, ..count..)) + 
+  geom_bar(aes(fill = Preferencia), position = "dodge") +
+  ylab("Número de personas") 
+```
+
+Podemos usar la función **xtabs** para obtener una tabla de contigencia.
+Luego con la función **chisq.test** cálculamos la probabilidad que estas dos preferencias esten igualmente distribuidas (una prueba clásica de chi cuadrado).
+
+```{r}
+(tabla.contingencia <- xtabs( ~ Preferencia, prefsAB))
+chisq.test(tabla.contingencia)
+```
+
+Otro test parecido, pero mas exacto es un test binomial.
+
+```{r}
+binom.test(tabla.contingencia)
+```
+
+Ahora imagina que estás analizando una base de datos dónde los participantes tenían que elegir entre 3 tipos de chocolates.
+
+Nuevamente, importamos primero nuestro set de datos.
+
+```{r}
+prefsABC <- read.csv("data/prefsABC.csv")
+
+prefsABC$Participante <- factor(prefsABC$Participante) # convertimos Participante a factor
+prefsABC$Preferencia <- factor(prefsABC$Preferencia) # convertimos Preferencia a factor
+head(prefsABC)
+```
+
+Realizamos el gráfico para visualizar diferencias en las preferencias.
+
+```{r}
+library(ggplot2)
+
+ggplot(prefsABC, aes(Preferencia, ..count..)) +
+  geom_bar(aes(fill = Preferencia), position = "dodge") +
+  ylab("Número de personas")
+```
+
+Podemos usar la función **xtabs** para obtener una tabla de contigencia.
+Luego con la función **chisq.test** cálculamos la probabilidad que estas dos preferencias esten igualmente distribuidas (una prueba clásica de chi cuadrado).
+
+```{r}
+(tabla.contingencia <- xtabs( ~ Preferencia, prefsABC))
+chisq.test(tabla.contingencia)
+```
+
+Otro test parecido, pero mas exacto es un test multinomial.
+
+```{r}
+library(XNomial)
+
+xmulti(tabla.contingencia, c(1/3, 1/3, 1/3), statName = "Prob")
+```
+
+Luego que pesquisamos diferencias generales podemos hacer comparaciones más específicas entre pares de elementos.
+Podemos usar la función **p.adjust** para ajustar el valor de p para tener en cuenta el problema de comparaciones múltiples.
+
+```{r}
+PrefA <- binom.test(sum(prefsABC$Preferencia == "Trencito"), nrow(prefsABC), p=1/3)
+PrefB <- binom.test(sum(prefsABC$Preferencia == "Sahne-Nuss"), nrow(prefsABC), p=1/3)
+PrefC <- binom.test(sum(prefsABC$Preferencia == "Golden-Nuss"), nrow(prefsABC), p=1/3)
+p.adjust(c(PrefA$p.value, PrefB$p.value, PrefC$p.value), method="holm")
+```
+
+En un siguiente nivel de complejidad imagina que ahora estás analizando una base de datos dónde los participantes tenían que elegir entre 2 tipos de chocolates, pero además se registró si era un hombre o una mujer.
+
+Nuevamente, importamos primero nuestro set de datos.
+
+```{r}
+prefsABsex <- read.csv("data/prefsABsex.csv")
+
+prefsABsex$Participante <- factor(prefsABsex$Participante) # convertimos a factor
+prefsABsex$Preferencia <- factor(prefsABsex$Preferencia) # convertimos a factor
+prefsABsex$Genero <- factor(prefsABsex$Genero) # convertimos a factor
+
+head(prefsABsex)
+```
+
+Realizamos el gráfico para visualizar diferencias en las preferencias.
+
+```{r}
+library(ggplot2)
+
+ggplot(prefsABsex, aes(Preferencia, ..count..)) + 
+  geom_bar(aes(fill = Preferencia), position = "dodge") +
+  facet_wrap( ~ Genero) +
+  ylab("Número de personas")
+```
+
+Podemos usar la función **xtabs** para obtener una tabla de contigencia.
+Luego con la función **chisq.test** cálculamos la probabilidad que estas dos preferencias en función del género esten igualmente distribuidas.
+
+```{r}
+(tabla.contingencia <- xtabs( ~ Preferencia + Genero, prefsABsex))
+chisq.test(tabla.contingencia)
+```
+
+Otro test parecido, pero mas exacto es un test de Fisher
+
+```{r}
+fisher.test(tabla.contingencia)
+```
+
+Finalmente, imagina que ahora estás analizando una base de datos dónde los participantes tenían que elegir entre 3 tipos de chocolates, pero además se registró si era un hombre o una mujer.
+
+Nuevamente, importamos primero nuestro set de datos.
+
+```{r}
+prefsABCsex <- read.csv("data/prefsABCsex.csv")
+
+prefsABCsex$Participante <- factor(prefsABCsex$Participante) # convertimos a factor
+prefsABCsex$Preferencia <- factor(prefsABCsex$Preferencia) # convertimos a factor
+prefsABCsex$Genero <- factor(prefsABCsex$Genero) # convertimos a factor
+
+head(prefsABCsex)
+```
+
+Realizamos el gráfico para visualizar diferencias en las preferencias.
+
+```{r}
+library(ggplot2)
+
+ggplot(prefsABCsex, aes(Preferencia, ..count..)) + 
+  geom_bar(aes(fill = Preferencia), position = "dodge") +
+  facet_wrap( ~ Genero) +
+  ylab("Número de personas")
+```
+
+Podemos usar la función **xtabs** para obtener una tabla de contigencia.
+Luego con la función **chisq.test** cálculamos la probabilidad que estas dos preferencias en función del género esten igualmente distribuidas.
+
+```{r}
+(tabla.contingencia <- xtabs( ~ Preferencia + Genero, prefsABCsex))
+chisq.test(tabla.contingencia)
+```
+
+Otro test parecido, pero mas exacto es un test de Fisher
+
+```{r}
+fisher.test(tabla.contingencia)
+```
+
+Luego que pesquisamos diferencias generales podemos hacer comparaciones más específicas entre pares de elementos.
+
+Primero, podemos hacer test binomiales sólo para los hombres.
+Hay diferencias significativas entre las preferencias de los hombres?
+
+```{r}
+male_A <- binom.test(sum(prefsABCsex[prefsABCsex$Genero == "Masculino",]$Preferencia == "Trencito"),
+                 nrow(prefsABCsex[prefsABCsex$Genero == "Masculino",]), p=1/3)
+
+male_B <- binom.test(sum(prefsABCsex[prefsABCsex$Genero == "Masculino",]$Preferencia == "Sahne-Nuss"), 
+                 nrow(prefsABCsex[prefsABCsex$Genero == "Masculino",]), p=1/3)
+
+male_C <- binom.test(sum(prefsABCsex[prefsABCsex$Genero == "Masculino",]$Preferencia == "Golden-Nuss"), 
+                 nrow(prefsABCsex[prefsABCsex$Genero == "Masculino",]), p=1/3)
+
+pvalues <- p.adjust(c(male_A$p.value, male_B$p.value, male_C$p.value), method="holm")
+formatC(pvalues, format = "f", digits = 6)
+```
+
+Segundo, podemos hacer test binomiales sólo para las mujeres.
+Hay diferencias significativas entre las preferencias de las mujeres?
+
+```{r}
+female_A <- binom.test(sum(prefsABCsex[prefsABCsex$Genero == "Femenino",]$Preferencia == "Trencito"),
+                 nrow(prefsABCsex[prefsABCsex$Genero == "Femenino",]), p=1/3)
+
+female_B <- binom.test(sum(prefsABCsex[prefsABCsex$Genero == "Femenino",]$Preferencia == "Sahne-Nuss"),
+                 nrow(prefsABCsex[prefsABCsex$Genero == "Femenino",]), p=1/3)
+
+female_C <- binom.test(sum(prefsABCsex[prefsABCsex$Genero == "Femenino",]$Preferencia == "Golden-Nuss"),
+                 nrow(prefsABCsex[prefsABCsex$Genero == "Femenino",]), p=1/3)
+
+pvalues <- p.adjust(c(female_A$p.value, female_B$p.value, female_C$p.value), method="holm")
+formatC(pvalues, format = "f", digits = 6)
+```

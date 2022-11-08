@@ -41,3 +41,5 @@ de-la-muestra-a-la-población
 la-muestra-en-la-vida-real
 los-intervalos-de-confianza-1
 los-intervalos-de-confianza-2
+analizar-datos
+análizar-proporciones
