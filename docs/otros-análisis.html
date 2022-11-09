@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 7 Otros análisis | Estadística con R</title>
+  <meta name="description" content="Capítulo 7 Otros análisis | Estadística con R" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 7 Otros análisis | Estadística con R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 7 Otros análisis | Estadística con R" />
+  
+  
+  
+
+<meta name="author" content="Facultad de Psicología, Universidad de Talca" />
+
+
+<meta name="date" content="2022-11-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="comparar-dos-grupos-t-test.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Estadística</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preámbulo</a></li>
+<li class="chapter" data-level="1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html"><i class="fa fa-check"></i><b>1</b> Introducción a la estadística</a><ul>
+<li class="chapter" data-level="1.1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#qué-es-la-estadística"><i class="fa fa-check"></i><b>1.1</b> ¿Qué es la estadística?</a></li>
+<li class="chapter" data-level="1.2" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#variables"><i class="fa fa-check"></i><b>1.2</b> ¿Variables?</a></li>
+<li class="chapter" data-level="1.3" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#diseños-experimentales"><i class="fa fa-check"></i><b>1.3</b> Diseños experimentales</a></li>
+<li class="chapter" data-level="1.4" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#qué-medimos"><i class="fa fa-check"></i><b>1.4</b> ¿Qué medimos?</a></li>
+<li class="chapter" data-level="1.5" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#un-prueba-estadística"><i class="fa fa-check"></i><b>1.5</b> Un prueba estadística</a></li>
+<li class="chapter" data-level="1.6" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#que-diseño-usaré"><i class="fa fa-check"></i><b>1.6</b> ¿Que diseño usaré?</a></li>
+<li class="chapter" data-level="1.7" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#una-historia-fantástica"><i class="fa fa-check"></i><b>1.7</b> Una historia fantástica</a></li>
+<li class="chapter" data-level="1.8" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#randomizar"><i class="fa fa-check"></i><b>1.8</b> ¿Randomizar?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html"><i class="fa fa-check"></i><b>2</b> Conceptos estadísticos</a><ul>
+<li class="chapter" data-level="2.1" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#la-significancia"><i class="fa fa-check"></i><b>2.1</b> La significancia</a></li>
+<li class="chapter" data-level="2.2" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#colas"><i class="fa fa-check"></i><b>2.2</b> Colas</a></li>
+<li class="chapter" data-level="2.3" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#errores-estadísticos"><i class="fa fa-check"></i><b>2.3</b> Errores estadísticos</a></li>
+<li class="chapter" data-level="2.4" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#tamaño-poder"><i class="fa fa-check"></i><b>2.4</b> Tamaño &amp; poder</a></li>
+<li class="chapter" data-level="2.5" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#planificar-mi-estudio"><i class="fa fa-check"></i><b>2.5</b> Planificar mi estudio</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="programación.html"><a href="programación.html"><i class="fa fa-check"></i><b>3</b> Programación</a><ul>
+<li class="chapter" data-level="3.1" data-path="programación.html"><a href="programación.html#que-significa-programar"><i class="fa fa-check"></i><b>3.1</b> ¿Que significa programar?</a></li>
+<li class="chapter" data-level="3.2" data-path="programación.html"><a href="programación.html#la-shell-consola-versus-el-script"><i class="fa fa-check"></i><b>3.2</b> La shell (consola) versus el script</a></li>
+<li class="chapter" data-level="3.3" data-path="programación.html"><a href="programación.html#intro-a-la-programación"><i class="fa fa-check"></i><b>3.3</b> Intro a la programación</a></li>
+<li class="chapter" data-level="3.4" data-path="programación.html"><a href="programación.html#empezando-a-programar"><i class="fa fa-check"></i><b>3.4</b> Empezando a programar</a></li>
+<li class="chapter" data-level="3.5" data-path="programación.html"><a href="programación.html#trabajando-con-data-frames"><i class="fa fa-check"></i><b>3.5</b> Trabajando con data frames</a></li>
+<li class="chapter" data-level="3.6" data-path="programación.html"><a href="programación.html#importando-datos"><i class="fa fa-check"></i><b>3.6</b> Importando datos</a></li>
+<li class="chapter" data-level="3.7" data-path="programación.html"><a href="programación.html#seleccionando-datos"><i class="fa fa-check"></i><b>3.7</b> Seleccionando datos</a></li>
+<li class="chapter" data-level="3.8" data-path="programación.html"><a href="programación.html#transformado-datos-en-formato-long-a-wide-y-viceversa"><i class="fa fa-check"></i><b>3.8</b> Transformado datos en formato long a wide y viceversa</a></li>
+<li class="chapter" data-level="3.9" data-path="programación.html"><a href="programación.html#exportando-datos"><i class="fa fa-check"></i><b>3.9</b> Exportando datos</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="gráficos.html"><a href="gráficos.html"><i class="fa fa-check"></i><b>4</b> Gráficos</a><ul>
+<li class="chapter" data-level="4.1" data-path="gráficos.html"><a href="gráficos.html#cómo-graficamos-en-r"><i class="fa fa-check"></i><b>4.1</b> ¿Cómo graficamos en R?</a></li>
+<li class="chapter" data-level="4.2" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-puntos"><i class="fa fa-check"></i><b>4.2</b> Gráfico de puntos</a></li>
+<li class="chapter" data-level="4.3" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-dispersión"><i class="fa fa-check"></i><b>4.3</b> Gráfico de dispersión</a></li>
+<li class="chapter" data-level="4.4" data-path="gráficos.html"><a href="gráficos.html#histograma"><i class="fa fa-check"></i><b>4.4</b> Histograma</a></li>
+<li class="chapter" data-level="4.5" data-path="gráficos.html"><a href="gráficos.html#boxplot"><i class="fa fa-check"></i><b>4.5</b> Boxplot</a></li>
+<li class="chapter" data-level="4.6" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-barras"><i class="fa fa-check"></i><b>4.6</b> Gráfico de barras</a></li>
+<li class="chapter" data-level="4.7" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-líneas-1-factor"><i class="fa fa-check"></i><b>4.7</b> Gráfico de líneas (1 factor)</a></li>
+<li class="chapter" data-level="4.8" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-líneas-2-factores"><i class="fa fa-check"></i><b>4.8</b> Gráfico de líneas (2 factores)</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html"><i class="fa fa-check"></i><b>5</b> Caracterizar datos</a><ul>
+<li class="chapter" data-level="5.1" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#visualizar-los-datos"><i class="fa fa-check"></i><b>5.1</b> Visualizar los datos</a></li>
+<li class="chapter" data-level="5.2" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal"><i class="fa fa-check"></i><b>5.2</b> La curva normal</a></li>
+<li class="chapter" data-level="5.3" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal-en-la-práctica-1"><i class="fa fa-check"></i><b>5.3</b> La curva normal en la práctica (1)</a></li>
+<li class="chapter" data-level="5.4" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal-en-la-práctica-2"><i class="fa fa-check"></i><b>5.4</b> La curva normal en la práctica (2)</a></li>
+<li class="chapter" data-level="5.5" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#de-la-muestra-a-la-población"><i class="fa fa-check"></i><b>5.5</b> De la muestra a la población</a></li>
+<li class="chapter" data-level="5.6" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-muestra-en-la-vida-real"><i class="fa fa-check"></i><b>5.6</b> La muestra en la vida real</a></li>
+<li class="chapter" data-level="5.7" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#los-intervalos-de-confianza-1"><i class="fa fa-check"></i><b>5.7</b> Los intervalos de confianza (1)</a></li>
+<li class="chapter" data-level="5.8" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#los-intervalos-de-confianza-2"><i class="fa fa-check"></i><b>5.8</b> Los intervalos de confianza (2)</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="comparar-dos-grupos-t-test.html"><a href="comparar-dos-grupos-t-test.html"><i class="fa fa-check"></i><b>6</b> Comparar dos grupos (t-test)</a><ul>
+<li class="chapter" data-level="6.1" data-path="comparar-dos-grupos-t-test.html"><a href="comparar-dos-grupos-t-test.html#cómo-comparamos-datos-de-dos-grupos"><i class="fa fa-check"></i><b>6.1</b> ¿Cómo comparamos datos de dos grupos?</a></li>
+<li class="chapter" data-level="6.2" data-path="comparar-dos-grupos-t-test.html"><a href="comparar-dos-grupos-t-test.html#la-distribución-normal-para-dos-grupos"><i class="fa fa-check"></i><b>6.2</b> La distribución normal para dos grupos</a></li>
+<li class="chapter" data-level="6.3" data-path="comparar-dos-grupos-t-test.html"><a href="comparar-dos-grupos-t-test.html#la-prueba-de-hipótesis"><i class="fa fa-check"></i><b>6.3</b> La prueba de hipótesis</a></li>
+<li class="chapter" data-level="6.4" data-path="comparar-dos-grupos-t-test.html"><a href="comparar-dos-grupos-t-test.html#el-t-test-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>6.4</b> El t-test como un modelo líneal general</a></li>
+<li class="chapter" data-level="6.5" data-path="comparar-dos-grupos-t-test.html"><a href="comparar-dos-grupos-t-test.html#el-t-test-con-r"><i class="fa fa-check"></i><b>6.5</b> El t-test con R</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>7</b> Otros análisis</a><ul>
+<li class="chapter" data-level="7.1" data-path="otros-análisis.html"><a href="otros-análisis.html#análisis-de-proporciones"><i class="fa fa-check"></i><b>7.1</b> Análisis de proporciones</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Estadística con R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="otros-análisis" class="section level1">
+<h1><span class="header-section-number">Capítulo 7</span> Otros análisis</h1>
+<p>En este capítulo vamos a revisar otros análisis estadísticos.</p>
+<div id="análisis-de-proporciones" class="section level2">
+<h2><span class="header-section-number">7.1</span> Análisis de proporciones</h2>
+<p>Imagina que estás analizando una base de datos dónde los participantes tenían que elegir entre dos tipos de chocolates.</p>
+<p>Primero seteamos nuestro directorio de trabajo y graficar los datos. Cargamos la librería <strong>ggplot2</strong> y otras librerías que nos serviran. Si no tienes estas librerías debes instalarlas. Luego importamos nuestro set de datos y lo miramos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
+
+prefsAB &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/prefsAB.csv&quot;</span>)
+prefsAB<span class="op">$</span>Participante &lt;-<span class="st"> </span><span class="kw">factor</span>(prefsAB<span class="op">$</span>Participante) <span class="co"># convertimos Participante a factor</span>
+prefsAB<span class="op">$</span>Preferencia &lt;-<span class="st"> </span><span class="kw">factor</span>(prefsAB<span class="op">$</span>Preferencia) <span class="co"># convertimos Preferencia a factor</span>
+<span class="kw">head</span>(prefsAB)</code></pre></div>
+<pre><code>##   Participante Preferencia
+## 1            1  Sahne-Nuss
+## 2            2  Sahne-Nuss
+## 3            3  Sahne-Nuss
+## 4            4  Sahne-Nuss
+## 5            5  Sahne-Nuss
+## 6            6  Sahne-Nuss</code></pre>
+<p>Luego realizamos un gráfico para visualizar diferencias en las preferencias.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+
+<span class="kw">ggplot</span>(prefsAB, <span class="kw">aes</span>(Preferencia, ..count..)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> Preferencia), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Número de personas&quot;</span>) </code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-109-1.png" width="672" /></p>
+<p>Podemos usar la función <strong>xtabs</strong> para obtener una tabla de contigencia. Luego con la función <strong>chisq.test</strong> cálculamos la probabilidad que estas dos preferencias esten igualmente distribuidas (una prueba clásica de chi cuadrado).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(tabla.contingencia &lt;-<span class="st"> </span><span class="kw">xtabs</span>( <span class="op">~</span><span class="st"> </span>Preferencia, prefsAB))</code></pre></div>
+<pre><code>## Preferencia
+## Sahne-Nuss   Trencito 
+##         46         14</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chisq.test</span>(tabla.contingencia)</code></pre></div>
+<pre><code>## 
+##  Chi-squared test for given probabilities
+## 
+## data:  tabla.contingencia
+## X-squared = 17.067, df = 1, p-value = 3.609e-05</code></pre>
+<p>Otro test parecido, pero mas exacto es un test binomial.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">binom.test</span>(tabla.contingencia)</code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  tabla.contingencia
+## number of successes = 46, number of trials = 60, p-value = 4.224e-05
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.6396172 0.8661627
+## sample estimates:
+## probability of success 
+##              0.7666667</code></pre>
+<p>Ahora imagina que estás analizando una base de datos dónde los participantes tenían que elegir entre 3 tipos de chocolates.</p>
+<p>Nuevamente, importamos primero nuestro set de datos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prefsABC &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/prefsABC.csv&quot;</span>)
+
+prefsABC<span class="op">$</span>Participante &lt;-<span class="st"> </span><span class="kw">factor</span>(prefsABC<span class="op">$</span>Participante) <span class="co"># convertimos Participante a factor</span>
+prefsABC<span class="op">$</span>Preferencia &lt;-<span class="st"> </span><span class="kw">factor</span>(prefsABC<span class="op">$</span>Preferencia) <span class="co"># convertimos Preferencia a factor</span>
+<span class="kw">head</span>(prefsABC)</code></pre></div>
+<pre><code>##   Participante Preferencia
+## 1            1 Golden-Nuss
+## 2            2 Golden-Nuss
+## 3            3  Sahne-Nuss
+## 4            4 Golden-Nuss
+## 5            5 Golden-Nuss
+## 6            6  Sahne-Nuss</code></pre>
+<p>Realizamos el gráfico para visualizar diferencias en las preferencias.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+
+<span class="kw">ggplot</span>(prefsABC, <span class="kw">aes</span>(Preferencia, ..count..)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> Preferencia), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Número de personas&quot;</span>)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-113-1.png" width="672" /></p>
+<p>Podemos usar la función <strong>xtabs</strong> para obtener una tabla de contigencia. Luego con la función <strong>chisq.test</strong> cálculamos la probabilidad que estas dos preferencias esten igualmente distribuidas (una prueba clásica de chi cuadrado).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(tabla.contingencia &lt;-<span class="st"> </span><span class="kw">xtabs</span>( <span class="op">~</span><span class="st"> </span>Preferencia, prefsABC))</code></pre></div>
+<pre><code>## Preferencia
+## Golden-Nuss  Sahne-Nuss    Trencito 
+##          31          21           8</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chisq.test</span>(tabla.contingencia)</code></pre></div>
+<pre><code>## 
+##  Chi-squared test for given probabilities
+## 
+## data:  tabla.contingencia
+## X-squared = 13.3, df = 2, p-value = 0.001294</code></pre>
+<p>Otro test parecido, pero mas exacto es un test multinomial.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(XNomial)
+
+<span class="kw">xmulti</span>(tabla.contingencia, <span class="kw">c</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">3</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>), <span class="dt">statName =</span> <span class="st">&quot;Prob&quot;</span>)</code></pre></div>
+<pre><code>## 
+## P value (Prob) = 0.0008024</code></pre>
+<p>Luego que pesquisamos diferencias generales podemos hacer comparaciones más específicas entre pares de elementos. Podemos usar la función <strong>p.adjust</strong> para ajustar el valor de p para tener en cuenta el problema de comparaciones múltiples.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">PrefA &lt;-<span class="st"> </span><span class="kw">binom.test</span>(<span class="kw">sum</span>(prefsABC<span class="op">$</span>Preferencia <span class="op">==</span><span class="st"> &quot;Trencito&quot;</span>), <span class="kw">nrow</span>(prefsABC), <span class="dt">p=</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)
+PrefB &lt;-<span class="st"> </span><span class="kw">binom.test</span>(<span class="kw">sum</span>(prefsABC<span class="op">$</span>Preferencia <span class="op">==</span><span class="st"> &quot;Sahne-Nuss&quot;</span>), <span class="kw">nrow</span>(prefsABC), <span class="dt">p=</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)
+PrefC &lt;-<span class="st"> </span><span class="kw">binom.test</span>(<span class="kw">sum</span>(prefsABC<span class="op">$</span>Preferencia <span class="op">==</span><span class="st"> &quot;Golden-Nuss&quot;</span>), <span class="kw">nrow</span>(prefsABC), <span class="dt">p=</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)
+<span class="kw">p.adjust</span>(<span class="kw">c</span>(PrefA<span class="op">$</span>p.value, PrefB<span class="op">$</span>p.value, PrefC<span class="op">$</span>p.value), <span class="dt">method=</span><span class="st">&quot;holm&quot;</span>)</code></pre></div>
+<pre><code>## [1] 0.001659954 0.785201685 0.007446980</code></pre>
+<p>En un siguiente nivel de complejidad imagina que ahora estás analizando una base de datos dónde los participantes tenían que elegir entre 2 tipos de chocolates, pero además se registró si era un hombre o una mujer.</p>
+<p>Nuevamente, importamos primero nuestro set de datos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prefsABsex &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/prefsABsex.csv&quot;</span>)
+
+prefsABsex<span class="op">$</span>Participante &lt;-<span class="st"> </span><span class="kw">factor</span>(prefsABsex<span class="op">$</span>Participante) <span class="co"># convertimos a factor</span>
+prefsABsex<span class="op">$</span>Preferencia &lt;-<span class="st"> </span><span class="kw">factor</span>(prefsABsex<span class="op">$</span>Preferencia) <span class="co"># convertimos a factor</span>
+prefsABsex<span class="op">$</span>Genero &lt;-<span class="st"> </span><span class="kw">factor</span>(prefsABsex<span class="op">$</span>Genero) <span class="co"># convertimos a factor</span>
+
+<span class="kw">head</span>(prefsABsex)</code></pre></div>
+<pre><code>##   Participante Preferencia    Genero
+## 1            1  Sahne-Nuss  Femenino
+## 2            2  Sahne-Nuss  Femenino
+## 3            3  Sahne-Nuss  Femenino
+## 4            4  Sahne-Nuss Masculino
+## 5            5  Sahne-Nuss  Femenino
+## 6            6  Sahne-Nuss Masculino</code></pre>
+<p>Realizamos el gráfico para visualizar diferencias en las preferencias.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+
+<span class="kw">ggplot</span>(prefsABsex, <span class="kw">aes</span>(Preferencia, ..count..)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> Preferencia), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>Genero) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Número de personas&quot;</span>)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-118-1.png" width="672" /></p>
+<p>Podemos usar la función <strong>xtabs</strong> para obtener una tabla de contigencia. Luego con la función <strong>chisq.test</strong> cálculamos la probabilidad que estas dos preferencias en función del género esten igualmente distribuidas.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(tabla.contingencia &lt;-<span class="st"> </span><span class="kw">xtabs</span>( <span class="op">~</span><span class="st"> </span>Preferencia <span class="op">+</span><span class="st"> </span>Genero, prefsABsex))</code></pre></div>
+<pre><code>##             Genero
+## Preferencia  Femenino Masculino
+##   Sahne-Nuss       29        17
+##   Trencito          2        12</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chisq.test</span>(tabla.contingencia)</code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s Chi-squared test with Yates&#39; continuity correction
+## 
+## data:  tabla.contingencia
+## X-squared = 8.3588, df = 1, p-value = 0.003838</code></pre>
+<p>Otro test parecido, pero mas exacto es un test de Fisher</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fisher.test</span>(tabla.contingencia)</code></pre></div>
+<pre><code>## 
+##  Fisher&#39;s Exact Test for Count Data
+## 
+## data:  tabla.contingencia
+## p-value = 0.001877
+## alternative hypothesis: true odds ratio is not equal to 1
+## 95 percent confidence interval:
+##    1.862023 101.026914
+## sample estimates:
+## odds ratio 
+##   9.844814</code></pre>
+<p>Finalmente, imagina que ahora estás analizando una base de datos dónde los participantes tenían que elegir entre 3 tipos de chocolates, pero además se registró si era un hombre o una mujer.</p>
+<p>Nuevamente, importamos primero nuestro set de datos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prefsABCsex &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/prefsABCsex.csv&quot;</span>)
+
+prefsABCsex<span class="op">$</span>Participante &lt;-<span class="st"> </span><span class="kw">factor</span>(prefsABCsex<span class="op">$</span>Participante) <span class="co"># convertimos a factor</span>
+prefsABCsex<span class="op">$</span>Preferencia &lt;-<span class="st"> </span><span class="kw">factor</span>(prefsABCsex<span class="op">$</span>Preferencia) <span class="co"># convertimos a factor</span>
+prefsABCsex<span class="op">$</span>Genero &lt;-<span class="st"> </span><span class="kw">factor</span>(prefsABCsex<span class="op">$</span>Genero) <span class="co"># convertimos a factor</span>
+
+<span class="kw">head</span>(prefsABCsex)</code></pre></div>
+<pre><code>##   Participante Preferencia    Genero
+## 1            1 Golden-Nuss  Femenino
+## 2            2 Golden-Nuss Masculino
+## 3            3  Sahne-Nuss Masculino
+## 4            4 Golden-Nuss Masculino
+## 5            5 Golden-Nuss Masculino
+## 6            6  Sahne-Nuss  Femenino</code></pre>
+<p>Realizamos el gráfico para visualizar diferencias en las preferencias.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+
+<span class="kw">ggplot</span>(prefsABCsex, <span class="kw">aes</span>(Preferencia, ..count..)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> Preferencia), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>Genero) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Número de personas&quot;</span>)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-122-1.png" width="672" /></p>
+<p>Podemos usar la función <strong>xtabs</strong> para obtener una tabla de contigencia. Luego con la función <strong>chisq.test</strong> cálculamos la probabilidad que estas dos preferencias en función del género esten igualmente distribuidas.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(tabla.contingencia &lt;-<span class="st"> </span><span class="kw">xtabs</span>( <span class="op">~</span><span class="st"> </span>Preferencia <span class="op">+</span><span class="st"> </span>Genero, prefsABCsex))</code></pre></div>
+<pre><code>##              Genero
+## Preferencia   Femenino Masculino
+##   Golden-Nuss       11        20
+##   Sahne-Nuss        15         6
+##   Trencito           3         5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chisq.test</span>(tabla.contingencia)</code></pre></div>
+<pre><code>## Warning in chisq.test(tabla.contingencia): Chi-squared approximation may be incorrect</code></pre>
+<pre><code>## 
+##  Pearson&#39;s Chi-squared test
+## 
+## data:  tabla.contingencia
+## X-squared = 6.9111, df = 2, p-value = 0.03157</code></pre>
+<p>Otro test parecido, pero mas exacto es un test de Fisher</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fisher.test</span>(tabla.contingencia)</code></pre></div>
+<pre><code>## 
+##  Fisher&#39;s Exact Test for Count Data
+## 
+## data:  tabla.contingencia
+## p-value = 0.03261
+## alternative hypothesis: two.sided</code></pre>
+<p>Luego que pesquisamos diferencias generales podemos hacer comparaciones más específicas entre pares de elementos.</p>
+<p>Primero, podemos hacer test binomiales sólo para los hombres. Hay diferencias significativas entre las preferencias de los hombres?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">male_A &lt;-<span class="st"> </span><span class="kw">binom.test</span>(<span class="kw">sum</span>(prefsABCsex[prefsABCsex<span class="op">$</span>Genero <span class="op">==</span><span class="st"> &quot;Masculino&quot;</span>,]<span class="op">$</span>Preferencia <span class="op">==</span><span class="st"> &quot;Trencito&quot;</span>),
+                 <span class="kw">nrow</span>(prefsABCsex[prefsABCsex<span class="op">$</span>Genero <span class="op">==</span><span class="st"> &quot;Masculino&quot;</span>,]), <span class="dt">p=</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)
+
+male_B &lt;-<span class="st"> </span><span class="kw">binom.test</span>(<span class="kw">sum</span>(prefsABCsex[prefsABCsex<span class="op">$</span>Genero <span class="op">==</span><span class="st"> &quot;Masculino&quot;</span>,]<span class="op">$</span>Preferencia <span class="op">==</span><span class="st"> &quot;Sahne-Nuss&quot;</span>), 
+                 <span class="kw">nrow</span>(prefsABCsex[prefsABCsex<span class="op">$</span>Genero <span class="op">==</span><span class="st"> &quot;Masculino&quot;</span>,]), <span class="dt">p=</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)
+
+male_C &lt;-<span class="st"> </span><span class="kw">binom.test</span>(<span class="kw">sum</span>(prefsABCsex[prefsABCsex<span class="op">$</span>Genero <span class="op">==</span><span class="st"> &quot;Masculino&quot;</span>,]<span class="op">$</span>Preferencia <span class="op">==</span><span class="st"> &quot;Golden-Nuss&quot;</span>), 
+                 <span class="kw">nrow</span>(prefsABCsex[prefsABCsex<span class="op">$</span>Genero <span class="op">==</span><span class="st"> &quot;Masculino&quot;</span>,]), <span class="dt">p=</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)
+
+pvalues &lt;-<span class="st"> </span><span class="kw">p.adjust</span>(<span class="kw">c</span>(male_A<span class="op">$</span>p.value, male_B<span class="op">$</span>p.value, male_C<span class="op">$</span>p.value), <span class="dt">method=</span><span class="st">&quot;holm&quot;</span>)
+<span class="kw">formatC</span>(pvalues, <span class="dt">format =</span> <span class="st">&quot;f&quot;</span>, <span class="dt">digits =</span> <span class="dv">6</span>)</code></pre></div>
+<pre><code>## [1] &quot;0.109474&quot; &quot;0.126622&quot; &quot;0.001297&quot;</code></pre>
+<p>Segundo, podemos hacer test binomiales sólo para las mujeres. Hay diferencias significativas entre las preferencias de las mujeres?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">female_A &lt;-<span class="st"> </span><span class="kw">binom.test</span>(<span class="kw">sum</span>(prefsABCsex[prefsABCsex<span class="op">$</span>Genero <span class="op">==</span><span class="st"> &quot;Femenino&quot;</span>,]<span class="op">$</span>Preferencia <span class="op">==</span><span class="st"> &quot;Trencito&quot;</span>),
+                 <span class="kw">nrow</span>(prefsABCsex[prefsABCsex<span class="op">$</span>Genero <span class="op">==</span><span class="st"> &quot;Femenino&quot;</span>,]), <span class="dt">p=</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)
+
+female_B &lt;-<span class="st"> </span><span class="kw">binom.test</span>(<span class="kw">sum</span>(prefsABCsex[prefsABCsex<span class="op">$</span>Genero <span class="op">==</span><span class="st"> &quot;Femenino&quot;</span>,]<span class="op">$</span>Preferencia <span class="op">==</span><span class="st"> &quot;Sahne-Nuss&quot;</span>),
+                 <span class="kw">nrow</span>(prefsABCsex[prefsABCsex<span class="op">$</span>Genero <span class="op">==</span><span class="st"> &quot;Femenino&quot;</span>,]), <span class="dt">p=</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)
+
+female_C &lt;-<span class="st"> </span><span class="kw">binom.test</span>(<span class="kw">sum</span>(prefsABCsex[prefsABCsex<span class="op">$</span>Genero <span class="op">==</span><span class="st"> &quot;Femenino&quot;</span>,]<span class="op">$</span>Preferencia <span class="op">==</span><span class="st"> &quot;Golden-Nuss&quot;</span>),
+                 <span class="kw">nrow</span>(prefsABCsex[prefsABCsex<span class="op">$</span>Genero <span class="op">==</span><span class="st"> &quot;Femenino&quot;</span>,]), <span class="dt">p=</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)
+
+pvalues &lt;-<span class="st"> </span><span class="kw">p.adjust</span>(<span class="kw">c</span>(female_A<span class="op">$</span>p.value, female_B<span class="op">$</span>p.value, female_C<span class="op">$</span>p.value), <span class="dt">method=</span><span class="st">&quot;holm&quot;</span>)
+<span class="kw">formatC</span>(pvalues, <span class="dt">format =</span> <span class="st">&quot;f&quot;</span>, <span class="dt">digits =</span> <span class="dv">6</span>)</code></pre></div>
+<pre><code>## [1] &quot;0.027033&quot; &quot;0.094478&quot; &quot;0.693970&quot;</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="comparar-dos-grupos-t-test.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/doctoradoenpsicologiautal/estadistica/edit/master/10_other_analyses.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/doctoradoenpsicologiautal/estadistica/blob/master/10_other_analyses.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

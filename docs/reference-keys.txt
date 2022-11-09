@@ -41,5 +41,11 @@ de-la-muestra-a-la-población
 la-muestra-en-la-vida-real
 los-intervalos-de-confianza-1
 los-intervalos-de-confianza-2
-analizar-datos
-análizar-proporciones
+comparar-dos-grupos-t-test
+cómo-comparamos-datos-de-dos-grupos
+la-distribución-normal-para-dos-grupos
+la-prueba-de-hipótesis
+el-t-test-como-un-modelo-líneal-general
+el-t-test-con-r
+otros-análisis
+análisis-de-proporciones

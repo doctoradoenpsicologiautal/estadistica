@@ -1,8 +1,8 @@
-# Analizar datos
+# Otros análisis
 
-En este capítulo vamos a revisar los análisis estadísticos básicos.
+En este capítulo vamos a revisar otros análisis estadísticos.
 
-## Análizar proporciones
+## Análisis de proporciones
 
 Imagina que estás analizando una base de datos dónde los participantes tenían que elegir entre dos tipos de chocolates.
 

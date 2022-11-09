@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 6 Comparar dos grupos (t-test) | Estadística con R</title>
+  <meta name="description" content="Capítulo 6 Comparar dos grupos (t-test) | Estadística con R" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 6 Comparar dos grupos (t-test) | Estadística con R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 6 Comparar dos grupos (t-test) | Estadística con R" />
+  
+  
+  
+
+<meta name="author" content="Facultad de Psicología, Universidad de Talca" />
+
+
+<meta name="date" content="2022-11-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="caracterizar-datos.html"/>
+<link rel="next" href="otros-análisis.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Estadística</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preámbulo</a></li>
+<li class="chapter" data-level="1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html"><i class="fa fa-check"></i><b>1</b> Introducción a la estadística</a><ul>
+<li class="chapter" data-level="1.1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#qué-es-la-estadística"><i class="fa fa-check"></i><b>1.1</b> ¿Qué es la estadística?</a></li>
+<li class="chapter" data-level="1.2" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#variables"><i class="fa fa-check"></i><b>1.2</b> ¿Variables?</a></li>
+<li class="chapter" data-level="1.3" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#diseños-experimentales"><i class="fa fa-check"></i><b>1.3</b> Diseños experimentales</a></li>
+<li class="chapter" data-level="1.4" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#qué-medimos"><i class="fa fa-check"></i><b>1.4</b> ¿Qué medimos?</a></li>
+<li class="chapter" data-level="1.5" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#un-prueba-estadística"><i class="fa fa-check"></i><b>1.5</b> Un prueba estadística</a></li>
+<li class="chapter" data-level="1.6" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#que-diseño-usaré"><i class="fa fa-check"></i><b>1.6</b> ¿Que diseño usaré?</a></li>
+<li class="chapter" data-level="1.7" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#una-historia-fantástica"><i class="fa fa-check"></i><b>1.7</b> Una historia fantástica</a></li>
+<li class="chapter" data-level="1.8" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#randomizar"><i class="fa fa-check"></i><b>1.8</b> ¿Randomizar?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html"><i class="fa fa-check"></i><b>2</b> Conceptos estadísticos</a><ul>
+<li class="chapter" data-level="2.1" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#la-significancia"><i class="fa fa-check"></i><b>2.1</b> La significancia</a></li>
+<li class="chapter" data-level="2.2" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#colas"><i class="fa fa-check"></i><b>2.2</b> Colas</a></li>
+<li class="chapter" data-level="2.3" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#errores-estadísticos"><i class="fa fa-check"></i><b>2.3</b> Errores estadísticos</a></li>
+<li class="chapter" data-level="2.4" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#tamaño-poder"><i class="fa fa-check"></i><b>2.4</b> Tamaño &amp; poder</a></li>
+<li class="chapter" data-level="2.5" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#planificar-mi-estudio"><i class="fa fa-check"></i><b>2.5</b> Planificar mi estudio</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="programación.html"><a href="programación.html"><i class="fa fa-check"></i><b>3</b> Programación</a><ul>
+<li class="chapter" data-level="3.1" data-path="programación.html"><a href="programación.html#que-significa-programar"><i class="fa fa-check"></i><b>3.1</b> ¿Que significa programar?</a></li>
+<li class="chapter" data-level="3.2" data-path="programación.html"><a href="programación.html#la-shell-consola-versus-el-script"><i class="fa fa-check"></i><b>3.2</b> La shell (consola) versus el script</a></li>
+<li class="chapter" data-level="3.3" data-path="programación.html"><a href="programación.html#intro-a-la-programación"><i class="fa fa-check"></i><b>3.3</b> Intro a la programación</a></li>
+<li class="chapter" data-level="3.4" data-path="programación.html"><a href="programación.html#empezando-a-programar"><i class="fa fa-check"></i><b>3.4</b> Empezando a programar</a></li>
+<li class="chapter" data-level="3.5" data-path="programación.html"><a href="programación.html#trabajando-con-data-frames"><i class="fa fa-check"></i><b>3.5</b> Trabajando con data frames</a></li>
+<li class="chapter" data-level="3.6" data-path="programación.html"><a href="programación.html#importando-datos"><i class="fa fa-check"></i><b>3.6</b> Importando datos</a></li>
+<li class="chapter" data-level="3.7" data-path="programación.html"><a href="programación.html#seleccionando-datos"><i class="fa fa-check"></i><b>3.7</b> Seleccionando datos</a></li>
+<li class="chapter" data-level="3.8" data-path="programación.html"><a href="programación.html#transformado-datos-en-formato-long-a-wide-y-viceversa"><i class="fa fa-check"></i><b>3.8</b> Transformado datos en formato long a wide y viceversa</a></li>
+<li class="chapter" data-level="3.9" data-path="programación.html"><a href="programación.html#exportando-datos"><i class="fa fa-check"></i><b>3.9</b> Exportando datos</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="gráficos.html"><a href="gráficos.html"><i class="fa fa-check"></i><b>4</b> Gráficos</a><ul>
+<li class="chapter" data-level="4.1" data-path="gráficos.html"><a href="gráficos.html#cómo-graficamos-en-r"><i class="fa fa-check"></i><b>4.1</b> ¿Cómo graficamos en R?</a></li>
+<li class="chapter" data-level="4.2" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-puntos"><i class="fa fa-check"></i><b>4.2</b> Gráfico de puntos</a></li>
+<li class="chapter" data-level="4.3" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-dispersión"><i class="fa fa-check"></i><b>4.3</b> Gráfico de dispersión</a></li>
+<li class="chapter" data-level="4.4" data-path="gráficos.html"><a href="gráficos.html#histograma"><i class="fa fa-check"></i><b>4.4</b> Histograma</a></li>
+<li class="chapter" data-level="4.5" data-path="gráficos.html"><a href="gráficos.html#boxplot"><i class="fa fa-check"></i><b>4.5</b> Boxplot</a></li>
+<li class="chapter" data-level="4.6" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-barras"><i class="fa fa-check"></i><b>4.6</b> Gráfico de barras</a></li>
+<li class="chapter" data-level="4.7" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-líneas-1-factor"><i class="fa fa-check"></i><b>4.7</b> Gráfico de líneas (1 factor)</a></li>
+<li class="chapter" data-level="4.8" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-líneas-2-factores"><i class="fa fa-check"></i><b>4.8</b> Gráfico de líneas (2 factores)</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html"><i class="fa fa-check"></i><b>5</b> Caracterizar datos</a><ul>
+<li class="chapter" data-level="5.1" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#visualizar-los-datos"><i class="fa fa-check"></i><b>5.1</b> Visualizar los datos</a></li>
+<li class="chapter" data-level="5.2" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal"><i class="fa fa-check"></i><b>5.2</b> La curva normal</a></li>
+<li class="chapter" data-level="5.3" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal-en-la-práctica-1"><i class="fa fa-check"></i><b>5.3</b> La curva normal en la práctica (1)</a></li>
+<li class="chapter" data-level="5.4" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal-en-la-práctica-2"><i class="fa fa-check"></i><b>5.4</b> La curva normal en la práctica (2)</a></li>
+<li class="chapter" data-level="5.5" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#de-la-muestra-a-la-población"><i class="fa fa-check"></i><b>5.5</b> De la muestra a la población</a></li>
+<li class="chapter" data-level="5.6" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-muestra-en-la-vida-real"><i class="fa fa-check"></i><b>5.6</b> La muestra en la vida real</a></li>
+<li class="chapter" data-level="5.7" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#los-intervalos-de-confianza-1"><i class="fa fa-check"></i><b>5.7</b> Los intervalos de confianza (1)</a></li>
+<li class="chapter" data-level="5.8" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#los-intervalos-de-confianza-2"><i class="fa fa-check"></i><b>5.8</b> Los intervalos de confianza (2)</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="comparar-dos-grupos-t-test.html"><a href="comparar-dos-grupos-t-test.html"><i class="fa fa-check"></i><b>6</b> Comparar dos grupos (t-test)</a><ul>
+<li class="chapter" data-level="6.1" data-path="comparar-dos-grupos-t-test.html"><a href="comparar-dos-grupos-t-test.html#cómo-comparamos-datos-de-dos-grupos"><i class="fa fa-check"></i><b>6.1</b> ¿Cómo comparamos datos de dos grupos?</a></li>
+<li class="chapter" data-level="6.2" data-path="comparar-dos-grupos-t-test.html"><a href="comparar-dos-grupos-t-test.html#la-distribución-normal-para-dos-grupos"><i class="fa fa-check"></i><b>6.2</b> La distribución normal para dos grupos</a></li>
+<li class="chapter" data-level="6.3" data-path="comparar-dos-grupos-t-test.html"><a href="comparar-dos-grupos-t-test.html#la-prueba-de-hipótesis"><i class="fa fa-check"></i><b>6.3</b> La prueba de hipótesis</a></li>
+<li class="chapter" data-level="6.4" data-path="comparar-dos-grupos-t-test.html"><a href="comparar-dos-grupos-t-test.html#el-t-test-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>6.4</b> El t-test como un modelo líneal general</a></li>
+<li class="chapter" data-level="6.5" data-path="comparar-dos-grupos-t-test.html"><a href="comparar-dos-grupos-t-test.html#el-t-test-con-r"><i class="fa fa-check"></i><b>6.5</b> El t-test con R</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>7</b> Otros análisis</a><ul>
+<li class="chapter" data-level="7.1" data-path="otros-análisis.html"><a href="otros-análisis.html#análisis-de-proporciones"><i class="fa fa-check"></i><b>7.1</b> Análisis de proporciones</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Estadística con R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="comparar-dos-grupos-t-test" class="section level1">
+<h1><span class="header-section-number">Capítulo 6</span> Comparar dos grupos (t-test)</h1>
+<p>En este capítulo vamos a revisar el típico t-test.</p>
+<div id="cómo-comparamos-datos-de-dos-grupos" class="section level2">
+<h2><span class="header-section-number">6.1</span> ¿Cómo comparamos datos de dos grupos?</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=3JKMXCpQvzw" target="_blank">video (10')</a> y trata de responder:</p>
+<ul>
+<li>¿Cómo se sabe si dos muestras viene de una misma población o de poblaciones diferentes?</li>
+<li>¿Cómo podemos usar los intervalos de confianzar para estimar las diferencias entre dos muestras?</li>
+</ul>
+</div>
+<div id="la-distribución-normal-para-dos-grupos" class="section level2">
+<h2><span class="header-section-number">6.2</span> La distribución normal para dos grupos</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=nUutIbaRWCQ" target="_blank">video (9')</a> y trata de responder:</p>
+<ul>
+<li>¿Para que nos sirve la distribución normal para compara dos muestras?</li>
+</ul>
+</div>
+<div id="la-prueba-de-hipótesis" class="section level2">
+<h2><span class="header-section-number">6.3</span> La prueba de hipótesis</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=L3SbEqzEWW0" target="_blank">video (12')</a> y trata de responder:</p>
+<ul>
+<li>¿Cuál es la hipótesis nula cuando comparamos dos muestras?</li>
+</ul>
+</div>
+<div id="el-t-test-como-un-modelo-líneal-general" class="section level2">
+<h2><span class="header-section-number">6.4</span> El t-test como un modelo líneal general</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=RS79Z69iu5U" target="_blank">video (15')</a> y trata de responder:</p>
+<ul>
+<li>¿Cómo se refleja un t-test en un modelo lineal general (GLM)?</li>
+<li>¿Qué representa el intercepto de la ecuación de un GLM para una variable outcome cuando se comparan dos grupos?</li>
+<li>¿Qué representa la pendiente de la ecuación de un GLM para una variable outcome cuando se comparan dos grupos?</li>
+</ul>
+</div>
+<div id="el-t-test-con-r" class="section level2">
+<h2><span class="header-section-number">6.5</span> El t-test con R</h2>
+<p>Ahora vamos a hacer el análisis. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas). Luego importamos el set de datos y le damos una mirada.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
+
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(Hmisc)
+<span class="kw">library</span>(Rmisc)
+<span class="kw">library</span>(effsize)
+<span class="kw">library</span>(pastecs)
+<span class="kw">library</span>(reshape2)
+<span class="kw">library</span>(car)
+<span class="kw">library</span>(effsize)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spiderLong &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/ansiedad_por_arañas_indep.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span>
+spiderLong<span class="op">$</span>Condicion &lt;-<span class="st"> </span><span class="kw">factor</span>(spiderLong<span class="op">$</span>Condicion)
+<span class="kw">head</span>(spiderLong)</code></pre></div>
+<pre><code>##   Sujeto Condicion Conductancia
+## 1      1    imagen           30
+## 2      2    imagen           35
+## 3      3    imagen           45
+## 4      4    imagen           40
+## 5      5    imagen           50
+## 6      6    imagen           35</code></pre>
+<p>Luego, mirar los datos siempre es bueno graficar.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Podemos usar esta función para calcular los estadísticos a través de los participantes.</span>
+datac &lt;-<span class="st"> </span><span class="kw">summarySE</span>(spiderLong, 
+                   <span class="dt">measurevar=</span><span class="st">&quot;Conductancia&quot;</span>, 
+                   <span class="dt">groupvars =</span> <span class="st">&quot;Condicion&quot;</span>)
+
+<span class="co"># Luego hacemos el gráfico</span>
+<span class="kw">ggplot</span>(datac, <span class="kw">aes</span>(<span class="dt">x =</span> Condicion, <span class="dt">y =</span> Conductancia)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>),
+           <span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>, 
+           <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, 
+           <span class="dt">fill =</span> <span class="st">&quot;White&quot;</span>, 
+           <span class="dt">show.legend=</span><span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">position=</span><span class="kw">position_dodge</span>(.<span class="dv">9</span>), 
+                <span class="dt">width=</span>.<span class="dv">25</span>, 
+                <span class="kw">aes</span>(<span class="dt">ymin =</span> Conductancia, <span class="dt">ymax =</span> Conductancia<span class="op">+</span>se)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
+        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
+        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">55</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">55</span>, <span class="dv">10</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Conductancia&quot;</span>)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
+<p>Recordando lo que acabamos de aprender vamos a comparar los promedios por cada grupo con la información que resulta de aplicar una regresión lineal a estos datos.</p>
+<p>Primero describamos los datos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lapply</span>(<span class="kw">by</span>(spiderLong<span class="op">$</span>Conductancia, 
+          spiderLong<span class="op">$</span>Condicion, 
+          stat.desc, 
+          <span class="dt">basic =</span> <span class="ot">FALSE</span>, 
+          <span class="dt">norm =</span> <span class="ot">TRUE</span>), 
+       round, <span class="dv">2</span>)</code></pre></div>
+<pre><code>## $imagen
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##        40.00        40.00         2.68         5.90        86.36         9.29         0.23         0.00 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.00        -1.39        -0.57         0.97         0.85 
+## 
+## $real
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##        50.00        47.00         3.18         7.01       121.64        11.03         0.23        -0.01 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.00        -1.46        -0.59         0.95         0.62</code></pre>
+<p>La función <strong>by</strong> permite calcular los estadísticos. La función <strong>round</strong> redondea los valores a dos décimas. Y la función <strong>lapply</strong> permite aplicar la función round de forma másiva.</p>
+<p>Ahora, vamos a realiza una regresión lineal. Lo que queremos es predecir los valores de <em>conductancia</em> en función de los grupos (o condiciones) que tenemos. Para realizar la regresión usamos la función <strong>lm</strong></p>
+<p>Luego de hacer la regresión lineal podemos revisar su contenido con la función <strong>summary</strong>. Recuerda mirar los coeficientes. ¿Qué ves?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Conductancia <span class="op">~</span><span class="st"> </span>Condicion, <span class="dt">data=</span>spiderLong)
+<span class="kw">summary</span>(m1)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Conductancia ~ Condicion, data = spiderLong)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##  -17.0   -8.5    1.5    8.0   18.0 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)     40.000      2.944  13.587 3.53e-12 ***
+## Condicionreal    7.000      4.163   1.681    0.107    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 10.2 on 22 degrees of freedom
+## Multiple R-squared:  0.1139, Adjusted R-squared:  0.07359 
+## F-statistic: 2.827 on 1 and 22 DF,  p-value: 0.1068</code></pre>
+<p>Finalmente, podemos hacer el t-test. Pero, antes de hacerlo debemos verificar si existen problemas de homgeneidad de varianza. Podemos hacerlo con la función <strong>leveneTest</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">leveneTest</span>(spiderLong<span class="op">$</span>Conductancia, spiderLong<span class="op">$</span>Condicion)</code></pre></div>
+<pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
+##       Df F value Pr(&gt;F)
+## group  1  0.2991   0.59
+##       22</code></pre>
+<p>Luego podemos hacer el análisis estadístico, aplicando la función <strong>t.test</strong>. De la siguiente forma: newModel &lt;- t.test(outcome ~ predictor, data=df, var.equal = TRUE/FALSE, paired=TRUE/FALSE). Ya que no tenemos problemas de homogeneidad de varianzar seteamos var.equal a FALSE.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_test1 &lt;-<span class="st"> </span><span class="kw">t.test</span>(Conductancia <span class="op">~</span><span class="st"> </span>Condicion, 
+                  <span class="dt">data=</span>spiderLong, 
+                  <span class="dt">var.equal =</span> <span class="ot">TRUE</span>,
+                  <span class="dt">paired =</span> <span class="ot">FALSE</span>)
+t_test1</code></pre></div>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  Conductancia by Condicion
+## t = -1.6813, df = 22, p-value = 0.1068
+## alternative hypothesis: true difference in means between group imagen and group real is not equal to 0
+## 95 percent confidence interval:
+##  -15.634222   1.634222
+## sample estimates:
+## mean in group imagen   mean in group real 
+##                   40                   47</code></pre>
+<p>Para terminar siempre es bueno calcular el tamaño del efecto.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span>t_test1<span class="op">$</span>statistic[[<span class="dv">1</span>]]
+df &lt;-<span class="st"> </span>t_test1<span class="op">$</span>parameter[[<span class="dv">1</span>]]
+r &lt;-<span class="st"> </span><span class="kw">sqrt</span>(t<span class="op">**</span><span class="dv">2</span><span class="op">/</span>(t<span class="op">**</span><span class="dv">2</span><span class="op">+</span>df))
+r</code></pre></div>
+<pre><code>## [1] 0.3374392</code></pre>
+<p>Ahora, imaginemos que en realidad nuestro diseño experimental era intra-sujetos. Vamos a usar exactamente los mismos datos que antes pero asumiendo un diseño intra-sujetos. Y asumiremos que estos datos viendo en un formato wide.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spiderWide &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/ansiedad_por_arañas_dep.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span>
+<span class="kw">head</span> (spiderWide)</code></pre></div>
+<pre><code>##   Sujeto imagen real
+## 1      1     30   40
+## 2      2     35   35
+## 3      3     45   50
+## 4      4     40   55
+## 5      5     50   65
+## 6      6     35   55</code></pre>
+<p>Para realizar el gráfico para un diseño intra-sujetos tenemos que hacer algunos ajustes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spiderWideOri &lt;-<span class="st"> </span>spiderWide
+spiderWide<span class="op">$</span>pMean &lt;-<span class="st"> </span>(spiderWide<span class="op">$</span>imagen <span class="op">+</span><span class="st"> </span>spiderWide<span class="op">$</span>real)<span class="op">/</span><span class="dv">2</span>
+grandMean &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">c</span>(spiderWide<span class="op">$</span>imagen, spiderWide<span class="op">$</span>real))
+spiderWide<span class="op">$</span>adj &lt;-<span class="st"> </span>grandMean <span class="op">-</span><span class="st"> </span>spiderWide<span class="op">$</span>pMean
+spiderWide<span class="op">$</span>imagen_adj &lt;-<span class="st"> </span>spiderWide<span class="op">$</span>imagen <span class="op">+</span><span class="st"> </span>spiderWide<span class="op">$</span>adj
+spiderWide<span class="op">$</span>real_adj &lt;-<span class="st"> </span>spiderWide<span class="op">$</span>real <span class="op">+</span><span class="st"> </span>spiderWide<span class="op">$</span>adj
+spiderWide<span class="op">$</span>Mean2 &lt;-<span class="st"> </span><span class="kw">mean</span>(spiderWide<span class="op">$</span>imagen_adj <span class="op">+</span><span class="st"> </span>spiderWide<span class="op">$</span>real_adj)<span class="op">/</span><span class="dv">2</span>
+
+spiderWideSelec &lt;-<span class="st"> </span>spiderWide[, <span class="op">-</span><span class="kw">c</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">5</span>)]
+spiderWideSelec &lt;-<span class="st"> </span>spiderWideSelec[, <span class="op">-</span><span class="dv">4</span>]
+<span class="kw">names</span>(spiderWideSelec) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Sujeto&quot;</span>, <span class="st">&quot;imagen&quot;</span>, <span class="st">&quot;real&quot;</span>)</code></pre></div>
+<p>Los datos ajustados los transformamos a formato Long.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">adjustedData &lt;-<span class="st"> </span><span class="kw">melt</span>(spiderWideSelec,
+                     <span class="dt">id =</span> <span class="kw">c</span>(<span class="st">&quot;Sujeto&quot;</span>), 
+                     <span class="dt">measured =</span> <span class="kw">c</span>(<span class="st">&quot;imagen&quot;</span>, <span class="st">&quot;real&quot;</span>))
+<span class="kw">names</span>(adjustedData) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Sujeto&quot;</span>, <span class="st">&quot;Condicion&quot;</span>, <span class="st">&quot;Conductancia&quot;</span>)</code></pre></div>
+<p>Luego procedemos como antes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Podemos usar esta función para calcular los estadísticos para un diseño intra-sujetos.</span>
+datac2 &lt;-<span class="st"> </span><span class="kw">summarySEwithin</span>(adjustedData, 
+                          <span class="dt">measurevar=</span><span class="st">&quot;Conductancia&quot;</span>, 
+                          <span class="dt">withinvars=</span><span class="st">&quot;Condicion&quot;</span>, 
+                          <span class="dt">idvar=</span><span class="st">&quot;Sujeto&quot;</span>)
+
+<span class="kw">ggplot</span>(datac2, <span class="kw">aes</span>(<span class="dt">x=</span>Condicion, <span class="dt">y=</span>Conductancia)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>),
+           <span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, 
+           <span class="dt">color=</span><span class="st">&quot;black&quot;</span>, 
+           <span class="dt">fill=</span><span class="st">&quot;White&quot;</span>, 
+           <span class="dt">show.legend=</span><span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">position=</span><span class="kw">position_dodge</span>(.<span class="dv">9</span>), 
+                <span class="dt">width=</span>.<span class="dv">25</span>, 
+                <span class="kw">aes</span>(<span class="dt">ymin=</span>Conductancia, <span class="dt">ymax=</span>Conductancia<span class="op">+</span>se)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
+        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
+        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">55</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">55</span>, <span class="dv">10</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Conductancia&quot;</span>)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-103-1.png" width="672" /></p>
+<p>Luego podemos chequear algunos supuestos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spiderWide<span class="op">$</span>diff &lt;-<span class="st"> </span>spiderWide<span class="op">$</span>imagen <span class="op">-</span><span class="st"> </span>spiderWide<span class="op">$</span>real <span class="co"># calcula la diferencia</span>
+<span class="kw">stat.desc</span>(spiderWide<span class="op">$</span>diff, <span class="dt">basic =</span> <span class="ot">FALSE</span>, <span class="dt">norm =</span> <span class="ot">TRUE</span>) <span class="co"># calcula los estadísticos</span></code></pre></div>
+<pre><code>##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##   -7.5000000   -7.0000000    2.8311043    6.2312185   96.1818182    9.8072330   -1.4010333    0.2464810 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##    0.1933785   -1.2342159   -0.5007991    0.9557903    0.7224801</code></pre>
+<p>Y luego haces el t-test.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_test2 &lt;-<span class="st"> </span><span class="kw">t.test</span>(spiderWide<span class="op">$</span>real, spiderWide<span class="op">$</span>imagen, <span class="dt">paired =</span> <span class="ot">TRUE</span>)
+t_test2</code></pre></div>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  spiderWide$real and spiderWide$imagen
+## t = 2.4725, df = 11, p-value = 0.03098
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##   0.7687815 13.2312185
+## sample estimates:
+## mean of the differences 
+##                       7</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Pero también lo podrías hacer si estuvieran en formato Long.</span>
+<span class="kw">t.test</span>(Conductancia <span class="op">~</span><span class="st"> </span>Condicion, <span class="dt">data=</span>spiderLong, <span class="dt">paired =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  Conductancia by Condicion
+## t = -2.4725, df = 11, p-value = 0.03098
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -13.2312185  -0.7687815
+## sample estimates:
+## mean of the differences 
+##                      -7</code></pre>
+<p>Para terminar siempre es bueno calcular el tamaño del efecto. Podemos calcularlo de diferentes formas.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span>t_test2<span class="op">$</span>statistic[[<span class="dv">1</span>]]
+df &lt;-<span class="st"> </span>t_test2<span class="op">$</span>parameter[[<span class="dv">1</span>]]
+(r &lt;-<span class="st"> </span><span class="kw">sqrt</span>(t<span class="op">**</span><span class="dv">2</span><span class="op">/</span>(t<span class="op">**</span><span class="dv">2</span><span class="op">+</span>df)))</code></pre></div>
+<pre><code>## [1] 0.5976869</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">r</code></pre></div>
+<pre><code>## [1] 0.5976869</code></pre>
+<p>O podemos usar una función.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Cohen&#39;s d = (M2 - M1) / SDpooled</span>
+<span class="co"># SDpooled = sqrt((SD1^2 + SD2^2)/ 2)</span>
+<span class="kw">cohen.d</span>(spiderWide<span class="op">$</span>real, spiderWide<span class="op">$</span>imagen, <span class="dt">paired =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## 
+## Cohen&#39;s d
+## 
+## d estimate: 0.6805173 (medium)
+## 95 percent confidence interval:
+##      lower      upper 
+## 0.04707723 1.31395743</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="caracterizar-datos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="otros-análisis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/doctoradoenpsicologiautal/estadistica/edit/master/06_ttest.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/doctoradoenpsicologiautal/estadistica/blob/master/06_ttest.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
