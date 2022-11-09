@@ -23,7 +23,9 @@ library(ggplot2)
 library(reshape)
 library(plyr)
 library(Rmisc)
+```
 
+```{r}
 facebookData <- read.delim("data/FacebookNarcissism.dat", header = TRUE) # load data
 head(facebookData)
 ```

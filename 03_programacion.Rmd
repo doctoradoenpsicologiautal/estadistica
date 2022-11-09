@@ -538,3 +538,73 @@ Los archivos se crearán en tu actual directorio (para saber cual es puedes hace
 write.table(lightAlcoholics, "datoExportado.txt", sep="\t")
 write.csv(lightAlcoholics, "datoExportado.csv")
 ```
+
+## En la práctica
+
+Veamos que información podemos sacar de datos que importamos.
+
+```{r}
+setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+
+library(ggplot2)
+```
+
+Primero importemos datos.
+
+```{r}
+dat <- read.csv("data/latidos_cardiacos.csv", header = TRUE) # load data
+```
+
+Luego calculemos algunos estadísticos.
+
+```{r}
+mean(dat$latidos)
+sd(dat$latidos)
+```
+
+Y hagamos algunos gráficos (más de esto luego).
+
+```{r}
+h1 <- ggplot(dat, aes(latidos))
+h1 + geom_histogram()
+```
+
+```{r}
+h1 <- ggplot(dat, aes("", latidos))
+h1 + geom_boxplot()
+```
+
+Veámos otros datos.
+
+```{r}
+dat <- read.csv("data/demografia_salud.csv", header = TRUE) # load data
+```
+
+
+```{r}
+table(dat$Sexo)
+table(dat$Estado.Civil)
+
+mean(dat$Número.de.hijos)
+sd(dat$Número.de.hijos)
+```
+
+```{r}
+min(dat$Peso)
+max(dat$Peso)
+```
+
+```{r}
+dat$Altura <- as.numeric(gsub(",", ".", dat$Altura))
+aggregate(Altura ~ Sexo, data = dat, mean)
+aggregate(Altura ~ Sexo, data = dat, sd)
+```
+
+```{r}
+dat$PA.Min <- dat$Pr.Arter.Máx
+dat$PA.Max <- dat$Pr.Arter.Mín
+
+aggregate(PA.Max ~ Estado.Civil, data = dat, mean)
+aggregate(PA.Max ~ Estado.Civil, data = dat, sd)
+```
+
