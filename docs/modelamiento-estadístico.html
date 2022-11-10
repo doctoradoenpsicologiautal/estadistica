@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 2 Conceptos estadísticos | Estadística con R</title>
-  <meta name="description" content="Capítulo 2 Conceptos estadísticos | Estadística con R" />
+  <title>Capítulo 7 Modelamiento estadístico | Estadística con R</title>
+  <meta name="description" content="Capítulo 7 Modelamiento estadístico | Estadística con R" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 2 Conceptos estadísticos | Estadística con R" />
+  <meta property="og:title" content="Capítulo 7 Modelamiento estadístico | Estadística con R" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 2 Conceptos estadísticos | Estadística con R" />
+  <meta name="twitter:title" content="Capítulo 7 Modelamiento estadístico | Estadística con R" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="introducción-a-la-estadística.html"/>
-<link rel="next" href="programación.html"/>
+<link rel="prev" href="comparar-dos-grupos-t-test.html"/>
+<link rel="next" href="otros-análisis.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -190,50 +190,36 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="conceptos-estadísticos" class="section level1">
-<h1><span class="header-section-number">Capítulo 2</span> Conceptos estadísticos</h1>
-<div id="la-significancia" class="section level2">
-<h2><span class="header-section-number">2.1</span> La significancia</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=cOtuIWu9NQ0" target="_blank">video (9')</a> y trata de responder:</p>
+<div id="modelamiento-estadístico" class="section level1">
+<h1><span class="header-section-number">Capítulo 7</span> Modelamiento estadístico</h1>
+<p>En este capítulo vamos a revisar que significa modelar.</p>
+<div id="modelos" class="section level2">
+<h2><span class="header-section-number">7.1</span> Modelos</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=DOIjIB1FGYY" target="_blank">video (17')</a> y trata de responder:</p>
 <ul>
-<li>¿Qué me dice y qué no me dice el valor de p?</li>
-<li>¿Cómo se interpreta un resultado estadístico nulo?</li>
+<li>¿Qué es un modelo estadístico?</li>
+<li>¿Por qué es importante tener buenos modelos?</li>
+<li>¿Cómo de determina el error en un modelo?</li>
+<li>¿Qué son los grados de libertad?</li>
 </ul>
 </div>
-<div id="colas" class="section level2">
-<h2><span class="header-section-number">2.2</span> Colas</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=dQ0LnqUAVnA" target="_blank">video (11')</a> y trata de responder:</p>
+<div id="la-ecuación-de-la-recta" class="section level2">
+<h2><span class="header-section-number">7.2</span> La ecuación de la recta</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=In1vL_kZeYk" target="_blank">video (8')</a> y trata de responder:</p>
 <ul>
-<li>¿Cuál es la diferencia entre una hipótesis de una cola y una hipótesis de dos colas?</li>
-<li>¿Por qué los criterios de significancia son más altos para una hipótesis de una cola que para una hipótesis de dos colas?</li>
+<li>¿Cómo se define la línea de la ecuación de un GLM que se ajuste mejor a los datos?</li>
+<li>¿Cuál es el modelo más básico con el cual se compara un modelo que uno construya?</li>
 </ul>
 </div>
-<div id="errores-estadísticos" class="section level2">
-<h2><span class="header-section-number">2.3</span> Errores estadísticos</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=AbsXEad0gMQ" target="_blank">video (9')</a> y trata de responder:</p>
+<div id="la-suma-de-cuadrados" class="section level2">
+<h2><span class="header-section-number">7.3</span> La suma de cuadrados</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=maFx6TKuaQI" target="_blank">video (14')</a> y trata de responder:</p>
 <ul>
-<li>¿Qué es un error de tipo I?</li>
-<li>¿Qué es un error de tipo II?</li>
-<li>¿Por qué hay un balance entre el error de tipo I y II?</li>
-<li>¿Qué es mas perjudicial para un estudio? ¿Un error de tipo I o II?</li>
-</ul>
-</div>
-<div id="tamaño-poder" class="section level2">
-<h2><span class="header-section-number">2.4</span> Tamaño &amp; poder</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=Xh9-Mt2_WTE" target="_blank">video (8')</a> y trata de responder:</p>
-<ul>
-<li>¿Qué es el tamaño del efecto?</li>
-<li>¿Cómo se contabiliza el tamaño del efecto?</li>
-<li>¿Qué es el poder estadístico?</li>
-<li>¿Cómo definimos el tamaño de la muestra que necesitamos para un experimento?</li>
-</ul>
-</div>
-<div id="planificar-mi-estudio" class="section level2">
-<h2><span class="header-section-number">2.5</span> Planificar mi estudio</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=bumW9zlQJdo" target="_blank">video (9')</a> y trata de responder:</p>
-<ul>
-<li>¿Cómo planificar mejor mi estudio?</li>
-<li>¿Por qué debo planificar mi análisis ANTES de recolectar los datos?</li>
+<li>¿Qué es la SS total?</li>
+<li>¿Qué es la SS de los residuales?</li>
+<li>¿Qué es la SS del modelo?</li>
+<li>¿Cómo se establece que un modelo dado explica mejor los datos que un modelo básico?</li>
+<li>¿Cómo se establece cuan bueno es un modelo comparado con cuan malo es? ¿Lo que explica y lo que no explica un modelo?</li>
 </ul>
 
 </div>
@@ -243,8 +229,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="introducción-a-la-estadística.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="programación.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="comparar-dos-grupos-t-test.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="otros-análisis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -275,7 +261,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/doctoradoenpsicologiautal/estadistica/edit/master/02_conceptos.Rmd",
+"link": "https://github.com/doctoradoenpsicologiautal/estadistica/edit/master/07_modeling.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -283,7 +269,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/doctoradoenpsicologiautal/estadistica/blob/master/02_conceptos.Rmd",
+"link": "https://github.com/doctoradoenpsicologiautal/estadistica/blob/master/07_modeling.Rmd",
 "text": null
 },
 "download": null,

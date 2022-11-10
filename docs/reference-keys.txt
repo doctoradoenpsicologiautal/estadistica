@@ -48,11 +48,9 @@ la-distribución-normal-para-dos-grupos
 la-prueba-de-hipótesis
 el-t-test-como-un-modelo-líneal-general
 el-t-test-con-r
-comparar-dos-grupos-t-test-1
-cómo-comparamos-datos-de-dos-grupos-1
-la-distribución-normal-para-dos-grupos-1
-la-prueba-de-hipótesis-1
-el-t-test-como-un-modelo-líneal-general-1
-el-t-test-con-r-1
+modelamiento-estadístico
+modelos
+la-ecuación-de-la-recta
+la-suma-de-cuadrados
 otros-análisis
 análisis-de-proporciones
