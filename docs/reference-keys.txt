@@ -48,8 +48,8 @@ la-distribución-normal-para-dos-grupos
 la-prueba-de-hipótesis
 el-t-test-como-un-modelo-líneal-general
 el-t-test-con-r
-modelamiento-estadístico
-modelos
+la-regresión
+modelos-estadísticos
 la-ecuación-de-la-recta
 la-suma-de-cuadrados
 otros-análisis

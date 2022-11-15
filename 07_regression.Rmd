@@ -1,8 +1,8 @@
-# Modelamiento estadístico
+# La regresión
 
-En este capítulo vamos a revisar que significa modelar.
+En este capítulo vamos a revisar el elemento básico para hacer modelos estadísticos: la regresión lineal.
 
-## Modelos
+## Modelos estadísticos
 Revisa este <a href="https://www.youtube.com/watch?v=DOIjIB1FGYY" target="_blank">video (17')</a> y trata de responder:
 
 - ¿Qué es un modelo estadístico?

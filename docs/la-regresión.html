@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 5 Caracterizar datos | Estadística con R</title>
-  <meta name="description" content="Capítulo 5 Caracterizar datos | Estadística con R" />
+  <title>Capítulo 7 La regresión | Estadística con R</title>
+  <meta name="description" content="Capítulo 7 La regresión | Estadística con R" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 5 Caracterizar datos | Estadística con R" />
+  <meta property="og:title" content="Capítulo 7 La regresión | Estadística con R" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 5 Caracterizar datos | Estadística con R" />
+  <meta name="twitter:title" content="Capítulo 7 La regresión | Estadística con R" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="gráficos.html"/>
-<link rel="next" href="comparar-dos-grupos-t-test.html"/>
+<link rel="prev" href="comparar-dos-grupos-t-test.html"/>
+<link rel="next" href="otros-análisis.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -190,79 +190,36 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="caracterizar-datos" class="section level1">
-<h1><span class="header-section-number">Capítulo 5</span> Caracterizar datos</h1>
-<p>En este capítulo vamos a revisar algunos elementos relacionados con la estadística inferencial. Para entender estas ideas primero vamos a hablar sobre como caracterizamos y visualizamos nuestros datos.</p>
-<div id="visualizar-los-datos" class="section level2">
-<h2><span class="header-section-number">5.1</span> Visualizar los datos</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=IFNrCATEjxY" target="_blank">video (17')</a> y trata de responder:</p>
+<div id="la-regresión" class="section level1">
+<h1><span class="header-section-number">Capítulo 7</span> La regresión</h1>
+<p>En este capítulo vamos a revisar el elemento básico para hacer modelos estadísticos: la regresión lineal.</p>
+<div id="modelos-estadísticos" class="section level2">
+<h2><span class="header-section-number">7.1</span> Modelos estadísticos</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=DOIjIB1FGYY" target="_blank">video (17')</a> y trata de responder:</p>
 <ul>
-<li>¿Por qué es importante graficar los datos?</li>
-<li>¿Cómo se calcula la desviación estándar?</li>
-<li>¿Qué es la suma de cuadrados (o suma de los errores al cuadrado)?</li>
+<li>¿Qué es un modelo estadístico?</li>
+<li>¿Por qué es importante tener buenos modelos?</li>
+<li>¿Cómo de determina el error en un modelo?</li>
+<li>¿Qué son los grados de libertad?</li>
 </ul>
 </div>
-<div id="la-curva-normal" class="section level2">
-<h2><span class="header-section-number">5.2</span> La curva normal</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=AdPw4jita2o" target="_blank">video (10')</a> y trata de responder:</p>
+<div id="la-ecuación-de-la-recta" class="section level2">
+<h2><span class="header-section-number">7.2</span> La ecuación de la recta</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=In1vL_kZeYk" target="_blank">video (8')</a> y trata de responder:</p>
 <ul>
-<li>¿Cómo se puede visualizar la &quot;forma&quot; de los datos?</li>
-<li>¿Qué características tiene la curva normal?</li>
-<li>¿Cómo estimamos cuantas observaciones caen entre dos valores para una set de datos?</li>
-<li>¿Qué porcentaje de los datos esta entre -1 SD y 1 SD?</li>
+<li>¿Cómo se define la línea de la ecuación de un GLM que se ajuste mejor a los datos?</li>
+<li>¿Cuál es el modelo más básico con el cual se compara un modelo que uno construya?</li>
 </ul>
 </div>
-<div id="la-curva-normal-en-la-práctica-1" class="section level2">
-<h2><span class="header-section-number">5.3</span> La curva normal en la práctica (1)</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=kcxyC1b-QZM" target="_blank">video (8')</a> y trata de responder:</p>
+<div id="la-suma-de-cuadrados" class="section level2">
+<h2><span class="header-section-number">7.3</span> La suma de cuadrados</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=maFx6TKuaQI" target="_blank">video (14')</a> y trata de responder:</p>
 <ul>
-<li>¿Cuantos vehículos anduvieron a exceso de velocidad? PAUSA el video para responder</li>
-<li>¿Qué porcentaje de los datos esta entre -2 SD y 2 SD?</li>
-<li>¿Qué porcentaje de los datos esta entre -2.5 SD y 2.5 SD?</li>
-</ul>
-</div>
-<div id="la-curva-normal-en-la-práctica-2" class="section level2">
-<h2><span class="header-section-number">5.4</span> La curva normal en la práctica (2)</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=zKnxXD9C-78" target="_blank">video (9')</a> y trata de responder:</p>
-<ul>
-<li>¿Entre cuantas SD tenemos prácticamente todos los puntos de un set de datos?</li>
-<li>¿Entre Linda y Bill quien saco mejor puntaje dentro de su cohorte? PAUSA el video para responder</li>
-</ul>
-</div>
-<div id="de-la-muestra-a-la-población" class="section level2">
-<h2><span class="header-section-number">5.5</span> De la muestra a la población</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=BpH3_BJf5do" target="_blank">video (17')</a> y trata de responder:</p>
-<ul>
-<li>¿Qué significa generalizar nuestros hallazgos?</li>
-<li>¿Qué son los parámetros?</li>
-<li>¿Qué son los estadísticos?</li>
-<li>¿Qué es la variación de la muestra (o sampling variation)?</li>
-<li>¿Qué representa el promedio de los promedios de las muestras?</li>
-</ul>
-</div>
-<div id="la-muestra-en-la-vida-real" class="section level2">
-<h2><span class="header-section-number">5.6</span> La muestra en la vida real</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=SF4vsowPyrw" target="_blank">video (10')</a> y trata de responder:</p>
-<ul>
-<li>¿Qué pasa en la vida con respecto a la distribución de los promedios de las muestras?</li>
-<li>¿Qué es el error estándar y como se calcula?</li>
-</ul>
-</div>
-<div id="los-intervalos-de-confianza-1" class="section level2">
-<h2><span class="header-section-number">5.7</span> Los intervalos de confianza (1)</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=WPgwrvY8SEw" target="_blank">video (13')</a> y trata de responder:</p>
-<ul>
-<li>¿Cómo se calcula el SE?</li>
-<li>¿Cómo se estima el promedio de la población?</li>
-<li>¿Qué son los intervalos de confianza?</li>
-</ul>
-</div>
-<div id="los-intervalos-de-confianza-2" class="section level2">
-<h2><span class="header-section-number">5.8</span> Los intervalos de confianza (2)</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=tHovt9mI7Xg" target="_blank">video (6')</a> y trata de responder:</p>
-<ul>
-<li>¿Qué significa que cálculemos un promedio con un intervalo de confianza al 68%?</li>
-<li>¿Qué significa que cálculemos un promedio con un intervalo de confianza al 95%?</li>
+<li>¿Qué es la SS total?</li>
+<li>¿Qué es la SS de los residuales?</li>
+<li>¿Qué es la SS del modelo?</li>
+<li>¿Cómo se establece que un modelo dado explica mejor los datos que un modelo básico?</li>
+<li>¿Cómo se establece cuan bueno es un modelo comparado con cuan malo es? ¿Lo que explica y lo que no explica un modelo?</li>
 </ul>
 
 </div>
@@ -272,8 +229,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="gráficos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="comparar-dos-grupos-t-test.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="comparar-dos-grupos-t-test.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="otros-análisis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -304,7 +261,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/doctoradoenpsicologiautal/estadistica/edit/master/05_caracterizar.Rmd",
+"link": "https://github.com/doctoradoenpsicologiautal/estadistica/edit/master/07_regression.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -312,7 +269,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/doctoradoenpsicologiautal/estadistica/blob/master/05_caracterizar.Rmd",
+"link": "https://github.com/doctoradoenpsicologiautal/estadistica/blob/master/07_regression.Rmd",
 "text": null
 },
 "download": null,

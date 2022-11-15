@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2022-11-10" />
+<meta name="date" content="2022-11-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -163,10 +163,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.4" data-path="comparar-dos-grupos-t-test.html"><a href="comparar-dos-grupos-t-test.html#el-t-test-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>6.4</b> El t-test como un modelo líneal general</a></li>
 <li class="chapter" data-level="6.5" data-path="comparar-dos-grupos-t-test.html"><a href="comparar-dos-grupos-t-test.html#el-t-test-con-r"><i class="fa fa-check"></i><b>6.5</b> El t-test con R</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="modelamiento-estadístico.html"><a href="modelamiento-estadístico.html"><i class="fa fa-check"></i><b>7</b> Modelamiento estadístico</a><ul>
-<li class="chapter" data-level="7.1" data-path="modelamiento-estadístico.html"><a href="modelamiento-estadístico.html#modelos"><i class="fa fa-check"></i><b>7.1</b> Modelos</a></li>
-<li class="chapter" data-level="7.2" data-path="modelamiento-estadístico.html"><a href="modelamiento-estadístico.html#la-ecuación-de-la-recta"><i class="fa fa-check"></i><b>7.2</b> La ecuación de la recta</a></li>
-<li class="chapter" data-level="7.3" data-path="modelamiento-estadístico.html"><a href="modelamiento-estadístico.html#la-suma-de-cuadrados"><i class="fa fa-check"></i><b>7.3</b> La suma de cuadrados</a></li>
+<li class="chapter" data-level="7" data-path="la-regresión.html"><a href="la-regresión.html"><i class="fa fa-check"></i><b>7</b> La regresión</a><ul>
+<li class="chapter" data-level="7.1" data-path="la-regresión.html"><a href="la-regresión.html#modelos-estadísticos"><i class="fa fa-check"></i><b>7.1</b> Modelos estadísticos</a></li>
+<li class="chapter" data-level="7.2" data-path="la-regresión.html"><a href="la-regresión.html#la-ecuación-de-la-recta"><i class="fa fa-check"></i><b>7.2</b> La ecuación de la recta</a></li>
+<li class="chapter" data-level="7.3" data-path="la-regresión.html"><a href="la-regresión.html#la-suma-de-cuadrados"><i class="fa fa-check"></i><b>7.3</b> La suma de cuadrados</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>8</b> Otros análisis</a><ul>
 <li class="chapter" data-level="8.1" data-path="otros-análisis.html"><a href="otros-análisis.html#análisis-de-proporciones"><i class="fa fa-check"></i><b>8.1</b> Análisis de proporciones</a></li>
@@ -379,8 +379,8 @@ name</code></pre></div>
 <pre><code>##  [1] &quot;Ben&quot;    &quot;Martin&quot; &quot;Andy&quot;   &quot;Paul&quot;   &quot;Graham&quot; &quot;Carina&quot; &quot;Karina&quot; &quot;Doug&quot;   &quot;Mark&quot;   &quot;Zoe&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">birth_date &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">c</span>(<span class="st">&quot;1977-07-03&quot;</span>, <span class="st">&quot;1969-05-24&quot;</span>, <span class="st">&quot;1973-06-21&quot;</span>, <span class="st">&quot;1970-07-16&quot;</span>, <span class="st">&quot;1949-10-10&quot;</span>, <span class="st">&quot;1983-11-05&quot;</span>, <span class="st">&quot;1987-10-08&quot;</span>, <span class="st">&quot;1989-09-16&quot;</span>, <span class="st">&quot;1973-05-20&quot;</span>, <span class="st">&quot;1984-11-12&quot;</span>))
 birth_date</code></pre></div>
-<pre><code>##  [1] &quot;1977-07-03&quot; &quot;1969-05-24&quot; &quot;1973-06-21&quot; &quot;1970-07-16&quot; &quot;1949-10-10&quot; &quot;1983-11-05&quot; &quot;1987-10-08&quot; &quot;1989-09-16&quot;
-##  [9] &quot;1973-05-20&quot; &quot;1984-11-12&quot;</code></pre>
+<pre><code>##  [1] &quot;1977-07-03&quot; &quot;1969-05-24&quot; &quot;1973-06-21&quot; &quot;1970-07-16&quot; &quot;1949-10-10&quot; &quot;1983-11-05&quot; &quot;1987-10-08&quot;
+##  [8] &quot;1989-09-16&quot; &quot;1973-05-20&quot; &quot;1984-11-12&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">job &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">5</span>), <span class="kw">rep</span>(<span class="dv">2</span>, <span class="dv">5</span>)) <span class="co"># que es el equivalente a: job &lt;- c(1,1,1,1,1,2,2,2,2,2)</span>
 job</code></pre></div>
 <pre><code>##  [1] 1 1 1 1 1 2 2 2 2 2</code></pre>
