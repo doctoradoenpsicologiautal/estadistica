@@ -248,7 +248,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Cantidad de dinero gastado en publicidad&quot;</span>,
        <span class="dt">y=</span><span class="st">&quot;Ventas&quot;</span>)</code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-127-1.png" width="672" /></p>
 <p>Lo que nos dice el sentido común, y lo que vemos en el gráfico efectivamente es que a mayor dinero invertido en publicidad debería haber mayores ventas. Es este un buen modelo para predecir el número de ventas a partir del dinero invertido en publicidad? Para analizar estos podemos hacer un modelo lineal con la función <strong>lm</strong>. En esta función usamos la típica relación entre resultado (ouctome) y variable explicativa (predictor), y le indicamos a R que base de datos usamos (datos): newModel &lt;- lm(outcome~predictor, datos) Luego podemos visualizar los resulatdos con la función <strong>summary</strong>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_album &lt;-<span class="st"> </span><span class="kw">lm</span>(ventas <span class="op">~</span><span class="st"> </span>publicidad, <span class="dt">data =</span> album1)
 <span class="kw">summary</span>(m_album)</code></pre></div>
@@ -270,6 +270,51 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## Residual standard error: 65.99 on 198 degrees of freedom
 ## Multiple R-squared:  0.3346, Adjusted R-squared:  0.3313 
 ## F-statistic: 99.59 on 1 and 198 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>En qué debemos fijarnos dentro de los resultados que obtenemos al aplicar un módelo líneal? En la línea siguientes a &quot;Call&quot; aparece el módelo que usamos. También aparecen los llamados coeficientes que reflejan bajo el nombre de &quot;Estimate&quot; que refleja con que magnitud una variable predictora predice una variable resultado. Por ejemplo, por cada unidad de publicidad invertida el aumento en el número de ventas es 0.09. Y esta relación es significativa, o sea es diferente de 0 (lo que ocurre cuando no hay ninguna relación entre ambas variables).</p>
+<p>En el fondo este análisis nos dice que la publicidad si impacta sobre la venta de los discos. Sin embargo, a publicidad no es el único que podría afectar las ventas. En este sentido, podríamos estudiar otros factores que afectan esta variable resultados. Para ello hacemos lo que se llama una regresión múltiple.</p>
+<p>Primero cargamos los datos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">album2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/datos_ventas_de_discos_2.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span>
+<span class="kw">head</span>(album2)</code></pre></div>
+<pre><code>##   publicidad ventas radio eventos
+## 1     10.256    330    43      10
+## 2    985.685    120    28       7
+## 3   1445.563    360    35       7
+## 4   1188.193    270    33       7
+## 5    574.513    220    44       5
+## 6    568.954    170    19       5</code></pre>
+<p>Podemos graficar la relación entre alguna variable de interés y el número de ventas. Por ejemplo, podríamos visualizar el impacto de la frecuencia de aparición de un tema musical en la radio.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(album2,
+       <span class="kw">aes</span>(publicidad, radio)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Número de apariciones en la radio&quot;</span>,
+       <span class="dt">y=</span><span class="st">&quot;Ventas&quot;</span>)</code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-130-1.png" width="672" /></p>
+<p>Luego podríamos hacer un modelo para entender el impacto de distintos factores en la venta de discos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_album2 &lt;-<span class="st"> </span><span class="kw">lm</span>(ventas <span class="op">~</span><span class="st"> </span>publicidad <span class="op">+</span><span class="st"> </span>radio <span class="op">+</span><span class="st"> </span>eventos, <span class="dt">data =</span> album2)
+<span class="kw">summary</span>(m_album2)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = ventas ~ publicidad + radio + eventos, data = album2)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -121.324  -28.336   -0.451   28.967  144.132 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -26.612958  17.350001  -1.534    0.127    
+## publicidad    0.084885   0.006923  12.261  &lt; 2e-16 ***
+## radio         3.367425   0.277771  12.123  &lt; 2e-16 ***
+## eventos      11.086335   2.437849   4.548 9.49e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 47.09 on 196 degrees of freedom
+## Multiple R-squared:  0.6647, Adjusted R-squared:  0.6595 
+## F-statistic: 129.5 on 3 and 196 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>¿Qué conclusiones sacas de este análisis?</p>
 
 </div>
 </div>

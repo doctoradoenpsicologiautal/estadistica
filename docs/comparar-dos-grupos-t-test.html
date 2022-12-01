@@ -252,11 +252,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## The following objects are masked from &#39;package:reshape&#39;:
 ## 
 ##     colsplit, melt, recast</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(car)</code></pre></div>
-<pre><code>## Warning: package &#39;car&#39; was built under R version 4.1.3</code></pre>
-<pre><code>## Loading required package: carData</code></pre>
-<pre><code>## Warning: package &#39;carData&#39; was built under R version 4.1.3</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(effsize)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(car)
+<span class="kw">library</span>(effsize)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spiderLong &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/ansiedad_por_arañas_indep.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span>
 spiderLong<span class="op">$</span>Condicion &lt;-<span class="st"> </span><span class="kw">factor</span>(spiderLong<span class="op">$</span>Condicion)
 <span class="kw">head</span>(spiderLong)</code></pre></div>
@@ -289,7 +286,7 @@ datac &lt;-<span class="st"> </span><span class="kw">summarySE</span>(spiderLong
         <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">55</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">55</span>, <span class="dv">10</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Conductancia&quot;</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-105-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
 <p>Recordando lo que acabamos de aprender vamos a comparar los promedios por cada grupo con la información que resulta de aplicar una regresión lineal a estos datos.</p>
 <p>Primero describamos los datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lapply</span>(<span class="kw">by</span>(spiderLong<span class="op">$</span>Conductancia, 
@@ -410,7 +407,7 @@ datac2 &lt;-<span class="st"> </span><span class="kw">summarySEwithin</span>(adj
         <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">55</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">55</span>, <span class="dv">10</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Conductancia&quot;</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-120-1.png" width="672" /></p>
 <p>Luego podemos chequear algunos supuestos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spiderWide<span class="op">$</span>diff &lt;-<span class="st"> </span>spiderWide<span class="op">$</span>imagen <span class="op">-</span><span class="st"> </span>spiderWide<span class="op">$</span>real <span class="co"># calcula la diferencia</span>
 <span class="kw">stat.desc</span>(spiderWide<span class="op">$</span>diff, <span class="dt">basic =</span> <span class="ot">FALSE</span>, <span class="dt">norm =</span> <span class="ot">TRUE</span>) <span class="co"># calcula los estadísticos</span></code></pre></div>

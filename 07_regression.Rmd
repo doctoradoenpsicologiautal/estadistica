@@ -63,5 +63,37 @@ m_album <- lm(ventas ~ publicidad, data = album1)
 summary(m_album)
 ```
 
+En qué debemos fijarnos dentro de los resultados que obtenemos al aplicar un módelo líneal?
+En la línea siguientes a "Call" aparece el módelo que usamos.
+También aparecen los llamados coeficientes que reflejan bajo el nombre de "Estimate" que refleja con que magnitud una variable predictora predice una variable resultado. Por ejemplo, por cada unidad de publicidad invertida el aumento en el número de ventas es 0.09. Y esta relación es significativa, o sea es diferente de 0 (lo que ocurre cuando no hay ninguna relación entre ambas variables).
 
 
+En el fondo este análisis nos dice que la publicidad si impacta sobre la venta de los discos.
+Sin embargo, a publicidad no es el único que podría afectar las ventas. En este sentido, podríamos estudiar otros factores que afectan esta variable resultados. Para ello hacemos lo que se llama una regresión múltiple.
+
+Primero cargamos los datos.
+```{r}
+album2 <- read.csv("data/datos_ventas_de_discos_2.csv", header = TRUE) # load data
+head(album2)
+```
+
+Podemos graficar la relación entre alguna variable de interés y el número de ventas.
+Por ejemplo, podríamos visualizar el impacto de la frecuencia de aparición de un tema musical en la radio.
+
+```{r}
+ggplot(album2,
+       aes(publicidad, radio)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(x="Número de apariciones en la radio",
+       y="Ventas")
+```
+
+Luego podríamos hacer un modelo para entender el impacto de distintos factores en la venta de discos.
+
+```{r}
+m_album2 <- lm(ventas ~ publicidad + radio + eventos, data = album2)
+summary(m_album2)
+```
+
+¿Qué conclusiones sacas de este análisis?
