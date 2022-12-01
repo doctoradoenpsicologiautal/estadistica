@@ -1,0 +1,231 @@
+# Comparar más de dos grupos (ANOVA)
+
+En este capítulo vamos a revisar el típico análisis de varianza o ANOVA.
+
+## ¿Por qué necesitamos un ANOVA?
+Revisa este <a href="https://www.youtube.com/watch?v=hzasDQY0GVk" target="_blank">video (9')</a> y trata de responder:
+
+- ¿Cómo comparamos varias condiciones experimentales?
+- ¿Cuántos distintos tipos de ANOVA existen?
+- ¿De qué dependen del tipo de ANOVA que usemos para realizar un análisis?
+- ¿Qué es un factor en un ANOVA?
+- ¿Qué es un nivel en un ANOVA?
+- ¿Qué es un ANOVA mixto?
+- ¿En un experimento hipotético con 3 condiciones experimentales por qué no podemos usar 3 t-test?
+- ¿Cuanto aumenta el error de tipo 1 cuando aumentamos el número de comparaciones que hacemos?
+- ¿Qué es una prueba omnibus?
+- ¿Cuáles son los supuestos del ANOVA?
+
+## El ANOVA como un modelo líneal general
+Revisa este <a href="https://www.youtube.com/watch?v=CyrNtF3C0Mc" target="_blank">video (18')</a> y trata de responder:
+
+- ¿Qué nos dice el valor F en un ANOVA?
+- ¿Por qué el ANOVA se puede representar como una regresión?
+- ¿Cómo se refleja un t-test en un modelo lineal general (GLM)?
+- ¿Para que nos sirven las variables ficticias (dummy coding) en el ANOVA?
+- ¿Qué refleja el intercepto de la ecuación que representa el ANOVA?
+- ¿Qué reflejan los coeficientes (o betas) de la ecuación que representa el ANOVA?
+
+## La lógica del ANOVA
+Revisa este <a href="https://www.youtube.com/watch?v=sWdZHcBWTGg" target="_blank">video (15')</a> y trata de responder:
+
+- ¿Qué reflejan los coeficientes (o betas) de la ecuación que representa el ANOVA?
+- ¿Cómo serían los promedios de los grupos si la hipótesis nula se tuviera que aceptar?
+- ¿Qué es la suma de cuadrados (SS) total?
+- ¿Qué es la suma de cuadrados (SS) del modelo?
+- ¿Qué es la suma de cuadrados (SS) de los residuales?
+
+## El ANOVA con R
+
+Ahora vamos a hacer el análisis. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas). Luego importamos el set de datos y le damos una mirada.
+
+```{r}
+setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+
+library(ggplot2)
+library(Hmisc)
+library(Rmisc)
+library(effsize)
+library(pastecs)
+library(reshape2)
+library(car)
+library(effsize)
+```
+
+```{r}
+spiderLong <- read.csv("data/ansiedad_por_arañas_indep.csv", header = TRUE) # load data
+spiderLong$Condicion <- factor(spiderLong$Condicion)
+head(spiderLong)
+```
+
+Luego, mirar los datos siempre es bueno graficar.
+
+```{r}
+# Podemos usar esta función para calcular los estadísticos a través de los participantes.
+datac <- summarySE(spiderLong, 
+                   measurevar="Conductancia", 
+                   groupvars = "Condicion")
+
+# Luego hacemos el gráfico
+ggplot(datac, aes(x = Condicion, y = Conductancia)) +
+  geom_bar(position = position_dodge(width = 0.9),
+           stat = "identity", 
+           color = "black", 
+           fill = "White", 
+           show.legend=FALSE) +
+  geom_errorbar(position=position_dodge(.9), 
+                width=.25, 
+                aes(ymin = Conductancia, ymax = Conductancia+se)) +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black")) +
+  scale_y_continuous(limits = c(0,55), breaks = seq(0, 55, 10)) +
+  ylab("Conductancia")
+```
+
+Recordando lo que acabamos de aprender vamos a comparar los promedios por cada grupo con la información que resulta de aplicar una regresión lineal a estos datos.
+
+Primero describamos los datos.
+
+```{r}
+lapply(by(spiderLong$Conductancia, 
+          spiderLong$Condicion, 
+          stat.desc, 
+          basic = FALSE, 
+          norm = TRUE), 
+       round, 2)
+```
+
+La función **by** permite calcular los estadísticos. La función **round** redondea los valores a dos décimas. Y la función **lapply** permite aplicar la función round de forma másiva.
+
+Ahora, vamos a realiza una regresión lineal. Lo que queremos es predecir los valores de *conductancia* en función de los grupos (o condiciones) que tenemos. Para realizar la regresión usamos la función **lm**
+
+Luego de hacer la regresión lineal podemos revisar su contenido con la función **summary**.
+Recuerda mirar los coeficientes. ¿Qué ves?
+
+```{r}
+m1 <- lm(Conductancia ~ Condicion, data=spiderLong)
+summary(m1)
+```
+
+Finalmente, podemos hacer el t-test. Pero, antes de hacerlo debemos verificar si existen problemas de homgeneidad de varianza. Podemos hacerlo con la función **leveneTest**
+
+```{r}
+leveneTest(spiderLong$Conductancia, spiderLong$Condicion)
+```
+
+Luego podemos hacer el análisis estadístico, aplicando la función **t.test**.
+De la siguiente forma: newModel <- t.test(outcome ~ predictor, data=df, var.equal = TRUE/FALSE, paired=TRUE/FALSE).
+Ya que no tenemos problemas de homogeneidad de varianzar seteamos var.equal a FALSE.
+
+```{r}
+t_test1 <- t.test(Conductancia ~ Condicion, 
+                  data=spiderLong, 
+                  var.equal = TRUE,
+                  paired = FALSE)
+t_test1
+```
+
+Para terminar siempre es bueno calcular el tamaño del efecto.
+
+```{r}
+t <- t_test1$statistic[[1]]
+df <- t_test1$parameter[[1]]
+r <- sqrt(t**2/(t**2+df))
+r
+```
+
+Ahora, imaginemos que en realidad nuestro diseño experimental era intra-sujetos.
+Vamos a usar exactamente los mismos datos que antes pero asumiendo un diseño intra-sujetos. Y asumiremos que estos datos viendo en un formato wide.
+
+```{r}
+spiderWide <- read.csv("data/ansiedad_por_arañas_dep.csv", header = TRUE) # load data
+head (spiderWide)
+```
+
+Para realizar el gráfico para un diseño intra-sujetos tenemos que hacer algunos ajustes.
+
+```{r}
+spiderWideOri <- spiderWide
+spiderWide$pMean <- (spiderWide$imagen + spiderWide$real)/2
+grandMean <- mean(c(spiderWide$imagen, spiderWide$real))
+spiderWide$adj <- grandMean - spiderWide$pMean
+spiderWide$imagen_adj <- spiderWide$imagen + spiderWide$adj
+spiderWide$real_adj <- spiderWide$real + spiderWide$adj
+spiderWide$Mean2 <- mean(spiderWide$imagen_adj + spiderWide$real_adj)/2
+
+spiderWideSelec <- spiderWide[, -c(2:5)]
+spiderWideSelec <- spiderWideSelec[, -4]
+names(spiderWideSelec) <- c("Sujeto", "imagen", "real")
+```
+
+Los datos ajustados los transformamos a formato Long.
+
+```{r}
+adjustedData <- melt(spiderWideSelec,
+                     id = c("Sujeto"), 
+                     measured = c("imagen", "real"))
+names(adjustedData) <- c("Sujeto", "Condicion", "Conductancia")
+```
+
+Luego procedemos como antes.
+
+```{r}
+# Podemos usar esta función para calcular los estadísticos para un diseño intra-sujetos.
+datac2 <- summarySEwithin(adjustedData, 
+                          measurevar="Conductancia", 
+                          withinvars="Condicion", 
+                          idvar="Sujeto")
+
+ggplot(datac2, aes(x=Condicion, y=Conductancia)) +
+  geom_bar(position = position_dodge(width = 0.9),
+           stat="identity", 
+           color="black", 
+           fill="White", 
+           show.legend=FALSE) +
+  geom_errorbar(position=position_dodge(.9), 
+                width=.25, 
+                aes(ymin=Conductancia, ymax=Conductancia+se)) +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black")) +
+  scale_y_continuous(limits = c(0,55), breaks = seq(0, 55, 10)) +
+  ylab("Conductancia")
+```
+
+Luego podemos chequear algunos supuestos.
+
+```{r}
+spiderWide$diff <- spiderWide$imagen - spiderWide$real # calcula la diferencia
+stat.desc(spiderWide$diff, basic = FALSE, norm = TRUE) # calcula los estadísticos
+```
+
+Y luego haces el t-test.
+
+```{r}
+t_test2 <- t.test(spiderWide$real, spiderWide$imagen, paired = TRUE)
+t_test2
+
+# Pero también lo podrías hacer si estuvieran en formato Long.
+t.test(Conductancia ~ Condicion, data=spiderLong, paired = TRUE)
+```
+
+Para terminar siempre es bueno calcular el tamaño del efecto.
+Podemos calcularlo de diferentes formas.
+
+```{r}
+t <- t_test2$statistic[[1]]
+df <- t_test2$parameter[[1]]
+(r <- sqrt(t**2/(t**2+df)))
+r
+```
+
+O podemos usar una función.
+
+```{r}
+# Cohen's d = (M2 - M1) / SDpooled
+# SDpooled = sqrt((SD1^2 + SD2^2)/ 2)
+cohen.d(spiderWide$real, spiderWide$imagen, paired = TRUE)
+```

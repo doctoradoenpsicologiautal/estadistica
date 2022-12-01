@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 6 Comparar dos grupos (t-test) | Estadística con R</title>
-  <meta name="description" content="Capítulo 6 Comparar dos grupos (t-test) | Estadística con R" />
+  <title>Capítulo 8 Comparar más de dos grupos (ANOVA) | Estadística con R</title>
+  <meta name="description" content="Capítulo 8 Comparar más de dos grupos (ANOVA) | Estadística con R" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 6 Comparar dos grupos (t-test) | Estadística con R" />
+  <meta property="og:title" content="Capítulo 8 Comparar más de dos grupos (ANOVA) | Estadística con R" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 6 Comparar dos grupos (t-test) | Estadística con R" />
+  <meta name="twitter:title" content="Capítulo 8 Comparar más de dos grupos (ANOVA) | Estadística con R" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="caracterizar-datos.html"/>
-<link rel="next" href="la-regresión.html"/>
+<link rel="prev" href="la-regresión.html"/>
+<link rel="next" href="otros-análisis.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -197,42 +197,50 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="comparar-dos-grupos-t-test" class="section level1">
-<h1><span class="header-section-number">Capítulo 6</span> Comparar dos grupos (t-test)</h1>
-<p>En este capítulo vamos a revisar el típico t-test.</p>
-<div id="cómo-comparamos-datos-de-dos-grupos" class="section level2">
-<h2><span class="header-section-number">6.1</span> ¿Cómo comparamos datos de dos grupos?</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=3JKMXCpQvzw" target="_blank">video (10')</a> y trata de responder:</p>
+<div id="comparar-más-de-dos-grupos-anova" class="section level1">
+<h1><span class="header-section-number">Capítulo 8</span> Comparar más de dos grupos (ANOVA)</h1>
+<p>En este capítulo vamos a revisar el típico análisis de varianza o ANOVA.</p>
+<div id="por-qué-necesitamos-un-anova" class="section level2">
+<h2><span class="header-section-number">8.1</span> ¿Por qué necesitamos un ANOVA?</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=hzasDQY0GVk" target="_blank">video (9')</a> y trata de responder:</p>
 <ul>
-<li>¿Cómo se sabe si dos muestras viene de una misma población o de poblaciones diferentes?</li>
-<li>¿Cómo podemos usar los intervalos de confianzar para estimar las diferencias entre dos muestras?</li>
+<li>¿Cómo comparamos varias condiciones experimentales?</li>
+<li>¿Cuántos distintos tipos de ANOVA existen?</li>
+<li>¿De qué dependen del tipo de ANOVA que usemos para realizar un análisis?</li>
+<li>¿Qué es un factor en un ANOVA?</li>
+<li>¿Qué es un nivel en un ANOVA?</li>
+<li>¿Qué es un ANOVA mixto?</li>
+<li>¿En un experimento hipotético con 3 condiciones experimentales por qué no podemos usar 3 t-test?</li>
+<li>¿Cuanto aumenta el error de tipo 1 cuando aumentamos el número de comparaciones que hacemos?</li>
+<li>¿Qué es una prueba omnibus?</li>
+<li>¿Cuáles son los supuestos del ANOVA?</li>
 </ul>
 </div>
-<div id="la-distribución-normal-para-dos-grupos" class="section level2">
-<h2><span class="header-section-number">6.2</span> La distribución normal para dos grupos</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=nUutIbaRWCQ" target="_blank">video (9')</a> y trata de responder:</p>
+<div id="el-anova-como-un-modelo-líneal-general" class="section level2">
+<h2><span class="header-section-number">8.2</span> El ANOVA como un modelo líneal general</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=CyrNtF3C0Mc" target="_blank">video (18')</a> y trata de responder:</p>
 <ul>
-<li>¿Para que nos sirve la distribución normal para compara dos muestras?</li>
-</ul>
-</div>
-<div id="la-prueba-de-hipótesis" class="section level2">
-<h2><span class="header-section-number">6.3</span> La prueba de hipótesis</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=L3SbEqzEWW0" target="_blank">video (12')</a> y trata de responder:</p>
-<ul>
-<li>¿Cuál es la hipótesis nula cuando comparamos dos muestras?</li>
-</ul>
-</div>
-<div id="el-t-test-como-un-modelo-líneal-general" class="section level2">
-<h2><span class="header-section-number">6.4</span> El t-test como un modelo líneal general</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=RS79Z69iu5U" target="_blank">video (15')</a> y trata de responder:</p>
-<ul>
+<li>¿Qué nos dice el valor F en un ANOVA?</li>
+<li>¿Por qué el ANOVA se puede representar como una regresión?</li>
 <li>¿Cómo se refleja un t-test en un modelo lineal general (GLM)?</li>
-<li>¿Qué representa el intercepto de la ecuación de un GLM para una variable outcome cuando se comparan dos grupos?</li>
-<li>¿Qué representa la pendiente de la ecuación de un GLM para una variable outcome cuando se comparan dos grupos?</li>
+<li>¿Para que nos sirven las variables ficticias (dummy coding) en el ANOVA?</li>
+<li>¿Qué refleja el intercepto de la ecuación que representa el ANOVA?</li>
+<li>¿Qué reflejan los coeficientes (o betas) de la ecuación que representa el ANOVA?</li>
 </ul>
 </div>
-<div id="el-t-test-con-r" class="section level2">
-<h2><span class="header-section-number">6.5</span> El t-test con R</h2>
+<div id="la-lógica-del-anova" class="section level2">
+<h2><span class="header-section-number">8.3</span> La lógica del ANOVA</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=sWdZHcBWTGg" target="_blank">video (15')</a> y trata de responder:</p>
+<ul>
+<li>¿Qué reflejan los coeficientes (o betas) de la ecuación que representa el ANOVA?</li>
+<li>¿Cómo serían los promedios de los grupos si la hipótesis nula se tuviera que aceptar?</li>
+<li>¿Qué es la suma de cuadrados (SS) total?</li>
+<li>¿Qué es la suma de cuadrados (SS) del modelo?</li>
+<li>¿Qué es la suma de cuadrados (SS) de los residuales?</li>
+</ul>
+</div>
+<div id="el-anova-con-r" class="section level2">
+<h2><span class="header-section-number">8.4</span> El ANOVA con R</h2>
 <p>Ahora vamos a hacer el análisis. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas). Luego importamos el set de datos y le damos una mirada.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
 
@@ -276,7 +284,7 @@ datac &lt;-<span class="st"> </span><span class="kw">summarySE</span>(spiderLong
         <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">55</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">55</span>, <span class="dv">10</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Conductancia&quot;</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-105-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
 <p>Recordando lo que acabamos de aprender vamos a comparar los promedios por cada grupo con la información que resulta de aplicar una regresión lineal a estos datos.</p>
 <p>Primero describamos los datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lapply</span>(<span class="kw">by</span>(spiderLong<span class="op">$</span>Conductancia, 
@@ -397,7 +405,7 @@ datac2 &lt;-<span class="st"> </span><span class="kw">summarySEwithin</span>(adj
         <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">55</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">55</span>, <span class="dv">10</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Conductancia&quot;</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-137-1.png" width="672" /></p>
 <p>Luego podemos chequear algunos supuestos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spiderWide<span class="op">$</span>diff &lt;-<span class="st"> </span>spiderWide<span class="op">$</span>imagen <span class="op">-</span><span class="st"> </span>spiderWide<span class="op">$</span>real <span class="co"># calcula la diferencia</span>
 <span class="kw">stat.desc</span>(spiderWide<span class="op">$</span>diff, <span class="dt">basic =</span> <span class="ot">FALSE</span>, <span class="dt">norm =</span> <span class="ot">TRUE</span>) <span class="co"># calcula los estadísticos</span></code></pre></div>
@@ -458,8 +466,8 @@ df &lt;-<span class="st"> </span>t_test2<span class="op">$</span>parameter[[<spa
           </div>
         </div>
       </div>
-<a href="caracterizar-datos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="la-regresión.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="la-regresión.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="otros-análisis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -490,7 +498,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/doctoradoenpsicologiautal/estadistica/edit/master/06_ttest.Rmd",
+"link": "https://github.com/doctoradoenpsicologiautal/estadistica/edit/master/08_ANOVA.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -498,7 +506,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/doctoradoenpsicologiautal/estadistica/blob/master/06_ttest.Rmd",
+"link": "https://github.com/doctoradoenpsicologiautal/estadistica/blob/master/08_ANOVA.Rmd",
 "text": null
 },
 "download": null,

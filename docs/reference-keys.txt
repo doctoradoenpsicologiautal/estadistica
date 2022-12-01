@@ -53,5 +53,10 @@ modelos-estadísticos
 la-ecuación-de-la-recta
 la-suma-de-cuadrados
 la-regresión-con-r
+comparar-más-de-dos-grupos-anova
+por-qué-necesitamos-un-anova
+el-anova-como-un-modelo-líneal-general
+la-lógica-del-anova
+el-anova-con-r
 otros-análisis
 análisis-de-proporciones
