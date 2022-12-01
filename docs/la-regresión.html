@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2022-11-14" />
+<meta name="date" content="2022-12-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -167,6 +167,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.1" data-path="la-regresión.html"><a href="la-regresión.html#modelos-estadísticos"><i class="fa fa-check"></i><b>7.1</b> Modelos estadísticos</a></li>
 <li class="chapter" data-level="7.2" data-path="la-regresión.html"><a href="la-regresión.html#la-ecuación-de-la-recta"><i class="fa fa-check"></i><b>7.2</b> La ecuación de la recta</a></li>
 <li class="chapter" data-level="7.3" data-path="la-regresión.html"><a href="la-regresión.html#la-suma-de-cuadrados"><i class="fa fa-check"></i><b>7.3</b> La suma de cuadrados</a></li>
+<li class="chapter" data-level="7.4" data-path="la-regresión.html"><a href="la-regresión.html#la-regresión-con-r"><i class="fa fa-check"></i><b>7.4</b> La regresión con R</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>8</b> Otros análisis</a><ul>
 <li class="chapter" data-level="8.1" data-path="otros-análisis.html"><a href="otros-análisis.html#análisis-de-proporciones"><i class="fa fa-check"></i><b>8.1</b> Análisis de proporciones</a></li>
@@ -221,6 +222,54 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>¿Cómo se establece que un modelo dado explica mejor los datos que un modelo básico?</li>
 <li>¿Cómo se establece cuan bueno es un modelo comparado con cuan malo es? ¿Lo que explica y lo que no explica un modelo?</li>
 </ul>
+</div>
+<div id="la-regresión-con-r" class="section level2">
+<h2><span class="header-section-number">7.4</span> La regresión con R</h2>
+<p>Ahora vamos a hacer un análisis básico de regresión. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas). Luego importamos el set de datos y le damos una mirada.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
+
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(car)</code></pre></div>
+<p>Imagina que eres manager de un grupo musical y debes definir como invertir parte de tu presupuesto. A lo que aspiras en el fondo esa aumentar la venta de discos. Para ellos pirmero debes evaluar que factores afectan la venta de discos. Uno de estos factores es la cantidad de dineo invertido en la publicidad. En ese sentido, te gustaría saber cuál es la relación entre el dinero invertido en publicidad y el número de discos vendidos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">album1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/datos_ventas_de_discos_1.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span>
+<span class="kw">head</span>(album1)</code></pre></div>
+<pre><code>##   publicidad ventas
+## 1     10.256    330
+## 2    985.685    120
+## 3   1445.563    360
+## 4   1188.193    270
+## 5    574.513    220
+## 6    568.954    170</code></pre>
+<p>Primero graficamos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(album1,
+       <span class="kw">aes</span>(publicidad, ventas)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Cantidad de dinero gastado en publicidad&quot;</span>,
+       <span class="dt">y=</span><span class="st">&quot;Ventas&quot;</span>)</code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
+<p>Lo que nos dice el sentido común, y lo que vemos en el gráfico efectivamente es que a mayor dinero invertido en publicidad debería haber mayores ventas. Es este un buen modelo para predecir el número de ventas a partir del dinero invertido en publicidad? Para analizar estos podemos hacer un modelo lineal con la función <strong>lm</strong>. En esta función usamos la típica relación entre resultado (ouctome) y variable explicativa (predictor), y le indicamos a R que base de datos usamos (datos): newModel &lt;- lm(outcome~predictor, datos) Luego podemos visualizar los resulatdos con la función <strong>summary</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_album &lt;-<span class="st"> </span><span class="kw">lm</span>(ventas <span class="op">~</span><span class="st"> </span>publicidad, <span class="dt">data =</span> album1)
+<span class="kw">summary</span>(m_album)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = ventas ~ publicidad, data = album1)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -152.949  -43.796   -0.393   37.040  211.866 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 1.341e+02  7.537e+00  17.799   &lt;2e-16 ***
+## publicidad  9.612e-02  9.632e-03   9.979   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 65.99 on 198 degrees of freedom
+## Multiple R-squared:  0.3346, Adjusted R-squared:  0.3313 
+## F-statistic: 99.59 on 1 and 198 DF,  p-value: &lt; 2.2e-16</code></pre>
 
 </div>
 </div>

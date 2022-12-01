@@ -52,5 +52,6 @@ la-regresión
 modelos-estadísticos
 la-ecuación-de-la-recta
 la-suma-de-cuadrados
+la-regresión-con-r
 otros-análisis
 análisis-de-proporciones

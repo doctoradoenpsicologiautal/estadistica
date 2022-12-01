@@ -24,3 +24,44 @@ Revisa este <a href="https://www.youtube.com/watch?v=maFx6TKuaQI" target="_blank
 - ¿Qué es la SS del modelo?
 - ¿Cómo se establece que un modelo dado explica mejor los datos que un modelo básico?
 - ¿Cómo se establece cuan bueno es un modelo comparado con cuan malo es? ¿Lo que explica y lo que no explica un modelo?
+
+## La regresión con R
+
+Ahora vamos a hacer un análisis básico de regresión. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas). Luego importamos el set de datos y le damos una mirada.
+
+```{r}
+setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+
+library(ggplot2)
+library(car)
+```
+
+Imagina que eres manager de un grupo musical y debes definir como invertir parte de tu presupuesto. A lo que aspiras en el fondo esa aumentar la venta de discos. Para ellos pirmero debes evaluar que factores afectan la venta de discos. Uno de estos factores es la cantidad de dineo invertido en la publicidad. En ese sentido, te gustaría saber cuál es la relación entre el dinero invertido en publicidad y el número de discos vendidos.
+
+```{r}
+album1 <- read.csv("data/datos_ventas_de_discos_1.csv", header = TRUE) # load data
+head(album1)
+```
+
+Primero graficamos.
+
+```{r}
+ggplot(album1,
+       aes(publicidad, ventas)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(x="Cantidad de dinero gastado en publicidad",
+       y="Ventas")
+```
+
+Lo que nos dice el sentido común, y lo que vemos en el gráfico efectivamente es que a mayor dinero invertido en publicidad debería haber mayores ventas. Es este un buen modelo para predecir el número de ventas a partir del dinero invertido en publicidad? Para analizar estos podemos hacer un modelo lineal con la función **lm**. En esta función usamos la típica relación entre resultado (ouctome) y variable explicativa (predictor), y le indicamos a R que base de datos usamos (datos):
+newModel <- lm(outcome~predictor, datos)
+Luego podemos visualizar los resulatdos con la función **summary**.
+
+```{r}
+m_album <- lm(ventas ~ publicidad, data = album1)
+summary(m_album)
+```
+
+
+
