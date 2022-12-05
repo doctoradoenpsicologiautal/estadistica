@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2022-12-01" />
+<meta name="date" content="2022-12-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -241,7 +241,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="el-anova-con-r" class="section level2">
 <h2><span class="header-section-number">8.4</span> El ANOVA con R</h2>
-<p>Ahora vamos a hacer el análisis. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas). Luego importamos el set de datos y le damos una mirada.</p>
+<p>Ahora vamos a hacer el análisis. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
 
 <span class="kw">library</span>(ggplot2)
@@ -252,212 +252,184 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">library</span>(reshape2)
 <span class="kw">library</span>(car)
 <span class="kw">library</span>(effsize)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spiderLong &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/ansiedad_por_arañas_indep.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span>
-spiderLong<span class="op">$</span>Condicion &lt;-<span class="st"> </span><span class="kw">factor</span>(spiderLong<span class="op">$</span>Condicion)
-<span class="kw">head</span>(spiderLong)</code></pre></div>
-<pre><code>##   Sujeto Condicion Conductancia
-## 1      1    imagen           30
-## 2      2    imagen           35
-## 3      3    imagen           45
-## 4      4    imagen           40
-## 5      5    imagen           50
-## 6      6    imagen           35</code></pre>
+<p>Luego importamos el set de datos. Aprovechamos de agregar unas etiquetas que nos sirvan a visualizar las condiciones experimentales. Y le damos una mirada.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/inteligencia.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
+dat1<span class="op">$</span>Dosis &lt;-<span class="st"> </span><span class="kw">factor</span>(dat1<span class="op">$</span>Dosis, 
+                            <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))
+dat1</code></pre></div>
+<pre><code>##      Dosis Inteligencia
+## 1  Placebo            3
+## 2  Placebo            2
+## 3  Placebo            1
+## 4  Placebo            1
+## 5  Placebo            4
+## 6     Baja            5
+## 7     Baja            2
+## 8     Baja            4
+## 9     Baja            2
+## 10    Baja            3
+## 11    Alta            7
+## 12    Alta            4
+## 13    Alta            5
+## 14    Alta            3
+## 15    Alta            6</code></pre>
 <p>Luego, mirar los datos siempre es bueno graficar.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Podemos usar esta función para calcular los estadísticos a través de los participantes.</span>
-datac &lt;-<span class="st"> </span><span class="kw">summarySE</span>(spiderLong, 
-                   <span class="dt">measurevar=</span><span class="st">&quot;Conductancia&quot;</span>, 
-                   <span class="dt">groupvars =</span> <span class="st">&quot;Condicion&quot;</span>)
+datac &lt;-<span class="st"> </span><span class="kw">summarySE</span>(dat1, 
+                   <span class="dt">measurevar=</span><span class="st">&quot;Inteligencia&quot;</span>, 
+                   <span class="dt">groupvars=</span><span class="st">&quot;Dosis&quot;</span>)
 
 <span class="co"># Luego hacemos el gráfico</span>
-<span class="kw">ggplot</span>(datac, <span class="kw">aes</span>(<span class="dt">x =</span> Condicion, <span class="dt">y =</span> Conductancia)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>),
-           <span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>, 
-           <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, 
-           <span class="dt">fill =</span> <span class="st">&quot;White&quot;</span>, 
-           <span class="dt">show.legend=</span><span class="ot">FALSE</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">position=</span><span class="kw">position_dodge</span>(.<span class="dv">9</span>), 
-                <span class="dt">width=</span>.<span class="dv">25</span>, 
-                <span class="kw">aes</span>(<span class="dt">ymin =</span> Conductancia, <span class="dt">ymax =</span> Conductancia<span class="op">+</span>se)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">55</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">55</span>, <span class="dv">10</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Conductancia&quot;</span>)</code></pre></div>
+<span class="kw">ggplot</span>(datac, <span class="kw">aes</span>(<span class="dt">x=</span>Dosis, <span class="dt">y=</span>Inteligencia, <span class="dt">group=</span><span class="dv">1</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">width=</span>.<span class="dv">1</span>, <span class="kw">aes</span>(<span class="dt">ymin=</span>Inteligencia<span class="op">-</span>se, <span class="dt">ymax=</span>Inteligencia<span class="op">+</span>se)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">colour =</span> <span class="st">&quot;Red&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Niveles de inteligencia&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
-<p>Recordando lo que acabamos de aprender vamos a comparar los promedios por cada grupo con la información que resulta de aplicar una regresión lineal a estos datos.</p>
-<p>Primero describamos los datos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lapply</span>(<span class="kw">by</span>(spiderLong<span class="op">$</span>Conductancia, 
-          spiderLong<span class="op">$</span>Condicion, 
-          stat.desc, 
-          <span class="dt">basic =</span> <span class="ot">FALSE</span>, 
-          <span class="dt">norm =</span> <span class="ot">TRUE</span>), 
-       round, <span class="dv">2</span>)</code></pre></div>
-<pre><code>## $imagen
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
-##        40.00        40.00         2.68         5.90        86.36         9.29         0.23         0.00 
-##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##         0.00        -1.39        -0.57         0.97         0.85 
+<p>Luego podemos hacer una descripción de los datos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test &lt;-<span class="st"> </span><span class="kw">by</span>(dat1<span class="op">$</span>Inteligencia, 
+           dat1<span class="op">$</span>Dosis, 
+           stat.desc, <span class="dt">basic =</span> <span class="ot">FALSE</span>, 
+           <span class="dt">norm =</span> <span class="ot">TRUE</span>)
+<span class="kw">lapply</span>(test,round,<span class="dv">2</span>)</code></pre></div>
+<pre><code>## $Placebo
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##         2.00         2.20         0.58         1.62         1.70         1.30         0.59 
+##     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.26         0.14        -1.96        -0.49         0.90         0.42 
 ## 
-## $real
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
-##        50.00        47.00         3.18         7.01       121.64        11.03         0.23        -0.01 
-##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##         0.00        -1.46        -0.59         0.95         0.62</code></pre>
+## $Baja
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##         3.00         3.20         0.58         1.62         1.70         1.30         0.41 
+##     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.26         0.14        -1.96        -0.49         0.90         0.42 
+## 
+## $Alta
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##         5.00         5.00         0.71         1.96         2.50         1.58         0.32 
+##     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.00         0.00        -1.91        -0.48         0.99         0.97</code></pre>
 <p>La función <strong>by</strong> permite calcular los estadísticos. La función <strong>round</strong> redondea los valores a dos décimas. Y la función <strong>lapply</strong> permite aplicar la función round de forma másiva.</p>
-<p>Ahora, vamos a realiza una regresión lineal. Lo que queremos es predecir los valores de <em>conductancia</em> en función de los grupos (o condiciones) que tenemos. Para realizar la regresión usamos la función <strong>lm</strong></p>
-<p>Luego de hacer la regresión lineal podemos revisar su contenido con la función <strong>summary</strong>. Recuerda mirar los coeficientes. ¿Qué ves?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Conductancia <span class="op">~</span><span class="st"> </span>Condicion, <span class="dt">data=</span>spiderLong)
-<span class="kw">summary</span>(m1)</code></pre></div>
+<p>Antes de hacer el ANOVA verificamos si existen problemas de homgeneidad de varianza. Podemos hacerlo con la función <strong>leveneTest</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">leveneTest</span>(dat1<span class="op">$</span>Inteligencia, dat1<span class="op">$</span>Dosis, <span class="dt">center =</span> mean)</code></pre></div>
+<pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = mean)
+##       Df F value Pr(&gt;F)
+## group  2  0.0917  0.913
+##       12</code></pre>
+<p>Luego podemos hacer el análisis estadístico, aplicando la función <strong>aov</strong>. Enseguida aplicamos la función <strong>sumary</strong> para visualizar los resultados del test.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_AOV &lt;-<span class="st"> </span><span class="kw">aov</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Dosis, <span class="dt">data =</span> dat1)
+<span class="kw">summary</span>(m_AOV)</code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)  
+## Dosis        2  20.13  10.067   5.119 0.0247 *
+## Residuals   12  23.60   1.967                 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Pr(&gt;F) indica la probabilidad de que ocurra un F-ratio del tamaño del obtenido si no hubiera efecto en la población.</p>
+<p>En esta punto sabemos que existe un efecto en alguna parte. El ANOVA es un test omnibus. Pero todavía no sabemos exactamente dónde esta el efecto. Es decir, entre qué grupos hay diferencias.</p>
+<p>Vamos a volver sobre las ideas comentadas en los videos anteriores. ¿Te acuerdas que reflejan el intercepto y la pendiente (o beta) de una ecuación que represente el ANOVA?</p>
+<p>Vamos a usar el dummy coding para desarrollar esta idea. Primero carguemos uno base de datos idéntica a la anterior pero con una columna extra con el dumming coding.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/inteligencia_c_Variables.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
+dat2<span class="op">$</span>Dosis &lt;-<span class="st"> </span><span class="kw">factor</span>(dat2<span class="op">$</span>Dosis, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>),
+                         <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))
+dat2</code></pre></div>
+<pre><code>##      Dosis Inteligencia Baja Alta
+## 1  Placebo            3    0    0
+## 2  Placebo            2    0    0
+## 3  Placebo            1    0    0
+## 4  Placebo            1    0    0
+## 5  Placebo            4    0    0
+## 6     Baja            5    1    0
+## 7     Baja            2    1    0
+## 8     Baja            4    1    0
+## 9     Baja            2    1    0
+## 10    Baja            3    1    0
+## 11    Alta            7    0    1
+## 12    Alta            4    0    1
+## 13    Alta            5    0    1
+## 14    Alta            3    0    1
+## 15    Alta            6    0    1</code></pre>
+<p>Vamos a hacer un modelo lineal dónde tratemos de predecir los niveles de inteligencia en base a nuestro dummy coding (que en el fondo refleja los efectos que resultan de comparar los grupos experimentales con un grupo base).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_dummy1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Baja <span class="op">+</span><span class="st"> </span>Alta, <span class="dt">data =</span> dat2)
+<span class="kw">summary</span>(m_dummy1)</code></pre></div>
 <pre><code>## 
 ## Call:
-## lm(formula = Conductancia ~ Condicion, data = spiderLong)
+## lm(formula = Inteligencia ~ Baja + Alta, data = dat2)
 ## 
 ## Residuals:
 ##    Min     1Q Median     3Q    Max 
-##  -17.0   -8.5    1.5    8.0   18.0 
+##   -2.0   -1.2   -0.2    0.9    2.0 
 ## 
 ## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)     40.000      2.944  13.587 3.53e-12 ***
-## Condicionreal    7.000      4.163   1.681    0.107    
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)   2.2000     0.6272   3.508  0.00432 **
+## Baja          1.0000     0.8869   1.127  0.28158   
+## Alta          2.8000     0.8869   3.157  0.00827 **
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 10.2 on 22 degrees of freedom
-## Multiple R-squared:  0.1139, Adjusted R-squared:  0.07359 
-## F-statistic: 2.827 on 1 and 22 DF,  p-value: 0.1068</code></pre>
-<p>Finalmente, podemos hacer el t-test. Pero, antes de hacerlo debemos verificar si existen problemas de homgeneidad de varianza. Podemos hacerlo con la función <strong>leveneTest</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">leveneTest</span>(spiderLong<span class="op">$</span>Conductancia, spiderLong<span class="op">$</span>Condicion)</code></pre></div>
-<pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
-##       Df F value Pr(&gt;F)
-## group  1  0.2991   0.59
-##       22</code></pre>
-<p>Luego podemos hacer el análisis estadístico, aplicando la función <strong>t.test</strong>. De la siguiente forma: newModel &lt;- t.test(outcome ~ predictor, data=df, var.equal = TRUE/FALSE, paired=TRUE/FALSE). Ya que no tenemos problemas de homogeneidad de varianzar seteamos var.equal a FALSE.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_test1 &lt;-<span class="st"> </span><span class="kw">t.test</span>(Conductancia <span class="op">~</span><span class="st"> </span>Condicion, 
-                  <span class="dt">data=</span>spiderLong, 
-                  <span class="dt">var.equal =</span> <span class="ot">TRUE</span>,
-                  <span class="dt">paired =</span> <span class="ot">FALSE</span>)
-t_test1</code></pre></div>
+## Residual standard error: 1.402 on 12 degrees of freedom
+## Multiple R-squared:  0.4604, Adjusted R-squared:  0.3704 
+## F-statistic: 5.119 on 2 and 12 DF,  p-value: 0.02469</code></pre>
+<p>Al mismo tiempo aprovechemos de calcular los promedios para los valores de inteligencia de acuerdo a cada grupo experimental</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(dat2<span class="op">$</span>Inteligencia, <span class="kw">list</span>(dat2<span class="op">$</span>Dosis), mean)</code></pre></div>
+<pre><code>##   Group.1   x
+## 1 Placebo 2.2
+## 2    Baja 3.2
+## 3    Alta 5.0</code></pre>
+<p>Fíjate que:</p>
+<p>El intercepto del modelo (el &quot;Estimate&quot; de la fila &quot;Intercept&quot;) corresponde al promedio en los niveles de inteligencia para el grupo placebo.</p>
+<p>El beta 1 del modelo (el &quot;Estimate&quot; de la fila &quot;Baja&quot;) corresponde a la diferencia en los niveles de inteligencia entre el grupo con dosis baja y el grupo placebo.</p>
+<p>El beta 2 del modelo (el &quot;Estimate&quot; de la fila &quot;Alta&quot;) corresponde a la diferencia en los niveles de inteligencia entre el grupo con dosis alta y el grupo placebo.</p>
+<p>Tal como lo habíamos concebido anteriormente! ¿Necesitamos definir un dummy coding para hacer esto? En realidad R lo hace por defecto.</p>
+<p>Si hacemos un modelo para predecir los niveles de inteligencia directamente de la columna que indica las dosis obtenemos exactamente el mismo modelo.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_dummy2 &lt;-<span class="st"> </span><span class="kw">lm</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Dosis, <span class="dt">data =</span> dat2)
+<span class="kw">summary</span>(m_dummy2)</code></pre></div>
 <pre><code>## 
-##  Two Sample t-test
+## Call:
+## lm(formula = Inteligencia ~ Dosis, data = dat2)
 ## 
-## data:  Conductancia by Condicion
-## t = -1.6813, df = 22, p-value = 0.1068
-## alternative hypothesis: true difference in means between group imagen and group real is not equal to 0
-## 95 percent confidence interval:
-##  -15.634222   1.634222
-## sample estimates:
-## mean in group imagen   mean in group real 
-##                   40                   47</code></pre>
-<p>Para terminar siempre es bueno calcular el tamaño del efecto.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span>t_test1<span class="op">$</span>statistic[[<span class="dv">1</span>]]
-df &lt;-<span class="st"> </span>t_test1<span class="op">$</span>parameter[[<span class="dv">1</span>]]
-r &lt;-<span class="st"> </span><span class="kw">sqrt</span>(t<span class="op">**</span><span class="dv">2</span><span class="op">/</span>(t<span class="op">**</span><span class="dv">2</span><span class="op">+</span>df))
-r</code></pre></div>
-<pre><code>## [1] 0.3374392</code></pre>
-<p>Ahora, imaginemos que en realidad nuestro diseño experimental era intra-sujetos. Vamos a usar exactamente los mismos datos que antes pero asumiendo un diseño intra-sujetos. Y asumiremos que estos datos viendo en un formato wide.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spiderWide &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/ansiedad_por_arañas_dep.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span>
-<span class="kw">head</span> (spiderWide)</code></pre></div>
-<pre><code>##   Sujeto imagen real
-## 1      1     30   40
-## 2      2     35   35
-## 3      3     45   50
-## 4      4     40   55
-## 5      5     50   65
-## 6      6     35   55</code></pre>
-<p>Para realizar el gráfico para un diseño intra-sujetos tenemos que hacer algunos ajustes.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spiderWideOri &lt;-<span class="st"> </span>spiderWide
-spiderWide<span class="op">$</span>pMean &lt;-<span class="st"> </span>(spiderWide<span class="op">$</span>imagen <span class="op">+</span><span class="st"> </span>spiderWide<span class="op">$</span>real)<span class="op">/</span><span class="dv">2</span>
-grandMean &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">c</span>(spiderWide<span class="op">$</span>imagen, spiderWide<span class="op">$</span>real))
-spiderWide<span class="op">$</span>adj &lt;-<span class="st"> </span>grandMean <span class="op">-</span><span class="st"> </span>spiderWide<span class="op">$</span>pMean
-spiderWide<span class="op">$</span>imagen_adj &lt;-<span class="st"> </span>spiderWide<span class="op">$</span>imagen <span class="op">+</span><span class="st"> </span>spiderWide<span class="op">$</span>adj
-spiderWide<span class="op">$</span>real_adj &lt;-<span class="st"> </span>spiderWide<span class="op">$</span>real <span class="op">+</span><span class="st"> </span>spiderWide<span class="op">$</span>adj
-spiderWide<span class="op">$</span>Mean2 &lt;-<span class="st"> </span><span class="kw">mean</span>(spiderWide<span class="op">$</span>imagen_adj <span class="op">+</span><span class="st"> </span>spiderWide<span class="op">$</span>real_adj)<span class="op">/</span><span class="dv">2</span>
-
-spiderWideSelec &lt;-<span class="st"> </span>spiderWide[, <span class="op">-</span><span class="kw">c</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">5</span>)]
-spiderWideSelec &lt;-<span class="st"> </span>spiderWideSelec[, <span class="op">-</span><span class="dv">4</span>]
-<span class="kw">names</span>(spiderWideSelec) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Sujeto&quot;</span>, <span class="st">&quot;imagen&quot;</span>, <span class="st">&quot;real&quot;</span>)</code></pre></div>
-<p>Los datos ajustados los transformamos a formato Long.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">adjustedData &lt;-<span class="st"> </span><span class="kw">melt</span>(spiderWideSelec,
-                     <span class="dt">id =</span> <span class="kw">c</span>(<span class="st">&quot;Sujeto&quot;</span>), 
-                     <span class="dt">measured =</span> <span class="kw">c</span>(<span class="st">&quot;imagen&quot;</span>, <span class="st">&quot;real&quot;</span>))
-<span class="kw">names</span>(adjustedData) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Sujeto&quot;</span>, <span class="st">&quot;Condicion&quot;</span>, <span class="st">&quot;Conductancia&quot;</span>)</code></pre></div>
-<p>Luego procedemos como antes.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Podemos usar esta función para calcular los estadísticos para un diseño intra-sujetos.</span>
-datac2 &lt;-<span class="st"> </span><span class="kw">summarySEwithin</span>(adjustedData, 
-                          <span class="dt">measurevar=</span><span class="st">&quot;Conductancia&quot;</span>, 
-                          <span class="dt">withinvars=</span><span class="st">&quot;Condicion&quot;</span>, 
-                          <span class="dt">idvar=</span><span class="st">&quot;Sujeto&quot;</span>)
-
-<span class="kw">ggplot</span>(datac2, <span class="kw">aes</span>(<span class="dt">x=</span>Condicion, <span class="dt">y=</span>Conductancia)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>),
-           <span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, 
-           <span class="dt">color=</span><span class="st">&quot;black&quot;</span>, 
-           <span class="dt">fill=</span><span class="st">&quot;White&quot;</span>, 
-           <span class="dt">show.legend=</span><span class="ot">FALSE</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">position=</span><span class="kw">position_dodge</span>(.<span class="dv">9</span>), 
-                <span class="dt">width=</span>.<span class="dv">25</span>, 
-                <span class="kw">aes</span>(<span class="dt">ymin=</span>Conductancia, <span class="dt">ymax=</span>Conductancia<span class="op">+</span>se)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">55</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">55</span>, <span class="dv">10</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Conductancia&quot;</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-137-1.png" width="672" /></p>
-<p>Luego podemos chequear algunos supuestos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spiderWide<span class="op">$</span>diff &lt;-<span class="st"> </span>spiderWide<span class="op">$</span>imagen <span class="op">-</span><span class="st"> </span>spiderWide<span class="op">$</span>real <span class="co"># calcula la diferencia</span>
-<span class="kw">stat.desc</span>(spiderWide<span class="op">$</span>diff, <span class="dt">basic =</span> <span class="ot">FALSE</span>, <span class="dt">norm =</span> <span class="ot">TRUE</span>) <span class="co"># calcula los estadísticos</span></code></pre></div>
-<pre><code>##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
-##   -7.5000000   -7.0000000    2.8311043    6.2312185   96.1818182    9.8072330   -1.4010333    0.2464810 
-##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##    0.1933785   -1.2342159   -0.5007991    0.9557903    0.7224801</code></pre>
-<p>Y luego haces el t-test.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_test2 &lt;-<span class="st"> </span><span class="kw">t.test</span>(spiderWide<span class="op">$</span>real, spiderWide<span class="op">$</span>imagen, <span class="dt">paired =</span> <span class="ot">TRUE</span>)
-t_test2</code></pre></div>
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##   -2.0   -1.2   -0.2    0.9    2.0 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)   2.2000     0.6272   3.508  0.00432 **
+## DosisBaja     1.0000     0.8869   1.127  0.28158   
+## DosisAlta     2.8000     0.8869   3.157  0.00827 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.402 on 12 degrees of freedom
+## Multiple R-squared:  0.4604, Adjusted R-squared:  0.3704 
+## F-statistic: 5.119 on 2 and 12 DF,  p-value: 0.02469</code></pre>
+<p>Por úlitmo, fíjate que cuando usamos la función <strong>aov</strong> para hacer el ANOVA obtuvimos una versión resumida de lo que obtenemos al realizar el modelo lineal con la función <strong>lm</strong>. En el fondo esto refleja que una ANOVA es un modelo lineal que esta disfrazado. Esto es lo que se llama una función <em>wraper</em>. De hecho podemos ver el modelo completo si al resultado del <strong>aov</strong> le aplicamos la función <strong>summary.lm</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary.lm</span>(m_AOV)</code></pre></div>
 <pre><code>## 
-##  Paired t-test
+## Call:
+## aov(formula = Inteligencia ~ Dosis, data = dat1)
 ## 
-## data:  spiderWide$real and spiderWide$imagen
-## t = 2.4725, df = 11, p-value = 0.03098
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##   0.7687815 13.2312185
-## sample estimates:
-## mean of the differences 
-##                       7</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Pero también lo podrías hacer si estuvieran en formato Long.</span>
-<span class="kw">t.test</span>(Conductancia <span class="op">~</span><span class="st"> </span>Condicion, <span class="dt">data=</span>spiderLong, <span class="dt">paired =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## 
-##  Paired t-test
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##   -2.0   -1.2   -0.2    0.9    2.0 
 ## 
-## data:  Conductancia by Condicion
-## t = -2.4725, df = 11, p-value = 0.03098
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  -13.2312185  -0.7687815
-## sample estimates:
-## mean of the differences 
-##                      -7</code></pre>
-<p>Para terminar siempre es bueno calcular el tamaño del efecto. Podemos calcularlo de diferentes formas.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span>t_test2<span class="op">$</span>statistic[[<span class="dv">1</span>]]
-df &lt;-<span class="st"> </span>t_test2<span class="op">$</span>parameter[[<span class="dv">1</span>]]
-(r &lt;-<span class="st"> </span><span class="kw">sqrt</span>(t<span class="op">**</span><span class="dv">2</span><span class="op">/</span>(t<span class="op">**</span><span class="dv">2</span><span class="op">+</span>df)))</code></pre></div>
-<pre><code>## [1] 0.5976869</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">r</code></pre></div>
-<pre><code>## [1] 0.5976869</code></pre>
-<p>O podemos usar una función.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Cohen&#39;s d = (M2 - M1) / SDpooled</span>
-<span class="co"># SDpooled = sqrt((SD1^2 + SD2^2)/ 2)</span>
-<span class="kw">cohen.d</span>(spiderWide<span class="op">$</span>real, spiderWide<span class="op">$</span>imagen, <span class="dt">paired =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## 
-## Cohen&#39;s d
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)   2.2000     0.6272   3.508  0.00432 **
+## DosisBaja     1.0000     0.8869   1.127  0.28158   
+## DosisAlta     2.8000     0.8869   3.157  0.00827 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## d estimate: 0.6805173 (medium)
-## 95 percent confidence interval:
-##      lower      upper 
-## 0.04707723 1.31395743</code></pre>
+## Residual standard error: 1.402 on 12 degrees of freedom
+## Multiple R-squared:  0.4604, Adjusted R-squared:  0.3704 
+## F-statistic: 5.119 on 2 and 12 DF,  p-value: 0.02469</code></pre>
+<p>Por último, podemos hacer algunos gráficos que podemos extraer del modelo de ANOVA.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(m_AOV)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-137-1.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-137-2.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-137-3.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-137-4.png" width="672" /></p>
+<p>Los dos primeros gráficos son los mas importantes. El gráfico 1 muestra la homogeneidad de varianza. Si ves una forma de embudo entonces hay en problemas en la homgeneidad de varianza. La idea es que los puntos estén igualmente repartidos. Es decir, las variaciones son similares entre los grupos. El gráfico 2 es un gráfico Q-Q. Si los puntos están sobre la diagonal entonces se cumple el suspuesto de la normalidad de los datos.</p>
 
 </div>
 </div>

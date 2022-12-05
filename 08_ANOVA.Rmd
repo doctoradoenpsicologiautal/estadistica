@@ -37,7 +37,7 @@ Revisa este <a href="https://www.youtube.com/watch?v=sWdZHcBWTGg" target="_blank
 
 ## El ANOVA con R
 
-Ahora vamos a hacer el análisis. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas). Luego importamos el set de datos y le damos una mirada.
+Ahora vamos a hacer el análisis. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).
 
 ```{r}
 setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
@@ -52,180 +52,120 @@ library(car)
 library(effsize)
 ```
 
+Luego importamos el set de datos. Aprovechamos de agregar unas etiquetas que nos sirvan a visualizar las condiciones experimentales. Y le damos una mirada.
+
 ```{r}
-spiderLong <- read.csv("data/ansiedad_por_arañas_indep.csv", header = TRUE) # load data
-spiderLong$Condicion <- factor(spiderLong$Condicion)
-head(spiderLong)
+dat1 <- read.csv("data/inteligencia.csv", header = TRUE)
+dat1$Dosis <- factor(dat1$Dosis, 
+                            levels = c(1:3), labels = c("Placebo", "Baja", "Alta"))
+dat1
 ```
 
 Luego, mirar los datos siempre es bueno graficar.
 
 ```{r}
 # Podemos usar esta función para calcular los estadísticos a través de los participantes.
-datac <- summarySE(spiderLong, 
-                   measurevar="Conductancia", 
-                   groupvars = "Condicion")
+datac <- summarySE(dat1, 
+                   measurevar="Inteligencia", 
+                   groupvars="Dosis")
 
 # Luego hacemos el gráfico
-ggplot(datac, aes(x = Condicion, y = Conductancia)) +
-  geom_bar(position = position_dodge(width = 0.9),
-           stat = "identity", 
-           color = "black", 
-           fill = "White", 
-           show.legend=FALSE) +
-  geom_errorbar(position=position_dodge(.9), 
-                width=.25, 
-                aes(ymin = Conductancia, ymax = Conductancia+se)) +
-  theme(panel.grid.major = element_blank(), 
-        panel.grid.minor = element_blank(),
-        panel.background = element_blank(), 
-        axis.line = element_line(colour = "black")) +
-  scale_y_continuous(limits = c(0,55), breaks = seq(0, 55, 10)) +
-  ylab("Conductancia")
+ggplot(datac, aes(x=Dosis, y=Inteligencia, group=1)) +
+  geom_errorbar(width=.1, aes(ymin=Inteligencia-se, ymax=Inteligencia+se)) +
+  geom_line(colour = "Red", linetype = "dashed") + 
+  geom_point() +
+  ylab("Niveles de inteligencia") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"))
 ```
 
-Recordando lo que acabamos de aprender vamos a comparar los promedios por cada grupo con la información que resulta de aplicar una regresión lineal a estos datos.
-
-Primero describamos los datos.
+Luego podemos hacer una descripción de los datos.
 
 ```{r}
-lapply(by(spiderLong$Conductancia, 
-          spiderLong$Condicion, 
-          stat.desc, 
-          basic = FALSE, 
-          norm = TRUE), 
-       round, 2)
+test <- by(dat1$Inteligencia, 
+           dat1$Dosis, 
+           stat.desc, basic = FALSE, 
+           norm = TRUE)
+lapply(test,round,2)
 ```
 
 La función **by** permite calcular los estadísticos. La función **round** redondea los valores a dos décimas. Y la función **lapply** permite aplicar la función round de forma másiva.
 
-Ahora, vamos a realiza una regresión lineal. Lo que queremos es predecir los valores de *conductancia* en función de los grupos (o condiciones) que tenemos. Para realizar la regresión usamos la función **lm**
-
-Luego de hacer la regresión lineal podemos revisar su contenido con la función **summary**.
-Recuerda mirar los coeficientes. ¿Qué ves?
+Antes de hacer el ANOVA verificamos si existen problemas de homgeneidad de varianza. Podemos hacerlo con la función **leveneTest**
 
 ```{r}
-m1 <- lm(Conductancia ~ Condicion, data=spiderLong)
-summary(m1)
+leveneTest(dat1$Inteligencia, dat1$Dosis, center = mean)
 ```
 
-Finalmente, podemos hacer el t-test. Pero, antes de hacerlo debemos verificar si existen problemas de homgeneidad de varianza. Podemos hacerlo con la función **leveneTest**
+Luego podemos hacer el análisis estadístico, aplicando la función **aov**.
+Enseguida aplicamos la función **sumary** para visualizar los resultados del test.
+
 
 ```{r}
-leveneTest(spiderLong$Conductancia, spiderLong$Condicion)
+m_AOV <- aov(Inteligencia ~ Dosis, data = dat1)
+summary(m_AOV)
 ```
 
-Luego podemos hacer el análisis estadístico, aplicando la función **t.test**.
-De la siguiente forma: newModel <- t.test(outcome ~ predictor, data=df, var.equal = TRUE/FALSE, paired=TRUE/FALSE).
-Ya que no tenemos problemas de homogeneidad de varianzar seteamos var.equal a FALSE.
+Pr(>F) indica la probabilidad de que ocurra un F-ratio del tamaño del obtenido si no hubiera efecto en la población.
+
+En esta punto sabemos que existe un efecto en alguna parte. El ANOVA es un test omnibus. Pero todavía no sabemos exactamente dónde esta el efecto. Es decir, entre qué grupos hay diferencias.
+
+Vamos a volver sobre las ideas comentadas en los videos anteriores.
+¿Te acuerdas que reflejan el intercepto y la pendiente (o beta) de una ecuación que represente el ANOVA?
+
+Vamos a usar el dummy coding para desarrollar esta idea.
+Primero carguemos uno base de datos idéntica a la anterior pero con una columna extra con el dumming coding.
 
 ```{r}
-t_test1 <- t.test(Conductancia ~ Condicion, 
-                  data=spiderLong, 
-                  var.equal = TRUE,
-                  paired = FALSE)
-t_test1
+dat2 <- read.csv("data/inteligencia_c_Variables.csv", header = TRUE)
+dat2$Dosis <- factor(dat2$Dosis, levels = c(1:3),
+                         labels = c("Placebo", "Baja", "Alta"))
+dat2
 ```
 
-Para terminar siempre es bueno calcular el tamaño del efecto.
+Vamos a hacer un modelo lineal dónde tratemos de predecir los niveles de inteligencia en base a nuestro dummy coding (que en el fondo refleja los efectos que resultan de comparar los grupos experimentales con un grupo base).
 
 ```{r}
-t <- t_test1$statistic[[1]]
-df <- t_test1$parameter[[1]]
-r <- sqrt(t**2/(t**2+df))
-r
+m_dummy1 <- lm(Inteligencia ~ Baja + Alta, data = dat2)
+summary(m_dummy1)
 ```
 
-Ahora, imaginemos que en realidad nuestro diseño experimental era intra-sujetos.
-Vamos a usar exactamente los mismos datos que antes pero asumiendo un diseño intra-sujetos. Y asumiremos que estos datos viendo en un formato wide.
+Al mismo tiempo aprovechemos de calcular los promedios para los valores de inteligencia de acuerdo a cada grupo experimental
 
 ```{r}
-spiderWide <- read.csv("data/ansiedad_por_arañas_dep.csv", header = TRUE) # load data
-head (spiderWide)
+aggregate(dat2$Inteligencia, list(dat2$Dosis), mean)
 ```
 
-Para realizar el gráfico para un diseño intra-sujetos tenemos que hacer algunos ajustes.
+Fíjate que:
+
+El intercepto del modelo (el "Estimate" de la fila "Intercept") corresponde al promedio en los niveles de inteligencia para el grupo placebo.
+
+El beta 1 del modelo (el "Estimate" de la fila "Baja") corresponde a la diferencia en los niveles de inteligencia entre el grupo con dosis baja y el grupo placebo.
+
+El beta 2 del modelo (el "Estimate" de la fila "Alta") corresponde a la diferencia en los niveles de inteligencia entre el grupo con dosis alta y el grupo placebo.
+
+Tal como lo habíamos concebido anteriormente!
+¿Necesitamos definir un dummy coding para hacer esto? En realidad R lo hace por defecto.
+
+Si hacemos un modelo para predecir los niveles de inteligencia directamente de la columna que indica las dosis obtenemos exactamente el mismo modelo.
 
 ```{r}
-spiderWideOri <- spiderWide
-spiderWide$pMean <- (spiderWide$imagen + spiderWide$real)/2
-grandMean <- mean(c(spiderWide$imagen, spiderWide$real))
-spiderWide$adj <- grandMean - spiderWide$pMean
-spiderWide$imagen_adj <- spiderWide$imagen + spiderWide$adj
-spiderWide$real_adj <- spiderWide$real + spiderWide$adj
-spiderWide$Mean2 <- mean(spiderWide$imagen_adj + spiderWide$real_adj)/2
-
-spiderWideSelec <- spiderWide[, -c(2:5)]
-spiderWideSelec <- spiderWideSelec[, -4]
-names(spiderWideSelec) <- c("Sujeto", "imagen", "real")
+m_dummy2 <- lm(Inteligencia ~ Dosis, data = dat2)
+summary(m_dummy2)
 ```
 
-Los datos ajustados los transformamos a formato Long.
+Por úlitmo, fíjate que cuando usamos la función **aov** para hacer el ANOVA obtuvimos una versión resumida de lo que obtenemos al realizar el modelo lineal con la función **lm**. En el fondo esto refleja que una ANOVA es un modelo lineal que esta disfrazado. Esto es lo que se llama una función *wraper*. De hecho podemos ver el modelo completo si al resultado del **aov** le aplicamos la función **summary.lm**.
 
 ```{r}
-adjustedData <- melt(spiderWideSelec,
-                     id = c("Sujeto"), 
-                     measured = c("imagen", "real"))
-names(adjustedData) <- c("Sujeto", "Condicion", "Conductancia")
+summary.lm(m_AOV)
 ```
 
-Luego procedemos como antes.
+Por último, podemos hacer algunos gráficos que podemos extraer del modelo de ANOVA.
 
 ```{r}
-# Podemos usar esta función para calcular los estadísticos para un diseño intra-sujetos.
-datac2 <- summarySEwithin(adjustedData, 
-                          measurevar="Conductancia", 
-                          withinvars="Condicion", 
-                          idvar="Sujeto")
-
-ggplot(datac2, aes(x=Condicion, y=Conductancia)) +
-  geom_bar(position = position_dodge(width = 0.9),
-           stat="identity", 
-           color="black", 
-           fill="White", 
-           show.legend=FALSE) +
-  geom_errorbar(position=position_dodge(.9), 
-                width=.25, 
-                aes(ymin=Conductancia, ymax=Conductancia+se)) +
-  theme(panel.grid.major = element_blank(), 
-        panel.grid.minor = element_blank(),
-        panel.background = element_blank(), 
-        axis.line = element_line(colour = "black")) +
-  scale_y_continuous(limits = c(0,55), breaks = seq(0, 55, 10)) +
-  ylab("Conductancia")
+plot(m_AOV)
 ```
 
-Luego podemos chequear algunos supuestos.
-
-```{r}
-spiderWide$diff <- spiderWide$imagen - spiderWide$real # calcula la diferencia
-stat.desc(spiderWide$diff, basic = FALSE, norm = TRUE) # calcula los estadísticos
-```
-
-Y luego haces el t-test.
-
-```{r}
-t_test2 <- t.test(spiderWide$real, spiderWide$imagen, paired = TRUE)
-t_test2
-
-# Pero también lo podrías hacer si estuvieran en formato Long.
-t.test(Conductancia ~ Condicion, data=spiderLong, paired = TRUE)
-```
-
-Para terminar siempre es bueno calcular el tamaño del efecto.
-Podemos calcularlo de diferentes formas.
-
-```{r}
-t <- t_test2$statistic[[1]]
-df <- t_test2$parameter[[1]]
-(r <- sqrt(t**2/(t**2+df)))
-r
-```
-
-O podemos usar una función.
-
-```{r}
-# Cohen's d = (M2 - M1) / SDpooled
-# SDpooled = sqrt((SD1^2 + SD2^2)/ 2)
-cohen.d(spiderWide$real, spiderWide$imagen, paired = TRUE)
-```
+Los dos primeros gráficos son los mas importantes.
+El gráfico 1 muestra la homogeneidad de varianza. Si ves una forma de embudo entonces hay en problemas en la homgeneidad de varianza. La idea es que los puntos estén igualmente repartidos. Es decir, las variaciones son similares entre los grupos.
+El gráfico 2  es un gráfico Q-Q. Si los puntos están sobre la diagonal entonces se cumple el suspuesto de la normalidad de los datos.
