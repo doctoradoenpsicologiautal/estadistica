@@ -58,5 +58,11 @@ por-qué-necesitamos-un-anova
 el-anova-como-un-modelo-líneal-general
 la-lógica-del-anova
 el-anova-con-r
+pasos-después-de-un-anova
+qué-hacemos-después-de-un-anova
+comparaciones-planificadas
+cálculos-con-r
+pruebas-post-hoc
+cálculos-con-r-1
 otros-análisis
 análisis-de-proporciones

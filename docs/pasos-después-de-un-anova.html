@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 9 Pasos después de un ANOVA | Estadística con R</title>
+  <meta name="description" content="Capítulo 9 Pasos después de un ANOVA | Estadística con R" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 9 Pasos después de un ANOVA | Estadística con R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 9 Pasos después de un ANOVA | Estadística con R" />
+  
+  
+  
+
+<meta name="author" content="Facultad de Psicología, Universidad de Talca" />
+
+
+<meta name="date" content="2022-12-14" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="comparar-más-de-dos-grupos-anova.html"/>
+<link rel="next" href="otros-análisis.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Estadística</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preámbulo</a></li>
+<li class="chapter" data-level="1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html"><i class="fa fa-check"></i><b>1</b> Introducción a la estadística</a><ul>
+<li class="chapter" data-level="1.1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#qué-es-la-estadística"><i class="fa fa-check"></i><b>1.1</b> ¿Qué es la estadística?</a></li>
+<li class="chapter" data-level="1.2" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#variables"><i class="fa fa-check"></i><b>1.2</b> ¿Variables?</a></li>
+<li class="chapter" data-level="1.3" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#diseños-experimentales"><i class="fa fa-check"></i><b>1.3</b> Diseños experimentales</a></li>
+<li class="chapter" data-level="1.4" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#qué-medimos"><i class="fa fa-check"></i><b>1.4</b> ¿Qué medimos?</a></li>
+<li class="chapter" data-level="1.5" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#un-prueba-estadística"><i class="fa fa-check"></i><b>1.5</b> Un prueba estadística</a></li>
+<li class="chapter" data-level="1.6" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#que-diseño-usaré"><i class="fa fa-check"></i><b>1.6</b> ¿Que diseño usaré?</a></li>
+<li class="chapter" data-level="1.7" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#una-historia-fantástica"><i class="fa fa-check"></i><b>1.7</b> Una historia fantástica</a></li>
+<li class="chapter" data-level="1.8" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#randomizar"><i class="fa fa-check"></i><b>1.8</b> ¿Randomizar?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html"><i class="fa fa-check"></i><b>2</b> Conceptos estadísticos</a><ul>
+<li class="chapter" data-level="2.1" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#la-significancia"><i class="fa fa-check"></i><b>2.1</b> La significancia</a></li>
+<li class="chapter" data-level="2.2" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#colas"><i class="fa fa-check"></i><b>2.2</b> Colas</a></li>
+<li class="chapter" data-level="2.3" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#errores-estadísticos"><i class="fa fa-check"></i><b>2.3</b> Errores estadísticos</a></li>
+<li class="chapter" data-level="2.4" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#tamaño-poder"><i class="fa fa-check"></i><b>2.4</b> Tamaño &amp; poder</a></li>
+<li class="chapter" data-level="2.5" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#planificar-mi-estudio"><i class="fa fa-check"></i><b>2.5</b> Planificar mi estudio</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="programación.html"><a href="programación.html"><i class="fa fa-check"></i><b>3</b> Programación</a><ul>
+<li class="chapter" data-level="3.1" data-path="programación.html"><a href="programación.html#que-significa-programar"><i class="fa fa-check"></i><b>3.1</b> ¿Que significa programar?</a></li>
+<li class="chapter" data-level="3.2" data-path="programación.html"><a href="programación.html#la-shell-consola-versus-el-script"><i class="fa fa-check"></i><b>3.2</b> La shell (consola) versus el script</a></li>
+<li class="chapter" data-level="3.3" data-path="programación.html"><a href="programación.html#intro-a-la-programación"><i class="fa fa-check"></i><b>3.3</b> Intro a la programación</a></li>
+<li class="chapter" data-level="3.4" data-path="programación.html"><a href="programación.html#empezando-a-programar"><i class="fa fa-check"></i><b>3.4</b> Empezando a programar</a></li>
+<li class="chapter" data-level="3.5" data-path="programación.html"><a href="programación.html#trabajando-con-data-frames"><i class="fa fa-check"></i><b>3.5</b> Trabajando con data frames</a></li>
+<li class="chapter" data-level="3.6" data-path="programación.html"><a href="programación.html#importando-datos"><i class="fa fa-check"></i><b>3.6</b> Importando datos</a></li>
+<li class="chapter" data-level="3.7" data-path="programación.html"><a href="programación.html#seleccionando-datos"><i class="fa fa-check"></i><b>3.7</b> Seleccionando datos</a></li>
+<li class="chapter" data-level="3.8" data-path="programación.html"><a href="programación.html#transformado-datos-en-formato-long-a-wide-y-viceversa"><i class="fa fa-check"></i><b>3.8</b> Transformado datos en formato long a wide y viceversa</a></li>
+<li class="chapter" data-level="3.9" data-path="programación.html"><a href="programación.html#exportando-datos"><i class="fa fa-check"></i><b>3.9</b> Exportando datos</a></li>
+<li class="chapter" data-level="3.10" data-path="programación.html"><a href="programación.html#en-la-práctica"><i class="fa fa-check"></i><b>3.10</b> En la práctica</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="gráficos.html"><a href="gráficos.html"><i class="fa fa-check"></i><b>4</b> Gráficos</a><ul>
+<li class="chapter" data-level="4.1" data-path="gráficos.html"><a href="gráficos.html#cómo-graficamos-en-r"><i class="fa fa-check"></i><b>4.1</b> ¿Cómo graficamos en R?</a></li>
+<li class="chapter" data-level="4.2" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-puntos"><i class="fa fa-check"></i><b>4.2</b> Gráfico de puntos</a></li>
+<li class="chapter" data-level="4.3" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-dispersión"><i class="fa fa-check"></i><b>4.3</b> Gráfico de dispersión</a></li>
+<li class="chapter" data-level="4.4" data-path="gráficos.html"><a href="gráficos.html#histograma"><i class="fa fa-check"></i><b>4.4</b> Histograma</a></li>
+<li class="chapter" data-level="4.5" data-path="gráficos.html"><a href="gráficos.html#boxplot"><i class="fa fa-check"></i><b>4.5</b> Boxplot</a></li>
+<li class="chapter" data-level="4.6" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-barras"><i class="fa fa-check"></i><b>4.6</b> Gráfico de barras</a></li>
+<li class="chapter" data-level="4.7" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-líneas-1-factor"><i class="fa fa-check"></i><b>4.7</b> Gráfico de líneas (1 factor)</a></li>
+<li class="chapter" data-level="4.8" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-líneas-2-factores"><i class="fa fa-check"></i><b>4.8</b> Gráfico de líneas (2 factores)</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html"><i class="fa fa-check"></i><b>5</b> Caracterizar datos</a><ul>
+<li class="chapter" data-level="5.1" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#visualizar-los-datos"><i class="fa fa-check"></i><b>5.1</b> Visualizar los datos</a></li>
+<li class="chapter" data-level="5.2" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal"><i class="fa fa-check"></i><b>5.2</b> La curva normal</a></li>
+<li class="chapter" data-level="5.3" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal-en-la-práctica-1"><i class="fa fa-check"></i><b>5.3</b> La curva normal en la práctica (1)</a></li>
+<li class="chapter" data-level="5.4" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal-en-la-práctica-2"><i class="fa fa-check"></i><b>5.4</b> La curva normal en la práctica (2)</a></li>
+<li class="chapter" data-level="5.5" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#de-la-muestra-a-la-población"><i class="fa fa-check"></i><b>5.5</b> De la muestra a la población</a></li>
+<li class="chapter" data-level="5.6" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-muestra-en-la-vida-real"><i class="fa fa-check"></i><b>5.6</b> La muestra en la vida real</a></li>
+<li class="chapter" data-level="5.7" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#los-intervalos-de-confianza-1"><i class="fa fa-check"></i><b>5.7</b> Los intervalos de confianza (1)</a></li>
+<li class="chapter" data-level="5.8" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#los-intervalos-de-confianza-2"><i class="fa fa-check"></i><b>5.8</b> Los intervalos de confianza (2)</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="comparar-dos-grupos-t-test.html"><a href="comparar-dos-grupos-t-test.html"><i class="fa fa-check"></i><b>6</b> Comparar dos grupos (t-test)</a><ul>
+<li class="chapter" data-level="6.1" data-path="comparar-dos-grupos-t-test.html"><a href="comparar-dos-grupos-t-test.html#cómo-comparamos-datos-de-dos-grupos"><i class="fa fa-check"></i><b>6.1</b> ¿Cómo comparamos datos de dos grupos?</a></li>
+<li class="chapter" data-level="6.2" data-path="comparar-dos-grupos-t-test.html"><a href="comparar-dos-grupos-t-test.html#la-distribución-normal-para-dos-grupos"><i class="fa fa-check"></i><b>6.2</b> La distribución normal para dos grupos</a></li>
+<li class="chapter" data-level="6.3" data-path="comparar-dos-grupos-t-test.html"><a href="comparar-dos-grupos-t-test.html#la-prueba-de-hipótesis"><i class="fa fa-check"></i><b>6.3</b> La prueba de hipótesis</a></li>
+<li class="chapter" data-level="6.4" data-path="comparar-dos-grupos-t-test.html"><a href="comparar-dos-grupos-t-test.html#el-t-test-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>6.4</b> El t-test como un modelo líneal general</a></li>
+<li class="chapter" data-level="6.5" data-path="comparar-dos-grupos-t-test.html"><a href="comparar-dos-grupos-t-test.html#el-t-test-con-r"><i class="fa fa-check"></i><b>6.5</b> El t-test con R</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="la-regresión.html"><a href="la-regresión.html"><i class="fa fa-check"></i><b>7</b> La regresión</a><ul>
+<li class="chapter" data-level="7.1" data-path="la-regresión.html"><a href="la-regresión.html#modelos-estadísticos"><i class="fa fa-check"></i><b>7.1</b> Modelos estadísticos</a></li>
+<li class="chapter" data-level="7.2" data-path="la-regresión.html"><a href="la-regresión.html#la-ecuación-de-la-recta"><i class="fa fa-check"></i><b>7.2</b> La ecuación de la recta</a></li>
+<li class="chapter" data-level="7.3" data-path="la-regresión.html"><a href="la-regresión.html#la-suma-de-cuadrados"><i class="fa fa-check"></i><b>7.3</b> La suma de cuadrados</a></li>
+<li class="chapter" data-level="7.4" data-path="la-regresión.html"><a href="la-regresión.html#la-regresión-con-r"><i class="fa fa-check"></i><b>7.4</b> La regresión con R</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="comparar-más-de-dos-grupos-anova.html"><a href="comparar-más-de-dos-grupos-anova.html"><i class="fa fa-check"></i><b>8</b> Comparar más de dos grupos (ANOVA)</a><ul>
+<li class="chapter" data-level="8.1" data-path="comparar-más-de-dos-grupos-anova.html"><a href="comparar-más-de-dos-grupos-anova.html#por-qué-necesitamos-un-anova"><i class="fa fa-check"></i><b>8.1</b> ¿Por qué necesitamos un ANOVA?</a></li>
+<li class="chapter" data-level="8.2" data-path="comparar-más-de-dos-grupos-anova.html"><a href="comparar-más-de-dos-grupos-anova.html#el-anova-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>8.2</b> El ANOVA como un modelo líneal general</a></li>
+<li class="chapter" data-level="8.3" data-path="comparar-más-de-dos-grupos-anova.html"><a href="comparar-más-de-dos-grupos-anova.html#la-lógica-del-anova"><i class="fa fa-check"></i><b>8.3</b> La lógica del ANOVA</a></li>
+<li class="chapter" data-level="8.4" data-path="comparar-más-de-dos-grupos-anova.html"><a href="comparar-más-de-dos-grupos-anova.html#el-anova-con-r"><i class="fa fa-check"></i><b>8.4</b> El ANOVA con R</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="pasos-después-de-un-anova.html"><a href="pasos-después-de-un-anova.html"><i class="fa fa-check"></i><b>9</b> Pasos después de un ANOVA</a><ul>
+<li class="chapter" data-level="9.1" data-path="pasos-después-de-un-anova.html"><a href="pasos-después-de-un-anova.html#qué-hacemos-después-de-un-anova"><i class="fa fa-check"></i><b>9.1</b> ¿Qué hacemos después de un ANOVA?</a></li>
+<li class="chapter" data-level="9.2" data-path="pasos-después-de-un-anova.html"><a href="pasos-después-de-un-anova.html#comparaciones-planificadas"><i class="fa fa-check"></i><b>9.2</b> Comparaciones planificadas</a></li>
+<li class="chapter" data-level="9.3" data-path="pasos-después-de-un-anova.html"><a href="pasos-después-de-un-anova.html#cálculos-con-r"><i class="fa fa-check"></i><b>9.3</b> Cálculos con R</a></li>
+<li class="chapter" data-level="9.4" data-path="pasos-después-de-un-anova.html"><a href="pasos-después-de-un-anova.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>9.4</b> Pruebas post-hoc</a></li>
+<li class="chapter" data-level="9.5" data-path="pasos-después-de-un-anova.html"><a href="pasos-después-de-un-anova.html#cálculos-con-r-1"><i class="fa fa-check"></i><b>9.5</b> Cálculos con R</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>10</b> Otros análisis</a><ul>
+<li class="chapter" data-level="10.1" data-path="otros-análisis.html"><a href="otros-análisis.html#análisis-de-proporciones"><i class="fa fa-check"></i><b>10.1</b> Análisis de proporciones</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Estadística con R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="pasos-después-de-un-anova" class="section level1">
+<h1><span class="header-section-number">Capítulo 9</span> Pasos después de un ANOVA</h1>
+<p>En este capítulo vamos a revisar que podemos hacer después de un ANOVA.</p>
+<div id="qué-hacemos-después-de-un-anova" class="section level2">
+<h2><span class="header-section-number">9.1</span> ¿Qué hacemos después de un ANOVA?</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=nFcxN5qVYxY" target="_blank">video (12')</a> y trata de responder:</p>
+<ul>
+<li>¿Que hago después de una prueba omnibus?</li>
+<li>¿De qué depende el tipo de análisis que se hace después del ANOVA?</li>
+<li>¿Qué significa que desglocemos la varianza explicada en los distintos contrastes en el análisis de contrastes planificados?</li>
+<li>¿En un experimento dónde analizo el efecto de dos dosis de droga comparada con un placebo, que contrastes planificados se podrían hacer y que indican el intercepto y los betas de este modelo?</li>
+<li>¿Por que es importante que el contraste que hagamos sea un contraste ortogonal?</li>
+</ul>
+</div>
+<div id="comparaciones-planificadas" class="section level2">
+<h2><span class="header-section-number">9.2</span> Comparaciones planificadas</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=z_jVSEKOVZM" target="_blank">video (18')</a> y trata de responder:</p>
+<ul>
+<li>¿Para que sirven los contrastes que evaluan una tendencia líneal o cuadrática?</li>
+</ul>
+</div>
+<div id="cálculos-con-r" class="section level2">
+<h2><span class="header-section-number">9.3</span> Cálculos con R</h2>
+<p>Ahora vamos a hacer el análisis. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
+
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(Hmisc)
+<span class="kw">library</span>(Rmisc)
+<span class="kw">library</span>(effsize)
+<span class="kw">library</span>(pastecs)
+<span class="kw">library</span>(reshape2)
+<span class="kw">library</span>(car)
+<span class="kw">library</span>(effsize)</code></pre></div>
+<p>Primero, vamos a revisar el código para realizar los contrastes planificados. Recuerda que se utiliza un dummy coding en un modelo de regresión para que los valores b representen las diferencias entre los promedios de los contrastes que se quieren evaluar.</p>
+<p>Importamos el set de datos. Aprovechamos de agregar unas etiquetas que nos sirvan a visualizar las condiciones experimentales. Y le damos una mirada.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">contrastData &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/inteligencia_c_Contrast_Planif.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
+contrastData<span class="op">$</span>Dosis &lt;-<span class="st"> </span><span class="kw">factor</span>(contrastData<span class="op">$</span>Dosis, 
+                             <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))
+contrastData</code></pre></div>
+<pre><code>##      Dosis Inteligencia Compars1 Compars2
+## 1  Placebo            3       -2        0
+## 2  Placebo            2       -2        0
+## 3  Placebo            1       -2        0
+## 4  Placebo            1       -2        0
+## 5  Placebo            4       -2        0
+## 6     Baja            5        1       -1
+## 7     Baja            2        1       -1
+## 8     Baja            4        1       -1
+## 9     Baja            2        1       -1
+## 10    Baja            3        1       -1
+## 11    Alta            7        1        1
+## 12    Alta            4        1        1
+## 13    Alta            5        1        1
+## 14    Alta            3        1        1
+## 15    Alta            6        1        1</code></pre>
+<p>Usemos las columnas que corresponden a las variables dummy. Compars1 refleja la diferencia para los niveles de inteligencia entre el placebo y cualquier dosis de droga (en realidad el promedio de ambas). Compars2 refleja la diferencia para los niveles de inteligencia entre la dosis baja y la dosis alta.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_contrastedAOV &lt;-<span class="st"> </span><span class="kw">lm</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Compars1 <span class="op">+</span><span class="st"> </span>Compars2, <span class="dt">data =</span> contrastData)
+<span class="kw">summary</span>(m_contrastedAOV)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Inteligencia ~ Compars1 + Compars2, data = contrastData)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##   -2.0   -1.2   -0.2    0.9    2.0 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   3.4667     0.3621   9.574 5.72e-07 ***
+## Compars1      0.6333     0.2560   2.474   0.0293 *  
+## Compars2      0.9000     0.4435   2.029   0.0652 .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.402 on 12 degrees of freedom
+## Multiple R-squared:  0.4604, Adjusted R-squared:  0.3704 
+## F-statistic: 5.119 on 2 and 12 DF,  p-value: 0.02469</code></pre>
+<p>¿Qué nos dice este modelo? El F es el mismo. Lo que cambia son los coeficientes de regresión. Primero. El intercepto es el gran promedio (3.467). Verifiquemos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># promedio a través de todas las condiciones</span>
+<span class="kw">mean</span>(contrastData<span class="op">$</span>Inteligencia)</code></pre></div>
+<pre><code>## [1] 3.466667</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># promedio a través de todas las condiciones experimentales</span>
+varX &lt;-<span class="st"> </span>contrastData[contrastData<span class="op">$</span>Dosis <span class="op">!=</span><span class="st"> &quot;Placebo&quot;</span>,]
+<span class="kw">mean</span>(varX<span class="op">$</span>Inteligencia)</code></pre></div>
+<pre><code>## [1] 4.1</code></pre>
+<p>El contraste 1 (o b1) refleja la diferencia en los niveles de inteligencia entre la aplicación de la droga y el placebo. El coeficiente de regresión (0.63) para el contraste 1 es 1/3 de esta diferencia (1.9/3 = 0.633). El FWE se controla haciendo que el coeficiente de regresión sea igual a la diferencia real dividida por el número de grupos en el contraste (en este caso 3).</p>
+<p>El contraste 2 (o b2) refleja la diferencia en los niveles de inteligencia entre la aplicación de una dosis alta droga y una dosis baja de droga. El coeficiente de regresión (0.9) para el contraste 1 es 1/2 de esta diferencia (1.8/2 = 0.9). El FWE se controla haciendo que el coeficiente de regresión sea igual a la diferencia real dividida por el número de grupos en el contraste (en este caso 3).</p>
+<p>Uno podría pensar que siempre hay que crear las dos columnas del dummy coding en los datos. En realidad eso se puede hacer en R.</p>
+<p>Importemos los datos originales.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">inteligData2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/inteligencia.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
+inteligData2<span class="op">$</span>Dosis &lt;-<span class="st"> </span><span class="kw">factor</span>(inteligData2<span class="op">$</span>Dosis, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>),
+                     <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))</code></pre></div>
+<p>Si revisas los valores de dosis encontrarás que tienen los nombres correspondientes a las condiciones experimentales, y al final veras que tiene 3 niveles: Placebo, Baja y Alta</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">inteligData2<span class="op">$</span>Dosis</code></pre></div>
+<pre><code>##  [1] Placebo Placebo Placebo Placebo Placebo Baja    Baja    Baja    Baja    Baja    Alta    Alta   
+## [13] Alta    Alta    Alta   
+## Levels: Placebo Baja Alta</code></pre>
+<p>Por defecto R toma el primer grupo base y crea dos variables dummy que se comparan con ese grupo base. Puedes mirar estos contrastes con la función <strong>contrasts</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(inteligData2<span class="op">$</span>Dosis)</code></pre></div>
+<pre><code>##         Baja Alta
+## Placebo    0    0
+## Baja       1    0
+## Alta       0    1</code></pre>
+<p>Pero, tu puedes crear manualmente contrastes específicos. Por ejemplo, con la función <strong>contr.treatment</strong> puedes crear 2 variables dummy (a partir de 3 condiciones exprimentales) dónde decidas que el grupo base es el segundo.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contr.treatment</span>(<span class="dv">3</span>, <span class="dt">base =</span> <span class="dv">2</span>)</code></pre></div>
+<pre><code>##   1 3
+## 1 1 0
+## 2 0 0
+## 3 0 1</code></pre>
+<p>Luego para que estos contraste surgan efecto lo inyectas como contrastes</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(inteligData2<span class="op">$</span>Dosis) &lt;-<span class="st"> </span><span class="kw">contr.treatment</span>(<span class="dv">3</span>, <span class="dt">base =</span> <span class="dv">2</span>)</code></pre></div>
+<p>Luego verificas como quedaron los contrastes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">inteligData2<span class="op">$</span>Dosis</code></pre></div>
+<pre><code>##  [1] Placebo Placebo Placebo Placebo Placebo Baja    Baja    Baja    Baja    Baja    Alta    Alta   
+## [13] Alta    Alta    Alta   
+## attr(,&quot;contrasts&quot;)
+##         1 3
+## Placebo 1 0
+## Baja    0 0
+## Alta    0 1
+## Levels: Placebo Baja Alta</code></pre>
+<p>Y finalmente realizas el ANOVA nuevamente.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_AOV3 &lt;-<span class="st"> </span><span class="kw">aov</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Dosis, <span class="dt">data =</span> inteligData2)
+<span class="kw">summary.lm</span>(m_AOV3)</code></pre></div>
+<pre><code>## 
+## Call:
+## aov(formula = Inteligencia ~ Dosis, data = inteligData2)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##   -2.0   -1.2   -0.2    0.9    2.0 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   3.2000     0.6272   5.102 0.000261 ***
+## Dosis1       -1.0000     0.8869  -1.127 0.281584    
+## Dosis3        1.8000     0.8869   2.029 0.065192 .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.402 on 12 degrees of freedom
+## Multiple R-squared:  0.4604, Adjusted R-squared:  0.3704 
+## F-statistic: 5.119 on 2 and 12 DF,  p-value: 0.02469</code></pre>
+<p>Fíjate los betas son diferentes.</p>
+<p>Ahora, en R hay ciertos contrastes que ya están preparados. Uno de ellos es el contraste Helmert. Trata de entender que contrastes se hacen en este caso. Igual que antes creas el contraste lo inyectas en la base de datos y verificas.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contr.helmert</span>(<span class="dv">3</span>)</code></pre></div>
+<pre><code>##   [,1] [,2]
+## 1   -1   -1
+## 2    1   -1
+## 3    0    2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(inteligData2<span class="op">$</span>Dosis) &lt;-<span class="st"> </span><span class="kw">contr.helmert</span>(<span class="dv">3</span>)
+inteligData2<span class="op">$</span>Dosis</code></pre></div>
+<pre><code>##  [1] Placebo Placebo Placebo Placebo Placebo Baja    Baja    Baja    Baja    Baja    Alta    Alta   
+## [13] Alta    Alta    Alta   
+## attr(,&quot;contrasts&quot;)
+##         [,1] [,2]
+## Placebo   -1   -1
+## Baja       1   -1
+## Alta       0    2
+## Levels: Placebo Baja Alta</code></pre>
+<p>Luego calculas el ANOVA nuevamente.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_AOV4 &lt;-<span class="st"> </span><span class="kw">aov</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Dosis, <span class="dt">data =</span> inteligData2)
+<span class="kw">summary.lm</span>(m_AOV4)</code></pre></div>
+<pre><code>## 
+## Call:
+## aov(formula = Inteligencia ~ Dosis, data = inteligData2)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##   -2.0   -1.2   -0.2    0.9    2.0 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   3.4667     0.3621   9.574 5.72e-07 ***
+## Dosis1        0.5000     0.4435   1.127   0.2816    
+## Dosis2        0.7667     0.2560   2.994   0.0112 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.402 on 12 degrees of freedom
+## Multiple R-squared:  0.4604, Adjusted R-squared:  0.3704 
+## F-statistic: 5.119 on 2 and 12 DF,  p-value: 0.02469</code></pre>
+<p>Más importante que esto es que puedas crear tu propios contrastes. Para ello, te recomiendo darles nombres que te permitan entender esos contrastes. Por ejemplo, siguiendo nuestro ejemplo anterior podríamos tener dos hipótesis específicas. Primero, comparamos el efecto del tratamiento de la droga versus el grupo placebo. Para ello concatenamos -2, 1 y 1, que corresponden respectivamente a Placebo, Low y High.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">C_vs_Treatment &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">1</span>)</code></pre></div>
+<p>Segundo, comparamos el efecto del dosis alta versus la dsis baja. Para ello concatenamos 0, -1 y 1, que corresponden respectivamente a Placebo, Low y High.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Low_vs_High &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)</code></pre></div>
+<p>Luego ponemos los dos contrastes en la base de datos y calculamos un nuevo ANOVA.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(inteligData2<span class="op">$</span>Dosis) &lt;-<span class="st"> </span><span class="kw">cbind</span>(C_vs_Treatment, Low_vs_High)
+m_AOV4 &lt;-<span class="st"> </span><span class="kw">aov</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Dosis, <span class="dt">data =</span> inteligData2)
+<span class="kw">summary.lm</span>(m_AOV4)</code></pre></div>
+<pre><code>## 
+## Call:
+## aov(formula = Inteligencia ~ Dosis, data = inteligData2)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##   -2.0   -1.2   -0.2    0.9    2.0 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)           3.4667     0.3621   9.574 5.72e-07 ***
+## DosisC_vs_Treatment   0.6333     0.2560   2.474   0.0293 *  
+## DosisLow_vs_High      0.9000     0.4435   2.029   0.0652 .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.402 on 12 degrees of freedom
+## Multiple R-squared:  0.4604, Adjusted R-squared:  0.3704 
+## F-statistic: 5.119 on 2 and 12 DF,  p-value: 0.02469</code></pre>
+<p>Fíjate que obtenemos los mismos resultados que cuando utilizamos la base de datos dónde orginalmente se había definido las variables dummy.</p>
+<p>Por último, algo que también podriamos hacer es un análisis de tendencia líneal. Si pensamos en los efectos de las drogas (vean el gráfico arriba) esperaríamos que a medida que aumenta la dosis aumentará su efecto de manera lineal. Para ello podemos crear un contraste que de cuenta de este efecto lineal. Para ello usamos la función <strong>contr.poly</strong> y lo inyectamos en la base de datos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contr.poly</span>(<span class="dv">3</span>)</code></pre></div>
+<pre><code>##                 .L         .Q
+## [1,] -7.071068e-01  0.4082483
+## [2,] -7.850462e-17 -0.8164966
+## [3,]  7.071068e-01  0.4082483</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(inteligData2<span class="op">$</span>Dosis) &lt;-<span class="st"> </span><span class="kw">contr.poly</span>(<span class="dv">3</span>)
+<span class="kw">contrasts</span>(inteligData2<span class="op">$</span>Dosis)</code></pre></div>
+<pre><code>##                    .L         .Q
+## Placebo -7.071068e-01  0.4082483
+## Baja    -7.850462e-17 -0.8164966
+## Alta     7.071068e-01  0.4082483</code></pre>
+<p>Finalmente, calculamos el ANOVA nuevamente</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trend_M &lt;-<span class="st"> </span><span class="kw">aov</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Dosis, <span class="dt">data =</span> inteligData2)
+<span class="kw">summary.lm</span>(trend_M)</code></pre></div>
+<pre><code>## 
+## Call:
+## aov(formula = Inteligencia ~ Dosis, data = inteligData2)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##   -2.0   -1.2   -0.2    0.9    2.0 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   3.4667     0.3621   9.574 5.72e-07 ***
+## Dosis.L       1.9799     0.6272   3.157  0.00827 ** 
+## Dosis.Q       0.3266     0.6272   0.521  0.61201    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.402 on 12 degrees of freedom
+## Multiple R-squared:  0.4604, Adjusted R-squared:  0.3704 
+## F-statistic: 5.119 on 2 and 12 DF,  p-value: 0.02469</code></pre>
+<p>La fila &quot;L&quot; indica un efecto lineal y la fila &quot;Q&quot; indica un efecto cuadrático. ¿Qué ves?</p>
+</div>
+<div id="pruebas-post-hoc" class="section level2">
+<h2><span class="header-section-number">9.4</span> Pruebas post-hoc</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=qXR27qqjDvU" target="_blank">video (15')</a> y trata de responder:</p>
+<p>¿Qué tipos de pruebas post-hoc existen? ¿Cuál es el riesgo que corremos si usamos una prueba post-hoc muy exigente (o conservadora)? ¿Cuál es el riesgo que corremos si usamos una prueba post-hoc poco exigente (o conservadora)?</p>
+</div>
+<div id="cálculos-con-r-1" class="section level2">
+<h2><span class="header-section-number">9.5</span> Cálculos con R</h2>
+<p>Ahora vamos a revisar el código para realizar las pruebas post-hoc.</p>
+<p>Usemos el set de datos originales. Aprovechamos de agregar unas etiquetas que nos sirvan a visualizar las condiciones experimentales. Y le damos una mirada.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/inteligencia.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
+dat1<span class="op">$</span>Dosis &lt;-<span class="st"> </span><span class="kw">factor</span>(dat1<span class="op">$</span>Dosis, 
+                            <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))</code></pre></div>
+<p>En las pruebas post-hoc comparamos todo con todo. Para ello usamos la función <strong>pairwise.t.test</strong>. Pero, además podemos aplicar una corrección (en el parámetro <em>p.adjust.method</em>) para lidiar con el error de tipo 1.</p>
+<p>Veamos que pasa cuando no agregamos ninguna corrección.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairwise.t.test</span>(dat1<span class="op">$</span>Inteligencia, dat1<span class="op">$</span>Dosis, <span class="dt">p.adjust.method =</span> <span class="st">&quot;none&quot;</span>)</code></pre></div>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  dat1$Inteligencia and dat1$Dosis 
+## 
+##      Placebo Baja  
+## Baja 0.2816  -     
+## Alta 0.0083  0.0652
+## 
+## P value adjustment method: none</code></pre>
+<p>Veamos que pasa cuando usamos una corrección de Bonferroni.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairwise.t.test</span>(dat1<span class="op">$</span>Inteligencia, dat1<span class="op">$</span>Dosis, <span class="dt">p.adjust.method =</span> <span class="st">&quot;bonferroni&quot;</span>)</code></pre></div>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  dat1$Inteligencia and dat1$Dosis 
+## 
+##      Placebo Baja 
+## Baja 0.845   -    
+## Alta 0.025   0.196
+## 
+## P value adjustment method: bonferroni</code></pre>
+<p>Veamos que pasa cuando usamos una corrección de Benjamini-Hochberg.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairwise.t.test</span>(dat1<span class="op">$</span>Inteligencia, dat1<span class="op">$</span>Dosis, <span class="dt">p.adjust.method =</span> <span class="st">&quot;BH&quot;</span>)</code></pre></div>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  dat1$Inteligencia and dat1$Dosis 
+## 
+##      Placebo Baja 
+## Baja 0.282   -    
+## Alta 0.025   0.098
+## 
+## P value adjustment method: BH</code></pre>
+<p>Para terminar siempre es bueno calcular el tamaño del efecto. Recuerda que hicimos en el ANOVA.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_AOV &lt;-<span class="st"> </span><span class="kw">aov</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Dosis, <span class="dt">data =</span> dat1)
+<span class="kw">summary.lm</span>(m_AOV)</code></pre></div>
+<pre><code>## 
+## Call:
+## aov(formula = Inteligencia ~ Dosis, data = dat1)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##   -2.0   -1.2   -0.2    0.9    2.0 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)   2.2000     0.6272   3.508  0.00432 **
+## DosisBaja     1.0000     0.8869   1.127  0.28158   
+## DosisAlta     2.8000     0.8869   3.157  0.00827 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.402 on 12 degrees of freedom
+## Multiple R-squared:  0.4604, Adjusted R-squared:  0.3704 
+## F-statistic: 5.119 on 2 and 12 DF,  p-value: 0.02469</code></pre>
+<p>En el contexto de ANOVA, r^2 generalmente se llama eta cuadrado.</p>
+<p>Alternativamente también podemos usar una función.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">omega &lt;-<span class="st"> </span><span class="cf">function</span>(SSm, SSr, dfm, MSr)
+{
+  SSt =<span class="st"> </span>SSm <span class="op">+</span><span class="st"> </span>SSr
+  omega =<span class="st"> </span>(SSm<span class="op">-</span>(dfm<span class="op">*</span>MSr))<span class="op">/</span>(SSt<span class="op">+</span>MSr)
+  <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;Omega-Squared: &quot;</span>, omega))
+  omega
+}
+
+omega1 &lt;-<span class="st"> </span><span class="kw">omega</span>(<span class="fl">20.133</span>, <span class="fl">23.600</span>, <span class="dv">2</span>, <span class="fl">1.9667</span>)</code></pre></div>
+<pre><code>## [1] &quot;Omega-Squared:  0.35447935106795&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(omega1)</code></pre></div>
+<pre><code>## [1] 0.5953817</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="comparar-más-de-dos-grupos-anova.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="otros-análisis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/doctoradoenpsicologiautal/estadistica/edit/master/09_afterANOVA.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/doctoradoenpsicologiautal/estadistica/blob/master/09_afterANOVA.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

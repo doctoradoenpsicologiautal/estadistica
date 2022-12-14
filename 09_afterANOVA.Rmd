@@ -1,0 +1,249 @@
+# Pasos después de un ANOVA
+
+En este capítulo vamos a revisar que podemos hacer después de un ANOVA.
+
+## ¿Qué hacemos después de un ANOVA?
+Revisa este <a href="https://www.youtube.com/watch?v=nFcxN5qVYxY" target="_blank">video (12')</a> y trata de responder:
+
+- ¿Que hago después de una prueba omnibus?
+- ¿De qué depende el tipo de análisis que se hace después del ANOVA?
+- ¿Qué significa que desglocemos la varianza explicada en los distintos contrastes en el análisis de contrastes planificados?
+- ¿En un experimento dónde analizo el efecto de dos dosis de droga comparada con un placebo, que contrastes planificados se podrían hacer y que indican el intercepto y los betas de este modelo?
+- ¿Por que es importante que el contraste que hagamos sea un contraste ortogonal?
+
+## Comparaciones planificadas
+Revisa este <a href="https://www.youtube.com/watch?v=z_jVSEKOVZM" target="_blank">video (18')</a> y trata de responder:
+
+- ¿Para que sirven los contrastes que evaluan una tendencia líneal o cuadrática?
+
+## Cálculos con R
+
+Ahora vamos a hacer el análisis. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).
+
+```{r}
+setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+
+library(ggplot2)
+library(Hmisc)
+library(Rmisc)
+library(effsize)
+library(pastecs)
+library(reshape2)
+library(car)
+library(effsize)
+```
+
+Primero, vamos a revisar el código para realizar los contrastes planificados.
+Recuerda que se utiliza un dummy coding en un modelo de regresión para que los valores b representen las diferencias entre los promedios de los contrastes que se quieren evaluar.
+
+Importamos el set de datos. Aprovechamos de agregar unas etiquetas que nos sirvan a visualizar las condiciones experimentales. Y le damos una mirada.
+
+```{r}
+contrastData <- read.csv("data/inteligencia_c_Contrast_Planif.csv", header = TRUE)
+contrastData$Dosis <- factor(contrastData$Dosis, 
+                             levels = c(1:3), labels = c("Placebo", "Baja", "Alta"))
+contrastData
+```
+
+Usemos las columnas que corresponden a las variables dummy.
+Compars1 refleja la diferencia para los niveles de inteligencia entre el placebo y cualquier dosis de droga (en realidad el promedio de ambas).
+Compars2 refleja la diferencia para los niveles de inteligencia entre la dosis baja y la dosis alta.
+
+```{r}
+m_contrastedAOV <- lm(Inteligencia ~ Compars1 + Compars2, data = contrastData)
+summary(m_contrastedAOV)
+```
+
+¿Qué nos dice este modelo? El F es el mismo. Lo que cambia son los coeficientes de regresión.
+Primero. El intercepto es el gran promedio (3.467). Verifiquemos.
+
+```{r}
+# promedio a través de todas las condiciones
+mean(contrastData$Inteligencia)
+```
+
+```{r}
+# promedio a través de todas las condiciones experimentales
+varX <- contrastData[contrastData$Dosis != "Placebo",]
+mean(varX$Inteligencia)
+```
+
+El contraste 1 (o b1) refleja la diferencia en los niveles de inteligencia entre la aplicación de la droga y el placebo. El coeficiente de regresión (0.63) para el contraste 1 es 1/3 de esta diferencia (1.9/3 = 0.633). El FWE se controla haciendo que el coeficiente de regresión sea igual a la diferencia real dividida por el número de grupos en el contraste (en este caso 3).
+
+El contraste 2 (o b2) refleja la diferencia en los niveles de inteligencia entre la aplicación de una dosis alta droga y una dosis baja de droga. El coeficiente de regresión (0.9) para el contraste 1 es 1/2 de esta diferencia (1.8/2 = 0.9). El FWE se controla haciendo que el coeficiente de regresión sea igual a la diferencia real dividida por el número de grupos en el contraste (en este caso 3).
+
+Uno podría pensar que siempre hay que crear las dos columnas del dummy coding en los datos. En realidad eso se puede hacer en R.
+
+Importemos los datos originales.
+
+```{r}
+inteligData2 <- read.csv("data/inteligencia.csv", header = TRUE)
+inteligData2$Dosis <- factor(inteligData2$Dosis, levels = c(1:3),
+                     labels = c("Placebo", "Baja", "Alta"))
+```
+
+Si revisas los valores de dosis encontrarás que tienen los nombres correspondientes a las condiciones experimentales, y al final veras que tiene 3 niveles: Placebo, Baja y Alta
+
+```{r}
+inteligData2$Dosis
+```
+
+Por defecto R toma el primer grupo base y crea dos variables dummy que se comparan con ese grupo base. Puedes mirar estos contrastes con la función **contrasts**.
+
+```{r}
+contrasts(inteligData2$Dosis)
+```
+
+Pero, tu puedes crear manualmente contrastes específicos. Por ejemplo, con la función **contr.treatment** puedes crear 2 variables dummy (a partir de 3 condiciones exprimentales) dónde decidas que el grupo base es el segundo.
+
+```{r}
+contr.treatment(3, base = 2)
+```
+
+Luego para que estos contraste surgan efecto lo inyectas como contrastes 
+
+```{r}
+contrasts(inteligData2$Dosis) <- contr.treatment(3, base = 2)
+```
+
+Luego verificas como quedaron los contrastes.
+
+```{r}
+inteligData2$Dosis
+```
+
+Y finalmente realizas el ANOVA nuevamente.
+
+```{r}
+m_AOV3 <- aov(Inteligencia ~ Dosis, data = inteligData2)
+summary.lm(m_AOV3)
+```
+
+Fíjate los betas son diferentes.
+
+Ahora, en R hay ciertos contrastes que ya están preparados. Uno de ellos es el contraste Helmert.
+Trata de entender que contrastes se hacen en este caso.
+Igual que antes creas el contraste lo inyectas en la base de datos y verificas.
+
+```{r}
+contr.helmert(3)
+contrasts(inteligData2$Dosis) <- contr.helmert(3)
+inteligData2$Dosis
+```
+
+Luego calculas el ANOVA nuevamente.
+
+```{r}
+m_AOV4 <- aov(Inteligencia ~ Dosis, data = inteligData2)
+summary.lm(m_AOV4)
+```
+
+Más importante que esto es que puedas crear tu propios contrastes.
+Para ello, te recomiendo darles nombres que te permitan entender esos contrastes.
+Por ejemplo, siguiendo nuestro ejemplo anterior podríamos tener dos hipótesis específicas.
+Primero, comparamos el efecto del tratamiento de la droga versus el grupo placebo.
+Para ello concatenamos -2, 1 y 1, que corresponden respectivamente a Placebo, Low y High.
+
+```{r}
+C_vs_Treatment <- c(-2,1,1)
+```
+
+Segundo, comparamos el efecto del dosis alta versus la dsis baja. Para ello concatenamos 0, -1 y 1, que corresponden respectivamente a Placebo, Low y High.
+
+```{r}
+Low_vs_High <- c(0,-1,1)
+```
+
+Luego ponemos los dos contrastes en la base de datos y calculamos un nuevo ANOVA.
+
+```{r}
+contrasts(inteligData2$Dosis) <- cbind(C_vs_Treatment, Low_vs_High)
+m_AOV4 <- aov(Inteligencia ~ Dosis, data = inteligData2)
+summary.lm(m_AOV4)
+```
+
+Fíjate que obtenemos los mismos resultados que cuando utilizamos la base de datos dónde orginalmente se había definido las variables dummy.
+
+Por último, algo que también podriamos hacer es un análisis de tendencia líneal.
+Si pensamos en los efectos de las drogas (vean el gráfico arriba) esperaríamos que a medida que aumenta la dosis aumentará su efecto de manera lineal.
+Para ello podemos crear un contraste que de cuenta de este efecto lineal. Para ello usamos la función **contr.poly** y lo inyectamos en la base de datos.
+
+```{r}
+contr.poly(3)
+contrasts(inteligData2$Dosis) <- contr.poly(3)
+contrasts(inteligData2$Dosis)
+```
+
+Finalmente, calculamos el ANOVA nuevamente
+
+```{r}
+trend_M <- aov(Inteligencia ~ Dosis, data = inteligData2)
+summary.lm(trend_M)
+```
+
+La fila "L" indica un efecto lineal y la fila "Q" indica un efecto cuadrático.
+¿Qué ves?
+
+## Pruebas post-hoc
+Revisa este <a href="https://www.youtube.com/watch?v=qXR27qqjDvU" target="_blank">video (15')</a> y trata de responder:
+
+¿Qué tipos de pruebas post-hoc existen?
+¿Cuál es el riesgo que corremos si usamos una prueba post-hoc muy exigente (o conservadora)?
+¿Cuál es el riesgo que corremos si usamos una prueba post-hoc poco exigente (o conservadora)?
+
+## Cálculos con R
+
+Ahora vamos a revisar el código para realizar las pruebas post-hoc.
+
+Usemos el set de datos originales. Aprovechamos de agregar unas etiquetas que nos sirvan a visualizar las condiciones experimentales. Y le damos una mirada.
+
+```{r}
+dat1 <- read.csv("data/inteligencia.csv", header = TRUE)
+dat1$Dosis <- factor(dat1$Dosis, 
+                            levels = c(1:3), labels = c("Placebo", "Baja", "Alta"))
+```
+
+En las pruebas post-hoc comparamos todo con todo. Para ello usamos la función **pairwise.t.test**. Pero, además podemos aplicar una corrección (en el parámetro *p.adjust.method*) para lidiar con el error de tipo 1. 
+
+Veamos que pasa cuando no agregamos ninguna corrección.
+
+```{r}
+pairwise.t.test(dat1$Inteligencia, dat1$Dosis, p.adjust.method = "none")
+```
+
+Veamos que pasa cuando usamos una corrección de Bonferroni.
+
+```{r}
+pairwise.t.test(dat1$Inteligencia, dat1$Dosis, p.adjust.method = "bonferroni")
+```
+
+Veamos que pasa cuando usamos una corrección de Benjamini-Hochberg.
+
+```{r}
+pairwise.t.test(dat1$Inteligencia, dat1$Dosis, p.adjust.method = "BH")
+```
+
+Para terminar siempre es bueno calcular el tamaño del efecto.
+Recuerda que hicimos en el ANOVA.
+
+```{r}
+m_AOV <- aov(Inteligencia ~ Dosis, data = dat1)
+summary.lm(m_AOV)
+```
+
+En el contexto de ANOVA, r^2 generalmente se llama eta cuadrado.
+
+Alternativamente también podemos usar una función.
+
+```{r}
+omega <- function(SSm, SSr, dfm, MSr)
+{
+  SSt = SSm + SSr
+  omega = (SSm-(dfm*MSr))/(SSt+MSr)
+  print(paste("Omega-Squared: ", omega))
+  omega
+}
+
+omega1 <- omega(20.133, 23.600, 2, 1.9667)
+sqrt(omega1)
+```

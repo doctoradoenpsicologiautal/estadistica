@@ -97,7 +97,15 @@ Antes de hacer el ANOVA verificamos si existen problemas de homgeneidad de varia
 leveneTest(dat1$Inteligencia, dat1$Dosis, center = mean)
 ```
 
-Luego podemos hacer el análisis estadístico, aplicando la función **aov**.
+Si la prueba de Levene es significativa entonces las varianzas son diferentes entre los grupos.
+En ese caso podemos aplicar la F de Welch a los datos. Esta prueba hace ajustes por las diferencias que hay entre las varianzas de cada grupo.
+
+```{r}
+AOV_W <- oneway.test(Inteligencia ~ Dosis, data = dat1)
+AOV_W
+```
+
+En nuestro caso no tuvimos problema en relación a la homgeneidad de varianza. Podemos hacer entonces el análisis estadístico, aplicando la función **aov**.
 Enseguida aplicamos la función **sumary** para visualizar los resultados del test.
 
 

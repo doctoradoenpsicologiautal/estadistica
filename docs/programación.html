@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2022-12-05" />
+<meta name="date" content="2022-12-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -175,8 +175,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.3" data-path="comparar-más-de-dos-grupos-anova.html"><a href="comparar-más-de-dos-grupos-anova.html#la-lógica-del-anova"><i class="fa fa-check"></i><b>8.3</b> La lógica del ANOVA</a></li>
 <li class="chapter" data-level="8.4" data-path="comparar-más-de-dos-grupos-anova.html"><a href="comparar-más-de-dos-grupos-anova.html#el-anova-con-r"><i class="fa fa-check"></i><b>8.4</b> El ANOVA con R</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>9</b> Otros análisis</a><ul>
-<li class="chapter" data-level="9.1" data-path="otros-análisis.html"><a href="otros-análisis.html#análisis-de-proporciones"><i class="fa fa-check"></i><b>9.1</b> Análisis de proporciones</a></li>
+<li class="chapter" data-level="9" data-path="pasos-después-de-un-anova.html"><a href="pasos-después-de-un-anova.html"><i class="fa fa-check"></i><b>9</b> Pasos después de un ANOVA</a><ul>
+<li class="chapter" data-level="9.1" data-path="pasos-después-de-un-anova.html"><a href="pasos-después-de-un-anova.html#qué-hacemos-después-de-un-anova"><i class="fa fa-check"></i><b>9.1</b> ¿Qué hacemos después de un ANOVA?</a></li>
+<li class="chapter" data-level="9.2" data-path="pasos-después-de-un-anova.html"><a href="pasos-después-de-un-anova.html#comparaciones-planificadas"><i class="fa fa-check"></i><b>9.2</b> Comparaciones planificadas</a></li>
+<li class="chapter" data-level="9.3" data-path="pasos-después-de-un-anova.html"><a href="pasos-después-de-un-anova.html#cálculos-con-r"><i class="fa fa-check"></i><b>9.3</b> Cálculos con R</a></li>
+<li class="chapter" data-level="9.4" data-path="pasos-después-de-un-anova.html"><a href="pasos-después-de-un-anova.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>9.4</b> Pruebas post-hoc</a></li>
+<li class="chapter" data-level="9.5" data-path="pasos-después-de-un-anova.html"><a href="pasos-después-de-un-anova.html#cálculos-con-r-1"><i class="fa fa-check"></i><b>9.5</b> Cálculos con R</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>10</b> Otros análisis</a><ul>
+<li class="chapter" data-level="10.1" data-path="otros-análisis.html"><a href="otros-análisis.html#análisis-de-proporciones"><i class="fa fa-check"></i><b>10.1</b> Análisis de proporciones</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -582,20 +589,13 @@ lightAlcoholicsPerso</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
 satisfactionData &lt;-<span class="st">  </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Honeymoon_Period.csv&quot;</span>)
 <span class="kw">head</span>(satisfactionData)</code></pre></div>
-<pre><code>##   Person Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months Satisfaction_18_Months
-## 1      1                 6                     6                      5                      2
-## 2      2                 7                     7                      8                      4
-## 3      3                 4                     6                      2                      2
-## 4      4                 6                     9                      4                      1
-## 5      5                 6                     7                      6                      6
-## 6      6                 5                    10                      4                      2
-##   Gender
-## 1      0
-## 2      1
-## 3      1
-## 4      0
-## 5      0
-## 6      1</code></pre>
+<pre><code>##   Person Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months Satisfaction_18_Months Gender
+## 1      1                 6                     6                      5                      2      0
+## 2      2                 7                     7                      8                      4      1
+## 3      3                 4                     6                      2                      2      1
+## 4      4                 6                     9                      4                      1      0
+## 5      5                 6                     7                      6                      6      0
+## 6      6                 5                    10                      4                      2      1</code></pre>
 <p>Con <strong>head</strong> miramos sólo los primeras 6 filas de la base de datos. En esta data frame están los niveles de satisfacción con la pareja al momento de casarse, y luego de 6, 12 y 18 meses. Además está el género del entrevistado.</p>
 <p>Esta data frame la podemos a transformar a un formato <em>long</em> usando la función <strong>stack</strong>. Esta función la usamos de la siguiente manera: newDataFrame &lt;- stack(oldDataFrame, select = c(variable_list))</p>
 <p>En nuestro ejemplo podemos hacerlo así:</p>
@@ -677,20 +677,13 @@ restructuredData &lt;-<span class="st"> </span><span class="kw">melt</span>(sati
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wideData &lt;-<span class="st"> </span><span class="kw">cast</span>(restructuredData, Person <span class="op">+</span><span class="st"> </span>Gender <span class="op">~</span><span class="st"> </span>SatisfType, <span class="dt">value =</span> <span class="st">&quot;Values&quot;</span>)
 
 <span class="kw">head</span>(wideData)</code></pre></div>
-<pre><code>##   Person Gender Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months
-## 1      1      0                 6                     6                      5
-## 2      2      1                 7                     7                      8
-## 3      3      1                 4                     6                      2
-## 4      4      0                 6                     9                      4
-## 5      5      0                 6                     7                      6
-## 6      6      1                 5                    10                      4
-##   Satisfaction_18_Months
-## 1                      2
-## 2                      4
-## 3                      2
-## 4                      1
-## 5                      6
-## 6                      2</code></pre>
+<pre><code>##   Person Gender Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months Satisfaction_18_Months
+## 1      1      0                 6                     6                      5                      2
+## 2      2      1                 7                     7                      8                      4
+## 3      3      1                 4                     6                      2                      2
+## 4      4      0                 6                     9                      4                      1
+## 5      5      0                 6                     7                      6                      6
+## 6      6      1                 5                    10                      4                      2</code></pre>
 </div>
 <div id="exportando-datos" class="section level2">
 <h2><span class="header-section-number">3.9</span> Exportando datos</h2>
@@ -715,10 +708,10 @@ restructuredData &lt;-<span class="st"> </span><span class="kw">melt</span>(sati
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat, <span class="kw">aes</span>(latidos))
 h1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat, <span class="kw">aes</span>(<span class="st">&quot;&quot;</span>, latidos))
 h1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
 <p>Veámos otros datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/demografia_salud.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(dat<span class="op">$</span>Sexo)</code></pre></div>
