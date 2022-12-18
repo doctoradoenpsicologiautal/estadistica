@@ -126,6 +126,8 @@ r <- sqrt(t**2/(t**2+df))
 r
 ```
 
+***
+
 Ahora, imaginemos que en realidad nuestro diseño experimental era intra-sujetos.
 Vamos a usar exactamente los mismos datos que antes pero asumiendo un diseño intra-sujetos. Y asumiremos que estos datos viendo en un formato wide.
 
@@ -134,36 +136,20 @@ spiderWide <- read.csv("data/ansiedad_por_arañas_dep.csv", header = TRUE) # loa
 head (spiderWide)
 ```
 
-Para realizar el gráfico para un diseño intra-sujetos tenemos que hacer algunos ajustes.
+Para realizar el gráfico primero transformamos los datos a formato Long.
 
 ```{r}
-spiderWideOri <- spiderWide
-spiderWide$pMean <- (spiderWide$imagen + spiderWide$real)/2
-grandMean <- mean(c(spiderWide$imagen, spiderWide$real))
-spiderWide$adj <- grandMean - spiderWide$pMean
-spiderWide$imagen_adj <- spiderWide$imagen + spiderWide$adj
-spiderWide$real_adj <- spiderWide$real + spiderWide$adj
-spiderWide$Mean2 <- mean(spiderWide$imagen_adj + spiderWide$real_adj)/2
-
-spiderWideSelec <- spiderWide[, -c(2:5)]
-spiderWideSelec <- spiderWideSelec[, -4]
-names(spiderWideSelec) <- c("Sujeto", "imagen", "real")
-```
-
-Los datos ajustados los transformamos a formato Long.
-
-```{r}
-adjustedData <- melt(spiderWideSelec,
+spiderLongNew <- melt(spiderWide,
                      id = c("Sujeto"), 
                      measured = c("imagen", "real"))
-names(adjustedData) <- c("Sujeto", "Condicion", "Conductancia")
+names(spiderLongNew) <- c("Sujeto", "Condicion", "Conductancia")
 ```
 
 Luego procedemos como antes.
 
 ```{r}
 # Podemos usar esta función para calcular los estadísticos para un diseño intra-sujetos.
-datac2 <- summarySEwithin(adjustedData, 
+datac2 <- summarySEwithin(spiderLongNew, 
                           measurevar="Conductancia", 
                           withinvars="Condicion", 
                           idvar="Sujeto")

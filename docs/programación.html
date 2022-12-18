@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2022-12-16" />
+<meta name="date" content="2022-12-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -709,10 +709,10 @@ restructuredData &lt;-<span class="st"> </span><span class="kw">melt</span>(sati
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat, <span class="kw">aes</span>(latidos))
 h1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat, <span class="kw">aes</span>(<span class="st">&quot;&quot;</span>, latidos))
 h1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 <p>Veámos otros datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/demografia_salud.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(dat<span class="op">$</span>Sexo)</code></pre></div>
