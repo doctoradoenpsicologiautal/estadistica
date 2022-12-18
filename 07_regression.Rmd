@@ -97,3 +97,110 @@ summary(m_album2)
 ```
 
 ¿Qué conclusiones sacas de este análisis?
+
+## La correlación con R
+
+Ahora vamos a hacer un análisis de correlación. En la práctica es lo mismo que hacer una regresión, pero hay algunas funciones dedicadas más a las correlaciones.
+
+Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).
+
+```{r}
+setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+
+library(Hmisc)
+library(ggplot2)
+library(boot)
+library(ggm)
+library(ggpubr)
+library(ggcorrplot)
+library(dplyr)
+```
+
+Luego importamos el set de datos y le damos una mirada.
+
+```{r}
+examData <- read.delim("data/ExamAnxiety.dat",  header = TRUE)
+head(examData)
+```
+
+Recuerda siempre hacer un gráfico para ver los datos.
+Por ejemplo, podríamos graficar los niveles de ansiedad versus los resultados en un exámen.
+
+```{r}
+scatter <- ggplot(examData, aes(Anxiety, Exam))
+scatter + 
+  geom_point() + geom_smooth(method = "lm", colour = "Red") +
+  labs(x = "Niveles de ansiedad", y = "Desempeño en el examen (%)")
+```
+
+Para hacer una correlación podemos simplemente usar la función **cor** seleccionando nuestras colmunas de interés. Esta función nos devuelve los coeficientes de correlación. Por defecto se ejecuta una correlación de Pearson.
+
+```{r}
+cor(examData[, c("Exam", "Anxiety")])
+```
+
+Otra función que podemos usar  **rcorr**. Esta función nos devuelve los coeficientes de correlación. Fíjate que para usar esta función le decimos a R explícitamente que librería queremos usar, es decir, Hmisc.
+
+```{r}
+Hmisc::rcorr(as.matrix(examData[, c("Exam", "Anxiety")]))
+```
+
+Por último otra función que podemos usar  **cor.test**. Esta función nos devuelve Varias cosas: el valor de p y el coeficiente de correlación.
+
+```{r}
+cor.test(examData$Anxiety, examData$Exam)
+```
+
+También existen otras funciones que nos permiten hacer un gráfico que contenga
+
+```{r}
+ggscatter(examData, x = "Anxiety", y = "Exam",
+               add = "reg.line", conf.int = TRUE,
+               cor.coef = TRUE, cor.method = "spearman",
+               xlab = "Niveles de ansiedad ", ylab = "Desempeño en el examen (%)") +
+  theme(text = element_text(size=15))
+```
+
+El coeficiente de determinación es una medida que indica la varianza en una variable que es comparida por otra variable.  El coeficiente de determinación se puede calcular desde el coeficiente de correlación, elevándolo al cuadrado, y adicionalmente lo podemos multiplicar por 100 para leerlo como porcentaje.
+
+```{r}
+cor(examData[, c("Exam", "Anxiety")])^2 * 100
+```
+
+
+```{r}
+corr_selected <- examData %>% 
+  select(Revise, Exam, Anxiety) %>% 
+  cor(use = "pairwise") %>%
+  round(1)
+
+ggcorrplot(corr_selected, type = "lower", lab = TRUE, show.legend = TRUE)
+```
+
+Un paso mas allá de las correlaciones bivariadas (entre dos variables) son las correlaciones parciales. La correlación nos permiten investigar la asociación entre dos variables, tomando en cuenta una tercera variable. Es decir, estudiamos una correlación entre dos variables controlando por el efecto de una tercera variable.
+
+Para trabajar esto en R primero vamos a seleccionar algunas columnas de interés.
+
+```{r}
+examData2 <- examData[, c("Exam", "Anxiety", "Revise")]
+```
+
+Luego aplicamos la función **pcor**. En esta función las primeras dos variables son las que queremos estudiar, y en tercer lugar la variables por la que queremos controlar. En el siguiente ejemplo queremos estudiar la relación entre el desempeño en una examen y los niveles de ansiedad, controlando por el tiempo que pasaron los estudiantes haciendo revisión antes del examen.
+
+```{r}
+(pc <- pcor(c("Exam", "Anxiety", "Revise"), var(examData2)))
+```
+
+Nuevamente podemos calcular el coeficiente de determinación
+
+```{r}
+pc^2 * 100
+```
+
+Para obtener mas información podemos usar la función **pcor.test** a la que le inyectamos el objeto que recién creamos. Al usar la función primero hay que decirle cuál es la variable dónde esta los datos (pc en nuestro caso), luego cuantas variables controles hay (1 en nuestro caso) y finalmente cuál es el tamaño de la muestra (103 en nuestro caso).
+
+```{r}
+pcor.test(pc, 1, 103)
+```
+
+De esta manera sabemos el valor de p para la prueba de asociación entre dos variables, controlando por el efecto de una tercera variable.
