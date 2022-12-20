@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 10 Otros ANOVA | Estadística con R</title>
+  <meta name="description" content="Capítulo 10 Otros ANOVA | Estadística con R" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 10 Otros ANOVA | Estadística con R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 10 Otros ANOVA | Estadística con R" />
+  
+  
+  
+
+<meta name="author" content="Facultad de Psicología, Universidad de Talca" />
+
+
+<meta name="date" content="2022-12-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="pasos-después-de-un-anova.html"/>
+<link rel="next" href="otros-análisis.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Estadística</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preámbulo</a></li>
+<li class="chapter" data-level="1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html"><i class="fa fa-check"></i><b>1</b> Introducción a la estadística</a><ul>
+<li class="chapter" data-level="1.1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#qué-es-la-estadística"><i class="fa fa-check"></i><b>1.1</b> ¿Qué es la estadística?</a></li>
+<li class="chapter" data-level="1.2" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#variables"><i class="fa fa-check"></i><b>1.2</b> ¿Variables?</a></li>
+<li class="chapter" data-level="1.3" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#diseños-experimentales"><i class="fa fa-check"></i><b>1.3</b> Diseños experimentales</a></li>
+<li class="chapter" data-level="1.4" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#qué-medimos"><i class="fa fa-check"></i><b>1.4</b> ¿Qué medimos?</a></li>
+<li class="chapter" data-level="1.5" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#un-prueba-estadística"><i class="fa fa-check"></i><b>1.5</b> Un prueba estadística</a></li>
+<li class="chapter" data-level="1.6" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#que-diseño-usaré"><i class="fa fa-check"></i><b>1.6</b> ¿Que diseño usaré?</a></li>
+<li class="chapter" data-level="1.7" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#una-historia-fantástica"><i class="fa fa-check"></i><b>1.7</b> Una historia fantástica</a></li>
+<li class="chapter" data-level="1.8" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#randomizar"><i class="fa fa-check"></i><b>1.8</b> ¿Randomizar?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html"><i class="fa fa-check"></i><b>2</b> Conceptos estadísticos</a><ul>
+<li class="chapter" data-level="2.1" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#la-significancia"><i class="fa fa-check"></i><b>2.1</b> La significancia</a></li>
+<li class="chapter" data-level="2.2" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#colas"><i class="fa fa-check"></i><b>2.2</b> Colas</a></li>
+<li class="chapter" data-level="2.3" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#errores-estadísticos"><i class="fa fa-check"></i><b>2.3</b> Errores estadísticos</a></li>
+<li class="chapter" data-level="2.4" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#tamaño-poder"><i class="fa fa-check"></i><b>2.4</b> Tamaño &amp; poder</a></li>
+<li class="chapter" data-level="2.5" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#planificar-mi-estudio"><i class="fa fa-check"></i><b>2.5</b> Planificar mi estudio</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="programación.html"><a href="programación.html"><i class="fa fa-check"></i><b>3</b> Programación</a><ul>
+<li class="chapter" data-level="3.1" data-path="programación.html"><a href="programación.html#que-significa-programar"><i class="fa fa-check"></i><b>3.1</b> ¿Que significa programar?</a></li>
+<li class="chapter" data-level="3.2" data-path="programación.html"><a href="programación.html#la-shell-consola-versus-el-script"><i class="fa fa-check"></i><b>3.2</b> La shell (consola) versus el script</a></li>
+<li class="chapter" data-level="3.3" data-path="programación.html"><a href="programación.html#intro-a-la-programación"><i class="fa fa-check"></i><b>3.3</b> Intro a la programación</a></li>
+<li class="chapter" data-level="3.4" data-path="programación.html"><a href="programación.html#empezando-a-programar"><i class="fa fa-check"></i><b>3.4</b> Empezando a programar</a></li>
+<li class="chapter" data-level="3.5" data-path="programación.html"><a href="programación.html#trabajando-con-data-frames"><i class="fa fa-check"></i><b>3.5</b> Trabajando con data frames</a></li>
+<li class="chapter" data-level="3.6" data-path="programación.html"><a href="programación.html#importando-datos"><i class="fa fa-check"></i><b>3.6</b> Importando datos</a></li>
+<li class="chapter" data-level="3.7" data-path="programación.html"><a href="programación.html#seleccionando-datos"><i class="fa fa-check"></i><b>3.7</b> Seleccionando datos</a></li>
+<li class="chapter" data-level="3.8" data-path="programación.html"><a href="programación.html#transformado-datos-en-formato-long-a-wide-y-viceversa"><i class="fa fa-check"></i><b>3.8</b> Transformado datos en formato long a wide y viceversa</a></li>
+<li class="chapter" data-level="3.9" data-path="programación.html"><a href="programación.html#exportando-datos"><i class="fa fa-check"></i><b>3.9</b> Exportando datos</a></li>
+<li class="chapter" data-level="3.10" data-path="programación.html"><a href="programación.html#en-la-práctica"><i class="fa fa-check"></i><b>3.10</b> En la práctica</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="gráficos.html"><a href="gráficos.html"><i class="fa fa-check"></i><b>4</b> Gráficos</a><ul>
+<li class="chapter" data-level="4.1" data-path="gráficos.html"><a href="gráficos.html#cómo-graficamos-en-r"><i class="fa fa-check"></i><b>4.1</b> ¿Cómo graficamos en R?</a></li>
+<li class="chapter" data-level="4.2" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-puntos"><i class="fa fa-check"></i><b>4.2</b> Gráfico de puntos</a></li>
+<li class="chapter" data-level="4.3" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-dispersión"><i class="fa fa-check"></i><b>4.3</b> Gráfico de dispersión</a></li>
+<li class="chapter" data-level="4.4" data-path="gráficos.html"><a href="gráficos.html#histograma"><i class="fa fa-check"></i><b>4.4</b> Histograma</a></li>
+<li class="chapter" data-level="4.5" data-path="gráficos.html"><a href="gráficos.html#boxplot"><i class="fa fa-check"></i><b>4.5</b> Boxplot</a></li>
+<li class="chapter" data-level="4.6" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-barras"><i class="fa fa-check"></i><b>4.6</b> Gráfico de barras</a></li>
+<li class="chapter" data-level="4.7" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-líneas-1-factor"><i class="fa fa-check"></i><b>4.7</b> Gráfico de líneas (1 factor)</a></li>
+<li class="chapter" data-level="4.8" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-líneas-2-factores"><i class="fa fa-check"></i><b>4.8</b> Gráfico de líneas (2 factores)</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html"><i class="fa fa-check"></i><b>5</b> Caracterizar datos</a><ul>
+<li class="chapter" data-level="5.1" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#visualizar-los-datos"><i class="fa fa-check"></i><b>5.1</b> Visualizar los datos</a></li>
+<li class="chapter" data-level="5.2" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal"><i class="fa fa-check"></i><b>5.2</b> La curva normal</a></li>
+<li class="chapter" data-level="5.3" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal-en-la-práctica-1"><i class="fa fa-check"></i><b>5.3</b> La curva normal en la práctica (1)</a></li>
+<li class="chapter" data-level="5.4" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal-en-la-práctica-2"><i class="fa fa-check"></i><b>5.4</b> La curva normal en la práctica (2)</a></li>
+<li class="chapter" data-level="5.5" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#de-la-muestra-a-la-población"><i class="fa fa-check"></i><b>5.5</b> De la muestra a la población</a></li>
+<li class="chapter" data-level="5.6" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-muestra-en-la-vida-real"><i class="fa fa-check"></i><b>5.6</b> La muestra en la vida real</a></li>
+<li class="chapter" data-level="5.7" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#los-intervalos-de-confianza-1"><i class="fa fa-check"></i><b>5.7</b> Los intervalos de confianza (1)</a></li>
+<li class="chapter" data-level="5.8" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#los-intervalos-de-confianza-2"><i class="fa fa-check"></i><b>5.8</b> Los intervalos de confianza (2)</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="t-test.html"><a href="t-test.html"><i class="fa fa-check"></i><b>6</b> T-test</a><ul>
+<li class="chapter" data-level="6.1" data-path="t-test.html"><a href="t-test.html#cómo-comparamos-datos-de-dos-grupos"><i class="fa fa-check"></i><b>6.1</b> ¿Cómo comparamos datos de dos grupos?</a></li>
+<li class="chapter" data-level="6.2" data-path="t-test.html"><a href="t-test.html#la-distribución-normal-para-dos-grupos"><i class="fa fa-check"></i><b>6.2</b> La distribución normal para dos grupos</a></li>
+<li class="chapter" data-level="6.3" data-path="t-test.html"><a href="t-test.html#la-prueba-de-hipótesis"><i class="fa fa-check"></i><b>6.3</b> La prueba de hipótesis</a></li>
+<li class="chapter" data-level="6.4" data-path="t-test.html"><a href="t-test.html#el-t-test-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>6.4</b> El t-test como un modelo líneal general</a></li>
+<li class="chapter" data-level="6.5" data-path="t-test.html"><a href="t-test.html#el-t-test-con-r"><i class="fa fa-check"></i><b>6.5</b> El t-test con R</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="la-regresión.html"><a href="la-regresión.html"><i class="fa fa-check"></i><b>7</b> La regresión</a><ul>
+<li class="chapter" data-level="7.1" data-path="la-regresión.html"><a href="la-regresión.html#modelos-estadísticos"><i class="fa fa-check"></i><b>7.1</b> Modelos estadísticos</a></li>
+<li class="chapter" data-level="7.2" data-path="la-regresión.html"><a href="la-regresión.html#la-ecuación-de-la-recta"><i class="fa fa-check"></i><b>7.2</b> La ecuación de la recta</a></li>
+<li class="chapter" data-level="7.3" data-path="la-regresión.html"><a href="la-regresión.html#la-suma-de-cuadrados"><i class="fa fa-check"></i><b>7.3</b> La suma de cuadrados</a></li>
+<li class="chapter" data-level="7.4" data-path="la-regresión.html"><a href="la-regresión.html#la-regresión-con-r"><i class="fa fa-check"></i><b>7.4</b> La regresión con R</a></li>
+<li class="chapter" data-level="7.5" data-path="la-regresión.html"><a href="la-regresión.html#la-correlación-con-r"><i class="fa fa-check"></i><b>7.5</b> La correlación con R</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="comparar-más-de-dos-grupos-anova.html"><a href="comparar-más-de-dos-grupos-anova.html"><i class="fa fa-check"></i><b>8</b> Comparar más de dos grupos (ANOVA)</a><ul>
+<li class="chapter" data-level="8.1" data-path="comparar-más-de-dos-grupos-anova.html"><a href="comparar-más-de-dos-grupos-anova.html#por-qué-necesitamos-un-anova"><i class="fa fa-check"></i><b>8.1</b> ¿Por qué necesitamos un ANOVA?</a></li>
+<li class="chapter" data-level="8.2" data-path="comparar-más-de-dos-grupos-anova.html"><a href="comparar-más-de-dos-grupos-anova.html#el-anova-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>8.2</b> El ANOVA como un modelo líneal general</a></li>
+<li class="chapter" data-level="8.3" data-path="comparar-más-de-dos-grupos-anova.html"><a href="comparar-más-de-dos-grupos-anova.html#la-lógica-del-anova"><i class="fa fa-check"></i><b>8.3</b> La lógica del ANOVA</a></li>
+<li class="chapter" data-level="8.4" data-path="comparar-más-de-dos-grupos-anova.html"><a href="comparar-más-de-dos-grupos-anova.html#el-anova-con-r"><i class="fa fa-check"></i><b>8.4</b> El ANOVA con R</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="pasos-después-de-un-anova.html"><a href="pasos-después-de-un-anova.html"><i class="fa fa-check"></i><b>9</b> Pasos después de un ANOVA</a><ul>
+<li class="chapter" data-level="9.1" data-path="pasos-después-de-un-anova.html"><a href="pasos-después-de-un-anova.html#qué-hacemos-después-de-un-anova"><i class="fa fa-check"></i><b>9.1</b> ¿Qué hacemos después de un ANOVA?</a></li>
+<li class="chapter" data-level="9.2" data-path="pasos-después-de-un-anova.html"><a href="pasos-después-de-un-anova.html#comparaciones-planificadas"><i class="fa fa-check"></i><b>9.2</b> Comparaciones planificadas</a></li>
+<li class="chapter" data-level="9.3" data-path="pasos-después-de-un-anova.html"><a href="pasos-después-de-un-anova.html#cálculos-con-r"><i class="fa fa-check"></i><b>9.3</b> Cálculos con R</a></li>
+<li class="chapter" data-level="9.4" data-path="pasos-después-de-un-anova.html"><a href="pasos-después-de-un-anova.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>9.4</b> Pruebas post-hoc</a></li>
+<li class="chapter" data-level="9.5" data-path="pasos-después-de-un-anova.html"><a href="pasos-después-de-un-anova.html#cálculos-con-r-1"><i class="fa fa-check"></i><b>9.5</b> Cálculos con R</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="otros-anova.html"><a href="otros-anova.html"><i class="fa fa-check"></i><b>10</b> Otros ANOVA</a><ul>
+<li class="chapter" data-level="10.1" data-path="otros-anova.html"><a href="otros-anova.html#tipos-de-anova"><i class="fa fa-check"></i><b>10.1</b> Tipos de ANOVA</a></li>
+<li class="chapter" data-level="10.2" data-path="otros-anova.html"><a href="otros-anova.html#ejemplo-de-anova-factorial"><i class="fa fa-check"></i><b>10.2</b> Ejemplo de ANOVA factorial</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>11</b> Otros análisis</a><ul>
+<li class="chapter" data-level="11.1" data-path="otros-análisis.html"><a href="otros-análisis.html#análisis-de-proporciones"><i class="fa fa-check"></i><b>11.1</b> Análisis de proporciones</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Estadística con R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="otros-anova" class="section level1">
+<h1><span class="header-section-number">Capítulo 10</span> Otros ANOVA</h1>
+<p>En este capítulo vamos a revisar que otros tipos de ANOVA podemos realizar.</p>
+<div id="tipos-de-anova" class="section level2">
+<h2><span class="header-section-number">10.1</span> Tipos de ANOVA</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=ha_fahDpbSg" target="_blank">video (13')</a> y trata de responder:</p>
+<ul>
+<li>¿De qué depende el tipo de ANOVA que utilicemos?</li>
+</ul>
+</div>
+<div id="ejemplo-de-anova-factorial" class="section level2">
+<h2><span class="header-section-number">10.2</span> Ejemplo de ANOVA factorial</h2>
+<p>Ahora vamos a hacer un análisis de ANOVA factorial. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
+
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(Hmisc)
+<span class="kw">library</span>(Rmisc)
+<span class="kw">library</span>(effsize)
+<span class="kw">library</span>(pastecs)
+<span class="kw">library</span>(reshape2)
+<span class="kw">library</span>(car)
+<span class="kw">library</span>(effsize)</code></pre></div>
+<p>Primero importamos el set de datos y le damos una mirada.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gogglesData &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/goggle_beer_effect.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
+<span class="kw">head</span>(gogglesData)</code></pre></div>
+<pre><code>##   gender alcohol attractiveness
+## 1 Female    None             65
+## 2 Female    None             70
+## 3 Female    None             60
+## 4 Female    None             60
+## 5 Female    None             60
+## 6 Female    None             55</code></pre>
+<p>Enseguida es útil decirle a R que variables corresponden a factores.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gogglesData<span class="op">$</span>gender &lt;-<span class="st"> </span><span class="kw">factor</span>(gogglesData<span class="op">$</span>gender)
+gogglesData<span class="op">$</span>alcohol &lt;-<span class="st"> </span><span class="kw">factor</span>(gogglesData<span class="op">$</span>alcohol)
+
+<span class="kw">str</span>(gogglesData)</code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    48 obs. of  3 variables:
+##  $ gender        : Factor w/ 2 levels &quot;Female&quot;,&quot;Male&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ alcohol       : Factor w/ 3 levels &quot;2 Pints&quot;,&quot;4 Pints&quot;,..: 3 3 3 3 3 3 3 3 1 1 ...
+##  $ attractiveness: int  65 70 60 60 60 55 60 55 70 65 ...</code></pre>
+<p>También podemos cambiar el nombre de las variables si nos facilita la tarea de hacer gráficos por ejemplo.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(gogglesData<span class="op">$</span>alcohol)[<span class="kw">match</span>(<span class="st">&quot;None&quot;</span>, <span class="kw">levels</span>(gogglesData<span class="op">$</span>alcohol))] &lt;-<span class="st"> &quot;P0&quot;</span>
+<span class="kw">levels</span>(gogglesData<span class="op">$</span>alcohol)[<span class="kw">match</span>(<span class="st">&quot;2 Pints&quot;</span>, <span class="kw">levels</span>(gogglesData<span class="op">$</span>alcohol))] &lt;-<span class="st"> &quot;P2&quot;</span>
+<span class="kw">levels</span>(gogglesData<span class="op">$</span>alcohol)[<span class="kw">match</span>(<span class="st">&quot;4 Pints&quot;</span>, <span class="kw">levels</span>(gogglesData<span class="op">$</span>alcohol))] &lt;-<span class="st"> &quot;P4&quot;</span>
+
+<span class="kw">str</span>(gogglesData)</code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    48 obs. of  3 variables:
+##  $ gender        : Factor w/ 2 levels &quot;Female&quot;,&quot;Male&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ alcohol       : Factor w/ 3 levels &quot;P2&quot;,&quot;P4&quot;,&quot;P0&quot;: 3 3 3 3 3 3 3 3 1 1 ...
+##  $ attractiveness: int  65 70 60 60 60 55 60 55 70 65 ...</code></pre>
+<p>Fíjate que el nivel base quedó al final.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(gogglesData<span class="op">$</span>alcohol)</code></pre></div>
+<pre><code>## [1] &quot;P2&quot; &quot;P4&quot; &quot;P0&quot;</code></pre>
+<p>Necesitamos reordenar los niveles para este factor.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gogglesData<span class="op">$</span>alcohol &lt;-<span class="st"> </span><span class="kw">factor</span>(gogglesData<span class="op">$</span>alcohol,
+                              <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;P0&quot;</span>, <span class="st">&quot;P2&quot;</span>, <span class="st">&quot;P4&quot;</span>))
+<span class="kw">levels</span>(gogglesData<span class="op">$</span>alcohol)</code></pre></div>
+<pre><code>## [1] &quot;P0&quot; &quot;P2&quot; &quot;P4&quot;</code></pre>
+<p>Luego, podemos hacer algunos gráficos para visualizar los efectos. Por ejemplo, podemos hacer un histograma de los valores de atractivo en función del género y del consumo de alcohol.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_boxplot1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(gogglesData, <span class="kw">aes</span>(alcohol, attractiveness)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>gender) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Consumo de alcohol&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Atractivo promedio (%)&quot;</span>)
+fig_boxplot1</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-182-1.png" width="672" /></p>
+<p>Este mismo gráfico, valores de atractivo en función del género y del consumo de alcohol, se puede hacer en formato de líneas.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_linesplot1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(gogglesData, <span class="kw">aes</span>(alcohol, attractiveness, <span class="dt">colour =</span> gender)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>, <span class="kw">aes</span>(<span class="dt">group=</span> gender)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.data =</span> mean_cl_boot, <span class="dt">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="dt">width =</span> <span class="fl">0.2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Consumo de alcohol&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Atractivo promedio (%)&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;Gender&quot;</span>) </code></pre></div>
+<pre><code>## Warning: `fun.y` is deprecated. Use `fun` instead.
+## `fun.y` is deprecated. Use `fun` instead.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_linesplot1</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-183-1.png" width="672" /></p>
+<p>O en formato de barras.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_barplot1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(gogglesData, <span class="kw">aes</span>(alcohol, attractiveness, <span class="dt">fill =</span> gender)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.data =</span> mean_cl_normal, <span class="dt">geom =</span> <span class="st">&quot;errorbar&quot;</span>,
+               <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="dt">width=</span><span class="fl">0.90</span>), <span class="dt">width =</span> <span class="fl">0.2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;bar&quot;</span>, <span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Consumo de alcohol&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Atractivo promedio (%)&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;Gender&quot;</span>) </code></pre></div>
+<pre><code>## Warning: `fun.y` is deprecated. Use `fun` instead.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_barplot1</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-184-1.png" width="672" /></p>
+<p>Estos gráfico son muy informativos. ¿Que ves? Una manera de visualizar los efectos que estamos estudiando podemos separar los efectos. Esto es, podemos visualizar los niveles de atractivo en función de un sólo factor.</p>
+<p>Por ejemplo, podemos visualizar el efecto del género en los niveles de atractivo. Este efecto corresponde al <em>efecto principal</em> del género.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_bargender1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(gogglesData, <span class="kw">aes</span>(gender, attractiveness)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;bar&quot;</span>, 
+                   <span class="dt">fill =</span> <span class="st">&quot;White&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;Black&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.data =</span> mean_cl_normal, <span class="dt">geom =</span> <span class="st">&quot;pointrange&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Género&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Atractivo promedio (%)&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">80</span>, <span class="dt">by =</span> <span class="dv">10</span>))</code></pre></div>
+<pre><code>## Warning: `fun.y` is deprecated. Use `fun` instead.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_bargender1</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-185-1.png" width="672" /></p>
+<p>También podemos visualizar el efecto del consumo de alcohol en los niveles de atractivo. Este efecto corresponde al <em>efecto principal</em> del consumo de alcohol.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_barbeer1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(gogglesData, <span class="kw">aes</span>(alcohol, attractiveness)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;bar&quot;</span>, 
+                   <span class="dt">fill =</span> <span class="st">&quot;White&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;Black&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.data =</span> mean_cl_normal, <span class="dt">geom =</span> <span class="st">&quot;pointrange&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Consumo de alcohol&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Atractivo promedio (%)&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">80</span>, <span class="dt">by =</span> <span class="dv">10</span>))</code></pre></div>
+<pre><code>## Warning: `fun.y` is deprecated. Use `fun` instead.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_barbeer1</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-186-1.png" width="672" /></p>
+<p>Antes de hacer los análisis propiamente tal podemos describir un poco los datos y evaluar los supuestos de la estadística parámetrica.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">describ &lt;-<span class="st"> </span><span class="kw">by</span>(gogglesData<span class="op">$</span>attractiveness, 
+   gogglesData<span class="op">$</span>gender, stat.desc)
+<span class="kw">lapply</span>(describ, round, <span class="dv">2</span>)</code></pre></div>
+<pre><code>## $Female
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
+##        24.00         0.00         0.00        50.00        70.00        20.00      1445.00        60.00 
+##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        60.21         1.29         2.68        40.17         6.34         0.11 
+## 
+## $Male
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
+##        24.00         0.00         0.00        20.00        85.00        65.00      1355.00        60.00 
+##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        56.46         3.78         7.81       342.35        18.50         0.33</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">describ &lt;-<span class="st"> </span><span class="kw">by</span>(gogglesData<span class="op">$</span>attractiveness, 
+              gogglesData<span class="op">$</span>alcohol, stat.desc)
+<span class="kw">lapply</span>(describ, round, <span class="dv">2</span>)</code></pre></div>
+<pre><code>## $P0
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
+##        16.00         0.00         0.00        50.00        80.00        30.00      1020.00        62.50 
+##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        63.75         2.12         4.51        71.67         8.47         0.13 
+## 
+## $P2
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
+##        16.00         0.00         0.00        45.00        85.00        40.00      1035.00        65.00 
+##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        64.69         2.48         5.28        98.23         9.91         0.15 
+## 
+## $P4
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
+##        16.00         0.00         0.00        20.00        70.00        50.00       745.00        50.00 
+##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        46.56         3.59         7.64       205.73        14.34         0.31</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">describ &lt;-<span class="st"> </span><span class="kw">by</span>(gogglesData<span class="op">$</span>attractiveness, 
+              <span class="kw">list</span>(gogglesData<span class="op">$</span>alcohol, gogglesData<span class="op">$</span>gender), 
+              stat.desc, <span class="dt">basic =</span> <span class="ot">FALSE</span>)
+<span class="kw">lapply</span>(describ, round, <span class="dv">2</span>)</code></pre></div>
+<pre><code>## [[1]]
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        60.00        60.62         1.75         4.14        24.55         4.96         0.08 
+## 
+## [[2]]
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        62.50        62.50         2.31         5.47        42.86         6.55         0.10 
+## 
+## [[3]]
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        55.00        57.50         2.50         5.91        50.00         7.07         0.12 
+## 
+## [[4]]
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        67.50        66.88         3.65         8.64       106.70        10.33         0.15 
+## 
+## [[5]]
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        67.50        66.88         4.43        10.47       156.70        12.52         0.19 
+## 
+## [[6]]
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        32.50        35.62         3.83         9.06       117.41        10.84         0.30</code></pre>
+<p>También podemos evaluar la homogenididad de varianza.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">leveneTest</span>(gogglesData<span class="op">$</span>attractiveness, 
+           gogglesData<span class="op">$</span>gender, <span class="dt">center =</span> median)</code></pre></div>
+<pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
+##       Df F value   Pr(&gt;F)    
+## group  1  19.979 5.08e-05 ***
+##       46                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">leveneTest</span>(gogglesData<span class="op">$</span>attractiveness, 
+           gogglesData<span class="op">$</span>alcohol, <span class="dt">center =</span> median)</code></pre></div>
+<pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
+##       Df F value Pr(&gt;F)
+## group  2  2.3238 0.1095
+##       45</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">leveneTest</span>(gogglesData<span class="op">$</span>attractiveness, 
+           <span class="kw">interaction</span>(gogglesData<span class="op">$</span>alcohol, gogglesData<span class="op">$</span>gender),
+           <span class="dt">center =</span> median)</code></pre></div>
+<pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
+##       Df F value Pr(&gt;F)
+## group  5  1.4252 0.2351
+##       42</code></pre>
+<p>Antes de hacer el análisis de ANOVA podemos aprovechar de setear las comparaciones planificadas. ¿Para un diseño de este tipo que comparaciones harías?</p>
+<p>Una posibilidad es evaluar el efecto del género. Es decir, comparar hombres versus mujeres. Para hacer esto usamos un dummy coding muy simple. ¿Por qué simple? Porque simplemente comparas uno contra el otro. Fijate en el orden de los niveles en cada factor.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(gogglesData<span class="op">$</span>gender)</code></pre></div>
+<pre><code>## [1] &quot;Female&quot; &quot;Male&quot;</code></pre>
+<p>Entonces, puedes crear el siguiente constraste</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">.M_vs_F &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)
+.M_vs_F</code></pre></div>
+<pre><code>## [1] -1  1</code></pre>
+<p>Otra posibilidad es evaluar el efecto del consumo de alcohol. Es decir, comparar agua versus pint versus 2 pints.Para hacer esto usamos otro dummy coding. Para hacer estos de nuevo nos fijamos en el orden de los niveles en cada factor.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(gogglesData<span class="op">$</span>alcohol)</code></pre></div>
+<pre><code>## [1] &quot;P0&quot; &quot;P2&quot; &quot;P4&quot;</code></pre>
+<p>¿Que efectos podríamos querer ver? Por ejemplo, el efecto de ingerir alcohol.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">.Non_vs_P &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>)
+.Non_vs_P</code></pre></div>
+<pre><code>## [1] -2  1  1</code></pre>
+<p>Otro efecto que podemos estudiar es la diferencia producidad por 1 pint versus 2 pints.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">.P2_vs_P4 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)
+.P2_vs_P4</code></pre></div>
+<pre><code>## [1]  0 -1  1</code></pre>
+<p>Una vez que creamos los contraste lo ponemos en un vector.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(gogglesData<span class="op">$</span>alcohol) &lt;-<span class="st"> </span><span class="kw">cbind</span>(.Non_vs_P, .P2_vs_P4)
+<span class="kw">contrasts</span>(gogglesData<span class="op">$</span>gender) &lt;-<span class="st"> </span><span class="kw">cbind</span>(.M_vs_F)</code></pre></div>
+<p>Y los inyectamos en las bases de datos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contrasts</span>(gogglesData<span class="op">$</span>alcohol) &lt;-<span class="st"> </span><span class="kw">cbind</span>(.Non_vs_P, .P2_vs_P4)
+<span class="kw">contrasts</span>(gogglesData<span class="op">$</span>gender) &lt;-<span class="st"> </span><span class="kw">cbind</span>(.M_vs_F)</code></pre></div>
+<p>Luego puedes verificar para el factor género, y ...</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gogglesData<span class="op">$</span>gender</code></pre></div>
+<pre><code>##  [1] Female Female Female Female Female Female Female Female Female Female Female Female Female Female
+## [15] Female Female Female Female Female Female Female Female Female Female Male   Male   Male   Male  
+## [29] Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male  
+## [43] Male   Male   Male   Male   Male   Male  
+## attr(,&quot;contrasts&quot;)
+##        .M_vs_F
+## Female      -1
+## Male         1
+## Levels: Female Male</code></pre>
+<p>... consumo de alcohol</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gogglesData<span class="op">$</span>alcohol</code></pre></div>
+<pre><code>##  [1] P0 P0 P0 P0 P0 P0 P0 P0 P2 P2 P2 P2 P2 P2 P2 P2 P4 P4 P4 P4 P4 P4 P4 P4 P0 P0 P0 P0 P0 P0 P0 P0 P2
+## [34] P2 P2 P2 P2 P2 P2 P2 P4 P4 P4 P4 P4 P4 P4 P4
+## attr(,&quot;contrasts&quot;)
+##    .Non_vs_P .P2_vs_P4
+## P0        -2         0
+## P2         1        -1
+## P4         1         1
+## Levels: P0 P2 P4</code></pre>
+<p>Una vez que hemos seteado nuestros contrastes podemos hacer el modelo y visualizar los resultados. En el modelo tratamos de predecir los valores de atractivo en base al género, el consumo de alcohol y la interacción entre ambos factores. Para ello se usa un simbolo (*) que indica que queremos analizar los efectos principales y el efecto de interacción.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gogglesModel &lt;-<span class="st"> </span><span class="kw">aov</span>(attractiveness <span class="op">~</span><span class="st"> </span>gender<span class="op">*</span>alcohol, gogglesData)
+<span class="kw">Anova</span>(gogglesModel, <span class="dt">type=</span><span class="st">&quot;III&quot;</span>)</code></pre></div>
+<pre><code>## Anova Table (Type III tests)
+## 
+## Response: attractiveness
+##                Sum Sq Df   F value    Pr(&gt;F)    
+## (Intercept)    163333  1 1967.0251 &lt; 2.2e-16 ***
+## gender            169  1    2.0323    0.1614    
+## alcohol          3332  2   20.0654 7.649e-07 ***
+## gender:alcohol   1978  2   11.9113 7.987e-05 ***
+## Residuals        3488 42                        
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Si miras los valores de F verás que hay un efecto principal del alcohol y un efecto de interacción género-consumo de alcohol. El efecto principal que tenemos aquí refleja que hay un efecto del alcohol (mira el gráfico). Pero, fíjate que el efecto del alcohol en realidad esta calificado por una interación con el género. Es decir, el efecto del consumo de alcohol sobre los niveles de atractivo no son iguales para los dos géneros. En otras palabras. A la luz de una interacción no tiene sentido interpretar el efecto principal.</p>
+<p>¿Qué indican los resultados? Ten en cuenta los resultados estadísticos y el gráfico.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_linesplot1</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-203-1.png" width="672" /></p>
+<p>Los resultados muestran que las mujeres mantienen altos estándares en la selección de su pareja sin importar el consumo de alcohol. Los hombres toman 4 pints y terminan con parejas que tienen un menor atractivo. Es decir, ocurre el &quot;goggle bear effect&quot;.</p>
+<p>Veamos las comparaciones planificadas para revisar mayores detalles.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary.lm</span>(gogglesModel)</code></pre></div>
+<pre><code>## 
+## Call:
+## aov(formula = attractiveness ~ gender * alcohol, data = gogglesData)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -21.875  -5.625  -0.625   5.156  19.375 
+## 
+## Coefficients:
+##                                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                      58.333      1.315  44.351  &lt; 2e-16 ***
+## gender.M_vs_F                    -1.875      1.315  -1.426 0.161382    
+## alcohol.Non_vs_P                 -2.708      0.930  -2.912 0.005727 ** 
+## alcohol.P2_vs_P4                 -9.062      1.611  -5.626 1.37e-06 ***
+## gender.M_vs_F:alcohol.Non_vs_P   -2.500      0.930  -2.688 0.010258 *  
+## gender.M_vs_F:alcohol.P2_vs_P4   -6.562      1.611  -4.074 0.000201 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 9.112 on 42 degrees of freedom
+## Multiple R-squared:  0.6111, Adjusted R-squared:  0.5648 
+## F-statistic:  13.2 on 5 and 42 DF,  p-value: 9.609e-08</code></pre>
+<p>¿Qué vemos? Primero. No hay un impacto del género (gender.M_vs_F).</p>
+<p>Segundo. Parece que cualquier cantidad de alcohol afecta la percepción de atractivo cuando se compara con una condición sin alcohol (alcohol.Non_vs_P). Sin embargo, esto no es real. La comparación es significativa porque considera el efecto combinado de 2 y 4 pints, y las 4 pints tiene un efecto que arrastra el efecto total. De hecho si miramos el contraste de 2 versus 4 pints (alcohol.P2_vs_P4) vemos que hay un diferencia entre 2 y 4 pints. El promedio del grupo de 2 pints (64.69) es diferente del promedio del grupo de 4 pints (46.56). Esta diferencia es de -18.13 (46.56 - 64.69). El beta es este valor dividido por el número de grupos involucrados en el contraste (-18.13/2 = 9.06).</p>
+<p>Tercero. En las interacciones (gender.M_vs_F:alcohol.Non_vs_P y gender.M_vs_F:alcohol.P2_vs_P4) se evalúan sí los efectos del consumo de alcohol son diferentes entre hombres y mujeres. Sabemos que esta interacción refleja que el efecto del consumo de alcohol depende del género. Al igual que en el punto anterior observamos que hay un diferencia entre consumir 4 pints y 2 pints, pero esto ocurre sólo para los hombres.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="pasos-después-de-un-anova.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="otros-análisis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/doctoradoenpsicologiautal/estadistica/edit/master/10_factANOVA.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/doctoradoenpsicologiautal/estadistica/blob/master/10_factANOVA.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

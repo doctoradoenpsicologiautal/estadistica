@@ -42,7 +42,7 @@ de-la-muestra-a-la-población
 la-muestra-en-la-vida-real
 los-intervalos-de-confianza-1
 los-intervalos-de-confianza-2
-comparar-dos-grupos-t-test
+t-test
 cómo-comparamos-datos-de-dos-grupos
 la-distribución-normal-para-dos-grupos
 la-prueba-de-hipótesis
@@ -65,5 +65,8 @@ comparaciones-planificadas
 cálculos-con-r
 pruebas-post-hoc
 cálculos-con-r-1
+otros-anova
+tipos-de-anova
+ejemplo-de-anova-factorial
 otros-análisis
 análisis-de-proporciones

@@ -1,6 +1,6 @@
-# Comparar dos grupos (t-test)
+# T-test
 
-En este capítulo vamos a revisar el típico t-test.
+En este capítulo vamos a revisar la típica prueba para comparar dos grupos, el t-test.
 
 ## ¿Cómo comparamos datos de dos grupos?
 Revisa este <a href="https://www.youtube.com/watch?v=3JKMXCpQvzw" target="_blank">video (10')</a> y trata de responder:

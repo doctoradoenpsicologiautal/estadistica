@@ -1,0 +1,265 @@
+# Otros ANOVA
+
+En este capítulo vamos a revisar que otros tipos de ANOVA podemos realizar.
+
+## Tipos de ANOVA
+Revisa este <a href="https://www.youtube.com/watch?v=ha_fahDpbSg" target="_blank">video (13')</a> y trata de responder:
+
+- ¿De qué depende el tipo de ANOVA que utilicemos?
+
+## Ejemplo de ANOVA factorial
+
+Ahora vamos a hacer un análisis de ANOVA factorial. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).
+
+```{r}
+setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+
+library(ggplot2)
+library(Hmisc)
+library(Rmisc)
+library(effsize)
+library(pastecs)
+library(reshape2)
+library(car)
+library(effsize)
+```
+
+Primero importamos el set de datos y le damos una mirada.
+
+```{r}
+gogglesData <- read.csv("data/goggle_beer_effect.csv", header = TRUE)
+head(gogglesData)
+```
+
+Enseguida es útil decirle a R que variables corresponden a factores.
+
+```{r}
+gogglesData$gender <- factor(gogglesData$gender)
+gogglesData$alcohol <- factor(gogglesData$alcohol)
+
+str(gogglesData)
+```
+
+También podemos cambiar el nombre de las variables si nos facilita la tarea de hacer gráficos por ejemplo.
+
+```{r}
+levels(gogglesData$alcohol)[match("None", levels(gogglesData$alcohol))] <- "P0"
+levels(gogglesData$alcohol)[match("2 Pints", levels(gogglesData$alcohol))] <- "P2"
+levels(gogglesData$alcohol)[match("4 Pints", levels(gogglesData$alcohol))] <- "P4"
+
+str(gogglesData)
+```
+
+Fíjate que el nivel base quedó al final.
+
+```{r}
+levels(gogglesData$alcohol)
+```
+
+Necesitamos reordenar los niveles para este factor.
+
+```{r}
+gogglesData$alcohol <- factor(gogglesData$alcohol,
+                              levels = c("P0", "P2", "P4"))
+levels(gogglesData$alcohol)
+```
+
+Luego, podemos hacer algunos gráficos para visualizar los efectos.
+Por ejemplo, podemos hacer un histograma de los valores de atractivo en función del género y del consumo de alcohol.
+
+```{r}
+fig_boxplot1 <- ggplot(gogglesData, aes(alcohol, attractiveness)) +
+  geom_boxplot() + 
+  facet_wrap(~gender) + 
+  labs(x = "Consumo de alcohol", y = "Atractivo promedio (%)")
+fig_boxplot1
+
+```
+
+Este mismo gráfico, valores de atractivo en función del género y del consumo de alcohol, se puede hacer en formato de líneas.
+
+
+```{r}
+fig_linesplot1 <- ggplot(gogglesData, aes(alcohol, attractiveness, colour = gender)) +
+  stat_summary(fun.y = mean, geom = "point") +
+  stat_summary(fun.y = mean, geom = "line", aes(group= gender)) +
+  stat_summary(fun.data = mean_cl_boot, geom = "errorbar", width = 0.2) +
+  labs(x = "Consumo de alcohol", y = "Atractivo promedio (%)", colour = "Gender") 
+fig_linesplot1
+```
+
+O en formato de barras.
+
+
+```{r}
+fig_barplot1 <- ggplot(gogglesData, aes(alcohol, attractiveness, fill = gender)) +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar",
+               position=position_dodge(width=0.90), width = 0.2) +
+  stat_summary(fun.y = mean, geom = "bar", position="dodge") +
+  labs(x = "Consumo de alcohol", y = "Atractivo promedio (%)", fill = "Gender") 
+fig_barplot1
+```
+
+Estos gráfico son muy informativos. ¿Que ves?
+Una manera de visualizar los efectos que estamos estudiando podemos separar los efectos. Esto es, podemos visualizar los niveles de atractivo en función de un sólo factor.
+
+Por ejemplo, podemos visualizar el efecto del género en los niveles de atractivo.
+Este efecto corresponde al *efecto principal* del género.
+
+```{r}
+fig_bargender1 <- ggplot(gogglesData, aes(gender, attractiveness)) +
+  stat_summary(fun.y = mean, geom = "bar", 
+                   fill = "White", colour = "Black") +
+  stat_summary(fun.data = mean_cl_normal, geom = "pointrange") +
+  labs(x = "Género", y = "Atractivo promedio (%)") +
+  scale_y_continuous(breaks=seq(0,80, by = 10))
+fig_bargender1
+```
+
+También podemos visualizar el efecto del consumo de alcohol en los niveles de atractivo.
+Este efecto corresponde al *efecto principal* del consumo de alcohol.
+
+```{r}
+fig_barbeer1 <- ggplot(gogglesData, aes(alcohol, attractiveness)) +
+  stat_summary(fun.y = mean, geom = "bar", 
+                   fill = "White", colour = "Black") +
+  stat_summary(fun.data = mean_cl_normal, geom = "pointrange") +
+  labs(x = "Consumo de alcohol", y = "Atractivo promedio (%)") +
+  scale_y_continuous(breaks=seq(0,80, by = 10))
+fig_barbeer1
+```
+
+Antes de hacer los análisis propiamente tal podemos describir un poco los datos y evaluar los supuestos de la estadística parámetrica.
+
+```{r}
+describ <- by(gogglesData$attractiveness, 
+   gogglesData$gender, stat.desc)
+lapply(describ, round, 2)
+```
+
+```{r}
+describ <- by(gogglesData$attractiveness, 
+              gogglesData$alcohol, stat.desc)
+lapply(describ, round, 2)
+```
+
+```{r}
+describ <- by(gogglesData$attractiveness, 
+              list(gogglesData$alcohol, gogglesData$gender), 
+              stat.desc, basic = FALSE)
+lapply(describ, round, 2)
+```
+
+También podemos evaluar la homogenididad de varianza.
+
+```{r}
+leveneTest(gogglesData$attractiveness, 
+           gogglesData$gender, center = median)
+```
+
+```{r}
+leveneTest(gogglesData$attractiveness, 
+           gogglesData$alcohol, center = median)
+```
+
+
+```{r}
+leveneTest(gogglesData$attractiveness, 
+           interaction(gogglesData$alcohol, gogglesData$gender),
+           center = median)
+```
+
+Antes de hacer el análisis de ANOVA podemos aprovechar de setear las comparaciones planificadas.
+¿Para un diseño de este tipo que comparaciones harías?
+
+Una posibilidad es evaluar el efecto del género. Es decir, comparar hombres versus mujeres.
+Para hacer esto usamos un dummy coding muy simple. ¿Por qué simple? Porque simplemente comparas uno contra el otro. Fijate en el orden de los niveles en cada factor.
+
+```{r}
+levels(gogglesData$gender)
+```
+
+Entonces, puedes crear el siguiente constraste
+
+```{r}
+.M_vs_F <- c(-1, 1)
+.M_vs_F
+```
+
+Otra posibilidad es evaluar el efecto del consumo de alcohol. Es decir, comparar agua versus  pint versus 2 pints.Para hacer esto usamos otro dummy coding. Para hacer estos de nuevo nos fijamos en el orden de los niveles en cada factor.
+
+```{r}
+levels(gogglesData$alcohol)
+```
+
+¿Que efectos podríamos querer ver? Por ejemplo, el efecto de ingerir alcohol.
+
+```{r}
+.Non_vs_P <- c(-2, 1, 1)
+.Non_vs_P
+```
+
+Otro efecto que podemos estudiar es la diferencia producidad por 1 pint versus 2 pints.
+
+```{r}
+.P2_vs_P4 <- c(0, -1, 1)
+.P2_vs_P4
+```
+
+Una vez que creamos los contraste lo ponemos en un vector.
+
+```{r}
+contrasts(gogglesData$alcohol) <- cbind(.Non_vs_P, .P2_vs_P4)
+contrasts(gogglesData$gender) <- cbind(.M_vs_F)
+```
+
+Y los inyectamos en las bases de datos.
+
+```{r}
+contrasts(gogglesData$alcohol) <- cbind(.Non_vs_P, .P2_vs_P4)
+contrasts(gogglesData$gender) <- cbind(.M_vs_F)
+```
+
+Luego puedes verificar para el factor género, y ... 
+
+```{r}
+gogglesData$gender
+```
+
+... consumo de alcohol
+
+```{r}
+gogglesData$alcohol
+```
+
+Una vez que hemos seteado nuestros contrastes podemos hacer el modelo y visualizar los resultados.
+En el modelo tratamos de predecir los valores de atractivo en base al género, el consumo de alcohol y la interacción entre ambos factores. Para ello se usa un simbolo (*) que indica que queremos analizar los efectos principales y el efecto de interacción.
+
+```{r}
+gogglesModel <- aov(attractiveness ~ gender*alcohol, gogglesData)
+Anova(gogglesModel, type="III")
+```
+
+Si miras los valores de F verás que hay un efecto principal del alcohol y un efecto de interacción género-consumo de alcohol. El efecto principal que tenemos aquí refleja que hay un efecto del alcohol (mira el gráfico). Pero, fíjate que el efecto del alcohol en realidad esta calificado por una interación con el género. Es decir, el efecto del consumo de alcohol sobre los niveles de atractivo no son iguales para los dos géneros. En otras palabras. A la luz de una interacción no tiene sentido interpretar el efecto principal.
+
+¿Qué indican los resultados? Ten en cuenta los resultados estadísticos y el gráfico.
+
+```{r}
+fig_linesplot1
+```
+
+Los resultados muestran que las mujeres mantienen altos estándares en la selección de su pareja sin importar el consumo de alcohol. Los hombres toman 4 pints y terminan con parejas que tienen un menor atractivo. Es decir, ocurre el "goggle bear effect".
+
+
+Veamos las comparaciones planificadas para revisar mayores detalles.
+
+```{r}
+summary.lm(gogglesModel)
+```
+
+¿Qué vemos?
+Primero. No hay un impacto del género (gender.M_vs_F).
+
+Segundo. Parece que cualquier cantidad de alcohol afecta la percepción de atractivo cuando se compara con una condición sin alcohol (alcohol.Non_vs_P). Sin embargo, esto no es real. La comparación es significativa porque considera el efecto combinado de 2 y 4 pints, y las 4 pints tiene un efecto que arrastra el efecto total. De hecho si miramos el contraste de 2 versus 4 pints (alcohol.P2_vs_P4) vemos que hay un diferencia entre 2 y 4 pints. El promedio del grupo de 2 pints (64.69) es diferente del promedio del grupo de 4 pints (46.56). Esta diferencia es de -18.13 (46.56 - 64.69). El beta es este valor dividido por el número de grupos involucrados en el contraste (-18.13/2 = 9.06).
+
+Tercero. En las interacciones (gender.M_vs_F:alcohol.Non_vs_P y gender.M_vs_F:alcohol.P2_vs_P4) se evalúan sí los efectos del consumo de alcohol son diferentes entre hombres y mujeres. Sabemos que esta interacción refleja que el efecto del consumo de alcohol depende del género. Al igual que en el punto anterior observamos que hay un diferencia entre consumir 4 pints y 2 pints, pero esto ocurre sólo para los hombres.
