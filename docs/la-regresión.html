@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="t-test.html"/>
-<link rel="next" href="comparar-más-de-dos-grupos-anova.html"/>
+<link rel="next" href="anova.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -170,11 +170,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.4" data-path="la-regresión.html"><a href="la-regresión.html#la-regresión-con-r"><i class="fa fa-check"></i><b>7.4</b> La regresión con R</a></li>
 <li class="chapter" data-level="7.5" data-path="la-regresión.html"><a href="la-regresión.html#la-correlación-con-r"><i class="fa fa-check"></i><b>7.5</b> La correlación con R</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="comparar-más-de-dos-grupos-anova.html"><a href="comparar-más-de-dos-grupos-anova.html"><i class="fa fa-check"></i><b>8</b> Comparar más de dos grupos (ANOVA)</a><ul>
-<li class="chapter" data-level="8.1" data-path="comparar-más-de-dos-grupos-anova.html"><a href="comparar-más-de-dos-grupos-anova.html#por-qué-necesitamos-un-anova"><i class="fa fa-check"></i><b>8.1</b> ¿Por qué necesitamos un ANOVA?</a></li>
-<li class="chapter" data-level="8.2" data-path="comparar-más-de-dos-grupos-anova.html"><a href="comparar-más-de-dos-grupos-anova.html#el-anova-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>8.2</b> El ANOVA como un modelo líneal general</a></li>
-<li class="chapter" data-level="8.3" data-path="comparar-más-de-dos-grupos-anova.html"><a href="comparar-más-de-dos-grupos-anova.html#la-lógica-del-anova"><i class="fa fa-check"></i><b>8.3</b> La lógica del ANOVA</a></li>
-<li class="chapter" data-level="8.4" data-path="comparar-más-de-dos-grupos-anova.html"><a href="comparar-más-de-dos-grupos-anova.html#el-anova-con-r"><i class="fa fa-check"></i><b>8.4</b> El ANOVA con R</a></li>
+<li class="chapter" data-level="8" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>8</b> ANOVA</a><ul>
+<li class="chapter" data-level="8.1" data-path="anova.html"><a href="anova.html#por-qué-necesitamos-un-anova"><i class="fa fa-check"></i><b>8.1</b> ¿Por qué necesitamos un ANOVA?</a></li>
+<li class="chapter" data-level="8.2" data-path="anova.html"><a href="anova.html#el-anova-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>8.2</b> El ANOVA como un modelo líneal general</a></li>
+<li class="chapter" data-level="8.3" data-path="anova.html"><a href="anova.html#la-lógica-del-anova"><i class="fa fa-check"></i><b>8.3</b> La lógica del ANOVA</a></li>
+<li class="chapter" data-level="8.4" data-path="anova.html"><a href="anova.html#el-anova-con-r"><i class="fa fa-check"></i><b>8.4</b> El ANOVA con R</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="pasos-después-de-un-anova.html"><a href="pasos-después-de-un-anova.html"><i class="fa fa-check"></i><b>9</b> Pasos después de un ANOVA</a><ul>
 <li class="chapter" data-level="9.1" data-path="pasos-después-de-un-anova.html"><a href="pasos-después-de-un-anova.html#qué-hacemos-después-de-un-anova"><i class="fa fa-check"></i><b>9.1</b> ¿Qué hacemos después de un ANOVA?</a></li>
@@ -185,7 +185,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="10" data-path="otros-anova.html"><a href="otros-anova.html"><i class="fa fa-check"></i><b>10</b> Otros ANOVA</a><ul>
 <li class="chapter" data-level="10.1" data-path="otros-anova.html"><a href="otros-anova.html#tipos-de-anova"><i class="fa fa-check"></i><b>10.1</b> Tipos de ANOVA</a></li>
-<li class="chapter" data-level="10.2" data-path="otros-anova.html"><a href="otros-anova.html#ejemplo-de-anova-factorial"><i class="fa fa-check"></i><b>10.2</b> Ejemplo de ANOVA factorial</a></li>
+<li class="chapter" data-level="10.2" data-path="otros-anova.html"><a href="otros-anova.html#anova-factorial"><i class="fa fa-check"></i><b>10.2</b> ANOVA factorial</a></li>
+<li class="chapter" data-level="10.3" data-path="otros-anova.html"><a href="otros-anova.html#anova-de-medidas-repetidas"><i class="fa fa-check"></i><b>10.3</b> ANOVA de medidas repetidas</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>11</b> Otros análisis</a><ul>
 <li class="chapter" data-level="11.1" data-path="otros-análisis.html"><a href="otros-análisis.html#análisis-de-proporciones"><i class="fa fa-check"></i><b>11.1</b> Análisis de proporciones</a></li>
@@ -266,7 +267,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Cantidad de dinero gastado en publicidad&quot;</span>,
        <span class="dt">y=</span><span class="st">&quot;Ventas&quot;</span>)</code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-120-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-140-1.png" width="672" /></p>
 <p>Lo que nos dice el sentido común, y lo que vemos en el gráfico efectivamente es que a mayor dinero invertido en publicidad debería haber mayores ventas. Es este un buen modelo para predecir el número de ventas a partir del dinero invertido en publicidad? Para analizar estos podemos hacer un modelo lineal con la función <strong>lm</strong>. En esta función usamos la típica relación entre resultado (ouctome) y variable explicativa (predictor), y le indicamos a R que base de datos usamos (datos): newModel &lt;- lm(outcome~predictor, datos) Luego podemos visualizar los resulatdos con la función <strong>summary</strong>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_album &lt;-<span class="st"> </span><span class="kw">lm</span>(ventas <span class="op">~</span><span class="st"> </span>publicidad, <span class="dt">data =</span> album1)
 <span class="kw">summary</span>(m_album)</code></pre></div>
@@ -308,7 +309,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Número de apariciones en la radio&quot;</span>,
        <span class="dt">y=</span><span class="st">&quot;Ventas&quot;</span>)</code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-143-1.png" width="672" /></p>
 <p>Luego podríamos hacer un modelo para entender el impacto de distintos factores en la venta de discos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_album2 &lt;-<span class="st"> </span><span class="kw">lm</span>(ventas <span class="op">~</span><span class="st"> </span>publicidad <span class="op">+</span><span class="st"> </span>radio <span class="op">+</span><span class="st"> </span>eventos, <span class="dt">data =</span> album2)
 <span class="kw">summary</span>(m_album2)</code></pre></div>
@@ -363,7 +364,7 @@ scatter <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;Red&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Niveles de ansiedad&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Desempeño en el examen (%)&quot;</span>)</code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-127-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-147-1.png" width="672" /></p>
 <p>Para hacer una correlación podemos simplemente usar la función <strong>cor</strong> seleccionando nuestras colmunas de interés. Esta función nos devuelve los coeficientes de correlación. Por defecto se ejecuta una correlación de Pearson.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(examData[, <span class="kw">c</span>(<span class="st">&quot;Exam&quot;</span>, <span class="st">&quot;Anxiety&quot;</span>)])</code></pre></div>
 <pre><code>##               Exam    Anxiety
@@ -402,19 +403,19 @@ scatter <span class="op">+</span><span class="st"> </span>
                <span class="dt">xlab =</span> <span class="st">&quot;Niveles de ansiedad &quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Desempeño en el examen (%)&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">15</span>))</code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-151-1.png" width="672" /></p>
 <p>El coeficiente de determinación es una medida que indica la varianza en una variable que es comparida por otra variable. El coeficiente de determinación se puede calcular desde el coeficiente de correlación, elevándolo al cuadrado, y adicionalmente lo podemos multiplicar por 100 para leerlo como porcentaje.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(examData[, <span class="kw">c</span>(<span class="st">&quot;Exam&quot;</span>, <span class="st">&quot;Anxiety&quot;</span>)])<span class="op">^</span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">100</span></code></pre></div>
 <pre><code>##              Exam   Anxiety
 ## Exam    100.00000  19.44752
 ## Anxiety  19.44752 100.00000</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">corr_selected &lt;-<span class="st"> </span>examData <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">select</span>(Revise, Exam, Anxiety) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Revise, Exam, Anxiety) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">cor</span>(<span class="dt">use =</span> <span class="st">&quot;pairwise&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">round</span>(<span class="dv">1</span>)
 
 <span class="kw">ggcorrplot</span>(corr_selected, <span class="dt">type =</span> <span class="st">&quot;lower&quot;</span>, <span class="dt">lab =</span> <span class="ot">TRUE</span>, <span class="dt">show.legend =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-153-1.png" width="672" /></p>
 <p>Un paso mas allá de las correlaciones bivariadas (entre dos variables) son las correlaciones parciales. La correlación nos permiten investigar la asociación entre dos variables, tomando en cuenta una tercera variable. Es decir, estudiamos una correlación entre dos variables controlando por el efecto de una tercera variable.</p>
 <p>Para trabajar esto en R primero vamos a seleccionar algunas columnas de interés.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">examData2 &lt;-<span class="st"> </span>examData[, <span class="kw">c</span>(<span class="st">&quot;Exam&quot;</span>, <span class="st">&quot;Anxiety&quot;</span>, <span class="st">&quot;Revise&quot;</span>)]</code></pre></div>
@@ -444,7 +445,7 @@ scatter <span class="op">+</span><span class="st"> </span>
         </div>
       </div>
 <a href="t-test.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="comparar-más-de-dos-grupos-anova.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="anova.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

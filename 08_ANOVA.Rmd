@@ -1,6 +1,6 @@
-# Comparar más de dos grupos (ANOVA)
+# ANOVA
 
-En este capítulo vamos a revisar el típico análisis de varianza o ANOVA.
+En este capítulo vamos a revisar el típico análisis para comparar más de dos grupos, el ANOVA.
 
 ## ¿Por qué necesitamos un ANOVA?
 Revisa este <a href="https://www.youtube.com/watch?v=hzasDQY0GVk" target="_blank">video (9')</a> y trata de responder:

@@ -7,7 +7,7 @@ Revisa este <a href="https://www.youtube.com/watch?v=ha_fahDpbSg" target="_blank
 
 - ¿De qué depende el tipo de ANOVA que utilicemos?
 
-## Ejemplo de ANOVA factorial
+## ANOVA factorial
 
 Ahora vamos a hacer un análisis de ANOVA factorial. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).
 
@@ -263,3 +263,99 @@ Primero. No hay un impacto del género (gender.M_vs_F).
 Segundo. Parece que cualquier cantidad de alcohol afecta la percepción de atractivo cuando se compara con una condición sin alcohol (alcohol.Non_vs_P). Sin embargo, esto no es real. La comparación es significativa porque considera el efecto combinado de 2 y 4 pints, y las 4 pints tiene un efecto que arrastra el efecto total. De hecho si miramos el contraste de 2 versus 4 pints (alcohol.P2_vs_P4) vemos que hay un diferencia entre 2 y 4 pints. El promedio del grupo de 2 pints (64.69) es diferente del promedio del grupo de 4 pints (46.56). Esta diferencia es de -18.13 (46.56 - 64.69). El beta es este valor dividido por el número de grupos involucrados en el contraste (-18.13/2 = 9.06).
 
 Tercero. En las interacciones (gender.M_vs_F:alcohol.Non_vs_P y gender.M_vs_F:alcohol.P2_vs_P4) se evalúan sí los efectos del consumo de alcohol son diferentes entre hombres y mujeres. Sabemos que esta interacción refleja que el efecto del consumo de alcohol depende del género. Al igual que en el punto anterior observamos que hay un diferencia entre consumir 4 pints y 2 pints, pero esto ocurre sólo para los hombres.
+
+## ANOVA de medidas repetidas
+
+Ahora vamos a hacer un análisis un ANOVA de medidas repetidas. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).
+
+```{r}
+setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+
+library(ggplot2)
+library(Rmisc)
+library(pastecs)
+library(reshape)
+library(ez)
+library(multcomp)
+```
+
+Primero importamos el set de datos y le damos una mirada.
+
+```{r}
+dat1 <- read.csv("data/insectos_y_tiempo_vomito.csv", header = TRUE)
+str(dat1)
+```
+
+Enseguida transformamos los datos de formato wide a long y renombramos las columnas.
+
+```{r}
+dat1.long <- melt(dat1, 
+                 id = "participante", 
+                 measured = c("insecto.al.palo", 
+                              "testiculo.de.canguro", 
+                              "ojos.de.pescado",
+                              "larvas.de.polillas"))
+names(dat1.long) <- c("participante", "animal", "vomito")
+```
+
+Antes de hacer cualquier análisis miramos los datos con un gráfico.
+Usamos la función **summarySEwithin** para calcular los estadísticos.
+
+```{r}
+datac <- summarySEwithin(dat1.long, 
+                         measurevar="vomito", 
+                         withinvars="animal", 
+                         idvar="participante")
+```
+
+Luego hacemos el gráfico.
+
+```{r}
+ggplot(datac, aes(x=animal, y=vomito, group=1)) +
+  geom_errorbar(width=.1, aes(ymin=vomito-se, ymax=vomito+se)) +
+  geom_line(colour = "Red", linetype = "dashed") + 
+  geom_point() +
+  ylab("Tiempo para vomitar (segundos)") +
+  xlab("Tipo de comida") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"))
+```
+
+Luego podemos tener una descripción de los datos.
+
+```{r}
+test <- by(dat1.long$vomito, 
+           dat1.long$animal, 
+           stat.desc, 
+           basic = FALSE, 
+           norm = TRUE)
+lapply(test,round,2)
+```
+
+Finalmente, hacemos el análisis de ANOVA de medidas repetidas.
+
+```{r}
+model <- ezANOVA(data = dat1.long,
+                 dv = .(vomito),
+                 wid = .(participante),
+                 within = .(animal),
+                 type = 3,
+                 detailed = TRUE)
+model
+```
+
+¿Qué observamos?
+El modelo sugiere que hay un efecto del tipo de animal sobre el número de vómitos.
+Sin embargo, el test de Mauchly nos dice que no se cumple el supuesto de esfericidad.
+Por lo tanto debemos mirar las correcciones (Greenhouse-Geisser [GG] o Huynd-Feldt [HF]).
+
+Luego del análisis de ANOVA podemos evaluar que comparaciones son significativamente diferentes.
+
+```{r}
+pairwise.t.test(dat1.long$vomito, 
+                dat1.long$animal,
+                paired = TRUE, 
+                p.adjust.method = "bonferroni")
+```
+
+Finalmente, también puedes notar que el modelo de ANOVA también describe el tamaño del efecto en forma de ges (generalized eta squared).

@@ -170,7 +170,7 @@ cor(examData[, c("Exam", "Anxiety")])^2 * 100
 
 ```{r}
 corr_selected <- examData %>% 
-  select(Revise, Exam, Anxiety) %>% 
+  dplyr::select(Revise, Exam, Anxiety) %>% 
   cor(use = "pairwise") %>%
   round(1)
 

@@ -54,7 +54,7 @@ la-ecuación-de-la-recta
 la-suma-de-cuadrados
 la-regresión-con-r
 la-correlación-con-r
-comparar-más-de-dos-grupos-anova
+anova
 por-qué-necesitamos-un-anova
 el-anova-como-un-modelo-líneal-general
 la-lógica-del-anova
@@ -67,6 +67,7 @@ pruebas-post-hoc
 cálculos-con-r-1
 otros-anova
 tipos-de-anova
-ejemplo-de-anova-factorial
+anova-factorial
+anova-de-medidas-repetidas
 otros-análisis
 análisis-de-proporciones

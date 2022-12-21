@@ -170,11 +170,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.4" data-path="la-regresión.html"><a href="la-regresión.html#la-regresión-con-r"><i class="fa fa-check"></i><b>7.4</b> La regresión con R</a></li>
 <li class="chapter" data-level="7.5" data-path="la-regresión.html"><a href="la-regresión.html#la-correlación-con-r"><i class="fa fa-check"></i><b>7.5</b> La correlación con R</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="comparar-más-de-dos-grupos-anova.html"><a href="comparar-más-de-dos-grupos-anova.html"><i class="fa fa-check"></i><b>8</b> Comparar más de dos grupos (ANOVA)</a><ul>
-<li class="chapter" data-level="8.1" data-path="comparar-más-de-dos-grupos-anova.html"><a href="comparar-más-de-dos-grupos-anova.html#por-qué-necesitamos-un-anova"><i class="fa fa-check"></i><b>8.1</b> ¿Por qué necesitamos un ANOVA?</a></li>
-<li class="chapter" data-level="8.2" data-path="comparar-más-de-dos-grupos-anova.html"><a href="comparar-más-de-dos-grupos-anova.html#el-anova-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>8.2</b> El ANOVA como un modelo líneal general</a></li>
-<li class="chapter" data-level="8.3" data-path="comparar-más-de-dos-grupos-anova.html"><a href="comparar-más-de-dos-grupos-anova.html#la-lógica-del-anova"><i class="fa fa-check"></i><b>8.3</b> La lógica del ANOVA</a></li>
-<li class="chapter" data-level="8.4" data-path="comparar-más-de-dos-grupos-anova.html"><a href="comparar-más-de-dos-grupos-anova.html#el-anova-con-r"><i class="fa fa-check"></i><b>8.4</b> El ANOVA con R</a></li>
+<li class="chapter" data-level="8" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>8</b> ANOVA</a><ul>
+<li class="chapter" data-level="8.1" data-path="anova.html"><a href="anova.html#por-qué-necesitamos-un-anova"><i class="fa fa-check"></i><b>8.1</b> ¿Por qué necesitamos un ANOVA?</a></li>
+<li class="chapter" data-level="8.2" data-path="anova.html"><a href="anova.html#el-anova-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>8.2</b> El ANOVA como un modelo líneal general</a></li>
+<li class="chapter" data-level="8.3" data-path="anova.html"><a href="anova.html#la-lógica-del-anova"><i class="fa fa-check"></i><b>8.3</b> La lógica del ANOVA</a></li>
+<li class="chapter" data-level="8.4" data-path="anova.html"><a href="anova.html#el-anova-con-r"><i class="fa fa-check"></i><b>8.4</b> El ANOVA con R</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="pasos-después-de-un-anova.html"><a href="pasos-después-de-un-anova.html"><i class="fa fa-check"></i><b>9</b> Pasos después de un ANOVA</a><ul>
 <li class="chapter" data-level="9.1" data-path="pasos-después-de-un-anova.html"><a href="pasos-después-de-un-anova.html#qué-hacemos-después-de-un-anova"><i class="fa fa-check"></i><b>9.1</b> ¿Qué hacemos después de un ANOVA?</a></li>
@@ -185,7 +185,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="10" data-path="otros-anova.html"><a href="otros-anova.html"><i class="fa fa-check"></i><b>10</b> Otros ANOVA</a><ul>
 <li class="chapter" data-level="10.1" data-path="otros-anova.html"><a href="otros-anova.html#tipos-de-anova"><i class="fa fa-check"></i><b>10.1</b> Tipos de ANOVA</a></li>
-<li class="chapter" data-level="10.2" data-path="otros-anova.html"><a href="otros-anova.html#ejemplo-de-anova-factorial"><i class="fa fa-check"></i><b>10.2</b> Ejemplo de ANOVA factorial</a></li>
+<li class="chapter" data-level="10.2" data-path="otros-anova.html"><a href="otros-anova.html#anova-factorial"><i class="fa fa-check"></i><b>10.2</b> ANOVA factorial</a></li>
+<li class="chapter" data-level="10.3" data-path="otros-anova.html"><a href="otros-anova.html#anova-de-medidas-repetidas"><i class="fa fa-check"></i><b>10.3</b> ANOVA de medidas repetidas</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>11</b> Otros análisis</a><ul>
 <li class="chapter" data-level="11.1" data-path="otros-análisis.html"><a href="otros-análisis.html#análisis-de-proporciones"><i class="fa fa-check"></i><b>11.1</b> Análisis de proporciones</a></li>
@@ -235,7 +236,7 @@ prefsAB<span class="op">$</span>Preferencia &lt;-<span class="st"> </span><span 
 <span class="kw">ggplot</span>(prefsAB, <span class="kw">aes</span>(Preferencia, ..count..)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> Preferencia), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Número de personas&quot;</span>) </code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-206-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-234-1.png" width="672" /></p>
 <p>Podemos usar la función <strong>xtabs</strong> para obtener una tabla de contigencia. Luego con la función <strong>chisq.test</strong> cálculamos la probabilidad que estas dos preferencias esten igualmente distribuidas (una prueba clásica de chi cuadrado).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(tabla.contingencia &lt;-<span class="st"> </span><span class="kw">xtabs</span>( <span class="op">~</span><span class="st"> </span>Preferencia, prefsAB))</code></pre></div>
 <pre><code>## Preferencia
@@ -280,7 +281,7 @@ prefsABC<span class="op">$</span>Preferencia &lt;-<span class="st"> </span><span
 <span class="kw">ggplot</span>(prefsABC, <span class="kw">aes</span>(Preferencia, ..count..)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> Preferencia), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Número de personas&quot;</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-210-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-238-1.png" width="672" /></p>
 <p>Podemos usar la función <strong>xtabs</strong> para obtener una tabla de contigencia. Luego con la función <strong>chisq.test</strong> cálculamos la probabilidad que estas dos preferencias esten igualmente distribuidas (una prueba clásica de chi cuadrado).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(tabla.contingencia &lt;-<span class="st"> </span><span class="kw">xtabs</span>( <span class="op">~</span><span class="st"> </span>Preferencia, prefsABC))</code></pre></div>
 <pre><code>## Preferencia
@@ -327,7 +328,7 @@ prefsABsex<span class="op">$</span>Genero &lt;-<span class="st"> </span><span cl
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> Preferencia), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>Genero) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Número de personas&quot;</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-215-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-243-1.png" width="672" /></p>
 <p>Podemos usar la función <strong>xtabs</strong> para obtener una tabla de contigencia. Luego con la función <strong>chisq.test</strong> cálculamos la probabilidad que estas dos preferencias en función del género esten igualmente distribuidas.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(tabla.contingencia &lt;-<span class="st"> </span><span class="kw">xtabs</span>( <span class="op">~</span><span class="st"> </span>Preferencia <span class="op">+</span><span class="st"> </span>Genero, prefsABsex))</code></pre></div>
 <pre><code>##             Genero
@@ -376,7 +377,7 @@ prefsABCsex<span class="op">$</span>Genero &lt;-<span class="st"> </span><span c
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> Preferencia), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>Genero) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Número de personas&quot;</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-219-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-247-1.png" width="672" /></p>
 <p>Podemos usar la función <strong>xtabs</strong> para obtener una tabla de contigencia. Luego con la función <strong>chisq.test</strong> cálculamos la probabilidad que estas dos preferencias en función del género esten igualmente distribuidas.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(tabla.contingencia &lt;-<span class="st"> </span><span class="kw">xtabs</span>( <span class="op">~</span><span class="st"> </span>Preferencia <span class="op">+</span><span class="st"> </span>Genero, prefsABCsex))</code></pre></div>
 <pre><code>##              Genero
