@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2022-12-20" />
+<meta name="date" content="2022-12-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -187,6 +187,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="10.1" data-path="otros-anova.html"><a href="otros-anova.html#tipos-de-anova"><i class="fa fa-check"></i><b>10.1</b> Tipos de ANOVA</a></li>
 <li class="chapter" data-level="10.2" data-path="otros-anova.html"><a href="otros-anova.html#anova-factorial"><i class="fa fa-check"></i><b>10.2</b> ANOVA factorial</a></li>
 <li class="chapter" data-level="10.3" data-path="otros-anova.html"><a href="otros-anova.html#anova-de-medidas-repetidas"><i class="fa fa-check"></i><b>10.3</b> ANOVA de medidas repetidas</a></li>
+<li class="chapter" data-level="10.4" data-path="otros-anova.html"><a href="otros-anova.html#ancova"><i class="fa fa-check"></i><b>10.4</b> ANCOVA</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>11</b> Otros análisis</a><ul>
 <li class="chapter" data-level="11.1" data-path="otros-análisis.html"><a href="otros-análisis.html#análisis-de-proporciones"><i class="fa fa-check"></i><b>11.1</b> Análisis de proporciones</a></li>
@@ -300,7 +301,7 @@ datac &lt;-<span class="st"> </span><span class="kw">summarySE</span>(dat1,
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Niveles de inteligencia&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-160-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-156-1.png" width="672" /></p>
 <p>Luego podemos hacer una descripción de los datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test &lt;-<span class="st"> </span><span class="kw">by</span>(dat1<span class="op">$</span>Inteligencia, 
            dat1<span class="op">$</span>Dosis, 
@@ -308,22 +309,22 @@ datac &lt;-<span class="st"> </span><span class="kw">summarySE</span>(dat1,
            <span class="dt">norm =</span> <span class="ot">TRUE</span>)
 <span class="kw">lapply</span>(test,round,<span class="dv">2</span>)</code></pre></div>
 <pre><code>## $Placebo
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
-##         2.00         2.20         0.58         1.62         1.70         1.30         0.59         0.26 
-##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##         0.14        -1.96        -0.49         0.90         0.42 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##         2.00         2.20         0.58         1.62         1.70         1.30         0.59 
+##     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.26         0.14        -1.96        -0.49         0.90         0.42 
 ## 
 ## $Baja
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
-##         3.00         3.20         0.58         1.62         1.70         1.30         0.41         0.26 
-##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##         0.14        -1.96        -0.49         0.90         0.42 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##         3.00         3.20         0.58         1.62         1.70         1.30         0.41 
+##     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.26         0.14        -1.96        -0.49         0.90         0.42 
 ## 
 ## $Alta
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
-##         5.00         5.00         0.71         1.96         2.50         1.58         0.32         0.00 
-##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##         0.00        -1.91        -0.48         0.99         0.97</code></pre>
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##         5.00         5.00         0.71         1.96         2.50         1.58         0.32 
+##     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.00         0.00        -1.91        -0.48         0.99         0.97</code></pre>
 <p>La función <strong>by</strong> permite calcular los estadísticos. La función <strong>round</strong> redondea los valores a dos décimas. Y la función <strong>lapply</strong> permite aplicar la función round de forma másiva.</p>
 <p>Antes de hacer el ANOVA verificamos si existen problemas de homgeneidad de varianza. Podemos hacerlo con la función <strong>leveneTest</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">leveneTest</span>(dat1<span class="op">$</span>Inteligencia, dat1<span class="op">$</span>Dosis, <span class="dt">center =</span> mean)</code></pre></div>
@@ -449,7 +450,7 @@ dat2</code></pre></div>
 ## F-statistic: 5.119 on 2 and 12 DF,  p-value: 0.02469</code></pre>
 <p>Por último, podemos hacer algunos gráficos que podemos extraer del modelo de ANOVA.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(m_AOV)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-170-1.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-170-2.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-170-3.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-170-4.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-166-1.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-166-2.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-166-3.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-166-4.png" width="672" /></p>
 <p>Los dos primeros gráficos son los mas importantes. El gráfico 1 muestra la homogeneidad de varianza. Si ves una forma de embudo entonces hay en problemas en la homgeneidad de varianza. La idea es que los puntos estén igualmente repartidos. Es decir, las variaciones son similares entre los grupos. El gráfico 2 es un gráfico Q-Q. Si los puntos están sobre la diagonal entonces se cumple el suspuesto de la normalidad de los datos.</p>
 
 </div>

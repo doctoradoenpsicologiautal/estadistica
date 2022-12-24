@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2022-12-20" />
+<meta name="date" content="2022-12-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -187,6 +187,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="10.1" data-path="otros-anova.html"><a href="otros-anova.html#tipos-de-anova"><i class="fa fa-check"></i><b>10.1</b> Tipos de ANOVA</a></li>
 <li class="chapter" data-level="10.2" data-path="otros-anova.html"><a href="otros-anova.html#anova-factorial"><i class="fa fa-check"></i><b>10.2</b> ANOVA factorial</a></li>
 <li class="chapter" data-level="10.3" data-path="otros-anova.html"><a href="otros-anova.html#anova-de-medidas-repetidas"><i class="fa fa-check"></i><b>10.3</b> ANOVA de medidas repetidas</a></li>
+<li class="chapter" data-level="10.4" data-path="otros-anova.html"><a href="otros-anova.html#ancova"><i class="fa fa-check"></i><b>10.4</b> ANCOVA</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>11</b> Otros análisis</a><ul>
 <li class="chapter" data-level="11.1" data-path="otros-análisis.html"><a href="otros-análisis.html#análisis-de-proporciones"><i class="fa fa-check"></i><b>11.1</b> Análisis de proporciones</a></li>
@@ -276,7 +277,7 @@ gogglesData<span class="op">$</span>alcohol &lt;-<span class="st"> </span><span 
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>gender) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Consumo de alcohol&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Atractivo promedio (%)&quot;</span>)
 fig_boxplot1</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-202-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-198-1.png" width="672" /></p>
 <p>Este mismo gráfico, valores de atractivo en función del género y del consumo de alcohol, se puede hacer en formato de líneas.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_linesplot1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(gogglesData, <span class="kw">aes</span>(alcohol, attractiveness, <span class="dt">colour =</span> gender)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>) <span class="op">+</span>
@@ -286,7 +287,7 @@ fig_boxplot1</code></pre></div>
 <pre><code>## Warning: `fun.y` is deprecated. Use `fun` instead.
 ## `fun.y` is deprecated. Use `fun` instead.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_linesplot1</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-203-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-199-1.png" width="672" /></p>
 <p>O en formato de barras.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_barplot1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(gogglesData, <span class="kw">aes</span>(alcohol, attractiveness, <span class="dt">fill =</span> gender)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.data =</span> mean_cl_normal, <span class="dt">geom =</span> <span class="st">&quot;errorbar&quot;</span>,
@@ -295,7 +296,7 @@ fig_boxplot1</code></pre></div>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Consumo de alcohol&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Atractivo promedio (%)&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;Gender&quot;</span>) </code></pre></div>
 <pre><code>## Warning: `fun.y` is deprecated. Use `fun` instead.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_barplot1</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-204-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-200-1.png" width="672" /></p>
 <p>Estos gráfico son muy informativos. ¿Que ves? Una manera de visualizar los efectos que estamos estudiando podemos separar los efectos. Esto es, podemos visualizar los niveles de atractivo en función de un sólo factor.</p>
 <p>Por ejemplo, podemos visualizar el efecto del género en los niveles de atractivo. Este efecto corresponde al <em>efecto principal</em> del género.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_bargender1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(gogglesData, <span class="kw">aes</span>(gender, attractiveness)) <span class="op">+</span>
@@ -306,7 +307,7 @@ fig_boxplot1</code></pre></div>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">80</span>, <span class="dt">by =</span> <span class="dv">10</span>))</code></pre></div>
 <pre><code>## Warning: `fun.y` is deprecated. Use `fun` instead.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_bargender1</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-205-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-201-1.png" width="672" /></p>
 <p>También podemos visualizar el efecto del consumo de alcohol en los niveles de atractivo. Este efecto corresponde al <em>efecto principal</em> del consumo de alcohol.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_barbeer1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(gogglesData, <span class="kw">aes</span>(alcohol, attractiveness)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;bar&quot;</span>, 
@@ -316,42 +317,42 @@ fig_boxplot1</code></pre></div>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">80</span>, <span class="dt">by =</span> <span class="dv">10</span>))</code></pre></div>
 <pre><code>## Warning: `fun.y` is deprecated. Use `fun` instead.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_barbeer1</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-206-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-202-1.png" width="672" /></p>
 <p>Antes de hacer los análisis propiamente tal podemos describir un poco los datos y evaluar los supuestos de la estadística parámetrica.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">describ &lt;-<span class="st"> </span><span class="kw">by</span>(gogglesData<span class="op">$</span>attractiveness, 
    gogglesData<span class="op">$</span>gender, stat.desc)
 <span class="kw">lapply</span>(describ, round, <span class="dv">2</span>)</code></pre></div>
 <pre><code>## $Female
-##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
-##        24.00         0.00         0.00        50.00        70.00        20.00      1445.00        60.00 
-##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
-##        60.21         1.29         2.68        40.17         6.34         0.11 
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum 
+##        24.00         0.00         0.00        50.00        70.00        20.00      1445.00 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        60.00        60.21         1.29         2.68        40.17         6.34         0.11 
 ## 
 ## $Male
-##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
-##        24.00         0.00         0.00        20.00        85.00        65.00      1355.00        60.00 
-##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
-##        56.46         3.78         7.81       342.35        18.50         0.33</code></pre>
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum 
+##        24.00         0.00         0.00        20.00        85.00        65.00      1355.00 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        60.00        56.46         3.78         7.81       342.35        18.50         0.33</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">describ &lt;-<span class="st"> </span><span class="kw">by</span>(gogglesData<span class="op">$</span>attractiveness, 
               gogglesData<span class="op">$</span>alcohol, stat.desc)
 <span class="kw">lapply</span>(describ, round, <span class="dv">2</span>)</code></pre></div>
 <pre><code>## $P0
-##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
-##        16.00         0.00         0.00        50.00        80.00        30.00      1020.00        62.50 
-##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
-##        63.75         2.12         4.51        71.67         8.47         0.13 
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum 
+##        16.00         0.00         0.00        50.00        80.00        30.00      1020.00 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        62.50        63.75         2.12         4.51        71.67         8.47         0.13 
 ## 
 ## $P2
-##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
-##        16.00         0.00         0.00        45.00        85.00        40.00      1035.00        65.00 
-##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
-##        64.69         2.48         5.28        98.23         9.91         0.15 
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum 
+##        16.00         0.00         0.00        45.00        85.00        40.00      1035.00 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        65.00        64.69         2.48         5.28        98.23         9.91         0.15 
 ## 
 ## $P4
-##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
-##        16.00         0.00         0.00        20.00        70.00        50.00       745.00        50.00 
-##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
-##        46.56         3.59         7.64       205.73        14.34         0.31</code></pre>
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum 
+##        16.00         0.00         0.00        20.00        70.00        50.00       745.00 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        50.00        46.56         3.59         7.64       205.73        14.34         0.31</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">describ &lt;-<span class="st"> </span><span class="kw">by</span>(gogglesData<span class="op">$</span>attractiveness, 
               <span class="kw">list</span>(gogglesData<span class="op">$</span>alcohol, gogglesData<span class="op">$</span>gender), 
               stat.desc, <span class="dt">basic =</span> <span class="ot">FALSE</span>)
@@ -428,10 +429,10 @@ fig_boxplot1</code></pre></div>
 <span class="kw">contrasts</span>(gogglesData<span class="op">$</span>gender) &lt;-<span class="st"> </span><span class="kw">cbind</span>(.M_vs_F)</code></pre></div>
 <p>Luego puedes verificar para el factor género, y ...</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gogglesData<span class="op">$</span>gender</code></pre></div>
-<pre><code>##  [1] Female Female Female Female Female Female Female Female Female Female Female Female Female Female
-## [15] Female Female Female Female Female Female Female Female Female Female Male   Male   Male   Male  
-## [29] Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male  
-## [43] Male   Male   Male   Male   Male   Male  
+<pre><code>##  [1] Female Female Female Female Female Female Female Female Female Female Female Female Female
+## [14] Female Female Female Female Female Female Female Female Female Female Female Male   Male  
+## [27] Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male  
+## [40] Male   Male   Male   Male   Male   Male   Male   Male   Male  
 ## attr(,&quot;contrasts&quot;)
 ##        .M_vs_F
 ## Female      -1
@@ -439,8 +440,8 @@ fig_boxplot1</code></pre></div>
 ## Levels: Female Male</code></pre>
 <p>... consumo de alcohol</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gogglesData<span class="op">$</span>alcohol</code></pre></div>
-<pre><code>##  [1] P0 P0 P0 P0 P0 P0 P0 P0 P2 P2 P2 P2 P2 P2 P2 P2 P4 P4 P4 P4 P4 P4 P4 P4 P0 P0 P0 P0 P0 P0 P0 P0 P2
-## [34] P2 P2 P2 P2 P2 P2 P2 P4 P4 P4 P4 P4 P4 P4 P4
+<pre><code>##  [1] P0 P0 P0 P0 P0 P0 P0 P0 P2 P2 P2 P2 P2 P2 P2 P2 P4 P4 P4 P4 P4 P4 P4 P4 P0 P0 P0 P0 P0 P0 P0
+## [32] P0 P2 P2 P2 P2 P2 P2 P2 P2 P4 P4 P4 P4 P4 P4 P4 P4
 ## attr(,&quot;contrasts&quot;)
 ##    .Non_vs_P .P2_vs_P4
 ## P0        -2         0
@@ -464,7 +465,7 @@ fig_boxplot1</code></pre></div>
 <p>Si miras los valores de F verás que hay un efecto principal del alcohol y un efecto de interacción género-consumo de alcohol. El efecto principal que tenemos aquí refleja que hay un efecto del alcohol (mira el gráfico). Pero, fíjate que el efecto del alcohol en realidad esta calificado por una interación con el género. Es decir, el efecto del consumo de alcohol sobre los niveles de atractivo no son iguales para los dos géneros. En otras palabras. A la luz de una interacción no tiene sentido interpretar el efecto principal.</p>
 <p>¿Qué indican los resultados? Ten en cuenta los resultados estadísticos y el gráfico.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_linesplot1</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-223-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-219-1.png" width="672" /></p>
 <p>Los resultados muestran que las mujeres mantienen altos estándares en la selección de su pareja sin importar el consumo de alcohol. Los hombres toman 4 pints y terminan con parejas que tienen un menor atractivo. Es decir, ocurre el &quot;goggle bear effect&quot;.</p>
 <p>Veamos las comparaciones planificadas para revisar mayores detalles.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary.lm</span>(gogglesModel)</code></pre></div>
@@ -536,7 +537,7 @@ fig_boxplot1</code></pre></div>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Tipo de comida&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-229-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-225-1.png" width="672" /></p>
 <p>Luego podemos tener una descripción de los datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test &lt;-<span class="st"> </span><span class="kw">by</span>(dat1.long<span class="op">$</span>vomito, 
            dat1.long<span class="op">$</span>animal, 
@@ -545,28 +546,28 @@ fig_boxplot1</code></pre></div>
            <span class="dt">norm =</span> <span class="ot">TRUE</span>)
 <span class="kw">lapply</span>(test,round,<span class="dv">2</span>)</code></pre></div>
 <pre><code>## $insecto.al.palo
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
-##         8.00         8.12         0.79         1.87         4.98         2.23         0.27         0.27 
-##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##         0.18        -1.21        -0.41         0.98         0.97 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##         8.00         8.12         0.79         1.87         4.98         2.23         0.27 
+##     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.27         0.18        -1.21        -0.41         0.98         0.97 
 ## 
 ## $testiculo.de.canguro
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
-##         4.50         4.25         0.65         1.53         3.36         1.83         0.43         0.05 
-##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##         0.03        -1.66        -0.56         0.94         0.60 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##         4.50         4.25         0.65         1.53         3.36         1.83         0.43 
+##     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.05         0.03        -1.66        -0.56         0.94         0.60 
 ## 
 ## $ojos.de.pescado
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
-##         4.00         4.12         0.97         2.30         7.55         2.75         0.67         0.10 
-##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##         0.07        -1.86        -0.63         0.91         0.37 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##         4.00         4.12         0.97         2.30         7.55         2.75         0.67 
+##     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.10         0.07        -1.86        -0.63         0.91         0.37 
 ## 
 ## $larvas.de.polillas
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
-##         6.50         5.75         1.03         2.44         8.50         2.92         0.51        -0.51 
-##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##        -0.34        -1.49        -0.50         0.90         0.29</code></pre>
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##         6.50         5.75         1.03         2.44         8.50         2.92         0.51 
+##     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##        -0.51        -0.34        -1.49        -0.50         0.90         0.29</code></pre>
 <p>Finalmente, hacemos el análisis de ANOVA de medidas repetidas.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">ezANOVA</span>(<span class="dt">data =</span> dat1.long,
                  <span class="dt">dv =</span> .(vomito),
@@ -606,6 +607,322 @@ fig_boxplot1</code></pre></div>
 ## 
 ## P value adjustment method: bonferroni</code></pre>
 <p>Finalmente, también puedes notar que el modelo de ANOVA también describe el tamaño del efecto en forma de ges (generalized eta squared).</p>
+</div>
+<div id="ancova" class="section level2">
+<h2><span class="header-section-number">10.4</span> ANCOVA</h2>
+<p>Ahora vamos a hacer un análisis un ANCOVA. Imagina que estuvimos estudiando el efecto de una droga sobre los niveles de inteligencia de unos individuos (revisa el capítulo sobre ANOVA).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
+
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(Hmisc)
+<span class="kw">library</span>(Rmisc)
+<span class="kw">library</span>(effsize)
+<span class="kw">library</span>(pastecs)
+<span class="kw">library</span>(reshape2)
+<span class="kw">library</span>(car)
+<span class="kw">library</span>(effsize)
+<span class="kw">library</span>(effects)
+<span class="kw">library</span>(multcomp)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/inteligencia.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
+dat1<span class="op">$</span>Dosis &lt;-<span class="st"> </span><span class="kw">factor</span>(dat1<span class="op">$</span>Dosis, 
+                            <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))
+dat1</code></pre></div>
+<pre><code>##      Dosis Inteligencia
+## 1  Placebo            3
+## 2  Placebo            2
+## 3  Placebo            1
+## 4  Placebo            1
+## 5  Placebo            4
+## 6     Baja            5
+## 7     Baja            2
+## 8     Baja            4
+## 9     Baja            2
+## 10    Baja            3
+## 11    Alta            7
+## 12    Alta            4
+## 13    Alta            5
+## 14    Alta            3
+## 15    Alta            6</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Podemos usar esta función para calcular los estadísticos a través de los participantes.</span>
+datac &lt;-<span class="st"> </span><span class="kw">summarySE</span>(dat1, 
+                   <span class="dt">measurevar=</span><span class="st">&quot;Inteligencia&quot;</span>, 
+                   <span class="dt">groupvars=</span><span class="st">&quot;Dosis&quot;</span>)
+
+<span class="co"># Luego hacemos el gráfico</span>
+<span class="kw">ggplot</span>(datac, <span class="kw">aes</span>(<span class="dt">x=</span>Dosis, <span class="dt">y=</span>Inteligencia, <span class="dt">group=</span><span class="dv">1</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">width=</span>.<span class="dv">1</span>, <span class="kw">aes</span>(<span class="dt">ymin=</span>Inteligencia<span class="op">-</span>se, <span class="dt">ymax=</span>Inteligencia<span class="op">+</span>se)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">colour =</span> <span class="st">&quot;Red&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Niveles de inteligencia&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-230-1.png" width="672" /></p>
+<p>Para el análisis de ANOVA observamos lo siguiente.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_AOV &lt;-<span class="st"> </span><span class="kw">aov</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Dosis, <span class="dt">data =</span> dat1)
+<span class="kw">summary</span>(m_AOV)</code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)  
+## Dosis        2  20.13  10.067   5.119 0.0247 *
+## Residuals   12  23.60   1.967                 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Según este análisis la droga tiene un efecto en los niveles de inteligencia. Pero ¿qué pasa si tomamos en cuenta otros factores? Por ejemplo, qué pasa si tomamos en cuenta la edad de los participantes o los niveles de inteligencia de sus padres? Las variables continuas que no son parte de una manipulación experimental pero que tienen una influencia en la variable dependiente, se conocen como co-variables y se pueden incluir en un análisis de ANOVA. Cuándo medimos las co-variables y las incluimos en un análisis de varianza lo llamamos análisis de covarianza (o ANCOVA).</p>
+<p>En el siguiente ejemplo vamos a analizar el efecto de la droga sobre los niveles de inteligencia considerando además los niveles de inteligencia de uno de sus progenitores.</p>
+<p>Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># </span>
+dat2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/inteligencia_y_covariable.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
+dat2<span class="op">$</span>dosis &lt;-<span class="st"> </span><span class="kw">factor</span>(dat2<span class="op">$</span>dosis,
+                   <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>),
+                   <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo&quot;</span>,
+                              <span class="st">&quot;Low Dose&quot;</span>,
+                              <span class="st">&quot;High Dose&quot;</span>))</code></pre></div>
+<p>Luego, pasamos los datos a formato long.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">restructuredData &lt;-<span class="st"> </span><span class="kw">melt</span>(dat2,
+                         <span class="dt">id =</span> <span class="kw">c</span>(<span class="st">&quot;dosis&quot;</span>),
+                         <span class="dt">measured =</span> <span class="kw">c</span>(<span class="st">&quot;inteligencia&quot;</span>, <span class="st">&quot;herencia&quot;</span>))
+<span class="kw">colnames</span>(restructuredData) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;dosis&quot;</span>, <span class="st">&quot;aspecto&quot;</span>, <span class="st">&quot;valor&quot;</span>)</code></pre></div>
+<p>Luego, podemos hacer algunos gráficos. Por ejemplo, podemos visualizar los niveles de inteligencia en función de la dosis de droga. Al mismo podemos ver como que diferencias hay los niveles de inteligencia heredados.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(restructuredData, <span class="kw">aes</span>(dosis, valor)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>aspecto) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Dosis&quot;</span>, <span class="dt">y =</span><span class="st">&quot;Inteligencia&quot;</span>) <span class="op">+</span>
+<span class="st">     </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-234-1.png" width="672" /></p>
+<p>Podemos observar cómo cambian los niveles de inteligencia individual en función de los niveles de inteligencia de los progenitores. Y podemos ver como cambia estos para los distintos niveles de droga.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(dat2, <span class="kw">aes</span>(herencia, inteligencia, <span class="dt">colour =</span> dosis)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Inteligencia heredada&quot;</span>, <span class="dt">y =</span><span class="st">&quot;Inteligencia evocada por la droga&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">   </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-235-1.png" width="672" /></p>
+<p>En seguida podemos hacer una descripción de los datos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.data.frame</span>(<span class="kw">lapply</span>(<span class="kw">by</span>(dat2<span class="op">$</span>inteligencia, 
+                        dat2<span class="op">$</span>dosis,
+                        stat.desc, 
+                        <span class="dt">basic =</span> <span class="ot">FALSE</span>, 
+                        <span class="dt">norm =</span> <span class="ot">TRUE</span>), 
+                     round, <span class="dv">2</span>))</code></pre></div>
+<pre><code>##              Placebo Low.Dose High.Dose
+## median          2.00     4.50      4.00
+## mean            3.22     4.88      4.85
+## SE.mean         0.60     0.52      0.59
+## CI.mean.0.95    1.37     1.22      1.28
+## var             3.19     2.12      4.47
+## std.dev         1.79     1.46      2.12
+## coef.var        0.55     0.30      0.44
+## skewness        0.99     0.43      0.43
+## skew.2SE        0.69     0.28      0.35
+## kurtosis       -0.55    -1.48     -0.90
+## kurt.2SE       -0.20    -0.50     -0.38
+## normtest.W      0.76     0.87      0.93
+## normtest.p      0.01     0.16      0.39</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.data.frame</span>(<span class="kw">lapply</span>(<span class="kw">by</span>(dat2<span class="op">$</span>herencia,
+                        dat2<span class="op">$</span>dosis,
+                        stat.desc, 
+                        <span class="dt">basic =</span> <span class="ot">FALSE</span>, 
+                        <span class="dt">norm =</span> <span class="ot">TRUE</span>), 
+                     round, <span class="dv">2</span>))</code></pre></div>
+<pre><code>##              Placebo Low.Dose High.Dose
+## median          4.00     2.50      2.00
+## mean            3.44     3.12      2.00
+## SE.mean         0.69     0.61      0.45
+## CI.mean.0.95    1.59     1.44      0.99
+## var             4.28     2.98      2.67
+## std.dev         2.07     1.73      1.63
+## coef.var        0.60     0.55      0.82
+## skewness        0.22     0.42      0.21
+## skew.2SE        0.15     0.28      0.17
+## kurtosis       -1.47    -1.50     -1.36
+## kurt.2SE       -0.53    -0.51     -0.57
+## normtest.W      0.92     0.92      0.91
+## normtest.p      0.40     0.42      0.20</code></pre>
+<p>Podemos ver el gran promedio de inteligencia evocada por la droga (a travaés de todas las dosis).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.data.frame</span>(<span class="kw">lapply</span>(<span class="kw">stat.desc</span>(dat2<span class="op">$</span>inteligencia,
+                               <span class="dt">basic =</span> <span class="ot">FALSE</span>), 
+                     round, <span class="dv">2</span>))</code></pre></div>
+<pre><code>##   median mean SE.mean CI.mean.0.95  var std.dev coef.var
+## 1      4 4.37    0.36         0.73 3.83    1.96     0.45</code></pre>
+<p>Podemos ver el gran promedio de inteligencia heredada (a travaés de todas las dosis).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.data.frame</span>(<span class="kw">lapply</span>(<span class="kw">stat.desc</span>(dat2<span class="op">$</span>herencia,
+                               <span class="dt">basic =</span> <span class="ot">FALSE</span>), 
+                     round, <span class="dv">2</span>))</code></pre></div>
+<pre><code>##   median mean SE.mean CI.mean.0.95  var std.dev coef.var
+## 1    2.5 2.73    0.34         0.69 3.44    1.86     0.68</code></pre>
+<p>Luego podemos evaluar la homogeneidad de la varianza.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">leveneTest</span>(dat2<span class="op">$</span>inteligencia, dat2<span class="op">$</span>dosis, <span class="dt">center =</span> median)</code></pre></div>
+<pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
+##       Df F value Pr(&gt;F)
+## group  2  0.3256 0.7249
+##       27</code></pre>
+<p>Dentro de los supuestos del ANCOVA debemos probar que nuestra variable independiente y la co-variable producen efectos independientes. Es decir, debemos probar que la co-variable no es afectada por la variable independiente.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">checkIndependenceModel &lt;-<span class="st"> </span><span class="kw">aov</span>(herencia <span class="op">~</span><span class="st"> </span>dosis, <span class="dt">data =</span> dat2)
+<span class="kw">summary</span>(checkIndependenceModel)</code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)
+## dosis        2  12.77   6.385   1.979  0.158
+## Residuals   27  87.10   3.226</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary.lm</span>(checkIndependenceModel)</code></pre></div>
+<pre><code>## 
+## Call:
+## aov(formula = herencia ~ dosis, data = dat2)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.4444 -1.3646 -0.0625  1.0000  3.5556 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)      3.4444     0.5987   5.753 4.06e-06 ***
+## dosisLow Dose   -0.3194     0.8727  -0.366   0.7172    
+## dosisHigh Dose  -1.4444     0.7788  -1.855   0.0746 .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.796 on 27 degrees of freedom
+## Multiple R-squared:  0.1279, Adjusted R-squared:  0.06326 
+## F-statistic: 1.979 on 2 and 27 DF,  p-value: 0.1577</code></pre>
+<p>La inteligencia heredada fue aproximadamente equivalente a través de las tres condiciones de drogas (placebo, dosis baja y alta). Este resultado nos permite decir que es apropiado utilizar la inteligencia heredada como co-variable en el análisis de ANCOVA.</p>
+<p>El ANCOVA se realiza como cualquier modelo lineal. Es necesario mencionar que cuando hacemos un modelo, R calcula usa una suma de cuadrados de Tipo I (o sumas secuenciales de cuadrados) por defecto. Esto significa que cualquier predictor ingresado en el modelo se evalúa después de los predictores anteriores en el modelo. Típicamente en los modelos tradicionales se usa una suma de cuadrados de tipo III, dónde los efectos de los predictores se evalúan después que se toman en cuenta todos los otros predictores. Para hacer esto creamos el modelo y luego usamos la función <strong>Anova</strong> e indicamos que queremos usar la suma de cuadrados de tipo III.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ANCOVA_model &lt;-<span class="st"> </span><span class="kw">aov</span>(inteligencia <span class="op">~</span><span class="st"> </span>herencia <span class="op">+</span><span class="st"> </span>dosis, dat2)
+<span class="kw">Anova</span>(ANCOVA_model, <span class="dt">type=</span><span class="st">&quot;III&quot;</span>)</code></pre></div>
+<pre><code>## Anova Table (Type III tests)
+## 
+## Response: inteligencia
+##             Sum Sq Df F value  Pr(&gt;F)  
+## (Intercept) 12.943  1  4.2572 0.04920 *
+## herencia    15.076  1  4.9587 0.03483 *
+## dosis       25.185  2  4.1419 0.02745 *
+## Residuals   79.047 26                  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>¿Cómo se interpretan estos resultados? Lo primero que vemos es que los niveles de inteligencia individuales son modulados por los niveles de inteligencia de los progenitores. Más interesante aún es el segundo resultado, que indica que los niveles de inteligencia son modulados por la dosis de droga, incluso cuando los efectos de los niveles de inteligencia heredados son controlados.</p>
+<p>En suma, si hubieramos hecho sólo el ANOVA hubieramos observado lo siguiente:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">anovaModel &lt;-<span class="st"> </span><span class="kw">aov</span>(inteligencia <span class="op">~</span><span class="st"> </span>dosis, dat2)
+<span class="kw">summary</span>(anovaModel)</code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)
+## dosis        2  16.84   8.422   2.416  0.108
+## Residuals   27  94.12   3.486</code></pre>
+<p>Pero, evaluando los niveles de inteligencia controlando por los niveles de inteligencia heredada llegamos a una conclusión distinta.</p>
+<p>En el modelo de ANCOVA queda por mirar los gráficos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(ANCOVA_model)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-244-1.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-244-2.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-244-3.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-244-4.png" width="672" /></p>
+<p>¿Qué vemos? El primer gráfico se puede usar para evaluar la homogeneidad de la varianza: si tiene forma de embudo, entonces estamos en problemas. En nuestro caso vemos que la dispersión de puntajes es más amplia en algunos puntos que en otros. Esto implica que los residuales pueden estar distribuidos de forma heteroscedástica.</p>
+<p>El segundo gráfico es un gráfico Q-Q que nos informa sobre la normalidad de los residuos en el modelo. Queremos que nuestros residuos se distribuyan normalmente, lo que significa que los puntos en el gráfico deben flotar alrededor de la línea diagonal. En nuestro los puntos se alejan de esta tendencia. Nuevamente, esta no es una buena noticia para el modelo. Estos gráficos sugieren que sería necesario realizar una versión robusta de ANCOVA.</p>
+<p>A pesar de los problemas que hayamos detectado, y con el objetivo de hacer un análisis completo del análisis de ANCOVA veremos otros aspectos importantes.</p>
+<p>Otro de los supuestos del ANCOVA que debemos probar es que existe una homogeneidad de las pendientes de regresión. Este supuesto significa que la relación entre la co-variable y la variable resultado (en este caso, inteligencia e inteligencia heredada) debe ser similar en diferentes niveles de la variable predictora (en este caso, en los tres grupos de dosis). Para probar esto, necesitamos ejecutar de nuevo un ANCOVA pero incluyendo la interacción entre la co-variable y la variable predictora.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hoRS &lt;-<span class="st"> </span><span class="kw">aov</span>(inteligencia <span class="op">~</span><span class="st"> </span>herencia<span class="op">*</span>dosis,
+            dat2)
+<span class="kw">Anova</span>(hoRS, <span class="dt">type =</span> <span class="st">&quot;III&quot;</span>)</code></pre></div>
+<pre><code>## Anova Table (Type III tests)
+## 
+## Response: inteligencia
+##                Sum Sq Df F value   Pr(&gt;F)   
+## (Intercept)     0.771  1  0.3157 0.579405   
+## herencia       19.922  1  8.1565 0.008715 **
+## dosis          36.558  2  7.4836 0.002980 **
+## herencia:dosis 20.427  2  4.1815 0.027667 * 
+## Residuals      58.621 24                    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Los efectos de la dosis de droga y la inteligencia heredada siguen siendo significativos, pero lo principal que nos interesa es la interacción. Un valor significativo en esta interacción sugiere que no cumple el supuesto de homogeneidad de las pendientes de regresión.</p>
+<p>Para los contrastes planificados podemos hacer algo similar a lo que hemos hecho antes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">.plac_vs_drug &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>)
+.high_vs_low &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)
+<span class="kw">contrasts</span>(dat2<span class="op">$</span>dosis) &lt;-<span class="st"> </span><span class="kw">cbind</span>(.plac_vs_drug, .high_vs_low)</code></pre></div>
+<p>Una vez que definimos los contrastes los podemos inyectar en la base de datos y luego realizamos el modelo nuevamente.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ANCOVA_model &lt;-<span class="st"> </span><span class="kw">aov</span>(inteligencia <span class="op">~</span><span class="st"> </span>dosis <span class="op">+</span><span class="st"> </span>herencia, dat2)</code></pre></div>
+<p>¿Cómo se interpretan estos resultados? Antes de mirar las comparaciones planificadas es buena idea calcular los promedios ajustados. En este caso en particular queremos saber los promedios de inteligencia en función de las dosis de droga ajustados por los niveles de inteligencia heredados. Para ello usamos la función <strong>effect</strong>. También podemos acceder a los SE de estos promedios.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">adjustedMeans &lt;-<span class="st"> </span><span class="kw">effect</span>(<span class="st">&quot;dosis&quot;</span>, ANCOVA_model, <span class="dt">se=</span><span class="ot">TRUE</span>)
+<span class="kw">summary</span>(adjustedMeans)</code></pre></div>
+<pre><code>## 
+##  dosis effect
+## dosis
+##   Placebo  Low Dose High Dose 
+##  2.926370  4.712050  5.151251 
+## 
+##  Lower 95 Percent Confidence Limits
+## dosis
+##   Placebo  Low Dose High Dose 
+##  1.700854  3.435984  4.118076 
+## 
+##  Upper 95 Percent Confidence Limits
+## dosis
+##   Placebo  Low Dose High Dose 
+##  4.151886  5.988117  6.184427</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">adjustedMeans<span class="op">$</span>se</code></pre></div>
+<pre><code>## [1] 0.5962045 0.6207971 0.5026323</code></pre>
+<p>A diferencia de los promedios originales, cuando se ajustan los promedios se observa que los promedios de inteligencia para dosis alta y baja son bastante diferentes. Es decir, cuando se ajuste por los efectos de la inteligencia de los progenitores, a medida que aumenta la dosis de droga aumentan los niveles de inteligencia de los individuos.</p>
+<p>Veamos los contrastes planificados.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary.lm</span>(ANCOVA_model)</code></pre></div>
+<pre><code>## 
+## Call:
+## aov(formula = inteligencia ~ dosis + herencia, data = dat2)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.2622 -0.7899 -0.3230  0.8811  4.5699 
+## 
+## Coefficients:
+##                    Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)          3.1260     0.6250   5.002 3.34e-05 ***
+## dosis.plac_vs_drug   0.6684     0.2400   2.785  0.00985 ** 
+## dosis.high_vs_low    0.2196     0.4056   0.541  0.59284    
+## herencia             0.4160     0.1868   2.227  0.03483 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.744 on 26 degrees of freedom
+## Multiple R-squared:  0.2876, Adjusted R-squared:  0.2055 
+## F-statistic:   3.5 on 3 and 26 DF,  p-value: 0.02954</code></pre>
+<p>En estos contrastes comparamos el efecto de la droga relativo al placebo (contraste 1) y el efecto de la dosis alta versus la dosis baja (contraste 2). Pero, además estos contrates están ajustados por los niveles de inteligencia heredados. ¿Qué vemos? Primero, que hay un efecto de la droga por sobre el placebo. Segundo. No parece haber una efecto de la dosis alta por sobre la dosis baja.</p>
+<p>El modelo además nos dice que hay una relación entre los niveles de inteligencia producidos por la droga y los niveles de inteligencia heredados. El beta es ~0.42. Asumiendo los otros factores en igualdad de condiciones, si la inteligencia del progenitor de un individuo aumenta en una 1 unidad, la inteligencia del individuo aumenta en alredor de la mitad. Esto los podemos ver en el siguiente gráfico.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(dat2, <span class="kw">aes</span>(herencia, inteligencia)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Inteligencia heredada&quot;</span>, <span class="dt">y =</span><span class="st">&quot;Inteligencia evocada&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">   </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-250-1.png" width="672" /></p>
+<p>Por último, también podemos hacer pruebas posthoc. Para hacer estos análisis en los promedios ajustados debemos usar la función <strong>glht</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">postHocs &lt;-<span class="st"> </span><span class="kw">glht</span>(ANCOVA_model, <span class="dt">linfct =</span> <span class="kw">mcp</span>(<span class="dt">dosis =</span> <span class="st">&quot;Tukey&quot;</span>))
+<span class="kw">summary</span>(postHocs)</code></pre></div>
+<pre><code>## 
+##   Simultaneous Tests for General Linear Hypotheses
+## 
+## Multiple Comparisons of Means: Tukey Contrasts
+## 
+## 
+## Fit: aov(formula = inteligencia ~ dosis + herencia, data = dat2)
+## 
+## Linear Hypotheses:
+##                           Estimate Std. Error t value Pr(&gt;|t|)  
+## Low Dose - Placebo == 0     1.7857     0.8494   2.102   0.1087  
+## High Dose - Placebo == 0    2.2249     0.8028   2.771   0.0267 *
+## High Dose - Low Dose == 0   0.4392     0.8112   0.541   0.8516  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## (Adjusted p values reported -- single-step method)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">confint</span>(postHocs)</code></pre></div>
+<pre><code>## 
+##   Simultaneous Confidence Intervals
+## 
+## Multiple Comparisons of Means: Tukey Contrasts
+## 
+## 
+## Fit: aov(formula = inteligencia ~ dosis + herencia, data = dat2)
+## 
+## Quantile = 2.4853
+## 95% family-wise confidence level
+##  
+## 
+## Linear Hypotheses:
+##                           Estimate lwr     upr    
+## Low Dose - Placebo == 0    1.7857  -0.3252  3.8966
+## High Dose - Placebo == 0   2.2249   0.2297  4.2201
+## High Dose - Low Dose == 0  0.4392  -1.5769  2.4553</code></pre>
+<p>De este análisis observamos que sólo hay diferencias de inteligencia (cuando controlamos por los efecto de inteligencia heredada) cuando comparamos el placebo y la dosis alta de droga.</p>
 
 </div>
 </div>

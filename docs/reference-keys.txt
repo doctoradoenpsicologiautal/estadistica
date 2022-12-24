@@ -69,5 +69,6 @@ otros-anova
 tipos-de-anova
 anova-factorial
 anova-de-medidas-repetidas
+ancova
 otros-análisis
 análisis-de-proporciones

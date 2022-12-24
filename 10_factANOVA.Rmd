@@ -359,3 +359,264 @@ pairwise.t.test(dat1.long$vomito,
 ```
 
 Finalmente, también puedes notar que el modelo de ANOVA también describe el tamaño del efecto en forma de ges (generalized eta squared).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## ANCOVA
+
+Ahora vamos a hacer un análisis un ANCOVA.
+Imagina que estuvimos estudiando el efecto de una droga sobre los niveles de inteligencia de unos individuos (revisa el capítulo sobre ANOVA).
+
+```{r}
+setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+
+library(ggplot2)
+library(Hmisc)
+library(Rmisc)
+library(effsize)
+library(pastecs)
+library(reshape2)
+library(car)
+library(effsize)
+library(effects)
+library(multcomp)
+```
+
+```{r}
+dat1 <- read.csv("data/inteligencia.csv", header = TRUE)
+dat1$Dosis <- factor(dat1$Dosis, 
+                            levels = c(1:3), labels = c("Placebo", "Baja", "Alta"))
+dat1
+
+# Podemos usar esta función para calcular los estadísticos a través de los participantes.
+datac <- summarySE(dat1, 
+                   measurevar="Inteligencia", 
+                   groupvars="Dosis")
+
+# Luego hacemos el gráfico
+ggplot(datac, aes(x=Dosis, y=Inteligencia, group=1)) +
+  geom_errorbar(width=.1, aes(ymin=Inteligencia-se, ymax=Inteligencia+se)) +
+  geom_line(colour = "Red", linetype = "dashed") + 
+  geom_point() +
+  ylab("Niveles de inteligencia") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"))
+```
+
+Para el análisis de ANOVA observamos lo siguiente.
+
+```{r}
+m_AOV <- aov(Inteligencia ~ Dosis, data = dat1)
+summary(m_AOV)
+```
+
+Según este análisis la droga tiene un efecto en los niveles de inteligencia.
+Pero ¿qué pasa si tomamos en cuenta otros factores? Por ejemplo, qué pasa si tomamos en cuenta la edad de los participantes o los niveles de inteligencia de sus padres? Las variables continuas que no son parte de una manipulación experimental pero que tienen una influencia en la variable dependiente, se conocen como co-variables y se pueden incluir en un análisis de ANOVA. Cuándo medimos las co-variables y las incluimos en un análisis de varianza lo llamamos análisis de covarianza (o ANCOVA).
+
+En el siguiente ejemplo vamos a analizar el efecto de la droga sobre los niveles de inteligencia considerando además los niveles de inteligencia de uno de sus progenitores.
+
+Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).
+
+```{r}
+# 
+dat2 <- read.csv("data/inteligencia_y_covariable.csv", header = TRUE)
+dat2$dosis <- factor(dat2$dosis,
+                   levels = c(1:3),
+                   labels = c("Placebo",
+                              "Low Dose",
+                              "High Dose"))
+```
+
+Luego, pasamos los datos a formato long.
+
+```{r}
+restructuredData <- melt(dat2,
+                         id = c("dosis"),
+                         measured = c("inteligencia", "herencia"))
+colnames(restructuredData) <- c("dosis", "aspecto", "valor")
+```
+
+Luego, podemos hacer algunos gráficos.
+Por ejemplo, podemos visualizar los niveles de inteligencia en función de la dosis de droga. Al mismo podemos ver como que diferencias hay los niveles de inteligencia heredados.
+
+```{r}
+ggplot(restructuredData, aes(dosis, valor)) +
+  geom_boxplot() +
+  facet_wrap(~aspecto) +
+  labs(x="Dosis", y ="Inteligencia") +
+     theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"))
+```
+
+Podemos observar cómo cambian los niveles de inteligencia individual en función de los niveles de inteligencia de los progenitores. Y podemos ver como cambia estos para los distintos niveles de droga.
+
+```{r}
+ggplot(dat2, aes(herencia, inteligencia, colour = dosis)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(x="Inteligencia heredada", y ="Inteligencia evocada por la droga") + 
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"))
+```
+
+En seguida podemos hacer una descripción de los datos.
+
+```{r}
+as.data.frame(lapply(by(dat2$inteligencia, 
+                        dat2$dosis,
+                        stat.desc, 
+                        basic = FALSE, 
+                        norm = TRUE), 
+                     round, 2))
+```
+
+```{r}
+as.data.frame(lapply(by(dat2$herencia,
+                        dat2$dosis,
+                        stat.desc, 
+                        basic = FALSE, 
+                        norm = TRUE), 
+                     round, 2))
+```
+
+Podemos ver el gran promedio de inteligencia evocada por la droga (a travaés de todas las dosis).
+
+```{r}
+as.data.frame(lapply(stat.desc(dat2$inteligencia,
+                               basic = FALSE), 
+                     round, 2))
+```
+
+Podemos ver el gran promedio de inteligencia heredada (a travaés de todas las dosis).
+
+```{r}
+as.data.frame(lapply(stat.desc(dat2$herencia,
+                               basic = FALSE), 
+                     round, 2))
+```
+
+Luego podemos evaluar la homogeneidad de la varianza.
+
+```{r}
+leveneTest(dat2$inteligencia, dat2$dosis, center = median)
+```
+
+Dentro de los supuestos del ANCOVA debemos probar que nuestra variable independiente y la co-variable producen efectos independientes. Es decir, debemos probar que la co-variable no es afectada por la variable independiente.
+
+```{r}
+checkIndependenceModel <- aov(herencia ~ dosis, data = dat2)
+summary(checkIndependenceModel)
+summary.lm(checkIndependenceModel)
+```
+
+La inteligencia heredada fue aproximadamente equivalente a través de las tres condiciones de drogas (placebo, dosis baja y alta). Este resultado nos permite decir que es apropiado utilizar la inteligencia heredada como co-variable en el análisis de ANCOVA.
+
+El ANCOVA se realiza como cualquier modelo lineal. Es necesario mencionar que cuando hacemos un modelo, R calcula usa una suma de cuadrados de Tipo I (o sumas secuenciales de cuadrados) por defecto. Esto significa que cualquier predictor ingresado en el modelo se evalúa después de los predictores anteriores en el modelo. Típicamente en los modelos tradicionales se usa una suma de cuadrados de tipo III, dónde los efectos de los predictores se evalúan después que se toman en cuenta todos los otros predictores. Para hacer esto creamos el modelo y luego usamos la función **Anova** e indicamos que queremos usar la suma de cuadrados de tipo III.
+
+```{r}
+ANCOVA_model <- aov(inteligencia ~ herencia + dosis, dat2)
+Anova(ANCOVA_model, type="III")
+```
+
+¿Cómo se interpretan estos resultados?
+Lo primero que vemos es que los niveles de inteligencia individuales son modulados por los niveles de inteligencia de los progenitores. Más interesante aún es el segundo resultado, que indica que los niveles de inteligencia son modulados por la dosis de droga, incluso cuando los efectos de los niveles de inteligencia heredados son controlados.
+
+En suma, si hubieramos hecho sólo el ANOVA hubieramos observado lo siguiente:
+
+```{r}
+anovaModel <- aov(inteligencia ~ dosis, dat2)
+summary(anovaModel)
+```
+
+Pero, evaluando los niveles de inteligencia controlando por los niveles de inteligencia heredada llegamos a una conclusión distinta.
+
+En el modelo de ANCOVA queda por mirar los gráficos.
+
+```{r}
+plot(ANCOVA_model)
+```
+
+¿Qué vemos?
+El primer gráfico se puede usar para evaluar la homogeneidad de la varianza: si tiene forma de embudo, entonces estamos en problemas. En nuestro caso vemos que la dispersión de puntajes es más amplia en algunos puntos que en otros. Esto implica que los residuales pueden estar distribuidos de forma heteroscedástica.
+
+El segundo gráfico es un gráfico Q-Q que nos informa sobre la normalidad de los residuos en el modelo. Queremos que nuestros residuos se distribuyan normalmente, lo que significa que los puntos en el gráfico deben flotar alrededor de la línea diagonal. En nuestro los puntos se alejan de esta tendencia. Nuevamente, esta no es una buena noticia para el modelo. Estos gráficos sugieren que sería necesario realizar una versión robusta de ANCOVA.
+
+A pesar de los problemas que hayamos detectado, y con el objetivo de hacer un análisis completo del análisis de ANCOVA veremos otros aspectos importantes.
+
+Otro de los supuestos del ANCOVA que debemos probar es que existe una homogeneidad de las pendientes de regresión. Este supuesto significa que la relación entre la co-variable y la variable resultado (en este caso, inteligencia e inteligencia heredada) debe ser similar en diferentes niveles de la variable predictora (en este caso, en los tres grupos de dosis). Para probar esto, necesitamos ejecutar de nuevo un ANCOVA pero incluyendo la interacción entre la co-variable y la variable predictora.
+
+```{r}
+hoRS <- aov(inteligencia ~ herencia*dosis,
+            dat2)
+Anova(hoRS, type = "III")
+```
+
+Los efectos de la dosis de droga y la inteligencia heredada siguen siendo significativos, pero lo principal que nos interesa es la interacción. Un valor significativo en esta interacción sugiere que no cumple el supuesto de homogeneidad de las pendientes de regresión.
+
+Para los contrastes planificados podemos hacer algo similar a lo que hemos hecho antes.
+
+```{r}
+.plac_vs_drug <- c(-2, 1, 1)
+.high_vs_low <- c(0, -1, 1)
+contrasts(dat2$dosis) <- cbind(.plac_vs_drug, .high_vs_low)
+```
+
+Una vez que definimos los contrastes los podemos inyectar en la base de datos y luego realizamos el modelo nuevamente.
+
+```{r}
+ANCOVA_model <- aov(inteligencia ~ dosis + herencia, dat2)
+```
+
+¿Cómo se interpretan estos resultados?
+Antes de mirar las comparaciones planificadas es buena idea calcular los promedios ajustados. En este caso en particular queremos saber los promedios de inteligencia en función de las dosis de droga ajustados por los niveles de inteligencia heredados. Para ello usamos la función **effect**. También podemos acceder a los SE de estos promedios.
+
+```{r}
+adjustedMeans <- effect("dosis", ANCOVA_model, se=TRUE)
+summary(adjustedMeans)
+adjustedMeans$se
+```
+
+A diferencia de los promedios originales, cuando se ajustan los promedios se observa que los promedios de inteligencia para dosis alta y baja son bastante diferentes. Es decir, cuando se ajuste por los efectos de la inteligencia de los progenitores, a medida que aumenta la dosis de droga aumentan los niveles de inteligencia de los individuos.
+
+Veamos los contrastes planificados.
+
+```{r}
+summary.lm(ANCOVA_model)
+```
+
+En estos contrastes comparamos el efecto de la droga relativo al placebo (contraste 1) y el efecto de la dosis alta versus la dosis baja (contraste 2). Pero, además estos contrates están ajustados por los niveles de inteligencia heredados. ¿Qué vemos? Primero, que hay un efecto de la droga por sobre el placebo. Segundo. No parece haber una efecto de la dosis alta por sobre la dosis baja. 
+
+El modelo además nos dice que hay una relación entre los niveles de inteligencia producidos por la droga y los niveles de inteligencia heredados. El beta es ~0.42. Asumiendo los otros factores en igualdad de condiciones, si la inteligencia del progenitor de un individuo aumenta en una 1 unidad, la inteligencia del individuo aumenta en alredor de la mitad. Esto los podemos ver en el siguiente gráfico.
+
+```{r}
+ggplot(dat2, aes(herencia, inteligencia)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(x="Inteligencia heredada", y ="Inteligencia evocada") + 
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"))
+```
+
+Por último, también podemos hacer pruebas posthoc. Para hacer estos análisis en los promedios ajustados debemos usar la función **glht**.
+
+```{r}
+postHocs <- glht(ANCOVA_model, linfct = mcp(dosis = "Tukey"))
+summary(postHocs)
+confint(postHocs)
+```
+
+De este análisis observamos que sólo hay diferencias de inteligencia (cuando controlamos por los efecto de inteligencia heredada) cuando comparamos el placebo y la dosis alta de droga.
