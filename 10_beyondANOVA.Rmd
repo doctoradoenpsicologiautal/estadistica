@@ -360,22 +360,6 @@ pairwise.t.test(dat1.long$vomito,
 
 Finalmente, también puedes notar que el modelo de ANOVA también describe el tamaño del efecto en forma de ges (generalized eta squared).
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## ANCOVA
 
 Ahora vamos a hacer un análisis un ANCOVA.
@@ -620,3 +604,189 @@ confint(postHocs)
 ```
 
 De este análisis observamos que sólo hay diferencias de inteligencia (cuando controlamos por los efecto de inteligencia heredada) cuando comparamos el placebo y la dosis alta de droga.
+
+## MANOVA
+
+Ahora vamos a hacer un análisis de MANOVA.
+El análisis de MANOVA se realizar porque el ANOVA lidia más que nada con una variable dependiente. Pero, ¿qué pasa cuando realizamos muchas mediciones? 
+
+En el siguiente estudio se aplicaron distintos tratamientos para enfrentar cierto tipo de problemas psicopatológicos. Había un grupo control (NT), y grupos a que se le aplicaron terapia condutual (BT) o terapia cognitivo-conductual (CBT). Además, de estos grupos (que reflejan las variables independientes), se midió la frecuencia de dos cosas: conductas y pensamientos.
+
+Para empezar carguemos las librerías.
+
+```{r}
+setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+
+library(car)
+library(ggplot2)
+library(mvnormtest)
+#library(mvoutlier)
+library(pastecs)
+library(reshape)
+#library(WRS)
+```
+
+Carguemos los datos.
+
+```{r}
+ocdData <- read.csv("data/OCD.csv", header = TRUE)
+ocdData$Grupo <- factor(ocdData$Grupo,
+                        levels = c("CBT", "BT", "No Treatment Control"),
+                        labels = c("CBT", "BT", "NT"))
+```
+
+Re-ordenemos los niveles dentro del factor de grupo para que en el gráfico aparezca el grupo control en primer lugar.
+
+```{r}
+
+ocdData$Grupo <- factor(ocdData$Grupo,
+                        levels(ocdData$Grupo)[c(3,1,2)])
+```
+
+Luego transformemos los datos a formato Long-.
+
+```{r}
+
+ocdMelt <- melt(ocdData, 
+                id = c("Grupo"),
+                measured = c("Acciones", "Pensamientos"))
+names(ocdMelt) <- c("Grupo", "Medicion", "Frecuencia")
+```
+
+Hagamos un gráfico de dispersión.
+
+```{r}
+ocdScatter <- ggplot(ocdData, aes(Acciones, Pensamientos))
+ocdScatter + geom_point() + geom_smooth(method = "lm") +
+  labs(x = "Conductas obsesivas", y = "Pensamientos obsesivos") +
+  facet_wrap(~Grupo, ncol = 3) + 
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"))
+```
+
+Hagamos un gráfico de barras.
+
+```{r}
+ocdBar <- ggplot(ocdMelt, aes(Grupo, Frecuencia, fill = Medicion))
+ocdBar + 
+  stat_summary(fun.data = mean_cl_boot,
+               geom = "errorbar", 
+               position = position_dodge(width=0.90),
+               width = 0.2) +
+  stat_summary(fun.y = mean, 
+               geom = "bar", 
+               position = "dodge") +
+  labs(x = "Grupo", y = "Frencuencia", fill = "Medición") + 
+  scale_y_continuous(breaks = seq(0, 20, by = 2)) + 
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"))
+```
+
+Hagamos un histograma.
+
+```{r}
+ocdBoxplot <- ggplot(ocdMelt, aes(Grupo, Frecuencia, colour = Medicion))
+ocdBoxplot + 
+  geom_boxplot() + 
+  labs(x = "Grupo", y = "Frecuencia", colour = "Medición") + 
+  scale_y_continuous(breaks = seq(0, 20, by = 2)) + 
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"))
+```
+
+Luego podemos hacer una descripción de los datos.
+
+```{r}
+descrip <- by(ocdData$Acciones, 
+           ocdData$Grupo, 
+           stat.desc, 
+           basic = FALSE, 
+           norm = TRUE)
+lapply(descrip,round,2)
+```
+
+```{r}
+descrip <- by(ocdData$Pensamientos, 
+           ocdData$Grupo, 
+           stat.desc, 
+           basic = FALSE, 
+           norm = TRUE)
+lapply(descrip,round,2)
+```
+
+Luego de describir los datos podemos comprobar algunos supuestos antes de hacer el análisis de MANOVA.
+
+Primero debemos chequear la homogeneidad de las matrices de covarianza, comparando los valores que encontremos. Idealmente deberían ser similares a través de los grupos.
+
+```{r}
+by(ocdData[, 2:3], ocdData$Grupo , cov)
+```
+
+En este caso se encuentran diferencias, pero ya que los grupos tienen un n similar no es algo de lo que tengamos que preocuparnos.
+
+Luego tenemos que testear la normalidad multivariada. Para ello necesitamos aplicar una prueba de normalidada los grupos individuales, y transponer los datos para que estén en un formato adecuado.
+
+```{r}
+nt <- t(ocdData[21:30, 2:3])
+cbt <- t(ocdData[1:10, 2:3])
+bt <- t(ocdData[11:20, 2:3])
+
+mshapiro.test(nt)
+mshapiro.test(cbt)
+mshapiro.test(bt)
+```
+
+El análisis sugiere que podrían haber problemas de normalidad en el grupo control. Por ahora lo vamos a ignorar. Pero mirando los datos se puede detectar un outlier. Y eliminando este outlier se puede realizar el análisis de normalidad para revisar si haciendo esto se corrige el problema de normalidad.
+
+Antes de hacer el análisis principal podemos setear nuestros contrastes de interés.
+
+```{r}
+.NT_vs_CBT <- c(1, 0, 0)
+.NT_vs_BT <- c(0, 1, 0)
+contrasts(ocdData$Grupo) <- cbind(.NT_vs_CBT, .NT_vs_BT)
+```
+
+Luego para definir la variable dependiente creamos un vector con las dos mediciones.
+Luego se realiza el modelo de la misma forma como se define en una regresión simple.
+Finalmente revisamos el resultados del modelo.
+
+```{r}
+outcome <- cbind(ocdData$Acciones, ocdData$Pensamientos)
+ocdModel <- manova(outcome ~ Grupo, data = ocdData)
+summary(ocdModel, intercept = TRUE)
+```
+
+Hay cuatro pruebas estadísticas que se pueden usar en MANOVA (traza de Pillai, lambda de Wilks, traza de Hotelling y prueba de raíz más grande de Roy). La prueba usada mas común es la traza de Pillai. Pero otras pruebas se pueden usar para condiciones particulares.
+
+Otros análisis se pueden hacer de la siguiente manera:
+
+```{r}
+summary(ocdModel, intercept = TRUE, test = "Wilks")
+summary(ocdModel, intercept = TRUE, test = "Hotelling")
+summary(ocdModel, intercept = TRUE, test = "Roy")
+```
+
+Finalmente luego de este análisis se pueden hacer análisis tipo ANOVA.
+Se puede aplicar 
+
+```{r}
+# Recuerda: outcome <- cbind(ocdData$Acciones, ocdData$Pensamientos)
+summary.aov(ocdModel)
+
+```
+
+Para los análisis de ANOVA observamos que no existen diferencias significativas entre los distintos tipos de terapia. Sólo con el fin de completar los análisis vamos a revisar las comparaciones planificadas. Pero no podemos intepretar estos resultados.
+
+Se pueden analizar los cambios en la frecuencia de acciones en función de los tratamientos.
+
+```{r}
+actionModel <- lm(Acciones ~ Grupo, data = ocdData)
+summary.lm(actionModel)
+```
+
+Se pueden analizar los cambios en la frecuencia de pensamientos en función de los tratamientos.
+
+```{r}
+thoughtsModel <- lm(Pensamientos ~ Grupo, data = ocdData)
+summary.lm(thoughtsModel)
+```

@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2022-12-24" />
+<meta name="date" content="2022-12-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -188,6 +188,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="10.2" data-path="otros-anova.html"><a href="otros-anova.html#anova-factorial"><i class="fa fa-check"></i><b>10.2</b> ANOVA factorial</a></li>
 <li class="chapter" data-level="10.3" data-path="otros-anova.html"><a href="otros-anova.html#anova-de-medidas-repetidas"><i class="fa fa-check"></i><b>10.3</b> ANOVA de medidas repetidas</a></li>
 <li class="chapter" data-level="10.4" data-path="otros-anova.html"><a href="otros-anova.html#ancova"><i class="fa fa-check"></i><b>10.4</b> ANCOVA</a></li>
+<li class="chapter" data-level="10.5" data-path="otros-anova.html"><a href="otros-anova.html#manova"><i class="fa fa-check"></i><b>10.5</b> MANOVA</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>11</b> Otros análisis</a><ul>
 <li class="chapter" data-level="11.1" data-path="otros-análisis.html"><a href="otros-análisis.html#análisis-de-proporciones"><i class="fa fa-check"></i><b>11.1</b> Análisis de proporciones</a></li>
@@ -656,17 +657,8 @@ satisfactionData &lt;-<span class="st">  </span><span class="kw">read.csv</span>
 <p>Otra manera de transformar datos a formato <em>long</em> es usando la función <strong>melt</strong>. Para ello necesitamos cargar la librería <strong>reshape</strong>.</p>
 <p>Esta función la usamos de la siguiente manera: newDataFrame &lt;- melt(oldDataFrame, id = c(constant_variables), measured = c(variables_that_change_across_columns))</p>
 <p>En nuestro ejemplo podemos hacerlo así:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(reshape)</code></pre></div>
-<pre><code>## Warning: package &#39;reshape&#39; was built under R version 4.1.3</code></pre>
-<pre><code>## 
-## Attaching package: &#39;reshape&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:reshape2&#39;:
-## 
-##     colsplit, melt, recast</code></pre>
-<pre><code>## The following objects are masked from &#39;package:plyr&#39;:
-## 
-##     rename, round_any</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">restructuredData &lt;-<span class="st"> </span><span class="kw">melt</span>(satisfactionData,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(reshape)
+restructuredData &lt;-<span class="st"> </span><span class="kw">melt</span>(satisfactionData,
                          <span class="dt">id =</span> <span class="kw">c</span>(<span class="st">&quot;Person&quot;</span>, <span class="st">&quot;Gender&quot;</span>),
                          <span class="dt">measured =</span> <span class="kw">c</span>(<span class="st">&quot;Satisfaction_Base&quot;</span>,
                                       <span class="st">&quot;Satisfaction_6_Months&quot;</span>,
@@ -738,10 +730,10 @@ satisfactionData &lt;-<span class="st">  </span><span class="kw">read.csv</span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat, <span class="kw">aes</span>(latidos))
 h1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat, <span class="kw">aes</span>(<span class="st">&quot;&quot;</span>, latidos))
 h1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 <p>Veámos otros datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/demografia_salud.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(dat<span class="op">$</span>Sexo)</code></pre></div>
