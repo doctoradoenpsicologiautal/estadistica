@@ -1,4 +1,4 @@
-# Pasos después de un ANOVA
+# Después del ANOVA
 
 En este capítulo vamos a revisar que podemos hacer después de un ANOVA.
 

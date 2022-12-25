@@ -1,4 +1,4 @@
-# Otros ANOVA
+# Más allá del ANOVA
 
 En este capítulo vamos a revisar que otros tipos de ANOVA podemos realizar.
 
