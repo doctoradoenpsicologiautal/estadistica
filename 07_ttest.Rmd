@@ -1,14 +1,14 @@
-# T-test
+# La prueba de t (comparar 2 grupos)
 
 En este capítulo vamos a revisar la típica prueba para comparar dos grupos, el t-test.
 
-## ¿Cómo comparamos datos de dos grupos?
+## ¿Cómo comparamos dos grupos?
 Revisa este <a href="https://www.youtube.com/watch?v=3JKMXCpQvzw" target="_blank">video (10')</a> y trata de responder:
 
 - ¿Cómo se sabe si dos muestras viene de una misma población o de poblaciones diferentes?
 - ¿Cómo podemos usar los intervalos de confianzar para estimar las diferencias entre dos muestras?
 
-## La distribución normal para dos grupos
+## La distribución normal de dos grupos
 Revisa este <a href="https://www.youtube.com/watch?v=nUutIbaRWCQ" target="_blank">video (9')</a> y trata de responder:
 
 - ¿Para que nos sirve la distribución normal para compara dos muestras?

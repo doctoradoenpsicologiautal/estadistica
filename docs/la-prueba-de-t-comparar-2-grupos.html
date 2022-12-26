@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 8 ANOVA | Estadística con R</title>
-  <meta name="description" content="Capítulo 8 ANOVA | Estadística con R" />
+  <title>Capítulo 7 La prueba de t (comparar 2 grupos) | Estadística con R</title>
+  <meta name="description" content="Capítulo 7 La prueba de t (comparar 2 grupos) | Estadística con R" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 8 ANOVA | Estadística con R" />
+  <meta property="og:title" content="Capítulo 7 La prueba de t (comparar 2 grupos) | Estadística con R" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 8 ANOVA | Estadística con R" />
+  <meta name="twitter:title" content="Capítulo 7 La prueba de t (comparar 2 grupos) | Estadística con R" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="la-prueba-de-t-comparar-2-grupos.html"/>
-<link rel="next" href="después-del-anova.html"/>
+<link rel="prev" href="la-regresión.html"/>
+<link rel="next" href="anova-comparar-3-grupos-o-más.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -170,11 +170,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.4" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#el-t-test-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>7.4</b> El t-test como un modelo líneal general</a></li>
 <li class="chapter" data-level="7.5" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#el-t-test-con-r"><i class="fa fa-check"></i><b>7.5</b> El t-test con R</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>8</b> ANOVA</a><ul>
-<li class="chapter" data-level="8.1" data-path="anova.html"><a href="anova.html#por-qué-necesitamos-un-anova"><i class="fa fa-check"></i><b>8.1</b> ¿Por qué necesitamos un ANOVA?</a></li>
-<li class="chapter" data-level="8.2" data-path="anova.html"><a href="anova.html#el-anova-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>8.2</b> El ANOVA como un modelo líneal general</a></li>
-<li class="chapter" data-level="8.3" data-path="anova.html"><a href="anova.html#la-lógica-del-anova"><i class="fa fa-check"></i><b>8.3</b> La lógica del ANOVA</a></li>
-<li class="chapter" data-level="8.4" data-path="anova.html"><a href="anova.html#el-anova-con-r"><i class="fa fa-check"></i><b>8.4</b> El ANOVA con R</a></li>
+<li class="chapter" data-level="8" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html"><i class="fa fa-check"></i><b>8</b> ANOVA (comparar 3 grupos o más)</a><ul>
+<li class="chapter" data-level="8.1" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#por-qué-necesitamos-un-anova"><i class="fa fa-check"></i><b>8.1</b> ¿Por qué necesitamos un ANOVA?</a></li>
+<li class="chapter" data-level="8.2" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#el-anova-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>8.2</b> El ANOVA como un modelo líneal general</a></li>
+<li class="chapter" data-level="8.3" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#la-lógica-del-anova"><i class="fa fa-check"></i><b>8.3</b> La lógica del ANOVA</a></li>
+<li class="chapter" data-level="8.4" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#el-anova-con-r"><i class="fa fa-check"></i><b>8.4</b> El ANOVA con R</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="después-del-anova.html"><a href="después-del-anova.html"><i class="fa fa-check"></i><b>9</b> Después del ANOVA</a><ul>
 <li class="chapter" data-level="9.1" data-path="después-del-anova.html"><a href="después-del-anova.html#qué-hacemos-después-de-un-anova"><i class="fa fa-check"></i><b>9.1</b> ¿Qué hacemos después de un ANOVA?</a></li>
@@ -212,51 +212,43 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="anova" class="section level1">
-<h1><span class="header-section-number">Capítulo 8</span> ANOVA</h1>
-<p>En este capítulo vamos a revisar el típico análisis para comparar más de dos grupos, el ANOVA.</p>
-<div id="por-qué-necesitamos-un-anova" class="section level2">
-<h2><span class="header-section-number">8.1</span> ¿Por qué necesitamos un ANOVA?</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=hzasDQY0GVk" target="_blank">video (9')</a> y trata de responder:</p>
+<div id="la-prueba-de-t-comparar-2-grupos" class="section level1">
+<h1><span class="header-section-number">Capítulo 7</span> La prueba de t (comparar 2 grupos)</h1>
+<p>En este capítulo vamos a revisar la típica prueba para comparar dos grupos, el t-test.</p>
+<div id="cómo-comparamos-dos-grupos" class="section level2">
+<h2><span class="header-section-number">7.1</span> ¿Cómo comparamos dos grupos?</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=3JKMXCpQvzw" target="_blank">video (10')</a> y trata de responder:</p>
 <ul>
-<li>¿Cómo comparamos varias condiciones experimentales?</li>
-<li>¿Cuántos distintos tipos de ANOVA existen?</li>
-<li>¿De qué dependen del tipo de ANOVA que usemos para realizar un análisis?</li>
-<li>¿Qué es un factor en un ANOVA?</li>
-<li>¿Qué es un nivel en un ANOVA?</li>
-<li>¿Qué es un ANOVA mixto?</li>
-<li>¿En un experimento hipotético con 3 condiciones experimentales por qué no podemos usar 3 t-test?</li>
-<li>¿Cuanto aumenta el error de tipo 1 cuando aumentamos el número de comparaciones que hacemos?</li>
-<li>¿Qué es una prueba omnibus?</li>
-<li>¿Cuáles son los supuestos del ANOVA?</li>
+<li>¿Cómo se sabe si dos muestras viene de una misma población o de poblaciones diferentes?</li>
+<li>¿Cómo podemos usar los intervalos de confianzar para estimar las diferencias entre dos muestras?</li>
 </ul>
 </div>
-<div id="el-anova-como-un-modelo-líneal-general" class="section level2">
-<h2><span class="header-section-number">8.2</span> El ANOVA como un modelo líneal general</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=CyrNtF3C0Mc" target="_blank">video (18')</a> y trata de responder:</p>
+<div id="la-distribución-normal-de-dos-grupos" class="section level2">
+<h2><span class="header-section-number">7.2</span> La distribución normal de dos grupos</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=nUutIbaRWCQ" target="_blank">video (9')</a> y trata de responder:</p>
 <ul>
-<li>¿Qué nos dice el valor F en un ANOVA?</li>
-<li>¿Por qué el ANOVA se puede representar como una regresión?</li>
+<li>¿Para que nos sirve la distribución normal para compara dos muestras?</li>
+</ul>
+</div>
+<div id="la-prueba-de-hipótesis" class="section level2">
+<h2><span class="header-section-number">7.3</span> La prueba de hipótesis</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=L3SbEqzEWW0" target="_blank">video (12')</a> y trata de responder:</p>
+<ul>
+<li>¿Cuál es la hipótesis nula cuando comparamos dos muestras?</li>
+</ul>
+</div>
+<div id="el-t-test-como-un-modelo-líneal-general" class="section level2">
+<h2><span class="header-section-number">7.4</span> El t-test como un modelo líneal general</h2>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=RS79Z69iu5U" target="_blank">video (15')</a> y trata de responder:</p>
+<ul>
 <li>¿Cómo se refleja un t-test en un modelo lineal general (GLM)?</li>
-<li>¿Para que nos sirven las variables ficticias (dummy coding) en el ANOVA?</li>
-<li>¿Qué refleja el intercepto de la ecuación que representa el ANOVA?</li>
-<li>¿Qué reflejan los coeficientes (o betas) de la ecuación que representa el ANOVA?</li>
+<li>¿Qué representa el intercepto de la ecuación de un GLM para una variable outcome cuando se comparan dos grupos?</li>
+<li>¿Qué representa la pendiente de la ecuación de un GLM para una variable outcome cuando se comparan dos grupos?</li>
 </ul>
 </div>
-<div id="la-lógica-del-anova" class="section level2">
-<h2><span class="header-section-number">8.3</span> La lógica del ANOVA</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=sWdZHcBWTGg" target="_blank">video (15')</a> y trata de responder:</p>
-<ul>
-<li>¿Qué reflejan los coeficientes (o betas) de la ecuación que representa el ANOVA?</li>
-<li>¿Cómo serían los promedios de los grupos si la hipótesis nula se tuviera que aceptar?</li>
-<li>¿Qué es la suma de cuadrados (SS) total?</li>
-<li>¿Qué es la suma de cuadrados (SS) del modelo?</li>
-<li>¿Qué es la suma de cuadrados (SS) de los residuales?</li>
-</ul>
-</div>
-<div id="el-anova-con-r" class="section level2">
-<h2><span class="header-section-number">8.4</span> El ANOVA con R</h2>
-<p>Ahora vamos a hacer el análisis. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).</p>
+<div id="el-t-test-con-r" class="section level2">
+<h2><span class="header-section-number">7.5</span> El t-test con R</h2>
+<p>Ahora vamos a hacer el análisis. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas). Luego importamos el set de datos y le damos una mirada.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
 
 <span class="kw">library</span>(ggplot2)
@@ -267,192 +259,201 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">library</span>(reshape2)
 <span class="kw">library</span>(car)
 <span class="kw">library</span>(effsize)</code></pre></div>
-<p>Luego importamos el set de datos. Aprovechamos de agregar unas etiquetas que nos sirvan a visualizar las condiciones experimentales. Y le damos una mirada.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/inteligencia.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
-dat1<span class="op">$</span>Dosis &lt;-<span class="st"> </span><span class="kw">factor</span>(dat1<span class="op">$</span>Dosis, 
-                            <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))
-dat1</code></pre></div>
-<pre><code>##      Dosis Inteligencia
-## 1  Placebo            3
-## 2  Placebo            2
-## 3  Placebo            1
-## 4  Placebo            1
-## 5  Placebo            4
-## 6     Baja            5
-## 7     Baja            2
-## 8     Baja            4
-## 9     Baja            2
-## 10    Baja            3
-## 11    Alta            7
-## 12    Alta            4
-## 13    Alta            5
-## 14    Alta            3
-## 15    Alta            6</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spiderLong &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/ansiedad_por_arañas_indep.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span>
+spiderLong<span class="op">$</span>Condicion &lt;-<span class="st"> </span><span class="kw">factor</span>(spiderLong<span class="op">$</span>Condicion)
+<span class="kw">head</span>(spiderLong)</code></pre></div>
+<pre><code>##   Sujeto Condicion Conductancia
+## 1      1    imagen           30
+## 2      2    imagen           35
+## 3      3    imagen           45
+## 4      4    imagen           40
+## 5      5    imagen           50
+## 6      6    imagen           35</code></pre>
 <p>Luego, mirar los datos siempre es bueno graficar.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Podemos usar esta función para calcular los estadísticos a través de los participantes.</span>
-datac &lt;-<span class="st"> </span><span class="kw">summarySE</span>(dat1, 
-                   <span class="dt">measurevar=</span><span class="st">&quot;Inteligencia&quot;</span>, 
-                   <span class="dt">groupvars=</span><span class="st">&quot;Dosis&quot;</span>)
+datac &lt;-<span class="st"> </span><span class="kw">summarySE</span>(spiderLong, 
+                   <span class="dt">measurevar=</span><span class="st">&quot;Conductancia&quot;</span>, 
+                   <span class="dt">groupvars =</span> <span class="st">&quot;Condicion&quot;</span>)
 
 <span class="co"># Luego hacemos el gráfico</span>
-<span class="kw">ggplot</span>(datac, <span class="kw">aes</span>(<span class="dt">x=</span>Dosis, <span class="dt">y=</span>Inteligencia, <span class="dt">group=</span><span class="dv">1</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">width=</span>.<span class="dv">1</span>, <span class="kw">aes</span>(<span class="dt">ymin=</span>Inteligencia<span class="op">-</span>se, <span class="dt">ymax=</span>Inteligencia<span class="op">+</span>se)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">colour =</span> <span class="st">&quot;Red&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Niveles de inteligencia&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-140-1.png" width="672" /></p>
-<p>Luego podemos hacer una descripción de los datos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test &lt;-<span class="st"> </span><span class="kw">by</span>(dat1<span class="op">$</span>Inteligencia, 
-           dat1<span class="op">$</span>Dosis, 
-           stat.desc, <span class="dt">basic =</span> <span class="ot">FALSE</span>, 
-           <span class="dt">norm =</span> <span class="ot">TRUE</span>)
-<span class="kw">lapply</span>(test,round,<span class="dv">2</span>)</code></pre></div>
-<pre><code>## $Placebo
+<span class="kw">ggplot</span>(datac, <span class="kw">aes</span>(<span class="dt">x =</span> Condicion, <span class="dt">y =</span> Conductancia)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>),
+           <span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>, 
+           <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, 
+           <span class="dt">fill =</span> <span class="st">&quot;White&quot;</span>, 
+           <span class="dt">show.legend=</span><span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">position=</span><span class="kw">position_dodge</span>(.<span class="dv">9</span>), 
+                <span class="dt">width=</span>.<span class="dv">25</span>, 
+                <span class="kw">aes</span>(<span class="dt">ymin =</span> Conductancia, <span class="dt">ymax =</span> Conductancia<span class="op">+</span>se)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
+        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
+        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">55</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">55</span>, <span class="dv">10</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Conductancia&quot;</span>)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-125-1.png" width="672" /></p>
+<p>Recordando lo que acabamos de aprender vamos a comparar los promedios por cada grupo con la información que resulta de aplicar una regresión lineal a estos datos.</p>
+<p>Primero describamos los datos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lapply</span>(<span class="kw">by</span>(spiderLong<span class="op">$</span>Conductancia, 
+          spiderLong<span class="op">$</span>Condicion, 
+          stat.desc, 
+          <span class="dt">basic =</span> <span class="ot">FALSE</span>, 
+          <span class="dt">norm =</span> <span class="ot">TRUE</span>), 
+       round, <span class="dv">2</span>)</code></pre></div>
+<pre><code>## $imagen
 ##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
-##         2.00         2.20         0.58         1.62         1.70         1.30         0.59 
+##        40.00        40.00         2.68         5.90        86.36         9.29         0.23 
 ##     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##         0.26         0.14        -1.96        -0.49         0.90         0.42 
+##         0.00         0.00        -1.39        -0.57         0.97         0.85 
 ## 
-## $Baja
+## $real
 ##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
-##         3.00         3.20         0.58         1.62         1.70         1.30         0.41 
+##        50.00        47.00         3.18         7.01       121.64        11.03         0.23 
 ##     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##         0.26         0.14        -1.96        -0.49         0.90         0.42 
-## 
-## $Alta
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
-##         5.00         5.00         0.71         1.96         2.50         1.58         0.32 
-##     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##         0.00         0.00        -1.91        -0.48         0.99         0.97</code></pre>
+##        -0.01         0.00        -1.46        -0.59         0.95         0.62</code></pre>
 <p>La función <strong>by</strong> permite calcular los estadísticos. La función <strong>round</strong> redondea los valores a dos décimas. Y la función <strong>lapply</strong> permite aplicar la función round de forma másiva.</p>
-<p>Antes de hacer el ANOVA verificamos si existen problemas de homgeneidad de varianza. Podemos hacerlo con la función <strong>leveneTest</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">leveneTest</span>(dat1<span class="op">$</span>Inteligencia, dat1<span class="op">$</span>Dosis, <span class="dt">center =</span> mean)</code></pre></div>
-<pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = mean)
+<p>Ahora, vamos a realiza una regresión lineal. Lo que queremos es predecir los valores de <em>conductancia</em> en función de los grupos (o condiciones) que tenemos. Para realizar la regresión usamos la función <strong>lm</strong></p>
+<p>Luego de hacer la regresión lineal podemos revisar su contenido con la función <strong>summary</strong>. Recuerda mirar los coeficientes. ¿Qué ves?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Conductancia <span class="op">~</span><span class="st"> </span>Condicion, <span class="dt">data=</span>spiderLong)
+<span class="kw">summary</span>(m1)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Conductancia ~ Condicion, data = spiderLong)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##  -17.0   -8.5    1.5    8.0   18.0 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)     40.000      2.944  13.587 3.53e-12 ***
+## Condicionreal    7.000      4.163   1.681    0.107    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 10.2 on 22 degrees of freedom
+## Multiple R-squared:  0.1139, Adjusted R-squared:  0.07359 
+## F-statistic: 2.827 on 1 and 22 DF,  p-value: 0.1068</code></pre>
+<p>Finalmente, podemos hacer el t-test. Pero, antes de hacerlo debemos verificar si existen problemas de homgeneidad de varianza. Podemos hacerlo con la función <strong>leveneTest</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">leveneTest</span>(spiderLong<span class="op">$</span>Conductancia, spiderLong<span class="op">$</span>Condicion)</code></pre></div>
+<pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
 ##       Df F value Pr(&gt;F)
-## group  2  0.0917  0.913
-##       12</code></pre>
-<p>Si la prueba de Levene es significativa entonces las varianzas son diferentes entre los grupos. En ese caso podemos aplicar la F de Welch a los datos. Esta prueba hace ajustes por las diferencias que hay entre las varianzas de cada grupo.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">AOV_W &lt;-<span class="st"> </span><span class="kw">oneway.test</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Dosis, <span class="dt">data =</span> dat1)
-AOV_W</code></pre></div>
+## group  1  0.2991   0.59
+##       22</code></pre>
+<p>Luego podemos hacer el análisis estadístico, aplicando la función <strong>t.test</strong>. De la siguiente forma: newModel &lt;- t.test(outcome ~ predictor, data=df, var.equal = TRUE/FALSE, paired=TRUE/FALSE). Ya que no tenemos problemas de homogeneidad de varianzar seteamos var.equal a FALSE.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_test1 &lt;-<span class="st"> </span><span class="kw">t.test</span>(Conductancia <span class="op">~</span><span class="st"> </span>Condicion, 
+                  <span class="dt">data=</span>spiderLong, 
+                  <span class="dt">var.equal =</span> <span class="ot">TRUE</span>,
+                  <span class="dt">paired =</span> <span class="ot">FALSE</span>)
+t_test1</code></pre></div>
 <pre><code>## 
-##  One-way analysis of means (not assuming equal variances)
+##  Two Sample t-test
 ## 
-## data:  Inteligencia and Dosis
-## F = 4.3205, num df = 2.0000, denom df = 7.9434, p-value = 0.05374</code></pre>
-<p>En nuestro caso no tuvimos problema en relación a la homgeneidad de varianza. Podemos hacer entonces el análisis estadístico, aplicando la función <strong>aov</strong>. Enseguida aplicamos la función <strong>sumary</strong> para visualizar los resultados del test.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_AOV &lt;-<span class="st"> </span><span class="kw">aov</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Dosis, <span class="dt">data =</span> dat1)
-<span class="kw">summary</span>(m_AOV)</code></pre></div>
-<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)  
-## Dosis        2  20.13  10.067   5.119 0.0247 *
-## Residuals   12  23.60   1.967                 
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p>Pr(&gt;F) indica la probabilidad de que ocurra un F-ratio del tamaño del obtenido si no hubiera efecto en la población.</p>
-<p>En esta punto sabemos que existe un efecto en alguna parte. El ANOVA es un test omnibus. Pero todavía no sabemos exactamente dónde esta el efecto. Es decir, entre qué grupos hay diferencias.</p>
-<p>Vamos a volver sobre las ideas comentadas en los videos anteriores. ¿Te acuerdas que reflejan el intercepto y la pendiente (o beta) de una ecuación que represente el ANOVA?</p>
-<p>Vamos a usar el dummy coding para desarrollar esta idea. Primero carguemos uno base de datos idéntica a la anterior pero con una columna extra con el dumming coding.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/inteligencia_c_Variables.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
-dat2<span class="op">$</span>Dosis &lt;-<span class="st"> </span><span class="kw">factor</span>(dat2<span class="op">$</span>Dosis, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>),
-                         <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))
-dat2</code></pre></div>
-<pre><code>##      Dosis Inteligencia Baja Alta
-## 1  Placebo            3    0    0
-## 2  Placebo            2    0    0
-## 3  Placebo            1    0    0
-## 4  Placebo            1    0    0
-## 5  Placebo            4    0    0
-## 6     Baja            5    1    0
-## 7     Baja            2    1    0
-## 8     Baja            4    1    0
-## 9     Baja            2    1    0
-## 10    Baja            3    1    0
-## 11    Alta            7    0    1
-## 12    Alta            4    0    1
-## 13    Alta            5    0    1
-## 14    Alta            3    0    1
-## 15    Alta            6    0    1</code></pre>
-<p>Vamos a hacer un modelo lineal dónde tratemos de predecir los niveles de inteligencia en base a nuestro dummy coding (que en el fondo refleja los efectos que resultan de comparar los grupos experimentales con un grupo base).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_dummy1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Baja <span class="op">+</span><span class="st"> </span>Alta, <span class="dt">data =</span> dat2)
-<span class="kw">summary</span>(m_dummy1)</code></pre></div>
+## data:  Conductancia by Condicion
+## t = -1.6813, df = 22, p-value = 0.1068
+## alternative hypothesis: true difference in means between group imagen and group real is not equal to 0
+## 95 percent confidence interval:
+##  -15.634222   1.634222
+## sample estimates:
+## mean in group imagen   mean in group real 
+##                   40                   47</code></pre>
+<p>Para terminar siempre es bueno calcular el tamaño del efecto.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span>t_test1<span class="op">$</span>statistic[[<span class="dv">1</span>]]
+df &lt;-<span class="st"> </span>t_test1<span class="op">$</span>parameter[[<span class="dv">1</span>]]
+r &lt;-<span class="st"> </span><span class="kw">sqrt</span>(t<span class="op">**</span><span class="dv">2</span><span class="op">/</span>(t<span class="op">**</span><span class="dv">2</span><span class="op">+</span>df))
+r</code></pre></div>
+<pre><code>## [1] 0.3374392</code></pre>
+<hr />
+<p>Ahora, imaginemos que en realidad nuestro diseño experimental era intra-sujetos. Vamos a usar exactamente los mismos datos que antes pero asumiendo un diseño intra-sujetos. Y asumiremos que estos datos viendo en un formato wide.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spiderWide &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/ansiedad_por_arañas_dep.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span>
+<span class="kw">head</span> (spiderWide)</code></pre></div>
+<pre><code>##   Sujeto imagen real
+## 1      1     30   40
+## 2      2     35   35
+## 3      3     45   50
+## 4      4     40   55
+## 5      5     50   65
+## 6      6     35   55</code></pre>
+<p>Para realizar el gráfico primero transformamos los datos a formato Long.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spiderLongNew &lt;-<span class="st"> </span><span class="kw">melt</span>(spiderWide,
+                     <span class="dt">id =</span> <span class="kw">c</span>(<span class="st">&quot;Sujeto&quot;</span>), 
+                     <span class="dt">measured =</span> <span class="kw">c</span>(<span class="st">&quot;imagen&quot;</span>, <span class="st">&quot;real&quot;</span>))
+<span class="kw">names</span>(spiderLongNew) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Sujeto&quot;</span>, <span class="st">&quot;Condicion&quot;</span>, <span class="st">&quot;Conductancia&quot;</span>)</code></pre></div>
+<p>Luego procedemos como antes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Podemos usar esta función para calcular los estadísticos para un diseño intra-sujetos.</span>
+datac2 &lt;-<span class="st"> </span><span class="kw">summarySEwithin</span>(spiderLongNew, 
+                          <span class="dt">measurevar=</span><span class="st">&quot;Conductancia&quot;</span>, 
+                          <span class="dt">withinvars=</span><span class="st">&quot;Condicion&quot;</span>, 
+                          <span class="dt">idvar=</span><span class="st">&quot;Sujeto&quot;</span>)
+
+<span class="kw">ggplot</span>(datac2, <span class="kw">aes</span>(<span class="dt">x=</span>Condicion, <span class="dt">y=</span>Conductancia)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>),
+           <span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, 
+           <span class="dt">color=</span><span class="st">&quot;black&quot;</span>, 
+           <span class="dt">fill=</span><span class="st">&quot;White&quot;</span>, 
+           <span class="dt">show.legend=</span><span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">position=</span><span class="kw">position_dodge</span>(.<span class="dv">9</span>), 
+                <span class="dt">width=</span>.<span class="dv">25</span>, 
+                <span class="kw">aes</span>(<span class="dt">ymin=</span>Conductancia, <span class="dt">ymax=</span>Conductancia<span class="op">+</span>se)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
+        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
+        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">55</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">55</span>, <span class="dv">10</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Conductancia&quot;</span>)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
+<p>Luego podemos chequear algunos supuestos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spiderWide<span class="op">$</span>diff &lt;-<span class="st"> </span>spiderWide<span class="op">$</span>imagen <span class="op">-</span><span class="st"> </span>spiderWide<span class="op">$</span>real <span class="co"># calcula la diferencia</span>
+<span class="kw">stat.desc</span>(spiderWide<span class="op">$</span>diff, <span class="dt">basic =</span> <span class="ot">FALSE</span>, <span class="dt">norm =</span> <span class="ot">TRUE</span>) <span class="co"># calcula los estadísticos</span></code></pre></div>
+<pre><code>##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##   -7.5000000   -7.0000000    2.8311043    6.2312185   96.1818182    9.8072330   -1.4010333 
+##     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##    0.2464810    0.1933785   -1.2342159   -0.5007991    0.9557903    0.7224801</code></pre>
+<p>Y luego haces el t-test.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_test2 &lt;-<span class="st"> </span><span class="kw">t.test</span>(spiderWide<span class="op">$</span>real, spiderWide<span class="op">$</span>imagen, <span class="dt">paired =</span> <span class="ot">TRUE</span>)
+t_test2</code></pre></div>
 <pre><code>## 
-## Call:
-## lm(formula = Inteligencia ~ Baja + Alta, data = dat2)
+##  Paired t-test
 ## 
-## Residuals:
-##    Min     1Q Median     3Q    Max 
-##   -2.0   -1.2   -0.2    0.9    2.0 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)   
-## (Intercept)   2.2000     0.6272   3.508  0.00432 **
-## Baja          1.0000     0.8869   1.127  0.28158   
-## Alta          2.8000     0.8869   3.157  0.00827 **
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 1.402 on 12 degrees of freedom
-## Multiple R-squared:  0.4604, Adjusted R-squared:  0.3704 
-## F-statistic: 5.119 on 2 and 12 DF,  p-value: 0.02469</code></pre>
-<p>Al mismo tiempo aprovechemos de calcular los promedios para los valores de inteligencia de acuerdo a cada grupo experimental</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(dat2<span class="op">$</span>Inteligencia, <span class="kw">list</span>(dat2<span class="op">$</span>Dosis), mean)</code></pre></div>
-<pre><code>##   Group.1   x
-## 1 Placebo 2.2
-## 2    Baja 3.2
-## 3    Alta 5.0</code></pre>
-<p>Fíjate que:</p>
-<p>El intercepto del modelo (el &quot;Estimate&quot; de la fila &quot;Intercept&quot;) corresponde al promedio en los niveles de inteligencia para el grupo placebo.</p>
-<p>El beta 1 del modelo (el &quot;Estimate&quot; de la fila &quot;Baja&quot;) corresponde a la diferencia en los niveles de inteligencia entre el grupo con dosis baja y el grupo placebo.</p>
-<p>El beta 2 del modelo (el &quot;Estimate&quot; de la fila &quot;Alta&quot;) corresponde a la diferencia en los niveles de inteligencia entre el grupo con dosis alta y el grupo placebo.</p>
-<p>Tal como lo habíamos concebido anteriormente! ¿Necesitamos definir un dummy coding para hacer esto? En realidad R lo hace por defecto.</p>
-<p>Si hacemos un modelo para predecir los niveles de inteligencia directamente de la columna que indica las dosis obtenemos exactamente el mismo modelo.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_dummy2 &lt;-<span class="st"> </span><span class="kw">lm</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Dosis, <span class="dt">data =</span> dat2)
-<span class="kw">summary</span>(m_dummy2)</code></pre></div>
+## data:  spiderWide$real and spiderWide$imagen
+## t = 2.4725, df = 11, p-value = 0.03098
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##   0.7687815 13.2312185
+## sample estimates:
+## mean of the differences 
+##                       7</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Pero también lo podrías hacer si estuvieran en formato Long.</span>
+<span class="kw">t.test</span>(Conductancia <span class="op">~</span><span class="st"> </span>Condicion, <span class="dt">data=</span>spiderLong, <span class="dt">paired =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## 
-## Call:
-## lm(formula = Inteligencia ~ Dosis, data = dat2)
+##  Paired t-test
 ## 
-## Residuals:
-##    Min     1Q Median     3Q    Max 
-##   -2.0   -1.2   -0.2    0.9    2.0 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)   
-## (Intercept)   2.2000     0.6272   3.508  0.00432 **
-## DosisBaja     1.0000     0.8869   1.127  0.28158   
-## DosisAlta     2.8000     0.8869   3.157  0.00827 **
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 1.402 on 12 degrees of freedom
-## Multiple R-squared:  0.4604, Adjusted R-squared:  0.3704 
-## F-statistic: 5.119 on 2 and 12 DF,  p-value: 0.02469</code></pre>
-<p>Por úlitmo, fíjate que cuando usamos la función <strong>aov</strong> para hacer el ANOVA obtuvimos una versión resumida de lo que obtenemos al realizar el modelo lineal con la función <strong>lm</strong>. En el fondo esto refleja que una ANOVA es un modelo lineal que esta disfrazado. Esto es lo que se llama una función <em>wraper</em>. De hecho podemos ver el modelo completo si al resultado del <strong>aov</strong> le aplicamos la función <strong>summary.lm</strong>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary.lm</span>(m_AOV)</code></pre></div>
+## data:  Conductancia by Condicion
+## t = -2.4725, df = 11, p-value = 0.03098
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -13.2312185  -0.7687815
+## sample estimates:
+## mean of the differences 
+##                      -7</code></pre>
+<p>Para terminar siempre es bueno calcular el tamaño del efecto. Podemos calcularlo de diferentes formas.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span>t_test2<span class="op">$</span>statistic[[<span class="dv">1</span>]]
+df &lt;-<span class="st"> </span>t_test2<span class="op">$</span>parameter[[<span class="dv">1</span>]]
+(r &lt;-<span class="st"> </span><span class="kw">sqrt</span>(t<span class="op">**</span><span class="dv">2</span><span class="op">/</span>(t<span class="op">**</span><span class="dv">2</span><span class="op">+</span>df)))</code></pre></div>
+<pre><code>## [1] 0.5976869</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">r</code></pre></div>
+<pre><code>## [1] 0.5976869</code></pre>
+<p>O podemos usar una función.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Cohen&#39;s d = (M2 - M1) / SDpooled</span>
+<span class="co"># SDpooled = sqrt((SD1^2 + SD2^2)/ 2)</span>
+<span class="kw">cohen.d</span>(spiderWide<span class="op">$</span>real, spiderWide<span class="op">$</span>imagen, <span class="dt">paired =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## 
-## Call:
-## aov(formula = Inteligencia ~ Dosis, data = dat1)
+## Cohen&#39;s d
 ## 
-## Residuals:
-##    Min     1Q Median     3Q    Max 
-##   -2.0   -1.2   -0.2    0.9    2.0 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)   
-## (Intercept)   2.2000     0.6272   3.508  0.00432 **
-## DosisBaja     1.0000     0.8869   1.127  0.28158   
-## DosisAlta     2.8000     0.8869   3.157  0.00827 **
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 1.402 on 12 degrees of freedom
-## Multiple R-squared:  0.4604, Adjusted R-squared:  0.3704 
-## F-statistic: 5.119 on 2 and 12 DF,  p-value: 0.02469</code></pre>
-<p>Por último, podemos hacer algunos gráficos que podemos extraer del modelo de ANOVA.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(m_AOV)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-150-1.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-150-2.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-150-3.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-150-4.png" width="672" /></p>
-<p>Los dos primeros gráficos son los mas importantes. El gráfico 1 muestra la homogeneidad de varianza. Si ves una forma de embudo entonces hay en problemas en la homgeneidad de varianza. La idea es que los puntos estén igualmente repartidos. Es decir, las variaciones son similares entre los grupos. El gráfico 2 es un gráfico Q-Q. Si los puntos están sobre la diagonal entonces se cumple el suspuesto de la normalidad de los datos.</p>
+## d estimate: 0.6805173 (medium)
+## 95 percent confidence interval:
+##      lower      upper 
+## 0.04707723 1.31395743</code></pre>
 
 </div>
 </div>
@@ -461,8 +462,8 @@ dat2</code></pre></div>
           </div>
         </div>
       </div>
-<a href="la-prueba-de-t-comparar-2-grupos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="después-del-anova.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="la-regresión.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="anova-comparar-3-grupos-o-más.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -493,7 +494,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/doctoradoenpsicologiautal/estadistica/edit/master/08_ANOVA.Rmd",
+"link": "https://github.com/doctoradoenpsicologiautal/estadistica/edit/master/07_ttest.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -501,7 +502,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/doctoradoenpsicologiautal/estadistica/blob/master/08_ANOVA.Rmd",
+"link": "https://github.com/doctoradoenpsicologiautal/estadistica/blob/master/07_ttest.Rmd",
 "text": null
 },
 "download": null,

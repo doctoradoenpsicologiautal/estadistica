@@ -6,24 +6,24 @@ knitr::opts_chunk$set(echo = TRUE)
 
 En este capítulo te voy a mostrar las primeras ideas para que puedas programar en R.
 
-## ¿Que significa programar?
+## ¿Qué significa programar?
 Revisa este <a href="https://www.youtube.com/watch?v=oY6OMnVRkjM" target="_blank">video (8')</a> y trata de responder:
 
 - ¿Qué habilidades permite desarrollar el conocimiento de programación?
 - ¿Qué es un algoritmo?
 - ¿Qué es un lenguaje de programación?
 
-## La shell (consola) versus el script
+## La consola versus el script
 Revisa este <a href="https://www.youtube.com/watch?v=ryTQ33oOsMw" target="_blank">video (6')</a> y trata de responder:
 
 - ¿Cuál es la diferencia entre un compilador y un intérprete?
 - ¿Cuál es la diferencia entre usar la shell (consola) y usar un script?
 - ¿Qué es el CRAN?
 
-## Intro a la programación
+## Introducción a la programación
 Revisa este <a href="https://www.youtube.com/watch?v=UREdS1HRKN4" target="_blank">video (16')</a> para comenzar a trabajar en RStudio. Mas abajo repetiré el mismo contenido para que vayas viendo como usar el material que viene  mas abajo. La idea es que vayas trabajando tus propios scripts ordenadamente en tu computador.
 
-## Empezando a programar
+## Empezar a programar
 
 En lo que sigue te recomiendo que crees un script (lo nombres "Curso_1" o algo así) y que vayas escribiendo o copiando lo que vamos viendo más abajo.
 En general, luego de una línea de código aparece el resultado precedido por ##.
@@ -154,7 +154,7 @@ Crea una variable que represente a tu banda favorita.
 
 ```
 
-## Trabajando con data frames
+## Trabajar con data frames
 
 Podemos crear variables de distintos tipos (lista de palabras o listas de números):
 
@@ -301,7 +301,7 @@ En tu data frame agrega el nombre, apellido y la edad.
 
 ```
 
-## Importando datos
+## Importar datos
 
 La mayoría del tiempo vas a importar más que crear datos.
 Para ello cuando trabajes en R debes decirle en que carpeta de tu computador están esos archivos.
@@ -373,7 +373,7 @@ Trata de importar algún archivo csv a tu sesión de R.
 
 ```
 
-## Seleccionando datos
+## Seleccionar datos
 
 Una vez que tienes datos en tu espacio de trabajo en R la idea es que puedas manipular esos datos.
 Uno de los aspectos fundamentales de esta manipulación es la selección de datos.
@@ -425,7 +425,7 @@ lightAlcoholicsPerso <- lecturerDat[lecturerDat$alcohol <= 15, c("friends", "alc
 lightAlcoholicsPerso
 ```
 
-## Transformado datos en formato long a wide y viceversa
+## Transformar datos (long vs wide)
 
 Otro aspecto muy importante que debes entender es como transformar de un formato a otro en R.
 En R hay dos formatos típicos. Cuando hay múltiples mediciones de un mismo sujeto, por ejemplo, a lo largo del tiempo o cuando se realizan distintas mediciones los datos a menudo se anotan en formato *wide*. En un formato *wide* la data frame contiene valores que no se repiten en la primera columna. En un formato *long* la data frame contiene valores que se repiten en la primera columna. Por ejemplo, importemos un set de datos que está en formato *wide*:
@@ -528,7 +528,7 @@ wideData <- cast(restructuredData, Person + Gender ~ SatisfType, value = "Values
 head(wideData)
 ```
 
-## Exportando datos
+## Exportar datos
 
 Finalmente podrías querer exportar estos datos seleccionados.
 Para ello puede crear archivos de tipo txt o csv aplicado algunas funciones.

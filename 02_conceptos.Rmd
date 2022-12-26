@@ -6,13 +6,13 @@ Revisa este <a href="https://www.youtube.com/watch?v=cOtuIWu9NQ0" target="_blank
 - ¿Qué me dice y qué no me dice el valor de p?
 - ¿Cómo se interpreta un resultado estadístico nulo?
 
-## Colas
+## Las colas
 Revisa este <a href="https://www.youtube.com/watch?v=dQ0LnqUAVnA" target="_blank">video (11')</a> y trata de responder:
 
 - ¿Cuál es la diferencia entre una hipótesis de una cola y una hipótesis de dos colas?
 - ¿Por qué los criterios de significancia son más altos para una hipótesis de una cola que para una hipótesis de dos colas?
 
-## Errores estadísticos
+## Los errores estadísticos
 Revisa este <a href="https://www.youtube.com/watch?v=AbsXEad0gMQ" target="_blank">video (9')</a> y trata de responder:
 
 - ¿Qué es un error de tipo I?
@@ -28,7 +28,7 @@ Revisa este <a href="https://www.youtube.com/watch?v=Xh9-Mt2_WTE" target="_blank
 - ¿Qué es el poder estadístico?
 - ¿Cómo definimos el tamaño de la muestra que necesitamos para un experimento?
 
-## Planificar mi estudio
+## ¿Cómo planificar un estudio?
 Revisa este <a href="https://www.youtube.com/watch?v=bumW9zlQJdo" target="_blank">video (9')</a> y trata de responder:
 
 - ¿Cómo planificar mejor mi estudio?

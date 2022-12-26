@@ -1,4 +1,4 @@
-# ANOVA
+# ANOVA (comparar 3 grupos o más)
 
 En este capítulo vamos a revisar el típico análisis para comparar más de dos grupos, el ANOVA.
 
