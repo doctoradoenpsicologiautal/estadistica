@@ -17,7 +17,7 @@ Revisa este <a href="https://www.youtube.com/watch?v=oY6OMnVRkjM" target="_blank
 Revisa este <a href="https://www.youtube.com/watch?v=ryTQ33oOsMw" target="_blank">video (6')</a> y trata de responder:
 
 - ¿Cuál es la diferencia entre un compilador y un intérprete?
-- ¿Cuál es la diferencia entre usar la shell (consola) y usar un script?
+- ¿Cuál es la diferencia entre usar la consola (shell) y usar un script?
 - ¿Qué es el CRAN?
 
 ## Introducción a la programación
@@ -45,7 +45,7 @@ También es buena idea que agregues una breve descripción de lo que hace tu có
 ```
 
 R tiene algunas funciones integradas. Por ejemplo: el promedio (**mean**) y la desviación estándar (**sd**).
-Para probar estas funciones podemos aplicarlas a una series de números (o vector). Para crear un vector podemos usar la *c* y un paréntesis. Lo que hacemos con la *c* es concatenar números.
+Para probar estas funciones podemos aplicarlas a una series de números (o vector). Para crear un vector podemos usar la *c* y un paréntesis. Lo que hacemos con la *c* es combinar números.
 
 ```{r}
 # JLUF 16/08/2022
@@ -61,7 +61,7 @@ sd(c(2,3))
 
 Comúnmente para hacer un cálculo de manera óptima usamos algo que se llama asignación.\
 Es decir, creamos una variable y le asignamos un valor.\
-Por ejemplo, definimos que **a** equivale a 2 y **b** equivale a 3.\
+Por ejemplo, definimos que "a" equivale a 2 y "b" equivale a 3.\
 Luego podemos usar solamente esas variables para hacer cálculos.\
 Para asignar ponemos una flecha: "<-"
 
@@ -169,7 +169,7 @@ metallicaColor
 ```
 
 Pero más importante que eso es que podemos reunir estas variables en una estructura mas compleja.
-Esta estructura se llama **data frame**.
+Esta estructura se llama *data frame*.
 Un data frame puede acomodar distintos tipos de datos y los pone en distintas "cajas".
 Para crear un data frame usamos la función **data.frame**
 
@@ -263,7 +263,7 @@ Y eso lo podemos agregar luego en una data frame.
 
 Veamos un ejemplo mas elaborado.
 Vamos a crear un base de datos sobre el nombre, la fecha de nacimiento y el trabajo de distintas personas.
-Para que R identifique los números como fechas usamos la función **as.Date**(por defecto el formato es yyyy-mm-dd).
+Para que R identifique los números como fechas usamos la función **as.Date** (por defecto el formato es yyyy-mm-dd).
 
 ```{r}
 
@@ -460,7 +460,7 @@ head(satisfactionStacked)
 En esta data frame se puede ver que los valores de satisfacción se ubican en una columna y la condición se ubica en otra columna. El problema con esta transformación es que perdemos la información de género y el número de la persona. Más adelante veremos una manera de hacer esta transformación sin perder esta información.
 
 Esta data frame la podemos reconvertir en formato wide con la función **unstack**.
-Esta función la usamos de la siguiente manera:
+Esta función la usamos de la siguiente manera:\
 newDataFrame <- unstack(oldDataFrame, scores ~ columns)
 O simplemente: newDataFrame <- unstack(oldDataFrame)
 

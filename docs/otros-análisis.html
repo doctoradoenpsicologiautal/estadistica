@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2022-12-26" />
+<meta name="date" content="2023-01-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -155,6 +155,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.6" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-muestra-en-la-vida-real"><i class="fa fa-check"></i><b>5.6</b> La muestra en la vida real</a></li>
 <li class="chapter" data-level="5.7" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#los-intervalos-de-confianza-1"><i class="fa fa-check"></i><b>5.7</b> Los intervalos de confianza (1)</a></li>
 <li class="chapter" data-level="5.8" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#los-intervalos-de-confianza-2"><i class="fa fa-check"></i><b>5.8</b> Los intervalos de confianza (2)</a></li>
+<li class="chapter" data-level="5.9" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#verificar-supuestos"><i class="fa fa-check"></i><b>5.9</b> Verificar supuestos</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="la-regresión.html"><a href="la-regresión.html"><i class="fa fa-check"></i><b>6</b> La regresión</a><ul>
 <li class="chapter" data-level="6.1" data-path="la-regresión.html"><a href="la-regresión.html#modelos-estadísticos"><i class="fa fa-check"></i><b>6.1</b> Modelos estadísticos</a></li>
@@ -238,7 +239,7 @@ prefsAB<span class="op">$</span>Preferencia &lt;-<span class="st"> </span><span 
 <span class="kw">ggplot</span>(prefsAB, <span class="kw">aes</span>(Preferencia, ..count..)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> Preferencia), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Número de personas&quot;</span>) </code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-254-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-282-1.png" width="672" /></p>
 <p>Podemos usar la función <strong>xtabs</strong> para obtener una tabla de contigencia. Luego con la función <strong>chisq.test</strong> cálculamos la probabilidad que estas dos preferencias esten igualmente distribuidas (una prueba clásica de chi cuadrado).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(tabla.contingencia &lt;-<span class="st"> </span><span class="kw">xtabs</span>( <span class="op">~</span><span class="st"> </span>Preferencia, prefsAB))</code></pre></div>
 <pre><code>## Preferencia
@@ -283,7 +284,7 @@ prefsABC<span class="op">$</span>Preferencia &lt;-<span class="st"> </span><span
 <span class="kw">ggplot</span>(prefsABC, <span class="kw">aes</span>(Preferencia, ..count..)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> Preferencia), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Número de personas&quot;</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-258-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-286-1.png" width="672" /></p>
 <p>Podemos usar la función <strong>xtabs</strong> para obtener una tabla de contigencia. Luego con la función <strong>chisq.test</strong> cálculamos la probabilidad que estas dos preferencias esten igualmente distribuidas (una prueba clásica de chi cuadrado).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(tabla.contingencia &lt;-<span class="st"> </span><span class="kw">xtabs</span>( <span class="op">~</span><span class="st"> </span>Preferencia, prefsABC))</code></pre></div>
 <pre><code>## Preferencia
@@ -330,7 +331,7 @@ prefsABsex<span class="op">$</span>Genero &lt;-<span class="st"> </span><span cl
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> Preferencia), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>Genero) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Número de personas&quot;</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-263-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-291-1.png" width="672" /></p>
 <p>Podemos usar la función <strong>xtabs</strong> para obtener una tabla de contigencia. Luego con la función <strong>chisq.test</strong> cálculamos la probabilidad que estas dos preferencias en función del género esten igualmente distribuidas.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(tabla.contingencia &lt;-<span class="st"> </span><span class="kw">xtabs</span>( <span class="op">~</span><span class="st"> </span>Preferencia <span class="op">+</span><span class="st"> </span>Genero, prefsABsex))</code></pre></div>
 <pre><code>##             Genero
@@ -379,7 +380,7 @@ prefsABCsex<span class="op">$</span>Genero &lt;-<span class="st"> </span><span c
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> Preferencia), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>Genero) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Número de personas&quot;</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-267-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-295-1.png" width="672" /></p>
 <p>Podemos usar la función <strong>xtabs</strong> para obtener una tabla de contigencia. Luego con la función <strong>chisq.test</strong> cálculamos la probabilidad que estas dos preferencias en función del género esten igualmente distribuidas.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(tabla.contingencia &lt;-<span class="st"> </span><span class="kw">xtabs</span>( <span class="op">~</span><span class="st"> </span>Preferencia <span class="op">+</span><span class="st"> </span>Genero, prefsABCsex))</code></pre></div>
 <pre><code>##              Genero

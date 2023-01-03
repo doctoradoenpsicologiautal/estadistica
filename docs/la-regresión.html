@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2022-12-26" />
+<meta name="date" content="2023-01-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -155,6 +155,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.6" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-muestra-en-la-vida-real"><i class="fa fa-check"></i><b>5.6</b> La muestra en la vida real</a></li>
 <li class="chapter" data-level="5.7" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#los-intervalos-de-confianza-1"><i class="fa fa-check"></i><b>5.7</b> Los intervalos de confianza (1)</a></li>
 <li class="chapter" data-level="5.8" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#los-intervalos-de-confianza-2"><i class="fa fa-check"></i><b>5.8</b> Los intervalos de confianza (2)</a></li>
+<li class="chapter" data-level="5.9" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#verificar-supuestos"><i class="fa fa-check"></i><b>5.9</b> Verificar supuestos</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="la-regresión.html"><a href="la-regresión.html"><i class="fa fa-check"></i><b>6</b> La regresión</a><ul>
 <li class="chapter" data-level="6.1" data-path="la-regresión.html"><a href="la-regresión.html#modelos-estadísticos"><i class="fa fa-check"></i><b>6.1</b> Modelos estadísticos</a></li>
@@ -214,7 +215,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="la-regresión" class="section level1">
 <h1><span class="header-section-number">Capítulo 6</span> La regresión</h1>
-<p>En este capítulo vamos a revisar el elemento básico para hacer modelos estadísticos: la regresión lineal.</p>
+<p>En este capítulo vamos a revisar el bloqueda fundamental de la estadística tradicional: la regresión.</p>
 <div id="modelos-estadísticos" class="section level2">
 <h2><span class="header-section-number">6.1</span> Modelos estadísticos</h2>
 <p>Revisa este <a href="https://www.youtube.com/watch?v=DOIjIB1FGYY" target="_blank">video (17')</a> y trata de responder:</p>
@@ -246,7 +247,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="la-regresión-con-r" class="section level2">
 <h2><span class="header-section-number">6.4</span> La regresión con R</h2>
-<p>Ahora vamos a hacer un análisis básico de regresión. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas). Luego importamos el set de datos y le damos una mirada.</p>
+<p>Ahora vamos a hacer un análisis básico de regresión. La regresión es un método estadístico utilizado para predecir el valor de una variable dependiente en función del valor de una o más variables independientes. En el análisis de regresión, se ajusta una línea o curva a los datos (modelo de regresión) y se usa para hacer predicciones de la variable dependiente.</p>
+<p>Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas). Luego importamos el set de datos y le damos una mirada.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
 
 <span class="kw">library</span>(ggplot2)
@@ -269,7 +271,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Cantidad de dinero gastado en publicidad&quot;</span>,
        <span class="dt">y=</span><span class="st">&quot;Ventas&quot;</span>)</code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-105-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
 <p>Lo que nos dice el sentido común, y lo que vemos en el gráfico efectivamente es que a mayor dinero invertido en publicidad debería haber mayores ventas. Es este un buen modelo para predecir el número de ventas a partir del dinero invertido en publicidad? Para analizar estos podemos hacer un modelo lineal con la función <strong>lm</strong>. En esta función usamos la típica relación entre resultado (ouctome) y variable explicativa (predictor), y le indicamos a R que base de datos usamos (datos): newModel &lt;- lm(outcome~predictor, datos) Luego podemos visualizar los resulatdos con la función <strong>summary</strong>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_album &lt;-<span class="st"> </span><span class="kw">lm</span>(ventas <span class="op">~</span><span class="st"> </span>publicidad, <span class="dt">data =</span> album1)
 <span class="kw">summary</span>(m_album)</code></pre></div>
@@ -311,7 +313,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Número de apariciones en la radio&quot;</span>,
        <span class="dt">y=</span><span class="st">&quot;Ventas&quot;</span>)</code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-108-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-136-1.png" width="672" /></p>
 <p>Luego podríamos hacer un modelo para entender el impacto de distintos factores en la venta de discos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_album2 &lt;-<span class="st"> </span><span class="kw">lm</span>(ventas <span class="op">~</span><span class="st"> </span>publicidad <span class="op">+</span><span class="st"> </span>radio <span class="op">+</span><span class="st"> </span>eventos, <span class="dt">data =</span> album2)
 <span class="kw">summary</span>(m_album2)</code></pre></div>
@@ -339,8 +341,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="la-correlación-con-r" class="section level2">
 <h2><span class="header-section-number">6.5</span> La correlación con R</h2>
-<p>Ahora vamos a hacer un análisis de correlación. En la práctica es lo mismo que hacer una regresión, pero hay algunas funciones dedicadas más a las correlaciones.</p>
-<p>Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).</p>
+<p>Ahora vamos a hacer un análisis de correlación. La regresión y la correlación son dos técnicas estadísticas que se utilizan a menudo para estudiar la relación entre dos variables. Sin embargo, la correlación se enfoca en proveer una medida estadística que describe la fuerza y dirección de la relación entre dos variables. Un coeficiente de correlación puede oscilar entre -1 (fuerte correlación negativa) y +1 (fuerte correlación positiva). Un valor de 0 indica que no hay correlación.</p>
+<p>Para empezar vamos a hacer un análisis de correlación clásico. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
 
 <span class="kw">library</span>(Hmisc)
@@ -366,8 +368,12 @@ scatter <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;Red&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Niveles de ansiedad&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Desempeño en el examen (%)&quot;</span>)</code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
-<p>Para hacer una correlación podemos simplemente usar la función <strong>cor</strong> seleccionando nuestras colmunas de interés. Esta función nos devuelve los coeficientes de correlación. Por defecto se ejecuta una correlación de Pearson.</p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-140-1.png" width="672" /></p>
+<p>Para hacer una correlación podemos simplemente usar la función <strong>cor</strong> seleccionando nuestras colmunas de interés. Esta función nos devuelve los coeficientes de correlación. Por defecto se ejecuta una correlación de <em>Pearson</em>.</p>
+<p>La correlación de Pearson se calcula como la covarianza de las dos variables dividida por el producto de sus desviaciones estándar, y es un medida paramétrica de la relación entre dos variables. La correlación de <em>Spearman</em> es una medida no paramétrica de una correlación. Se calcula determinando el rango de cada valor en las dos variables y luego calculando el coeficiente de correlación de Pearson entre los rangos. La correlación de <em>Kendall</em> es también una medida no paramétrica de una correlación. Se calcula determinando el número de pares concordantes (donde los rangos son los mismos) y el número de pares discordantes (donde los rangos son diferentes) entre las dos variables, y luego se divide por el número total de pares.</p>
+<p>Una valor de correlación siempre está entre -1 (fuerte correlación negativa) y 1 (fuerte correlación positiva). Un coeficiente de 0 refleja que no hay ninguna correlación.</p>
+<p>En general, la correlación de Pearson es más adecuada para datos distribuidos normalmente, mientras que la correlación de Spearman y Kendall son más adecuadas para datos no distribuidos normalmente o datos que no son continuos. Pero, además, la elección de qué medida usar dependerá de la naturaleza de los datos y la pregunta de investigación que se aborde.</p>
+<p>En general, en R siempre hay más de una opción de correlación. Para ello se puede setear el parámetro <em>method</em> a &quot;pearson&quot;, &quot;spearman&quot; o &quot;kendall&quot;.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(examData[, <span class="kw">c</span>(<span class="st">&quot;Exam&quot;</span>, <span class="st">&quot;Anxiety&quot;</span>)])</code></pre></div>
 <pre><code>##               Exam    Anxiety
 ## Exam     1.0000000 -0.4409934
@@ -401,11 +407,11 @@ scatter <span class="op">+</span><span class="st"> </span>
 <p>También existen otras funciones que nos permiten hacer un gráfico que contenga</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggscatter</span>(examData, <span class="dt">x =</span> <span class="st">&quot;Anxiety&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Exam&quot;</span>,
                <span class="dt">add =</span> <span class="st">&quot;reg.line&quot;</span>, <span class="dt">conf.int =</span> <span class="ot">TRUE</span>,
-               <span class="dt">cor.coef =</span> <span class="ot">TRUE</span>, <span class="dt">cor.method =</span> <span class="st">&quot;spearman&quot;</span>,
+               <span class="dt">cor.coef =</span> <span class="ot">TRUE</span>, <span class="dt">cor.method =</span> <span class="st">&quot;pearson&quot;</span>,
                <span class="dt">xlab =</span> <span class="st">&quot;Niveles de ansiedad &quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Desempeño en el examen (%)&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">15</span>))</code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-144-1.png" width="672" /></p>
 <p>El coeficiente de determinación es una medida que indica la varianza en una variable que es comparida por otra variable. El coeficiente de determinación se puede calcular desde el coeficiente de correlación, elevándolo al cuadrado, y adicionalmente lo podemos multiplicar por 100 para leerlo como porcentaje.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(examData[, <span class="kw">c</span>(<span class="st">&quot;Exam&quot;</span>, <span class="st">&quot;Anxiety&quot;</span>)])<span class="op">^</span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">100</span></code></pre></div>
 <pre><code>##              Exam   Anxiety
@@ -417,7 +423,7 @@ scatter <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">round</span>(<span class="dv">1</span>)
 
 <span class="kw">ggcorrplot</span>(corr_selected, <span class="dt">type =</span> <span class="st">&quot;lower&quot;</span>, <span class="dt">lab =</span> <span class="ot">TRUE</span>, <span class="dt">show.legend =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-118-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-146-1.png" width="672" /></p>
 <p>Un paso mas allá de las correlaciones bivariadas (entre dos variables) son las correlaciones parciales. La correlación nos permiten investigar la asociación entre dos variables, tomando en cuenta una tercera variable. Es decir, estudiamos una correlación entre dos variables controlando por el efecto de una tercera variable.</p>
 <p>Para trabajar esto en R primero vamos a seleccionar algunas columnas de interés.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">examData2 &lt;-<span class="st"> </span>examData[, <span class="kw">c</span>(<span class="st">&quot;Exam&quot;</span>, <span class="st">&quot;Anxiety&quot;</span>, <span class="st">&quot;Revise&quot;</span>)]</code></pre></div>

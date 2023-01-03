@@ -187,9 +187,9 @@ La fila "L" indica un efecto lineal y la fila "Q" indica un efecto cuadrático.
 ## Pruebas post-hoc
 Revisa este <a href="https://www.youtube.com/watch?v=qXR27qqjDvU" target="_blank">video (15')</a> y trata de responder:
 
-¿Qué tipos de pruebas post-hoc existen?
-¿Cuál es el riesgo que corremos si usamos una prueba post-hoc muy exigente (o conservadora)?
-¿Cuál es el riesgo que corremos si usamos una prueba post-hoc poco exigente (o conservadora)?
+- ¿Qué tipos de pruebas post-hoc existen?
+- ¿Cuál es el riesgo que corremos si usamos una prueba post-hoc muy exigente (o conservadora)?
+- ¿Cuál es el riesgo que corremos si usamos una prueba post-hoc poco exigente (o conservadora)?
 
 ## Cálculos con R
 

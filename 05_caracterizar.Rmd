@@ -57,3 +57,254 @@ Revisa este <a href="https://www.youtube.com/watch?v=tHovt9mI7Xg" target="_blank
 
 - ¿Qué significa que cálculemos un promedio con un intervalo de confianza al 68%?
 - ¿Qué significa que cálculemos un promedio con un intervalo de confianza al 95%?
+
+## Verificar supuestos
+
+Verificar los supuestos es un paso importante en la realización de un análisis estadístico. Los supuestos son condiciones que deben cumplirse para que los métodos estadísticos que se utilizan sean válidos. Si no se cumplen estos supuestos, los resultados del análisis pueden ser inexactos.
+
+Algunas suposiciones comunes que a menudo se verifican en el análisis estadístico incluyen:
+
+- Normalidad: los datos deben tener una distribución normal, lo que significa que siguen una curva en forma de campana cuando se trazan en un gráfico.
+
+- Independencia: las observaciones deben ser independientes, lo que significa que una observación no debe afectar a otra.
+
+- Varianzas iguales: las varianzas de los diferentes grupos que se comparan deben ser iguales.
+
+- Linealidad: La relación entre las variables que se analizan debe ser lineal.
+
+Para verificar estas suposiciones se pueden realizar gráficos (histogramas o diagramas de dispersión) y pruebas estadísticas (la prueba de normalidad de Shapiro-Wilk o la prueba de Levene para varianzas iguales).
+
+Ahora vamos a hacer estos análisis. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas). Luego importamos el set de datos y le damos una mirada.
+
+```{r}
+setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+
+library(ggplot2)
+library(Hmisc)
+library(Rmisc)
+library(reshape2)
+library(pastecs)
+library(car)
+```
+
+Para un estudio se investigaron los niveles de higiene de personas que asistieron a distintos días de un festival de música. Mientras más alto es el valor hay mayores niveles de higiene.
+
+```{r}
+dlf <- read.csv("data/DownloadFestival.csv", header = TRUE)
+head(dlf)
+```
+
+En seguida podemos hacer un gráfico
+
+```{r}
+festivalHistogram <- ggplot(dlf, aes(day1))
+festivalHistogram + geom_histogram()
+```
+
+Ya sabíamos de un antiguo capítulo que tenemos un outlier en esta base de datos.
+Para eliminarlo podemos usar la función **ifelse**. En esta función le decimos a R que todos los valores mayores a 20 se conviertan en 0.
+
+```{r}
+dlf$day1 <- ifelse(dlf$day1 > 20, NA, dlf$day1)
+```
+
+Luego, hacer de nuevo un histograma.
+
+```{r}
+festivalHistogram <- ggplot(dlf, aes(day1))
+festivalHistogram + geom_histogram()
+```
+
+En esta misma línea, podemos hacer unos ajustes.
+Podemos ajustar el eje Y para que se muestre la densidad (es sólo un re-escalamiento).
+Y podemos hacer el gráfico un poco mas claro.
+
+```{r}
+hist.day1 <- ggplot(dlf, aes(day1)) + 
+  labs(legend.position = "none") + 
+  geom_histogram(aes(y = ..density..), colour = "black", fill = "white") + 
+  labs(x = "Hygiene score on day 1", y = "Density") + 
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
+hist.day1
+```
+
+Para evaluar la normalidad podemos superponer una curva normal (en rojo) que se base en el promedio y la dispersión de los datos.
+
+```{r}
+hist.day1 +
+  stat_function(fun = dnorm, 
+                args = list(mean = mean(dlf$day1, na.rm = TRUE), 
+                            sd = sd(dlf$day1, na.rm = TRUE)), 
+                colour = "red", size = 1)
+```
+
+Para este set de datos la distribución de los datos se ve bastante normal si lo comparamos con la línea.
+Otra manera gráfica de revisar la normalidad es hacer un gráfico Q-Q
+
+```{r}
+qqplot.day1 <- qplot(sample = dlf$day1)
+qqplot.day1
+```
+
+Si los datos están normalmente distribuidos deberíamos ver una línea diagonal contínua.
+
+Además de observar gráficamente podemos aplicar analisis de normalidad. Por ejemplo, usando la función **stat.desc** podemos describir los datos y testear la normalidad. Debemos fijarnos en el valor de p del test ("normtest.p"). Si es significativo significa que los datos no poseen una distribución normal.
+
+```{r}
+stat.desc(dlf$day1, 
+          basic = FALSE, 
+          norm = TRUE)
+```
+
+Podemos aplicar esta función a varias columnas al mismo tiempo.
+
+```{r}
+stat.desc(cbind(dlf$day1, dlf$day2, dlf$day3),
+          basic = FALSE, 
+          norm = TRUE)
+```
+
+Y podemos definir el número de cifras significativas para tener una tabla mas leíble.
+
+```{r}
+round(stat.desc(dlf[, c("day1", "day2", "day3")],
+                basic = FALSE, 
+                norm = TRUE), 
+      digits = 3)
+```
+
+Utlizar esta función es equivalente a usar la función **shapiro.test**.
+
+```{r}
+shapiro.test(dlf$day1)
+```
+
+veamos otra base de datos para destacar un aspecto importante de este análisis.
+
+Para este otro estudio se investigaron distintos dominios de conocimiento y hábitos en una cohorte de estudiantes: desempeño en los examenes (exam), habilidades computacionales (computer), número de clases asistidas (lectures) y habilidad númerica (numeracy). Esta medición se realizó en 2 instituciones diferentes (uni).
+
+```{r}
+rexam <- read.delim("data/rexam.dat", header = TRUE)
+rexam$uni <- factor(rexam$uni, levels = c(0:1), 
+                    labels = c("Duncetown University", "Sussex University"))
+head(rexam)
+```
+
+Primero graficamos.
+
+```{r}
+hexam <- ggplot(rexam, aes(exam)) +
+  labs(legend.position = "none") + 
+  geom_histogram(aes(y = ..density..), colour = "black", fill = "white") + 
+  labs(x = "Exam", y = "Density") + 
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
+hexam
+```
+
+El gráfico sugiere que los valores de desempeño en los examenes no siguen una distribución normal.
+
+Nuevamente para evaluar la normalidad podemos superponer una curva normal (en rojo) que se base en el promedio y la dispersión de los datos.
+
+```{r}
+hexam +
+  stat_function(fun = dnorm, 
+                args = list(mean = mean(rexam$exam, na.rm = TRUE), 
+                            sd = sd(rexam$exam, na.rm = TRUE)), 
+                colour = "red", size = 1)
+```
+
+De hecho parece que hubieran una distribución bimodal, perteneciente a distribuciones de dos grupos diferentes.
+
+Veamos el gráfico Q-Q.
+
+```{r}
+qqplot.exam <- qplot(sample = rexam$exam)
+qqplot.exam
+```
+
+Describamos los datos y apliquemos un analisis de normalidad con la función **stat.desc**. Debemos fijarnos en el valor de p del test ("normtest.p"). Si es significativo significa que los datos no poseen una distribución normal.
+
+```{r}
+round(stat.desc(rexam[, c("exam",
+                          "computer",
+                          "lectures",
+                          "numeracy")],
+                basic = FALSE, norm = TRUE),
+      digits = 2)  
+```
+
+En este punto es importante destacar que todos estos análisis dependen netamente de la pregunta de investigación.
+En el caso que queramos comparar el desempeño en los examenes entre las 2 instituciones académicas entonces lo que importa es la distribución de los valores dentro de cada grupo.
+
+Para hacer una descripción de los datos por grupo podemos usar la función **by**.
+
+```{r}
+by(data = rexam$exam, INDICES = rexam$uni, FUN = describe)
+# o lo que es lo mismo: by(rexam$exam, rexam$uni, describe)
+```
+
+
+```{r}
+by(data = rexam$exam, INDICES = rexam$uni, FUN = stat.desc)
+# o lo que es lo mismo: by(rexam$exam, rexam$uni, stat.desc)
+```
+
+También se pueden describir simultáneamente varias variables.
+
+```{r}
+by(rexam[, c("exam", "computer", "lectures", "numeracy")],
+   rexam$uni, 
+   stat.desc,
+   basic = FALSE, 
+   norm = TRUE)
+```
+
+Estos análisis son equivalentes a usar la función **shapiro.test**.
+Nuevamente, dependiendo de la pregunta de investigación miramos la normalidad de todos los datos de desempeño en el examen.
+
+```{r}
+shapiro.test(rexam$exam)
+```
+
+O miramos los datos de desempeño en el examen en función de los grupos.
+
+```{r}
+by(rexam$exam, rexam$uni, shapiro.test)
+```
+
+Para graficar podemos separar los datos en función de las instituciones.
+
+```{r}
+dunceData <- rexam[rexam$uni=="Duncetown University",]
+sussexData <- rexam[rexam$uni=="Sussex University",]
+```
+
+Luego podemos graficar por ejemplo los valores en el desempeño del examen para una de las instituciones.
+
+```{r}
+hist.exam.duncetown <- ggplot(dunceData, aes(exam)) +
+  theme(legend.position = "none") + 
+  geom_histogram(aes(y = ..density..), fill = "white", colour = "black", binwidth = 1) +
+  labs(x = "Numeracy Score", y = "Density") + 
+  labs(title = "Duncetown") + 
+  stat_function(fun=dnorm, 
+                args=list(mean = mean(dunceData$exam, na.rm = TRUE), 
+                          sd = sd(dunceData$exam, na.rm = TRUE)), 
+                colour = "red", size=1)
+hist.exam.duncetown
+```
+
+Otro supuesto que debemos testear es la homogenidad de la varianza.
+Para ello aplicamos un test de Levene.
+
+```{r}
+leveneTest(rexam$exam, rexam$uni)
+```
+
+Nuevamente si no hay una diferencia significativa estamos Ok.

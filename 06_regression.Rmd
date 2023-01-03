@@ -1,6 +1,6 @@
 # La regresión
 
-En este capítulo vamos a revisar el elemento básico para hacer modelos estadísticos: la regresión lineal.
+En este capítulo vamos a revisar el bloqueda fundamental de la estadística tradicional: la regresión.
 
 ## Modelos estadísticos
 Revisa este <a href="https://www.youtube.com/watch?v=DOIjIB1FGYY" target="_blank">video (17')</a> y trata de responder:
@@ -27,7 +27,9 @@ Revisa este <a href="https://www.youtube.com/watch?v=maFx6TKuaQI" target="_blank
 
 ## La regresión con R
 
-Ahora vamos a hacer un análisis básico de regresión. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas). Luego importamos el set de datos y le damos una mirada.
+Ahora vamos a hacer un análisis básico de regresión. La regresión es un método estadístico utilizado para predecir el valor de una variable dependiente en función del valor de una o más variables independientes. En el análisis de regresión, se ajusta una línea o curva a los datos (modelo de regresión) y se usa para hacer predicciones de la variable dependiente.
+
+Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas). Luego importamos el set de datos y le damos una mirada.
 
 ```{r}
 setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
@@ -67,7 +69,6 @@ En qué debemos fijarnos dentro de los resultados que obtenemos al aplicar un m�
 En la línea siguientes a "Call" aparece el módelo que usamos.
 También aparecen los llamados coeficientes que reflejan bajo el nombre de "Estimate" que refleja con que magnitud una variable predictora predice una variable resultado. Por ejemplo, por cada unidad de publicidad invertida el aumento en el número de ventas es 0.09. Y esta relación es significativa, o sea es diferente de 0 (lo que ocurre cuando no hay ninguna relación entre ambas variables).
 
-
 En el fondo este análisis nos dice que la publicidad si impacta sobre la venta de los discos.
 Sin embargo, a publicidad no es el único que podría afectar las ventas. En este sentido, podríamos estudiar otros factores que afectan esta variable resultados. Para ello hacemos lo que se llama una regresión múltiple.
 
@@ -100,9 +101,9 @@ summary(m_album2)
 
 ## La correlación con R
 
-Ahora vamos a hacer un análisis de correlación. En la práctica es lo mismo que hacer una regresión, pero hay algunas funciones dedicadas más a las correlaciones.
+Ahora vamos a hacer un análisis de correlación. La regresión y la correlación son dos técnicas estadísticas que se utilizan a menudo para estudiar la relación entre dos variables. Sin embargo, la correlación se enfoca en proveer una medida estadística que describe la fuerza y dirección de la relación entre dos variables. Un coeficiente de correlación puede oscilar entre -1 (fuerte correlación negativa) y +1 (fuerte correlación positiva). Un valor de 0 indica que no hay correlación.
 
-Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).
+Para empezar vamos a hacer un análisis de correlación clásico. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).
 
 ```{r}
 setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
@@ -133,8 +134,16 @@ scatter +
   labs(x = "Niveles de ansiedad", y = "Desempeño en el examen (%)")
 ```
 
-Para hacer una correlación podemos simplemente usar la función **cor** seleccionando nuestras colmunas de interés. Esta función nos devuelve los coeficientes de correlación. Por defecto se ejecuta una correlación de Pearson.
+Para hacer una correlación podemos simplemente usar la función **cor** seleccionando nuestras colmunas de interés. Esta función nos devuelve los coeficientes de correlación. Por defecto se ejecuta una correlación de *Pearson*. 
 
+La correlación de Pearson se calcula como la covarianza de las dos variables dividida por el producto de sus desviaciones estándar, y es un medida paramétrica de la relación entre dos variables. La correlación de *Spearman* es una medida no paramétrica de una correlación. Se calcula determinando el rango de cada valor en las dos variables y luego calculando el coeficiente de correlación de Pearson entre los rangos. La correlación de *Kendall* es también una medida no paramétrica de una correlación. Se calcula determinando el número de pares concordantes (donde los rangos son los mismos) y el número de pares discordantes (donde los rangos son diferentes) entre las dos variables, y luego se divide por el número total de pares.
+
+Una valor de correlación siempre está entre -1 (fuerte correlación negativa) y 1 (fuerte correlación positiva). Un coeficiente de 0 refleja que no hay ninguna correlación.
+
+En general, la correlación de Pearson es más adecuada para datos distribuidos normalmente, mientras que la correlación de Spearman y Kendall son más adecuadas para datos no distribuidos normalmente o datos que no son continuos. Pero, además, la elección de qué medida usar dependerá de la naturaleza de los datos y la pregunta de investigación que se aborde.
+
+En general, en R siempre hay más de una opción de correlación. Para ello se puede setear el parámetro *method* a "pearson", "spearman" o "kendall".
+ 
 ```{r}
 cor(examData[, c("Exam", "Anxiety")])
 ```
@@ -156,7 +165,7 @@ También existen otras funciones que nos permiten hacer un gráfico que contenga
 ```{r}
 ggscatter(examData, x = "Anxiety", y = "Exam",
                add = "reg.line", conf.int = TRUE,
-               cor.coef = TRUE, cor.method = "spearman",
+               cor.coef = TRUE, cor.method = "pearson",
                xlab = "Niveles de ansiedad ", ylab = "Desempeño en el examen (%)") +
   theme(text = element_text(size=15))
 ```

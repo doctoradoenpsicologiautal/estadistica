@@ -42,6 +42,7 @@ de-la-muestra-a-la-población
 la-muestra-en-la-vida-real
 los-intervalos-de-confianza-1
 los-intervalos-de-confianza-2
+verificar-supuestos
 la-regresión
 modelos-estadísticos
 la-ecuación-de-la-recta

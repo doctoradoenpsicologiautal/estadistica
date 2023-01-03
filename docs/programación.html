@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2022-12-26" />
+<meta name="date" content="2023-01-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -155,6 +155,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.6" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-muestra-en-la-vida-real"><i class="fa fa-check"></i><b>5.6</b> La muestra en la vida real</a></li>
 <li class="chapter" data-level="5.7" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#los-intervalos-de-confianza-1"><i class="fa fa-check"></i><b>5.7</b> Los intervalos de confianza (1)</a></li>
 <li class="chapter" data-level="5.8" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#los-intervalos-de-confianza-2"><i class="fa fa-check"></i><b>5.8</b> Los intervalos de confianza (2)</a></li>
+<li class="chapter" data-level="5.9" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#verificar-supuestos"><i class="fa fa-check"></i><b>5.9</b> Verificar supuestos</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="la-regresión.html"><a href="la-regresión.html"><i class="fa fa-check"></i><b>6</b> La regresión</a><ul>
 <li class="chapter" data-level="6.1" data-path="la-regresión.html"><a href="la-regresión.html#modelos-estadísticos"><i class="fa fa-check"></i><b>6.1</b> Modelos estadísticos</a></li>
@@ -229,7 +230,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Revisa este <a href="https://www.youtube.com/watch?v=ryTQ33oOsMw" target="_blank">video (6')</a> y trata de responder:</p>
 <ul>
 <li>¿Cuál es la diferencia entre un compilador y un intérprete?</li>
-<li>¿Cuál es la diferencia entre usar la shell (consola) y usar un script?</li>
+<li>¿Cuál es la diferencia entre usar la consola (shell) y usar un script?</li>
 <li>¿Qué es el CRAN?</li>
 </ul>
 </div>
@@ -246,7 +247,7 @@ Para escribir un comentario debes anteponer un #. En el inicio de un script es u
 <p>También es buena idea que agregues una breve descripción de lo que hace tu código.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># JLUF 16/08/2022</span>
 <span class="co"># Estadística descriptiva</span></code></pre></div>
-<p>R tiene algunas funciones integradas. Por ejemplo: el promedio (<strong>mean</strong>) y la desviación estándar (<strong>sd</strong>). Para probar estas funciones podemos aplicarlas a una series de números (o vector). Para crear un vector podemos usar la <em>c</em> y un paréntesis. Lo que hacemos con la <em>c</em> es concatenar números.</p>
+<p>R tiene algunas funciones integradas. Por ejemplo: el promedio (<strong>mean</strong>) y la desviación estándar (<strong>sd</strong>). Para probar estas funciones podemos aplicarlas a una series de números (o vector). Para crear un vector podemos usar la <em>c</em> y un paréntesis. Lo que hacemos con la <em>c</em> es combinar números.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># JLUF 16/08/2022</span>
 <span class="co"># Estadística descriptiva</span>
 
@@ -258,7 +259,7 @@ Para escribir un comentario debes anteponer un #. En el inicio de un script es u
 <pre><code>## [1] 0.7071068</code></pre>
 <p>Comúnmente para hacer un cálculo de manera óptima usamos algo que se llama asignación.<br />
 Es decir, creamos una variable y le asignamos un valor.<br />
-Por ejemplo, definimos que <strong>a</strong> equivale a 2 y <strong>b</strong> equivale a 3.<br />
+Por ejemplo, definimos que &quot;a&quot; equivale a 2 y &quot;b&quot; equivale a 3.<br />
 Luego podemos usar solamente esas variables para hacer cálculos.<br />
 Para asignar ponemos una flecha: &quot;&lt;-&quot;</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">2</span>
@@ -325,7 +326,7 @@ metallicaAges</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaColor &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Blue&quot;</span>, <span class="st">&quot;Red&quot;</span>, <span class="st">&quot;Yellow&quot;</span>, <span class="st">&quot;Green&quot;</span>)
 metallicaColor</code></pre></div>
 <pre><code>## [1] &quot;Blue&quot;   &quot;Red&quot;    &quot;Yellow&quot; &quot;Green&quot;</code></pre>
-<p>Pero más importante que eso es que podemos reunir estas variables en una estructura mas compleja. Esta estructura se llama <strong>data frame</strong>. Un data frame puede acomodar distintos tipos de datos y los pone en distintas &quot;cajas&quot;. Para crear un data frame usamos la función <strong>data.frame</strong></p>
+<p>Pero más importante que eso es que podemos reunir estas variables en una estructura mas compleja. Esta estructura se llama <em>data frame</em>. Un data frame puede acomodar distintos tipos de datos y los pone en distintas &quot;cajas&quot;. Para crear un data frame usamos la función <strong>data.frame</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame &lt;-<span class="st"> </span><span class="kw">data.frame</span>(metallicaNames, metallicaAges, metallicaColor)
 metallicaDataFrame</code></pre></div>
 <pre><code>##   metallicaNames metallicaAges metallicaColor
@@ -395,14 +396,14 @@ metallicaDataFrame</code></pre></div>
 vector1</code></pre></div>
 <pre><code>##  [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3</code></pre>
 <p>Y eso lo podemos agregar luego en una data frame.</p>
-<p>Veamos un ejemplo mas elaborado. Vamos a crear un base de datos sobre el nombre, la fecha de nacimiento y el trabajo de distintas personas. Para que R identifique los números como fechas usamos la función <strong>as.Date</strong>(por defecto el formato es yyyy-mm-dd).</p>
+<p>Veamos un ejemplo mas elaborado. Vamos a crear un base de datos sobre el nombre, la fecha de nacimiento y el trabajo de distintas personas. Para que R identifique los números como fechas usamos la función <strong>as.Date</strong> (por defecto el formato es yyyy-mm-dd).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">name &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Ben&quot;</span>, <span class="st">&quot;Martin&quot;</span>,<span class="st">&quot;Andy&quot;</span>,<span class="st">&quot;Paul&quot;</span>, <span class="st">&quot;Graham&quot;</span>,<span class="st">&quot;Carina&quot;</span>,<span class="st">&quot;Karina&quot;</span>,<span class="st">&quot;Doug&quot;</span>,<span class="st">&quot;Mark&quot;</span>, <span class="st">&quot;Zoe&quot;</span>)
 name</code></pre></div>
 <pre><code>##  [1] &quot;Ben&quot;    &quot;Martin&quot; &quot;Andy&quot;   &quot;Paul&quot;   &quot;Graham&quot; &quot;Carina&quot; &quot;Karina&quot; &quot;Doug&quot;   &quot;Mark&quot;   &quot;Zoe&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">birth_date &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">c</span>(<span class="st">&quot;1977-07-03&quot;</span>, <span class="st">&quot;1969-05-24&quot;</span>, <span class="st">&quot;1973-06-21&quot;</span>, <span class="st">&quot;1970-07-16&quot;</span>, <span class="st">&quot;1949-10-10&quot;</span>, <span class="st">&quot;1983-11-05&quot;</span>, <span class="st">&quot;1987-10-08&quot;</span>, <span class="st">&quot;1989-09-16&quot;</span>, <span class="st">&quot;1973-05-20&quot;</span>, <span class="st">&quot;1984-11-12&quot;</span>))
 birth_date</code></pre></div>
-<pre><code>##  [1] &quot;1977-07-03&quot; &quot;1969-05-24&quot; &quot;1973-06-21&quot; &quot;1970-07-16&quot; &quot;1949-10-10&quot; &quot;1983-11-05&quot; &quot;1987-10-08&quot;
-##  [8] &quot;1989-09-16&quot; &quot;1973-05-20&quot; &quot;1984-11-12&quot;</code></pre>
+<pre><code>##  [1] &quot;1977-07-03&quot; &quot;1969-05-24&quot; &quot;1973-06-21&quot; &quot;1970-07-16&quot; &quot;1949-10-10&quot; &quot;1983-11-05&quot; &quot;1987-10-08&quot; &quot;1989-09-16&quot;
+##  [9] &quot;1973-05-20&quot; &quot;1984-11-12&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">job &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">5</span>), <span class="kw">rep</span>(<span class="dv">2</span>, <span class="dv">5</span>)) <span class="co"># que es el equivalente a: job &lt;- c(1,1,1,1,1,2,2,2,2,2)</span>
 job</code></pre></div>
 <pre><code>##  [1] 1 1 1 1 1 2 2 2 2 2</code></pre>
@@ -597,20 +598,13 @@ lightAlcoholicsPerso</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
 satisfactionData &lt;-<span class="st">  </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Honeymoon_Period.csv&quot;</span>)
 <span class="kw">head</span>(satisfactionData)</code></pre></div>
-<pre><code>##   Person Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months Satisfaction_18_Months
-## 1      1                 6                     6                      5                      2
-## 2      2                 7                     7                      8                      4
-## 3      3                 4                     6                      2                      2
-## 4      4                 6                     9                      4                      1
-## 5      5                 6                     7                      6                      6
-## 6      6                 5                    10                      4                      2
-##   Gender
-## 1      0
-## 2      1
-## 3      1
-## 4      0
-## 5      0
-## 6      1</code></pre>
+<pre><code>##   Person Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months Satisfaction_18_Months Gender
+## 1      1                 6                     6                      5                      2      0
+## 2      2                 7                     7                      8                      4      1
+## 3      3                 4                     6                      2                      2      1
+## 4      4                 6                     9                      4                      1      0
+## 5      5                 6                     7                      6                      6      0
+## 6      6                 5                    10                      4                      2      1</code></pre>
 <p>Con <strong>head</strong> miramos sólo los primeras 6 filas de la base de datos. En esta data frame están los niveles de satisfacción con la pareja al momento de casarse, y luego de 6, 12 y 18 meses. Además está el género del entrevistado.</p>
 <p>Esta data frame la podemos a transformar a un formato <em>long</em> usando la función <strong>stack</strong>. Esta función la usamos de la siguiente manera: newDataFrame &lt;- stack(oldDataFrame, select = c(variable_list))</p>
 <p>En nuestro ejemplo podemos hacerlo así:</p>
@@ -631,7 +625,8 @@ satisfactionData &lt;-<span class="st">  </span><span class="kw">read.csv</span>
 ## 5      6 Satisfaction_Base
 ## 6      5 Satisfaction_Base</code></pre>
 <p>En esta data frame se puede ver que los valores de satisfacción se ubican en una columna y la condición se ubica en otra columna. El problema con esta transformación es que perdemos la información de género y el número de la persona. Más adelante veremos una manera de hacer esta transformación sin perder esta información.</p>
-<p>Esta data frame la podemos reconvertir en formato wide con la función <strong>unstack</strong>. Esta función la usamos de la siguiente manera: newDataFrame &lt;- unstack(oldDataFrame, scores ~ columns) O simplemente: newDataFrame &lt;- unstack(oldDataFrame)</p>
+<p>Esta data frame la podemos reconvertir en formato wide con la función <strong>unstack</strong>. Esta función la usamos de la siguiente manera:<br />
+newDataFrame &lt;- unstack(oldDataFrame, scores ~ columns) O simplemente: newDataFrame &lt;- unstack(oldDataFrame)</p>
 <p>En nuestro ejemplo podemos hacerlo así:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">satisfactionUnstacked &lt;-<span class="st"> </span><span class="kw">unstack</span>(satisfactionStacked)
 
@@ -692,20 +687,13 @@ restructuredData &lt;-<span class="st"> </span><span class="kw">melt</span>(sati
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wideData &lt;-<span class="st"> </span><span class="kw">cast</span>(restructuredData, Person <span class="op">+</span><span class="st"> </span>Gender <span class="op">~</span><span class="st"> </span>SatisfType, <span class="dt">value =</span> <span class="st">&quot;Values&quot;</span>)
 
 <span class="kw">head</span>(wideData)</code></pre></div>
-<pre><code>##   Person Gender Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months
-## 1      1      0                 6                     6                      5
-## 2      2      1                 7                     7                      8
-## 3      3      1                 4                     6                      2
-## 4      4      0                 6                     9                      4
-## 5      5      0                 6                     7                      6
-## 6      6      1                 5                    10                      4
-##   Satisfaction_18_Months
-## 1                      2
-## 2                      4
-## 3                      2
-## 4                      1
-## 5                      6
-## 6                      2</code></pre>
+<pre><code>##   Person Gender Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months Satisfaction_18_Months
+## 1      1      0                 6                     6                      5                      2
+## 2      2      1                 7                     7                      8                      4
+## 3      3      1                 4                     6                      2                      2
+## 4      4      0                 6                     9                      4                      1
+## 5      5      0                 6                     7                      6                      6
+## 6      6      1                 5                    10                      4                      2</code></pre>
 </div>
 <div id="exportar-datos" class="section level2">
 <h2><span class="header-section-number">3.9</span> Exportar datos</h2>
@@ -730,10 +718,10 @@ restructuredData &lt;-<span class="st"> </span><span class="kw">melt</span>(sati
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat, <span class="kw">aes</span>(latidos))
 h1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat, <span class="kw">aes</span>(<span class="st">&quot;&quot;</span>, latidos))
 h1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
 <p>Veámos otros datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/demografia_salud.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(dat<span class="op">$</span>Sexo)</code></pre></div>
