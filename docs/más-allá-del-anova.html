@@ -279,7 +279,7 @@ gogglesData<span class="op">$</span>alcohol &lt;-<span class="st"> </span><span 
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>gender) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Consumo de alcohol&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Atractivo promedio (%)&quot;</span>)
 fig_boxplot1</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-267-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-225-1.png" width="672" /></p>
 <p>Este mismo gráfico, valores de atractivo en función del género y del consumo de alcohol, se puede hacer en formato de líneas.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_linesplot1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(gogglesData, <span class="kw">aes</span>(alcohol, attractiveness, <span class="dt">colour =</span> gender)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>) <span class="op">+</span>
@@ -289,7 +289,7 @@ fig_boxplot1</code></pre></div>
 <pre><code>## Warning: `fun.y` is deprecated. Use `fun` instead.
 ## `fun.y` is deprecated. Use `fun` instead.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_linesplot1</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-268-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-226-1.png" width="672" /></p>
 <p>O en formato de barras.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_barplot1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(gogglesData, <span class="kw">aes</span>(alcohol, attractiveness, <span class="dt">fill =</span> gender)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.data =</span> mean_cl_normal, <span class="dt">geom =</span> <span class="st">&quot;errorbar&quot;</span>,
@@ -298,7 +298,7 @@ fig_boxplot1</code></pre></div>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Consumo de alcohol&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Atractivo promedio (%)&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;Gender&quot;</span>) </code></pre></div>
 <pre><code>## Warning: `fun.y` is deprecated. Use `fun` instead.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_barplot1</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-269-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-227-1.png" width="672" /></p>
 <p>Estos gráfico son muy informativos. ¿Que ves? Una manera de visualizar los efectos que estamos estudiando podemos separar los efectos. Esto es, podemos visualizar los niveles de atractivo en función de un sólo factor.</p>
 <p>Por ejemplo, podemos visualizar el efecto del género en los niveles de atractivo. Este efecto corresponde al <em>efecto principal</em> del género.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_bargender1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(gogglesData, <span class="kw">aes</span>(gender, attractiveness)) <span class="op">+</span>
@@ -309,7 +309,7 @@ fig_boxplot1</code></pre></div>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">80</span>, <span class="dt">by =</span> <span class="dv">10</span>))</code></pre></div>
 <pre><code>## Warning: `fun.y` is deprecated. Use `fun` instead.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_bargender1</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-270-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-228-1.png" width="672" /></p>
 <p>También podemos visualizar el efecto del consumo de alcohol en los niveles de atractivo. Este efecto corresponde al <em>efecto principal</em> del consumo de alcohol.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_barbeer1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(gogglesData, <span class="kw">aes</span>(alcohol, attractiveness)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;bar&quot;</span>, 
@@ -319,7 +319,7 @@ fig_boxplot1</code></pre></div>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">80</span>, <span class="dt">by =</span> <span class="dv">10</span>))</code></pre></div>
 <pre><code>## Warning: `fun.y` is deprecated. Use `fun` instead.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_barbeer1</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-271-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-229-1.png" width="672" /></p>
 <p>Antes de hacer los análisis propiamente tal podemos describir un poco los datos y evaluar los supuestos de la estadística parámetrica.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">describ &lt;-<span class="st"> </span><span class="kw">by</span>(gogglesData<span class="op">$</span>attractiveness, 
    gogglesData<span class="op">$</span>gender, stat.desc)
@@ -467,7 +467,7 @@ fig_boxplot1</code></pre></div>
 <p>Si miras los valores de F verás que hay un efecto principal del alcohol y un efecto de interacción género-consumo de alcohol. El efecto principal que tenemos aquí refleja que hay un efecto del alcohol (mira el gráfico). Pero, fíjate que el efecto del alcohol en realidad esta calificado por una interación con el género. Es decir, el efecto del consumo de alcohol sobre los niveles de atractivo no son iguales para los dos géneros. En otras palabras. A la luz de una interacción no tiene sentido interpretar el efecto principal.</p>
 <p>¿Qué indican los resultados? Ten en cuenta los resultados estadísticos y el gráfico.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_linesplot1</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-288-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-246-1.png" width="672" /></p>
 <p>Los resultados muestran que las mujeres mantienen altos estándares en la selección de su pareja sin importar el consumo de alcohol. Los hombres toman 4 pints y terminan con parejas que tienen un menor atractivo. Es decir, ocurre el &quot;goggle bear effect&quot;.</p>
 <p>Veamos las comparaciones planificadas para revisar mayores detalles.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary.lm</span>(gogglesModel)</code></pre></div>
@@ -508,22 +508,6 @@ fig_boxplot1</code></pre></div>
 <span class="kw">library</span>(reshape)
 <span class="kw">library</span>(ez)
 <span class="kw">library</span>(multcomp)</code></pre></div>
-<pre><code>## Warning: package &#39;multcomp&#39; was built under R version 4.1.3</code></pre>
-<pre><code>## Loading required package: mvtnorm</code></pre>
-<pre><code>## Loading required package: TH.data</code></pre>
-<pre><code>## Warning: package &#39;TH.data&#39; was built under R version 4.1.3</code></pre>
-<pre><code>## Loading required package: MASS</code></pre>
-<pre><code>## Warning: package &#39;MASS&#39; was built under R version 4.1.3</code></pre>
-<pre><code>## 
-## Attaching package: &#39;MASS&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
-## 
-##     select</code></pre>
-<pre><code>## 
-## Attaching package: &#39;TH.data&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:MASS&#39;:
-## 
-##     geyser</code></pre>
 <p>Primero importamos el set de datos y le damos una mirada.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/insectos_y_tiempo_vomito.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
 <span class="kw">str</span>(dat1)</code></pre></div>
@@ -555,7 +539,7 @@ fig_boxplot1</code></pre></div>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Tipo de comida&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-294-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-252-1.png" width="672" /></p>
 <p>Luego podemos tener una descripción de los datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test &lt;-<span class="st"> </span><span class="kw">by</span>(dat1.long<span class="op">$</span>vomito, 
            dat1.long<span class="op">$</span>animal, 
@@ -639,13 +623,8 @@ fig_boxplot1</code></pre></div>
 <span class="kw">library</span>(reshape2)
 <span class="kw">library</span>(car)
 <span class="kw">library</span>(effsize)
-<span class="kw">library</span>(effects)</code></pre></div>
-<pre><code>## Warning: package &#39;effects&#39; was built under R version 4.1.3</code></pre>
-<pre><code>## Use the command
-##     lattice::trellis.par.set(effectsTheme())
-##   to customize lattice options for effects plots.
-## See ?effectsTheme for details.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(multcomp)</code></pre></div>
+<span class="kw">library</span>(effects)
+<span class="kw">library</span>(multcomp)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/inteligencia.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
 dat1<span class="op">$</span>Dosis &lt;-<span class="st"> </span><span class="kw">factor</span>(dat1<span class="op">$</span>Dosis, 
                             <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))
@@ -679,7 +658,7 @@ datac &lt;-<span class="st"> </span><span class="kw">summarySE</span>(dat1,
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Niveles de inteligencia&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-299-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-257-1.png" width="672" /></p>
 <p>Para el análisis de ANOVA observamos lo siguiente.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_AOV &lt;-<span class="st"> </span><span class="kw">aov</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Dosis, <span class="dt">data =</span> dat1)
 <span class="kw">summary</span>(m_AOV)</code></pre></div>
@@ -710,7 +689,7 @@ dat2<span class="op">$</span>dosis &lt;-<span class="st"> </span><span class="kw
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Dosis&quot;</span>, <span class="dt">y =</span><span class="st">&quot;Inteligencia&quot;</span>) <span class="op">+</span>
 <span class="st">     </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-303-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-261-1.png" width="672" /></p>
 <p>Podemos observar cómo cambian los niveles de inteligencia individual en función de los niveles de inteligencia de los progenitores. Y podemos ver como cambia estos para los distintos niveles de droga.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(dat2, <span class="kw">aes</span>(herencia, inteligencia, <span class="dt">colour =</span> dosis)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
@@ -719,7 +698,7 @@ dat2<span class="op">$</span>dosis &lt;-<span class="st"> </span><span class="kw
 <span class="st">   </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-304-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-262-1.png" width="672" /></p>
 <p>En seguida podemos hacer una descripción de los datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.data.frame</span>(<span class="kw">lapply</span>(<span class="kw">by</span>(dat2<span class="op">$</span>inteligencia, 
                         dat2<span class="op">$</span>dosis,
@@ -829,7 +808,7 @@ dat2<span class="op">$</span>dosis &lt;-<span class="st"> </span><span class="kw
 <p>Pero, evaluando los niveles de inteligencia controlando por los niveles de inteligencia heredada llegamos a una conclusión distinta.</p>
 <p>En el modelo de ANCOVA queda por mirar los gráficos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(ANCOVA_model)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-313-1.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-313-2.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-313-3.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-313-4.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-271-1.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-271-2.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-271-3.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-271-4.png" width="672" /></p>
 <p>¿Qué vemos? El primer gráfico se puede usar para evaluar la homogeneidad de la varianza: si tiene forma de embudo, entonces estamos en problemas. En nuestro caso vemos que la dispersión de puntajes es más amplia en algunos puntos que en otros. Esto implica que los residuales pueden estar distribuidos de forma heteroscedástica.</p>
 <p>El segundo gráfico es un gráfico Q-Q que nos informa sobre la normalidad de los residuos en el modelo. Queremos que nuestros residuos se distribuyan normalmente, lo que significa que los puntos en el gráfico deben flotar alrededor de la línea diagonal. En nuestro los puntos se alejan de esta tendencia. Nuevamente, esta no es una buena noticia para el modelo. Estos gráficos sugieren que sería necesario realizar una versión robusta de ANCOVA.</p>
 <p>A pesar de los problemas que hayamos detectado, y con el objetivo de hacer un análisis completo del análisis de ANCOVA veremos otros aspectos importantes.</p>
@@ -907,7 +886,7 @@ dat2<span class="op">$</span>dosis &lt;-<span class="st"> </span><span class="kw
 <span class="st">   </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-319-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-277-1.png" width="672" /></p>
 <p>Por último, también podemos hacer pruebas posthoc. Para hacer estos análisis en los promedios ajustados debemos usar la función <strong>glht</strong>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">postHocs &lt;-<span class="st"> </span><span class="kw">glht</span>(ANCOVA_model, <span class="dt">linfct =</span> <span class="kw">mcp</span>(<span class="dt">dosis =</span> <span class="st">&quot;Tukey&quot;</span>))
 <span class="kw">summary</span>(postHocs)</code></pre></div>
@@ -922,7 +901,7 @@ dat2<span class="op">$</span>dosis &lt;-<span class="st"> </span><span class="kw
 ## Linear Hypotheses:
 ##                           Estimate Std. Error t value Pr(&gt;|t|)  
 ## Low Dose - Placebo == 0     1.7857     0.8494   2.102   0.1088  
-## High Dose - Placebo == 0    2.2249     0.8028   2.771   0.0265 *
+## High Dose - Placebo == 0    2.2249     0.8028   2.771   0.0266 *
 ## High Dose - Low Dose == 0   0.4392     0.8112   0.541   0.8516  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
@@ -982,7 +961,7 @@ ocdScatter <span class="op">+</span><span class="st"> </span><span class="kw">ge
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-325-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-283-1.png" width="672" /></p>
 <p>Hagamos un gráfico de barras.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ocdBar &lt;-<span class="st"> </span><span class="kw">ggplot</span>(ocdMelt, <span class="kw">aes</span>(Grupo, Frecuencia, <span class="dt">fill =</span> Medicion))
 ocdBar <span class="op">+</span><span class="st"> </span>
@@ -998,7 +977,7 @@ ocdBar <span class="op">+</span><span class="st"> </span>
 <span class="st">  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),</span>
 <span class="st">        panel.background = element_blank(), axis.line = element_line(colour = &quot;</span>black<span class="st">&quot;))</span></code></pre></div>
 <pre><code>## Warning: `fun.y` is deprecated. Use `fun` instead.</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-326-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-284-1.png" width="672" /></p>
 <p>Hagamos un histograma.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ocdBoxplot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(ocdMelt, <span class="kw">aes</span>(Grupo, Frecuencia, <span class="dt">colour =</span> Medicion))
 ocdBoxplot <span class="op">+</span><span class="st"> </span>
@@ -1007,7 +986,7 @@ ocdBoxplot <span class="op">+</span><span class="st"> </span>
 <span class="st">  scale_y_continuous(breaks = seq(0, 20, by = 2)) + </span>
 <span class="st">  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),</span>
 <span class="st">        panel.background = element_blank(), axis.line = element_line(colour = &quot;</span>black<span class="st">&quot;))</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-327-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-285-1.png" width="672" /></p>
 <p>Luego podemos hacer una descripción de los datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">descrip &lt;-<span class="st"> </span><span class="kw">by</span>(ocdData<span class="op">$</span>Acciones, 
            ocdData<span class="op">$</span>Grupo, 

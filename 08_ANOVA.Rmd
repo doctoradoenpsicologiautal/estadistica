@@ -50,6 +50,8 @@ library(pastecs)
 library(reshape2)
 library(car)
 library(effsize)
+library(effectsize)
+library(lsr)
 ```
 
 Luego importamos el set de datos. Aprovechamos de agregar unas etiquetas que nos sirvan a visualizar las condiciones experimentales. Y le damos una mirada.
@@ -168,7 +170,7 @@ Por úlitmo, fíjate que cuando usamos la función **aov** para hacer el ANOVA o
 summary.lm(m_AOV)
 ```
 
-Por último, podemos hacer algunos gráficos que podemos extraer del modelo de ANOVA.
+Finalmente, podemos hacer algunos gráficos que podemos extraer del modelo de ANOVA.
 
 ```{r}
 plot(m_AOV)
@@ -177,3 +179,45 @@ plot(m_AOV)
 Los dos primeros gráficos son los mas importantes.
 El gráfico 1 muestra la homogeneidad de varianza. Si ves una forma de embudo entonces hay en problemas en la homgeneidad de varianza. La idea es que los puntos estén igualmente repartidos. Es decir, las variaciones son similares entre los grupos.
 El gráfico 2  es un gráfico Q-Q. Si los puntos están sobre la diagonal entonces se cumple el suspuesto de la normalidad de los datos.
+
+Para terminar siempre es bueno calcular el tamaño del efecto.
+Recuerda que hicimos en el ANOVA.
+
+```{r}
+m_AOV <- aov(Inteligencia ~ Dosis, data = dat1)
+summModel <- summary.lm(m_AOV)
+```
+
+En el contexto de ANOVA, r^2 generalmente se llama eta cuadrado.
+Se puede obtener desde el modelo.
+
+```{r}
+summModel$r.squared
+```
+
+Pero también se puede calcular con la función **etaSquared** (de la librería *effsize*).
+
+```{r}
+etaSquared(m_AOV)
+```
+
+Alternativamente también podemos calcular Omega cuadrado usando una función.
+
+```{r}
+omega <- function(SSm, SSr, dfm, MSr)
+{
+  SSt = SSm + SSr
+  omega = (SSm-(dfm*MSr))/(SSt+MSr)
+  print(paste("Omega-Squared: ", omega))
+  omega
+}
+
+omega1 <- omega(20.133, 23.600, 2, 1.9667)
+omega1
+```
+
+O también usar la función **omega_squared** (de la librería *effectsize*).
+
+```{r}
+omega_squared(m_AOV)
+```

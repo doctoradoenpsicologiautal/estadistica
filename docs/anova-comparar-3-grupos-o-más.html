@@ -267,7 +267,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">library</span>(pastecs)
 <span class="kw">library</span>(reshape2)
 <span class="kw">library</span>(car)
-<span class="kw">library</span>(effsize)</code></pre></div>
+<span class="kw">library</span>(effsize)
+<span class="kw">library</span>(effectsize)
+<span class="kw">library</span>(lsr)</code></pre></div>
 <p>Luego importamos el set de datos. Aprovechamos de agregar unas etiquetas que nos sirvan a visualizar las condiciones experimentales. Y le damos una mirada.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/inteligencia.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
 dat1<span class="op">$</span>Dosis &lt;-<span class="st"> </span><span class="kw">factor</span>(dat1<span class="op">$</span>Dosis, 
@@ -303,7 +305,7 @@ datac &lt;-<span class="st"> </span><span class="kw">summarySE</span>(dat1,
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Niveles de inteligencia&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-225-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-180-1.png" width="672" /></p>
 <p>Luego podemos hacer una descripción de los datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test &lt;-<span class="st"> </span><span class="kw">by</span>(dat1<span class="op">$</span>Inteligencia, 
            dat1<span class="op">$</span>Dosis, 
@@ -450,10 +452,44 @@ dat2</code></pre></div>
 ## Residual standard error: 1.402 on 12 degrees of freedom
 ## Multiple R-squared:  0.4604, Adjusted R-squared:  0.3704 
 ## F-statistic: 5.119 on 2 and 12 DF,  p-value: 0.02469</code></pre>
-<p>Por último, podemos hacer algunos gráficos que podemos extraer del modelo de ANOVA.</p>
+<p>Finalmente, podemos hacer algunos gráficos que podemos extraer del modelo de ANOVA.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(m_AOV)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-235-1.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-235-2.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-235-3.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-235-4.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-190-1.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-190-2.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-190-3.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-190-4.png" width="672" /></p>
 <p>Los dos primeros gráficos son los mas importantes. El gráfico 1 muestra la homogeneidad de varianza. Si ves una forma de embudo entonces hay en problemas en la homgeneidad de varianza. La idea es que los puntos estén igualmente repartidos. Es decir, las variaciones son similares entre los grupos. El gráfico 2 es un gráfico Q-Q. Si los puntos están sobre la diagonal entonces se cumple el suspuesto de la normalidad de los datos.</p>
+<p>Para terminar siempre es bueno calcular el tamaño del efecto. Recuerda que hicimos en el ANOVA.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_AOV &lt;-<span class="st"> </span><span class="kw">aov</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Dosis, <span class="dt">data =</span> dat1)
+summModel &lt;-<span class="st"> </span><span class="kw">summary.lm</span>(m_AOV)</code></pre></div>
+<p>En el contexto de ANOVA, r^2 generalmente se llama eta cuadrado. Se puede obtener desde el modelo.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summModel<span class="op">$</span>r.squared</code></pre></div>
+<pre><code>## [1] 0.4603659</code></pre>
+<p>Pero también se puede calcular con la función <strong>etaSquared</strong> (de la librería <em>effsize</em>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">etaSquared</span>(m_AOV)</code></pre></div>
+<pre><code>##          eta.sq eta.sq.part
+## Dosis 0.4603659   0.4603659</code></pre>
+<p>Alternativamente también podemos calcular Omega cuadrado usando una función.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">omega &lt;-<span class="st"> </span><span class="cf">function</span>(SSm, SSr, dfm, MSr)
+{
+  SSt =<span class="st"> </span>SSm <span class="op">+</span><span class="st"> </span>SSr
+  omega =<span class="st"> </span>(SSm<span class="op">-</span>(dfm<span class="op">*</span>MSr))<span class="op">/</span>(SSt<span class="op">+</span>MSr)
+  <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;Omega-Squared: &quot;</span>, omega))
+  omega
+}
+
+omega1 &lt;-<span class="st"> </span><span class="kw">omega</span>(<span class="fl">20.133</span>, <span class="fl">23.600</span>, <span class="dv">2</span>, <span class="fl">1.9667</span>)</code></pre></div>
+<pre><code>## [1] &quot;Omega-Squared:  0.35447935106795&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">omega1</code></pre></div>
+<pre><code>## [1] 0.3544794</code></pre>
+<p>O también usar la función <strong>omega_squared</strong> (de la librería <em>effectsize</em>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">omega_squared</span>(m_AOV)</code></pre></div>
+<pre><code>## For one-way between subjects designs, partial omega squared is equivalent to omega squared.
+## Returning omega squared.</code></pre>
+<pre><code>## # Effect Size for ANOVA
+## 
+## Parameter | Omega2 |       95% CI
+## ---------------------------------
+## Dosis     |   0.35 | [0.00, 1.00]
+## 
+## - One-sided CIs: upper bound fixed at [1.00].</code></pre>
 
 </div>
 </div>

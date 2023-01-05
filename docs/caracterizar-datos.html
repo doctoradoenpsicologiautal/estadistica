@@ -322,7 +322,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">festivalHistogram &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dlf, <span class="kw">aes</span>(day1))
 festivalHistogram <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-161-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
 <p>Ya sabíamos de un antiguo capítulo que tenemos un outlier en esta base de datos. Para eliminarlo podemos usar la función <strong>ifelse</strong>. En esta función le decimos a R que todos los valores mayores a 20 se conviertan en 0.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dlf<span class="op">$</span>day1 &lt;-<span class="st"> </span><span class="kw">ifelse</span>(dlf<span class="op">$</span>day1 <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span>, <span class="ot">NA</span>, dlf<span class="op">$</span>day1)</code></pre></div>
 <p>Luego, hacer de nuevo un histograma.</p>
@@ -330,7 +330,7 @@ festivalHistogram <span class="op">+</span><span class="st"> </span><span class=
 festivalHistogram <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <pre><code>## Warning: Removed 1 rows containing non-finite values (stat_bin).</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-163-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-118-1.png" width="672" /></p>
 <p>En esta misma línea, podemos hacer unos ajustes. Podemos ajustar el eje Y para que se muestre la densidad (es sólo un re-escalamiento). Y podemos hacer el gráfico un poco mas claro.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hist.day1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dlf, <span class="kw">aes</span>(day1)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span><span class="st"> </span>
@@ -343,7 +343,7 @@ festivalHistogram <span class="op">+</span><span class="st"> </span><span class=
 hist.day1</code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <pre><code>## Warning: Removed 1 rows containing non-finite values (stat_bin).</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-164-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-119-1.png" width="672" /></p>
 <p>Para evaluar la normalidad podemos superponer una curva normal (en rojo) que se base en el promedio y la dispersión de los datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hist.day1 <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_function</span>(<span class="dt">fun =</span> dnorm, 
@@ -352,12 +352,12 @@ hist.day1</code></pre></div>
                 <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>)</code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <pre><code>## Warning: Removed 1 rows containing non-finite values (stat_bin).</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-165-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-120-1.png" width="672" /></p>
 <p>Para este set de datos la distribución de los datos se ve bastante normal si lo comparamos con la línea. Otra manera gráfica de revisar la normalidad es hacer un gráfico Q-Q</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">qqplot.day1 &lt;-<span class="st"> </span><span class="kw">qplot</span>(<span class="dt">sample =</span> dlf<span class="op">$</span>day1)
 qqplot.day1</code></pre></div>
 <pre><code>## Warning: Removed 1 rows containing non-finite values (stat_qq).</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-166-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
 <p>Si los datos están normalmente distribuidos deberíamos ver una línea diagonal contínua.</p>
 <p>Además de observar gráficamente podemos aplicar analisis de normalidad. Por ejemplo, usando la función <strong>stat.desc</strong> podemos describir los datos y testear la normalidad. Debemos fijarnos en el valor de p del test (&quot;normtest.p&quot;). Si es significativo significa que los datos no poseen una distribución normal.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">stat.desc</span>(dlf<span class="op">$</span>day1, 
@@ -435,7 +435,7 @@ rexam<span class="op">$</span>uni &lt;-<span class="st"> </span><span class="kw"
         <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))
 hexam</code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-172-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-127-1.png" width="672" /></p>
 <p>El gráfico sugiere que los valores de desempeño en los examenes no siguen una distribución normal.</p>
 <p>Nuevamente para evaluar la normalidad podemos superponer una curva normal (en rojo) que se base en el promedio y la dispersión de los datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hexam <span class="op">+</span>
@@ -444,12 +444,12 @@ hexam</code></pre></div>
                             <span class="dt">sd =</span> <span class="kw">sd</span>(rexam<span class="op">$</span>exam, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)), 
                 <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>)</code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-173-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
 <p>De hecho parece que hubieran una distribución bimodal, perteneciente a distribuciones de dos grupos diferentes.</p>
 <p>Veamos el gráfico Q-Q.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">qqplot.exam &lt;-<span class="st"> </span><span class="kw">qplot</span>(<span class="dt">sample =</span> rexam<span class="op">$</span>exam)
 qqplot.exam</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-174-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
 <p>Describamos los datos y apliquemos un analisis de normalidad con la función <strong>stat.desc</strong>. Debemos fijarnos en el valor de p del test (&quot;normtest.p&quot;). Si es significativo significa que los datos no poseen una distribución normal.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="kw">stat.desc</span>(rexam[, <span class="kw">c</span>(<span class="st">&quot;exam&quot;</span>,
                           <span class="st">&quot;computer&quot;</span>,
@@ -579,7 +579,7 @@ sussexData &lt;-<span class="st"> </span>rexam[rexam<span class="op">$</span>uni
                           <span class="dt">sd =</span> <span class="kw">sd</span>(dunceData<span class="op">$</span>exam, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)), 
                 <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">size=</span><span class="dv">1</span>)
 hist.exam.duncetown</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-182-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-137-1.png" width="672" /></p>
 <p>Otro supuesto que debemos testear es la homogenidad de la varianza. Para ello aplicamos un test de Levene.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">leveneTest</span>(rexam<span class="op">$</span>exam, rexam<span class="op">$</span>uni)</code></pre></div>
 <pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)

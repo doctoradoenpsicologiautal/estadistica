@@ -222,28 +222,3 @@ Veamos que pasa cuando usamos una corrección de Benjamini-Hochberg.
 ```{r}
 pairwise.t.test(dat1$Inteligencia, dat1$Dosis, p.adjust.method = "BH")
 ```
-
-Para terminar siempre es bueno calcular el tamaño del efecto.
-Recuerda que hicimos en el ANOVA.
-
-```{r}
-m_AOV <- aov(Inteligencia ~ Dosis, data = dat1)
-summary.lm(m_AOV)
-```
-
-En el contexto de ANOVA, r^2 generalmente se llama eta cuadrado.
-
-Alternativamente también podemos usar una función.
-
-```{r}
-omega <- function(SSm, SSr, dfm, MSr)
-{
-  SSt = SSm + SSr
-  omega = (SSm-(dfm*MSr))/(SSt+MSr)
-  print(paste("Omega-Squared: ", omega))
-  omega
-}
-
-omega1 <- omega(20.133, 23.600, 2, 1.9667)
-sqrt(omega1)
-```
