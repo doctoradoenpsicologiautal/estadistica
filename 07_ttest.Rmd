@@ -118,12 +118,41 @@ t_test1
 ```
 
 Para terminar siempre es bueno calcular el tamaño del efecto.
+Un tamaño del efecto que podemos calcular es el r de Pearson.
 
 ```{r}
 t <- t_test1$statistic[[1]]
 df <- t_test1$parameter[[1]]
-r <- sqrt(t**2/(t**2+df))
+r <- sqrt(t^2/(t^2+df))
 r
+```
+
+Otra tamaño del efecto que podemos calcular es el d de Cohen.
+
+```{r}
+# SDpooled = sqrt((SD1^2 + SD2^2)/ 2)
+# Cohens_d = (M2 - M1) / SDpooled
+
+SDpooled <- sqrt((datac$sd[1]^2 + datac$sd[2]^2)/ 2)
+Cohens_d <- (datac$Conductancia[1] - datac$Conductancia[2]) / SDpooled
+Cohens_d
+```
+
+La cual también se puede calcular con la función **cohen.d**
+
+```{r}
+# Compute Cohen's effect size
+cohen_d <- cohen.d(Conductancia ~ Condicion, spiderLong)
+cohen_d
+```
+
+Por último, para realizar una prueba de t no paramétrica puede usar la función **wilcox.test**.\
+Este test también es conocidp como prueba U de Mann-Whitney.
+Imaginemos que no se han cumplido los supuestos para hacer un análisis paramétrico en nuestros datos.
+
+```{r}
+wilcox1 <- wilcox.test(Conductancia ~ Condicion, spiderLong)
+wilcox1
 ```
 
 ***
@@ -189,19 +218,25 @@ t.test(Conductancia ~ Condicion, data=spiderLong, paired = TRUE)
 ```
 
 Para terminar siempre es bueno calcular el tamaño del efecto.
-Podemos calcularlo de diferentes formas.
+Podemos calcular el r de Pearson.
 
 ```{r}
 t <- t_test2$statistic[[1]]
 df <- t_test2$parameter[[1]]
-(r <- sqrt(t**2/(t**2+df)))
+r <- sqrt(t**2/(t**2+df))
 r
 ```
 
-O podemos usar una función.
+O podemos calcular el d de Cohen.
 
 ```{r}
-# Cohen's d = (M2 - M1) / SDpooled
-# SDpooled = sqrt((SD1^2 + SD2^2)/ 2)
 cohen.d(spiderWide$real, spiderWide$imagen, paired = TRUE)
+```
+
+Por último, para realizar una prueba de t no paramétrica puede usar la función **wilcox.test**.\
+Este test también es conocidp como prueba U de Mann-Whitney.
+
+```{r}
+wilcox2 <- wilcox.test(spiderWide$imagen, spiderWide$real, paired = TRUE)
+wilcox2
 ```
