@@ -77,6 +77,21 @@ Para evitar esto podemos cambiar el parámetro *position* para agregar un retras
 graph + geom_point(aes(colour = Rating_Type), position = "jitter")
 ```
 
+A veces para podríamos querear eliminar ese fondo cuadrículado gris. Para ellos podemos agregar una capa que setea estas cuadriculas.
+
+```{r}
+graph + 
+  geom_point(aes(colour = Rating_Type), position = "jitter") +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
+```
+
+
+
+
+
 ## Gráfico de dispersión
 
 En un gráfico de dispersión se dibuja la puntuación de una una variable frente a la puntuación de otra variable.
@@ -111,7 +126,11 @@ Luego, podemos ir agregando las capas. Por ejemplo, los puntos que relfejan cada
 ```{r}
 scatter + 
   geom_point() + 
-  labs(x = "Exam Anxiety", y = "Exam Performance %")
+  labs(x = "Exam Anxiety", y = "Exam Performance %") +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
 ```
 
 En general, en los gráficos de dispersión agregamos una línea de tendencia que resume la relación entre las variables. La sombra asociada a la línea representa un intervalo de confianza (CI) al 95%.
@@ -120,7 +139,11 @@ En general, en los gráficos de dispersión agregamos una línea de tendencia qu
 scatter + 
   geom_point() + 
   geom_smooth() + 
-  labs(x = "Exam Anxiety", y = "Exam Performance %")
+  labs(x = "Exam Anxiety", y = "Exam Performance %") +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
 ```
 
 Pero, en general, se agrega una linea recta. Para ello usamos la función **geom_smooth**.
@@ -129,7 +152,11 @@ Pero, en general, se agrega una linea recta. Para ello usamos la función **geom
 scatter +
   geom_point() +
   geom_smooth(method = "lm", colour = "Red") +
-  labs(x = "Exam Anxiety", y = "Exam Performance %")
+  labs(x = "Exam Anxiety", y = "Exam Performance %") +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
 ```
 
 Opcionalmente se puede omitir la sombra.
@@ -138,7 +165,11 @@ Opcionalmente se puede omitir la sombra.
 scatter +
   geom_point() + 
   geom_smooth(method = "lm", colour = "Green", se = FALSE) +
-  labs(x = "Exam Anxiety", y = "Exam Performance %")
+  labs(x = "Exam Anxiety", y = "Exam Performance %") +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
 ```
 
 Además, podemos cambiar la transparencia de la línea, cambiando el parámetro *alpha*.
@@ -148,7 +179,11 @@ Y también podamos cambiar el relleno ("fill") de la sombra.
 scatter +
   geom_point() + 
   geom_smooth(method = "lm", alpha = 0.1, fill = "Blue") +
-  labs(x = "Exam Anxiety", y = "Exam Performance %")
+  labs(x = "Exam Anxiety", y = "Exam Performance %") +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
 ```
 
 ¿Qué pasa si queremos hacer gráficos de dispersión en función de más de una variable?
@@ -163,7 +198,11 @@ Luego podemos hacer un nuevo gráfico.
 ```{r}
 scatter + 
   geom_point() + 
-  geom_smooth(method = "lm")
+  geom_smooth(method = "lm") +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
 ```
 
 También podemos dibujar las líneas de acuerdo al género (y además podemos hacer las líneas transparentes).
@@ -173,7 +212,11 @@ Para ello debemos definir un parámetro aes dentro de la función geom_smooth.
 scatter + 
   geom_point() + 
   geom_smooth(method = "lm", alpha = 0.1, aes(fill = Gender)) +
-  labs(x = "Exam Anxiety", y = "Exam Performance %", colour = "Gender")
+  labs(x = "Exam Anxiety", y = "Exam Performance %", colour = "Gender") +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
 ```
 
 ## Histograma
@@ -199,7 +242,11 @@ festivalHistogram <- ggplot(festivalData, aes(day1))
 Y luego hacemos el gráfico.
 
 ```{r}
-festivalHistogram + geom_histogram()
+festivalHistogram + geom_histogram() +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
 ```
 
 Por defecto se realizan los agrupamientos (o "bins) en grupos de 30 puntos.
@@ -211,7 +258,11 @@ Además, le podemos agregar unos títulos a los ejes.
 ```{r}
 festivalHistogram +
   geom_histogram(binwidth = 0.4) +
-  labs(x = "Hygiene (Day 1 of Festival)", y = "Frequency")
+  labs(x = "Hygiene (Day 1 of Festival)", y = "Frequency") + 
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
 ```
 
 Para lidiar con el outlier tenemos 2 opciones.
@@ -227,7 +278,11 @@ festivalHistogramAlt <- ggplot(festivalDataAlt, aes(day1))
 # add layers
 festivalHistogramAlt +
   geom_histogram(binwidth = 0.6) +
-  labs(x = "Hygiene (Day 1 of Festival)", y = "Frequency")
+  labs(x = "Hygiene (Day 1 of Festival)", y = "Frequency") +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
 ```
 
 Mejor aún. Como una segunda opción podemos ubicar el outlier en la data frame.
@@ -254,7 +309,11 @@ festivalHistogramGood <- ggplot(festivalDataGood, aes(day1))
 
 festivalHistogramGood +
   geom_histogram(binwidth = 0.4) +
-  labs(x = "Hygiene (Day 1 of Festival)", y = "Frequency")
+  labs(x = "Hygiene (Day 1 of Festival)", y = "Frequency") +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
 
 ```
 
@@ -270,7 +329,11 @@ festivalBoxplot <- ggplot(festivalData, aes(gender, day1))
 
 festivalBoxplot + 
   geom_boxplot() + 
-  labs(x = "Gender", y = "Hygiene (Day 1 of Festival)")
+  labs(x = "Gender", y = "Hygiene (Day 1 of Festival)") +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
 ```
 
 En este tipo de gráfico también se puede visualizar el outlier.
@@ -284,21 +347,35 @@ festivalBoxplotAlt <- ggplot(festivalDataAlt, aes(gender, day1))
 # add layers
 festivalBoxplotAlt + 
   geom_boxplot() + 
-  labs(x = "Gender", y = "Hygiene (Day 1 of Festival)")
+  labs(x = "Gender", y = "Hygiene (Day 1 of Festival)") +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
 ```
 
 Por último, podemos hacer los boxplots para el día 2.
 
 ```{r}
 festivalBoxplot <- ggplot(festivalData, aes(gender, day2))
-festivalBoxplot + geom_boxplot() + labs(x = "Gender", y = "Hygiene (Day 2 of Festival)")
+festivalBoxplot + geom_boxplot() + 
+  labs(x = "Gender", y = "Hygiene (Day 2 of Festival)") +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
 ```
 
 Y para el día 3.
 
 ```{r}
 festivalBoxplot <- ggplot(festivalData, aes(gender, day3))
-festivalBoxplot + geom_boxplot() + labs(x = "Gender", y = "Hygiene (Day 3 of Festival)")
+festivalBoxplot + geom_boxplot() + 
+  labs(x = "Gender", y = "Hygiene (Day 3 of Festival)") +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
 ```
 
 ## Gráfico de barras

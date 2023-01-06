@@ -147,7 +147,7 @@ cohen_d
 ```
 
 Por último, para realizar una prueba de t no paramétrica puede usar la función **wilcox.test**.\
-Este test también es conocidp como prueba U de Mann-Whitney.
+Este test también es conocido como prueba U de Mann-Whitney.
 Imaginemos que no se han cumplido los supuestos para hacer un análisis paramétrico en nuestros datos.
 
 ```{r}

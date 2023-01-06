@@ -71,9 +71,12 @@ Por ejemplo, podemos hacer un histograma de los valores de atractivo en función
 fig_boxplot1 <- ggplot(gogglesData, aes(alcohol, attractiveness)) +
   geom_boxplot() + 
   facet_wrap(~gender) + 
-  labs(x = "Consumo de alcohol", y = "Atractivo promedio (%)")
+  labs(x = "Consumo de alcohol", y = "Atractivo promedio (%)") +
+    theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
 fig_boxplot1
-
 ```
 
 Este mismo gráfico, valores de atractivo en función del género y del consumo de alcohol, se puede hacer en formato de líneas.
@@ -84,7 +87,11 @@ fig_linesplot1 <- ggplot(gogglesData, aes(alcohol, attractiveness, colour = gend
   stat_summary(fun.y = mean, geom = "point") +
   stat_summary(fun.y = mean, geom = "line", aes(group= gender)) +
   stat_summary(fun.data = mean_cl_boot, geom = "errorbar", width = 0.2) +
-  labs(x = "Consumo de alcohol", y = "Atractivo promedio (%)", colour = "Gender") 
+  labs(x = "Consumo de alcohol", y = "Atractivo promedio (%)", colour = "Gender") +
+    theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
 fig_linesplot1
 ```
 
@@ -96,7 +103,10 @@ fig_barplot1 <- ggplot(gogglesData, aes(alcohol, attractiveness, fill = gender))
   stat_summary(fun.data = mean_cl_normal, geom = "errorbar",
                position=position_dodge(width=0.90), width = 0.2) +
   stat_summary(fun.y = mean, geom = "bar", position="dodge") +
-  labs(x = "Consumo de alcohol", y = "Atractivo promedio (%)", fill = "Gender") 
+  labs(x = "Consumo de alcohol", y = "Atractivo promedio (%)", fill = "Gender") +  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
 fig_barplot1
 ```
 
@@ -109,10 +119,14 @@ Este efecto corresponde al *efecto principal* del género.
 ```{r}
 fig_bargender1 <- ggplot(gogglesData, aes(gender, attractiveness)) +
   stat_summary(fun.y = mean, geom = "bar", 
-                   fill = "White", colour = "Black") +
+               fill = "White", colour = "Black") +
   stat_summary(fun.data = mean_cl_normal, geom = "pointrange") +
   labs(x = "Género", y = "Atractivo promedio (%)") +
-  scale_y_continuous(breaks=seq(0,80, by = 10))
+  scale_y_continuous(breaks=seq(0,80, by = 10)) +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
 fig_bargender1
 ```
 
@@ -125,7 +139,11 @@ fig_barbeer1 <- ggplot(gogglesData, aes(alcohol, attractiveness)) +
                    fill = "White", colour = "Black") +
   stat_summary(fun.data = mean_cl_normal, geom = "pointrange") +
   labs(x = "Consumo de alcohol", y = "Atractivo promedio (%)") +
-  scale_y_continuous(breaks=seq(0,80, by = 10))
+  scale_y_continuous(breaks=seq(0,80, by = 10)) +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))
 fig_barbeer1
 ```
 

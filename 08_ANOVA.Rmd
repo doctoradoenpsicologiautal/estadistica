@@ -221,3 +221,10 @@ O también usar la función **omega_squared** (de la librería *effectsize*).
 ```{r}
 omega_squared(m_AOV)
 ```
+
+Por último, para realizar un ANOVA no paramétrico puedes usar la función **kruskal.test**.
+Supongamos que para nuestros datos no logramos cumplir con los supuestos para aplicar estadística paramétrica.
+
+```{r}
+kruskal.test(Inteligencia ~ Dosis, data = dat1)
+```
