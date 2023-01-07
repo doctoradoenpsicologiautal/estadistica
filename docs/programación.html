@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2023-01-06" />
+<meta name="date" content="2023-01-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -145,6 +145,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.6" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-barras"><i class="fa fa-check"></i><b>4.6</b> Gráfico de barras</a></li>
 <li class="chapter" data-level="4.7" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-líneas-1-factor"><i class="fa fa-check"></i><b>4.7</b> Gráfico de líneas (1 factor)</a></li>
 <li class="chapter" data-level="4.8" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-líneas-2-factores"><i class="fa fa-check"></i><b>4.8</b> Gráfico de líneas (2 factores)</a></li>
+<li class="chapter" data-level="4.9" data-path="gráficos.html"><a href="gráficos.html#guardar-una-figura"><i class="fa fa-check"></i><b>4.9</b> Guardar una figura</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html"><i class="fa fa-check"></i><b>5</b> Caracterizar datos</a><ul>
 <li class="chapter" data-level="5.1" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#visualizar-los-datos"><i class="fa fa-check"></i><b>5.1</b> Visualizar los datos</a></li>
@@ -399,20 +400,18 @@ vector1</code></pre></div>
 <p>Veamos un ejemplo mas elaborado. Vamos a crear un base de datos sobre el nombre, la fecha de nacimiento y el trabajo de distintas personas. Para que R identifique los números como fechas usamos la función <strong>as.Date</strong> (por defecto el formato es yyyy-mm-dd).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">name &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Ben&quot;</span>, <span class="st">&quot;Martin&quot;</span>,<span class="st">&quot;Andy&quot;</span>,<span class="st">&quot;Paul&quot;</span>, <span class="st">&quot;Graham&quot;</span>,<span class="st">&quot;Carina&quot;</span>,<span class="st">&quot;Karina&quot;</span>,<span class="st">&quot;Doug&quot;</span>,<span class="st">&quot;Mark&quot;</span>, <span class="st">&quot;Zoe&quot;</span>)
 name</code></pre></div>
-<pre><code>##  [1] &quot;Ben&quot;    &quot;Martin&quot; &quot;Andy&quot;   &quot;Paul&quot;   &quot;Graham&quot; &quot;Carina&quot; &quot;Karina&quot; &quot;Doug&quot;  
-##  [9] &quot;Mark&quot;   &quot;Zoe&quot;</code></pre>
+<pre><code>##  [1] &quot;Ben&quot;    &quot;Martin&quot; &quot;Andy&quot;   &quot;Paul&quot;   &quot;Graham&quot; &quot;Carina&quot; &quot;Karina&quot; &quot;Doug&quot;   &quot;Mark&quot;   &quot;Zoe&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">birth_date &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">c</span>(<span class="st">&quot;1977-07-03&quot;</span>, <span class="st">&quot;1969-05-24&quot;</span>, <span class="st">&quot;1973-06-21&quot;</span>, <span class="st">&quot;1970-07-16&quot;</span>, <span class="st">&quot;1949-10-10&quot;</span>, <span class="st">&quot;1983-11-05&quot;</span>, <span class="st">&quot;1987-10-08&quot;</span>, <span class="st">&quot;1989-09-16&quot;</span>, <span class="st">&quot;1973-05-20&quot;</span>, <span class="st">&quot;1984-11-12&quot;</span>))
 birth_date</code></pre></div>
-<pre><code>##  [1] &quot;1977-07-03&quot; &quot;1969-05-24&quot; &quot;1973-06-21&quot; &quot;1970-07-16&quot; &quot;1949-10-10&quot;
-##  [6] &quot;1983-11-05&quot; &quot;1987-10-08&quot; &quot;1989-09-16&quot; &quot;1973-05-20&quot; &quot;1984-11-12&quot;</code></pre>
+<pre><code>##  [1] &quot;1977-07-03&quot; &quot;1969-05-24&quot; &quot;1973-06-21&quot; &quot;1970-07-16&quot; &quot;1949-10-10&quot; &quot;1983-11-05&quot; &quot;1987-10-08&quot; &quot;1989-09-16&quot;
+##  [9] &quot;1973-05-20&quot; &quot;1984-11-12&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">job &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">5</span>), <span class="kw">rep</span>(<span class="dv">2</span>, <span class="dv">5</span>)) <span class="co"># que es el equivalente a: job &lt;- c(1,1,1,1,1,2,2,2,2,2)</span>
 job</code></pre></div>
 <pre><code>##  [1] 1 1 1 1 1 2 2 2 2 2</code></pre>
 <p>La variable <em>job</em> es categórica. El número 1 indica que es un profesor y el 2 indica que es un estudiante. Para R son sólo números. Para decirle a R que es una variable categórica (o en el lenguaje de R un factor) tenemos que indicarselo usando la función <strong>factor</strong>. Además, podemos crear etiquetas o nombres que nos hagan mas sentido a nosotros. En este caso este factor tiene dos niveles: Lecturer y Student.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">job &lt;-<span class="st"> </span><span class="kw">factor</span>(job, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Lecturer&quot;</span>, <span class="st">&quot;Student&quot;</span>))
 job</code></pre></div>
-<pre><code>##  [1] Lecturer Lecturer Lecturer Lecturer Lecturer Student  Student  Student 
-##  [9] Student  Student 
+<pre><code>##  [1] Lecturer Lecturer Lecturer Lecturer Lecturer Student  Student  Student  Student  Student 
 ## Levels: Lecturer Student</code></pre>
 <p>Luego, el paso final es poner todo junto:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataframe1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(name, birth_date, job)
@@ -600,20 +599,13 @@ lightAlcoholicsPerso</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
 satisfactionData &lt;-<span class="st">  </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Honeymoon_Period.csv&quot;</span>)
 <span class="kw">head</span>(satisfactionData)</code></pre></div>
-<pre><code>##   Person Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months
-## 1      1                 6                     6                      5
-## 2      2                 7                     7                      8
-## 3      3                 4                     6                      2
-## 4      4                 6                     9                      4
-## 5      5                 6                     7                      6
-## 6      6                 5                    10                      4
-##   Satisfaction_18_Months Gender
-## 1                      2      0
-## 2                      4      1
-## 3                      2      1
-## 4                      1      0
-## 5                      6      0
-## 6                      2      1</code></pre>
+<pre><code>##   Person Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months Satisfaction_18_Months Gender
+## 1      1                 6                     6                      5                      2      0
+## 2      2                 7                     7                      8                      4      1
+## 3      3                 4                     6                      2                      2      1
+## 4      4                 6                     9                      4                      1      0
+## 5      5                 6                     7                      6                      6      0
+## 6      6                 5                    10                      4                      2      1</code></pre>
 <p>Con <strong>head</strong> miramos sólo los primeras 6 filas de la base de datos. En esta data frame están los niveles de satisfacción con la pareja al momento de casarse, y luego de 6, 12 y 18 meses. Además está el género del entrevistado.</p>
 <p>Esta data frame la podemos a transformar a un formato <em>long</em> usando la función <strong>stack</strong>. Esta función la usamos de la siguiente manera: newDataFrame &lt;- stack(oldDataFrame, select = c(variable_list))</p>
 <p>En nuestro ejemplo podemos hacerlo así:</p>
@@ -640,38 +632,24 @@ newDataFrame &lt;- unstack(oldDataFrame, scores ~ columns) O simplemente: newDat
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">satisfactionUnstacked &lt;-<span class="st"> </span><span class="kw">unstack</span>(satisfactionStacked)
 
 <span class="kw">head</span>(satisfactionUnstacked)</code></pre></div>
-<pre><code>##   Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months
-## 1                 6                     6                      5
-## 2                 7                     7                      8
-## 3                 4                     6                      2
-## 4                 6                     9                      4
-## 5                 6                     7                      6
-## 6                 5                    10                      4
-##   Satisfaction_18_Months
-## 1                      2
-## 2                      4
-## 3                      2
-## 4                      1
-## 5                      6
-## 6                      2</code></pre>
+<pre><code>##   Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months Satisfaction_18_Months
+## 1                 6                     6                      5                      2
+## 2                 7                     7                      8                      4
+## 3                 4                     6                      2                      2
+## 4                 6                     9                      4                      1
+## 5                 6                     7                      6                      6
+## 6                 5                    10                      4                      2</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">satisfactionUnstacked2 &lt;-<span class="st"> </span><span class="kw">unstack</span>(satisfactionStacked,
                                   Values <span class="op">~</span><span class="st"> </span>SatisfType)
 
 <span class="kw">head</span>(satisfactionUnstacked2)</code></pre></div>
-<pre><code>##   Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months
-## 1                 6                     6                      5
-## 2                 7                     7                      8
-## 3                 4                     6                      2
-## 4                 6                     9                      4
-## 5                 6                     7                      6
-## 6                 5                    10                      4
-##   Satisfaction_18_Months
-## 1                      2
-## 2                      4
-## 3                      2
-## 4                      1
-## 5                      6
-## 6                      2</code></pre>
+<pre><code>##   Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months Satisfaction_18_Months
+## 1                 6                     6                      5                      2
+## 2                 7                     7                      8                      4
+## 3                 4                     6                      2                      2
+## 4                 6                     9                      4                      1
+## 5                 6                     7                      6                      6
+## 6                 5                    10                      4                      2</code></pre>
 <p>Otra manera de transformar datos a formato <em>long</em> es usando la función <strong>melt</strong>. Para ello necesitamos cargar la librería <strong>reshape</strong>.</p>
 <p>Esta función la usamos de la siguiente manera: newDataFrame &lt;- melt(oldDataFrame, id = c(constant_variables), measured = c(variables_that_change_across_columns))</p>
 <p>En nuestro ejemplo podemos hacerlo así:</p>
@@ -710,20 +688,13 @@ restructuredData &lt;-<span class="st"> </span><span class="kw">melt</span>(sati
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wideData &lt;-<span class="st"> </span><span class="kw">cast</span>(restructuredData, Person <span class="op">+</span><span class="st"> </span>Gender <span class="op">~</span><span class="st"> </span>SatisfType, <span class="dt">value =</span> <span class="st">&quot;Values&quot;</span>)
 
 <span class="kw">head</span>(wideData)</code></pre></div>
-<pre><code>##   Person Gender Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months
-## 1      1      0                 6                     6                      5
-## 2      2      1                 7                     7                      8
-## 3      3      1                 4                     6                      2
-## 4      4      0                 6                     9                      4
-## 5      5      0                 6                     7                      6
-## 6      6      1                 5                    10                      4
-##   Satisfaction_18_Months
-## 1                      2
-## 2                      4
-## 3                      2
-## 4                      1
-## 5                      6
-## 6                      2</code></pre>
+<pre><code>##   Person Gender Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months Satisfaction_18_Months
+## 1      1      0                 6                     6                      5                      2
+## 2      2      1                 7                     7                      8                      4
+## 3      3      1                 4                     6                      2                      2
+## 4      4      0                 6                     9                      4                      1
+## 5      5      0                 6                     7                      6                      6
+## 6      6      1                 5                    10                      4                      2</code></pre>
 </div>
 <div id="exportar-datos" class="section level2">
 <h2><span class="header-section-number">3.9</span> Exportar datos</h2>
@@ -748,10 +719,10 @@ restructuredData &lt;-<span class="st"> </span><span class="kw">melt</span>(sati
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat, <span class="kw">aes</span>(latidos))
 h1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-148-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat, <span class="kw">aes</span>(<span class="st">&quot;&quot;</span>, latidos))
 h1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-149-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 <p>Veámos otros datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/demografia_salud.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(dat<span class="op">$</span>Sexo)</code></pre></div>

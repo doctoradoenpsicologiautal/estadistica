@@ -641,3 +641,20 @@ ggplot(dataSumm, aes(x=Time, y=Grammar_Score, colour=Group)) +
   coord_cartesian(ylim = c(45, 70))
 ```
 
+## Guardar una figura 
+
+Para guardar una figura se puede usar la interfaz gráfica de RStudio, pero es aún mas útil si lo podemos hacer de manera automática. Para ello bastan dos líneas de comando.
+Imagina si hubieramos querido guardar la primera figura que hicimos.
+Antes de pedirle a R que cree el gráfico agregamos una línea de código para usar la función **png**.
+En esta función indicamos el nombre que el queremos dar al archivo (incluimos la exentsión) y luego definimos el tamaño y la calidad de la imagen. Luego del código propio de la gráfico debemos agregar *dev.off()* para que R seap que estamos Ok con la imagen.
+El archivo se guardará en directorio actual que se este usando.
+
+```{r}
+png("fig_ejemplo_1.png", width = 500, height = 500, res = 100)
+
+graph <- ggplot(facebookData, aes(NPQC_R_Total, Rating))
+graph + geom_point()
+
+dev.off()
+
+```

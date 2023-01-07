@@ -33,6 +33,7 @@ boxplot
 gráfico-de-barras
 gráfico-de-líneas-1-factor
 gráfico-de-líneas-2-factores
+guardar-una-figura
 caracterizar-datos
 visualizar-los-datos
 la-curva-normal

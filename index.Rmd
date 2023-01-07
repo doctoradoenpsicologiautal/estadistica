@@ -7,8 +7,15 @@ site: bookdown::bookdown_site
 
 # Preámbulo {-}
 
-Este curso se basa en <a href="https://www.goodreads.com/book/show/578667.Statistics_Without_Tears" target="_blank">Statistics without tears</a> de Derek Rowntree y <a href="https://www.discoveringstatistics.com/books/discovering-statistics-using-r/" target="_blank">Discovering statistics using R</a>  de Andy Field, Jeremy Miles y Zoë Field. Este curso también utiliza material del libro "Discovering statistics using R". Este material es accesible <a href="https://studysites.uk.sagepub.com/dsur/study/articles.htm" target="_blank">aquí.</a>
+Esta plataforma fue creada con el objetivo de facilitar el aprendizaje de R y de la estadística. R es un lenguaje de programación que se usa ampliamente para el análisis de datos y el modelado estadístico, y es particularmente adecuado para trabajar con datos masivos y complejos. R es un software gratuito y de código abierto. R se usa ampliamente en academia para una variedad de propósitos, incluido el análisis de datos, la visualización de datos y el machine learning.
 
-Este curso asume que no sabes nada de estadística. Sin embargo, si asume que sabes aritmética básica y fracciones. La base de datos que vamos a utilizar se encuentra <a href="https://github.com/doctoradoenpsicologiautal/estadistica/tree/master/data" target="_blank">aquí.</a>
+Esta plataforma esta estructurado en forma de un curso de estadística. Este curso se basa en <a href="https://www.goodreads.com/book/show/578667.Statistics_Without_Tears" target="_blank">Statistics without tears</a> de Derek Rowntree y <a href="https://www.discoveringstatistics.com/books/discovering-statistics-using-r/" target="_blank">Discovering statistics using R</a>  de Andy Field, Jeremy Miles y Zoë Field. Este curso también utiliza material del libro "Discovering statistics using R". Este material es accesible <a href="https://studysites.uk.sagepub.com/dsur/study/articles.htm" target="_blank">aquí.</a>
 
-¡Que disfrutes el curso! </a>
+Este curso asume que no sabes nada de estadística. Sin embargo, si asume que sabes aritmética básica y fracciones.
+
+La base de datos que vamos a utilizar se encuentra <a href="https://github.com/doctoradoenpsicologiautal/estadistica/tree/master/data" target="_blank">aquí</a>. Asegurate de bajar estos datos para que puedas poner en práctica lo que aprendas aquí.
+
+
+Como todo, esta plataforma no esta exenta de errores. Si detectas algo que es incorrecto o que se pueda mejorar, por favor mándame un email (joseluisulloafulgeri@gmail.com). </a>
+
+¡Que disfrutes de esta plataforma! </a>
