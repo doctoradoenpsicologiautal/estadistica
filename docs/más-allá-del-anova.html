@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2023-01-07" />
+<meta name="date" content="2023-01-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -194,6 +194,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="11" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>11</b> Otros análisis</a><ul>
 <li class="chapter" data-level="11.1" data-path="otros-análisis.html"><a href="otros-análisis.html#análisis-de-proporciones"><i class="fa fa-check"></i><b>11.1</b> Análisis de proporciones</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="recursos.html"><a href="recursos.html"><i class="fa fa-check"></i><b>12</b> Recursos</a><ul>
+<li class="chapter" data-level="12.1" data-path="recursos.html"><a href="recursos.html#apps"><i class="fa fa-check"></i><b>12.1</b> Apps</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="recursos.html"><a href="recursos.html#convertidor-de-tamaños-de-efectos"><i class="fa fa-check"></i><b>12.1.1</b> Convertidor de tamaños de efectos</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="recursos.html"><a href="recursos.html#librerías"><i class="fa fa-check"></i><b>12.2</b> Librerías</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="recursos.html"><a href="recursos.html#para-calcular-tamaños-de-efectos"><i class="fa fa-check"></i><b>12.2.1</b> Para calcular tamaños de efectos</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="recursos.html"><a href="recursos.html#sitios-web"><i class="fa fa-check"></i><b>12.3</b> Sitios web</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="recursos.html"><a href="recursos.html#herramientas-de-estadística"><i class="fa fa-check"></i><b>12.3.1</b> Herramientas de estadística</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="recursos.html"><a href="recursos.html#cursos"><i class="fa fa-check"></i><b>12.4</b> Cursos</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="recursos.html"><a href="recursos.html#herramientas-de-estadística-1"><i class="fa fa-check"></i><b>12.4.1</b> Herramientas de estadística</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -919,9 +933,9 @@ dat2<span class="op">$</span>dosis &lt;-<span class="st"> </span><span class="kw
 ## 
 ## Linear Hypotheses:
 ##                           Estimate Std. Error t value Pr(&gt;|t|)  
-## Low Dose - Placebo == 0     1.7857     0.8494   2.102   0.1088  
-## High Dose - Placebo == 0    2.2249     0.8028   2.771   0.0267 *
-## High Dose - Low Dose == 0   0.4392     0.8112   0.541   0.8517  
+## Low Dose - Placebo == 0     1.7857     0.8494   2.102   0.1087  
+## High Dose - Placebo == 0    2.2249     0.8028   2.771   0.0265 *
+## High Dose - Low Dose == 0   0.4392     0.8112   0.541   0.8516  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## (Adjusted p values reported -- single-step method)</code></pre>
@@ -934,15 +948,15 @@ dat2<span class="op">$</span>dosis &lt;-<span class="st"> </span><span class="kw
 ## 
 ## Fit: aov(formula = inteligencia ~ dosis + herencia, data = dat2)
 ## 
-## Quantile = 2.4855
+## Quantile = 2.485
 ## 95% family-wise confidence level
 ##  
 ## 
 ## Linear Hypotheses:
 ##                           Estimate lwr     upr    
-## Low Dose - Placebo == 0    1.7857  -0.3254  3.8967
-## High Dose - Placebo == 0   2.2249   0.2295  4.2203
-## High Dose - Low Dose == 0  0.4392  -1.5771  2.4555</code></pre>
+## Low Dose - Placebo == 0    1.7857  -0.3250  3.8964
+## High Dose - Placebo == 0   2.2249   0.2299  4.2199
+## High Dose - Low Dose == 0  0.4392  -1.5767  2.4551</code></pre>
 <p>De este análisis observamos que sólo hay diferencias de inteligencia (cuando controlamos por los efecto de inteligencia heredada) cuando comparamos el placebo y la dosis alta de droga.</p>
 </div>
 <div id="manova" class="section level2">

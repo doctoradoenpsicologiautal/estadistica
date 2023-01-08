@@ -1,0 +1,22 @@
+# Recursos
+
+Para complementar esta plataforma se van a listar algunos recursos útiles.
+
+## Apps
+
+### Convertidor de tamaños de efectos 
+<a href="https://www.escal.site/" target="_blank">Effect size converter</a>
+
+## Librerías
+
+### Para calcular tamaños de efectos
+<a href="https://easystats.github.io/effectsize/reference/eta_squared.html" target="_blank">effectsize</a>
+
+## Sitios web
+
+### Herramientas de estadística
+<a href="https://github.com/easystats" target="_blank">easystats</a>
+
+## Cursos
+### Herramientas de estadística
+<a href="https://lindeloev.github.io/tests-as-linear/" target="_blank">Common statistical tests are linear models</a>

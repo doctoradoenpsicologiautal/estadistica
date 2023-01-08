@@ -75,3 +75,12 @@ ancova
 manova
 otros-análisis
 análisis-de-proporciones
+recursos
+apps
+convertidor-de-tamaños-de-efectos
+librerías
+para-calcular-tamaños-de-efectos
+sitios-web
+herramientas-de-estadística
+cursos
+herramientas-de-estadística-1
