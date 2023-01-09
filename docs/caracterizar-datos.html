@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2023-01-08" />
+<meta name="date" content="2023-01-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -318,11 +318,30 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
 
 <span class="kw">library</span>(ggplot2)
-<span class="kw">library</span>(Hmisc)
-<span class="kw">library</span>(Rmisc)
-<span class="kw">library</span>(reshape2)
-<span class="kw">library</span>(pastecs)
+<span class="kw">library</span>(Hmisc)</code></pre></div>
+<pre><code>## Warning: package &#39;Hmisc&#39; was built under R version 4.1.3</code></pre>
+<pre><code>## Loading required package: survival</code></pre>
+<pre><code>## Loading required package: Formula</code></pre>
+<pre><code>## 
+## Attaching package: &#39;Hmisc&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:plyr&#39;:
+## 
+##     is.discrete, summarize</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     format.pval, units</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Rmisc)
+<span class="kw">library</span>(reshape2)</code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;reshape2&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:reshape&#39;:
+## 
+##     colsplit, melt, recast</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pastecs)
 <span class="kw">library</span>(car)</code></pre></div>
+<pre><code>## Warning: package &#39;car&#39; was built under R version 4.1.3</code></pre>
+<pre><code>## Loading required package: carData</code></pre>
+<pre><code>## Warning: package &#39;carData&#39; was built under R version 4.1.3</code></pre>
 <p>Para un estudio se investigaron los niveles de higiene de personas que asistieron a distintos días de un festival de música. Mientras más alto es el valor hay mayores niveles de higiene.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dlf &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/DownloadFestival.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
 <span class="kw">head</span>(dlf)</code></pre></div>

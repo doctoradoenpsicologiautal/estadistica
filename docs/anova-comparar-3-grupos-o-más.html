@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2023-01-08" />
+<meta name="date" content="2023-01-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -283,8 +283,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">library</span>(reshape2)
 <span class="kw">library</span>(car)
 <span class="kw">library</span>(effsize)
-<span class="kw">library</span>(effectsize)
-<span class="kw">library</span>(lsr)</code></pre></div>
+<span class="kw">library</span>(effectsize)</code></pre></div>
+<pre><code>## Warning: package &#39;effectsize&#39; was built under R version 4.1.3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lsr)</code></pre></div>
+<pre><code>## Warning: package &#39;lsr&#39; was built under R version 4.1.3</code></pre>
 <p>Luego importamos el set de datos. Aprovechamos de agregar unas etiquetas que nos sirvan a visualizar las condiciones experimentales. Y le damos una mirada.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/inteligencia.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
 dat1<span class="op">$</span>Dosis &lt;-<span class="st"> </span><span class="kw">factor</span>(dat1<span class="op">$</span>Dosis, 

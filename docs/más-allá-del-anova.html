@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2023-01-08" />
+<meta name="date" content="2023-01-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -541,6 +541,22 @@ fig_boxplot1</code></pre></div>
 <span class="kw">library</span>(reshape)
 <span class="kw">library</span>(ez)
 <span class="kw">library</span>(multcomp)</code></pre></div>
+<pre><code>## Warning: package &#39;multcomp&#39; was built under R version 4.1.3</code></pre>
+<pre><code>## Loading required package: mvtnorm</code></pre>
+<pre><code>## Loading required package: TH.data</code></pre>
+<pre><code>## Warning: package &#39;TH.data&#39; was built under R version 4.1.3</code></pre>
+<pre><code>## Loading required package: MASS</code></pre>
+<pre><code>## Warning: package &#39;MASS&#39; was built under R version 4.1.3</code></pre>
+<pre><code>## 
+## Attaching package: &#39;MASS&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     select</code></pre>
+<pre><code>## 
+## Attaching package: &#39;TH.data&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:MASS&#39;:
+## 
+##     geyser</code></pre>
 <p>Primero importamos el set de datos y le damos una mirada.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/insectos_y_tiempo_vomito.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
 <span class="kw">str</span>(dat1)</code></pre></div>
@@ -656,8 +672,13 @@ fig_boxplot1</code></pre></div>
 <span class="kw">library</span>(reshape2)
 <span class="kw">library</span>(car)
 <span class="kw">library</span>(effsize)
-<span class="kw">library</span>(effects)
-<span class="kw">library</span>(multcomp)</code></pre></div>
+<span class="kw">library</span>(effects)</code></pre></div>
+<pre><code>## Warning: package &#39;effects&#39; was built under R version 4.1.3</code></pre>
+<pre><code>## Use the command
+##     lattice::trellis.par.set(effectsTheme())
+##   to customize lattice options for effects plots.
+## See ?effectsTheme for details.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(multcomp)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/inteligencia.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
 dat1<span class="op">$</span>Dosis &lt;-<span class="st"> </span><span class="kw">factor</span>(dat1<span class="op">$</span>Dosis, 
                             <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))
@@ -933,8 +954,8 @@ dat2<span class="op">$</span>dosis &lt;-<span class="st"> </span><span class="kw
 ## 
 ## Linear Hypotheses:
 ##                           Estimate Std. Error t value Pr(&gt;|t|)  
-## Low Dose - Placebo == 0     1.7857     0.8494   2.102   0.1087  
-## High Dose - Placebo == 0    2.2249     0.8028   2.771   0.0265 *
+## Low Dose - Placebo == 0     1.7857     0.8494   2.102   0.1088  
+## High Dose - Placebo == 0    2.2249     0.8028   2.771   0.0266 *
 ## High Dose - Low Dose == 0   0.4392     0.8112   0.541   0.8516  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
@@ -948,15 +969,15 @@ dat2<span class="op">$</span>dosis &lt;-<span class="st"> </span><span class="kw
 ## 
 ## Fit: aov(formula = inteligencia ~ dosis + herencia, data = dat2)
 ## 
-## Quantile = 2.485
+## Quantile = 2.4848
 ## 95% family-wise confidence level
 ##  
 ## 
 ## Linear Hypotheses:
 ##                           Estimate lwr     upr    
-## Low Dose - Placebo == 0    1.7857  -0.3250  3.8964
-## High Dose - Placebo == 0   2.2249   0.2299  4.2199
-## High Dose - Low Dose == 0  0.4392  -1.5767  2.4551</code></pre>
+## Low Dose - Placebo == 0    1.7857  -0.3248  3.8962
+## High Dose - Placebo == 0   2.2249   0.2301  4.2197
+## High Dose - Low Dose == 0  0.4392  -1.5765  2.4549</code></pre>
 <p>De este análisis observamos que sólo hay diferencias de inteligencia (cuando controlamos por los efecto de inteligencia heredada) cuando comparamos el placebo y la dosis alta de droga.</p>
 </div>
 <div id="manova" class="section level2">
