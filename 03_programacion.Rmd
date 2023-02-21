@@ -365,6 +365,9 @@ dat2 <- read.csv("data/facebook_friends_1.csv", header = FALSE)
 dat2
 ```
 
+En relación a la importación de datos en formato csv debo realizar una pequeña advertencia.
+Por alguna razón misteriosa a veces el comando **read.csv** no funciona bien e importa de manera defectuosa (todas las variables se ubican en una sola columna). A veces la solución es usar la versión 2 de esta función. Es decir usar **read.csv2**.
+
 Para importar archivos siempre asegurate que has seteado bien tu directorio de trabajo y que los archivos están ahí.
 
 ```

@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2023-01-09" />
+<meta name="date" content="2023-02-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -359,36 +359,36 @@ fig_boxplot1</code></pre></div>
    gogglesData<span class="op">$</span>gender, stat.desc)
 <span class="kw">lapply</span>(describ, round, <span class="dv">2</span>)</code></pre></div>
 <pre><code>## $Female
-##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median         mean 
-##        24.00         0.00         0.00        50.00        70.00        20.00      1445.00        60.00        60.21 
-##      SE.mean CI.mean.0.95          var      std.dev     coef.var 
-##         1.29         2.68        40.17         6.34         0.11 
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
+##        24.00         0.00         0.00        50.00        70.00        20.00      1445.00        60.00 
+##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        60.21         1.29         2.68        40.17         6.34         0.11 
 ## 
 ## $Male
-##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median         mean 
-##        24.00         0.00         0.00        20.00        85.00        65.00      1355.00        60.00        56.46 
-##      SE.mean CI.mean.0.95          var      std.dev     coef.var 
-##         3.78         7.81       342.35        18.50         0.33</code></pre>
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
+##        24.00         0.00         0.00        20.00        85.00        65.00      1355.00        60.00 
+##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        56.46         3.78         7.81       342.35        18.50         0.33</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">describ &lt;-<span class="st"> </span><span class="kw">by</span>(gogglesData<span class="op">$</span>attractiveness, 
               gogglesData<span class="op">$</span>alcohol, stat.desc)
 <span class="kw">lapply</span>(describ, round, <span class="dv">2</span>)</code></pre></div>
 <pre><code>## $P0
-##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median         mean 
-##        16.00         0.00         0.00        50.00        80.00        30.00      1020.00        62.50        63.75 
-##      SE.mean CI.mean.0.95          var      std.dev     coef.var 
-##         2.12         4.51        71.67         8.47         0.13 
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
+##        16.00         0.00         0.00        50.00        80.00        30.00      1020.00        62.50 
+##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        63.75         2.12         4.51        71.67         8.47         0.13 
 ## 
 ## $P2
-##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median         mean 
-##        16.00         0.00         0.00        45.00        85.00        40.00      1035.00        65.00        64.69 
-##      SE.mean CI.mean.0.95          var      std.dev     coef.var 
-##         2.48         5.28        98.23         9.91         0.15 
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
+##        16.00         0.00         0.00        45.00        85.00        40.00      1035.00        65.00 
+##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        64.69         2.48         5.28        98.23         9.91         0.15 
 ## 
 ## $P4
-##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median         mean 
-##        16.00         0.00         0.00        20.00        70.00        50.00       745.00        50.00        46.56 
-##      SE.mean CI.mean.0.95          var      std.dev     coef.var 
-##         3.59         7.64       205.73        14.34         0.31</code></pre>
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
+##        16.00         0.00         0.00        20.00        70.00        50.00       745.00        50.00 
+##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        46.56         3.59         7.64       205.73        14.34         0.31</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">describ &lt;-<span class="st"> </span><span class="kw">by</span>(gogglesData<span class="op">$</span>attractiveness, 
               <span class="kw">list</span>(gogglesData<span class="op">$</span>alcohol, gogglesData<span class="op">$</span>gender), 
               stat.desc, <span class="dt">basic =</span> <span class="ot">FALSE</span>)
@@ -465,9 +465,10 @@ fig_boxplot1</code></pre></div>
 <span class="kw">contrasts</span>(gogglesData<span class="op">$</span>gender) &lt;-<span class="st"> </span><span class="kw">cbind</span>(.M_vs_F)</code></pre></div>
 <p>Luego puedes verificar para el factor género, y ...</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gogglesData<span class="op">$</span>gender</code></pre></div>
-<pre><code>##  [1] Female Female Female Female Female Female Female Female Female Female Female Female Female Female Female Female
-## [17] Female Female Female Female Female Female Female Female Male   Male   Male   Male   Male   Male   Male   Male  
-## [33] Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male  
+<pre><code>##  [1] Female Female Female Female Female Female Female Female Female Female Female Female Female Female Female
+## [16] Female Female Female Female Female Female Female Female Female Male   Male   Male   Male   Male   Male  
+## [31] Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male  
+## [46] Male   Male   Male  
 ## attr(,&quot;contrasts&quot;)
 ##        .M_vs_F
 ## Female      -1
@@ -475,8 +476,8 @@ fig_boxplot1</code></pre></div>
 ## Levels: Female Male</code></pre>
 <p>... consumo de alcohol</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gogglesData<span class="op">$</span>alcohol</code></pre></div>
-<pre><code>##  [1] P0 P0 P0 P0 P0 P0 P0 P0 P2 P2 P2 P2 P2 P2 P2 P2 P4 P4 P4 P4 P4 P4 P4 P4 P0 P0 P0 P0 P0 P0 P0 P0 P2 P2 P2 P2 P2
-## [38] P2 P2 P2 P4 P4 P4 P4 P4 P4 P4 P4
+<pre><code>##  [1] P0 P0 P0 P0 P0 P0 P0 P0 P2 P2 P2 P2 P2 P2 P2 P2 P4 P4 P4 P4 P4 P4 P4 P4 P0 P0 P0 P0 P0 P0 P0 P0 P2 P2 P2
+## [36] P2 P2 P2 P2 P2 P4 P4 P4 P4 P4 P4 P4 P4
 ## attr(,&quot;contrasts&quot;)
 ##    .Non_vs_P .P2_vs_P4
 ## P0        -2         0
@@ -541,22 +542,6 @@ fig_boxplot1</code></pre></div>
 <span class="kw">library</span>(reshape)
 <span class="kw">library</span>(ez)
 <span class="kw">library</span>(multcomp)</code></pre></div>
-<pre><code>## Warning: package &#39;multcomp&#39; was built under R version 4.1.3</code></pre>
-<pre><code>## Loading required package: mvtnorm</code></pre>
-<pre><code>## Loading required package: TH.data</code></pre>
-<pre><code>## Warning: package &#39;TH.data&#39; was built under R version 4.1.3</code></pre>
-<pre><code>## Loading required package: MASS</code></pre>
-<pre><code>## Warning: package &#39;MASS&#39; was built under R version 4.1.3</code></pre>
-<pre><code>## 
-## Attaching package: &#39;MASS&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
-## 
-##     select</code></pre>
-<pre><code>## 
-## Attaching package: &#39;TH.data&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:MASS&#39;:
-## 
-##     geyser</code></pre>
 <p>Primero importamos el set de datos y le damos una mirada.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/insectos_y_tiempo_vomito.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
 <span class="kw">str</span>(dat1)</code></pre></div>
@@ -597,28 +582,28 @@ fig_boxplot1</code></pre></div>
            <span class="dt">norm =</span> <span class="ot">TRUE</span>)
 <span class="kw">lapply</span>(test,round,<span class="dv">2</span>)</code></pre></div>
 <pre><code>## $insecto.al.palo
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness     skew.2SE 
-##         8.00         8.12         0.79         1.87         4.98         2.23         0.27         0.27         0.18 
-##     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##        -1.21        -0.41         0.98         0.97 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##         8.00         8.12         0.79         1.87         4.98         2.23         0.27         0.27 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.18        -1.21        -0.41         0.98         0.97 
 ## 
 ## $testiculo.de.canguro
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness     skew.2SE 
-##         4.50         4.25         0.65         1.53         3.36         1.83         0.43         0.05         0.03 
-##     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##        -1.66        -0.56         0.94         0.60 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##         4.50         4.25         0.65         1.53         3.36         1.83         0.43         0.05 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.03        -1.66        -0.56         0.94         0.60 
 ## 
 ## $ojos.de.pescado
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness     skew.2SE 
-##         4.00         4.12         0.97         2.30         7.55         2.75         0.67         0.10         0.07 
-##     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##        -1.86        -0.63         0.91         0.37 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##         4.00         4.12         0.97         2.30         7.55         2.75         0.67         0.10 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.07        -1.86        -0.63         0.91         0.37 
 ## 
 ## $larvas.de.polillas
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness     skew.2SE 
-##         6.50         5.75         1.03         2.44         8.50         2.92         0.51        -0.51        -0.34 
-##     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##        -1.49        -0.50         0.90         0.29</code></pre>
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##         6.50         5.75         1.03         2.44         8.50         2.92         0.51        -0.51 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##        -0.34        -1.49        -0.50         0.90         0.29</code></pre>
 <p>Finalmente, hacemos el análisis de ANOVA de medidas repetidas.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">ezANOVA</span>(<span class="dt">data =</span> dat1.long,
                  <span class="dt">dv =</span> .(vomito),
@@ -672,13 +657,8 @@ fig_boxplot1</code></pre></div>
 <span class="kw">library</span>(reshape2)
 <span class="kw">library</span>(car)
 <span class="kw">library</span>(effsize)
-<span class="kw">library</span>(effects)</code></pre></div>
-<pre><code>## Warning: package &#39;effects&#39; was built under R version 4.1.3</code></pre>
-<pre><code>## Use the command
-##     lattice::trellis.par.set(effectsTheme())
-##   to customize lattice options for effects plots.
-## See ?effectsTheme for details.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(multcomp)</code></pre></div>
+<span class="kw">library</span>(effects)
+<span class="kw">library</span>(multcomp)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/inteligencia.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
 dat1<span class="op">$</span>Dosis &lt;-<span class="st"> </span><span class="kw">factor</span>(dat1<span class="op">$</span>Dosis, 
                             <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))
@@ -969,15 +949,15 @@ dat2<span class="op">$</span>dosis &lt;-<span class="st"> </span><span class="kw
 ## 
 ## Fit: aov(formula = inteligencia ~ dosis + herencia, data = dat2)
 ## 
-## Quantile = 2.4848
+## Quantile = 2.4859
 ## 95% family-wise confidence level
 ##  
 ## 
 ## Linear Hypotheses:
 ##                           Estimate lwr     upr    
-## Low Dose - Placebo == 0    1.7857  -0.3248  3.8962
-## High Dose - Placebo == 0   2.2249   0.2301  4.2197
-## High Dose - Low Dose == 0  0.4392  -1.5765  2.4549</code></pre>
+## Low Dose - Placebo == 0    1.7857  -0.3257  3.8971
+## High Dose - Placebo == 0   2.2249   0.2292  4.2206
+## High Dose - Low Dose == 0  0.4392  -1.5774  2.4558</code></pre>
 <p>De este análisis observamos que sólo hay diferencias de inteligencia (cuando controlamos por los efecto de inteligencia heredada) cuando comparamos el placebo y la dosis alta de droga.</p>
 </div>
 <div id="manova" class="section level2">
@@ -1049,22 +1029,22 @@ ocdBoxplot <span class="op">+</span><span class="st"> </span>
            <span class="dt">norm =</span> <span class="ot">TRUE</span>)
 <span class="kw">lapply</span>(descrip,round,<span class="dv">2</span>)</code></pre></div>
 <pre><code>## $NT
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness     skew.2SE 
-##         5.00         5.00         0.33         0.75         1.11         1.05         0.21         0.51         0.37 
-##     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##        -1.22        -0.46         0.86         0.07 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##         5.00         5.00         0.33         0.75         1.11         1.05         0.21         0.51 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.37        -1.22        -0.46         0.86         0.07 
 ## 
 ## $CBT
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness     skew.2SE 
-##         5.00         4.90         0.38         0.86         1.43         1.20         0.24         0.17         0.12 
-##     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##        -1.18        -0.44         0.95         0.69 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##         5.00         4.90         0.38         0.86         1.43         1.20         0.24         0.17 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.12        -1.18        -0.44         0.95         0.69 
 ## 
 ## $BT
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness     skew.2SE 
-##         4.00         3.70         0.56         1.26         3.12         1.77         0.48        -0.46        -0.34 
-##     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##        -1.45        -0.54         0.87         0.11</code></pre>
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##         4.00         3.70         0.56         1.26         3.12         1.77         0.48        -0.46 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##        -0.34        -1.45        -0.54         0.87         0.11</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">descrip &lt;-<span class="st"> </span><span class="kw">by</span>(ocdData<span class="op">$</span>Pensamientos, 
            ocdData<span class="op">$</span>Grupo, 
            stat.desc, 
@@ -1072,22 +1052,22 @@ ocdBoxplot <span class="op">+</span><span class="st"> </span>
            <span class="dt">norm =</span> <span class="ot">TRUE</span>)
 <span class="kw">lapply</span>(descrip,round,<span class="dv">2</span>)</code></pre></div>
 <pre><code>## $NT
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness     skew.2SE 
-##        14.00        15.00         0.75         1.69         5.56         2.36         0.16         0.96         0.70 
-##     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##        -0.54        -0.20         0.83         0.03 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##        14.00        15.00         0.75         1.69         5.56         2.36         0.16         0.96 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.70        -0.54        -0.20         0.83         0.03 
 ## 
 ## $CBT
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness     skew.2SE 
-##        13.50        13.40         0.60         1.36         3.60         1.90         0.14         0.09         0.07 
-##     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##        -1.67        -0.63         0.91         0.31 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##        13.50        13.40         0.60         1.36         3.60         1.90         0.14         0.09 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.07        -1.67        -0.63         0.91         0.31 
 ## 
 ## $BT
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness     skew.2SE 
-##        14.50        15.20         0.66         1.50         4.40         2.10         0.14         0.61         0.44 
-##     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##        -1.28        -0.48         0.88         0.12</code></pre>
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##        14.50        15.20         0.66         1.50         4.40         2.10         0.14         0.61 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.44        -1.28        -0.48         0.88         0.12</code></pre>
 <p>Luego de describir los datos podemos comprobar algunos supuestos antes de hacer el análisis de MANOVA.</p>
 <p>Primero debemos chequear la homogeneidad de las matrices de covarianza, comparando los valores que encontremos. Idealmente deberían ser similares a través de los grupos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">by</span>(ocdData[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>], ocdData<span class="op">$</span>Grupo , cov)</code></pre></div>
@@ -1095,12 +1075,12 @@ ocdBoxplot <span class="op">+</span><span class="st"> </span>
 ##               Acciones Pensamientos
 ## Acciones      1.111111    -1.111111
 ## Pensamientos -1.111111     5.555556
-## --------------------------------------------------------------------------------------- 
+## ----------------------------------------------------------------------------------- 
 ## ocdData$Grupo: CBT
 ##                Acciones Pensamientos
 ## Acciones     1.43333333   0.04444444
 ## Pensamientos 0.04444444   3.60000000
-## --------------------------------------------------------------------------------------- 
+## ----------------------------------------------------------------------------------- 
 ## ocdData$Grupo: BT
 ##              Acciones Pensamientos
 ## Acciones     3.122222     2.511111
