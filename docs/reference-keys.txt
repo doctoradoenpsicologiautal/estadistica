@@ -78,6 +78,7 @@ análisis-de-proporciones
 recursos
 apps
 convertidor-de-tamaños-de-efectos
+convertidor-de-tamaños-de-efectos-1
 librerías
 para-calcular-tamaños-de-efectos
 sitios-web

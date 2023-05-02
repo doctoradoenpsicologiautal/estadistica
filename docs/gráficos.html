@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2023-02-21" />
+<meta name="date" content="2023-05-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -198,6 +198,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="12" data-path="recursos.html"><a href="recursos.html"><i class="fa fa-check"></i><b>12</b> Recursos</a><ul>
 <li class="chapter" data-level="12.1" data-path="recursos.html"><a href="recursos.html#apps"><i class="fa fa-check"></i><b>12.1</b> Apps</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="recursos.html"><a href="recursos.html#convertidor-de-tamaños-de-efectos"><i class="fa fa-check"></i><b>12.1.1</b> Convertidor de tamaños de efectos</a></li>
+<li class="chapter" data-level="12.1.2" data-path="recursos.html"><a href="recursos.html#convertidor-de-tamaños-de-efectos-1"><i class="fa fa-check"></i><b>12.1.2</b> Convertidor de tamaños de efectos</a></li>
 </ul></li>
 <li class="chapter" data-level="12.2" data-path="recursos.html"><a href="recursos.html#librerías"><i class="fa fa-check"></i><b>12.2</b> Librerías</a><ul>
 <li class="chapter" data-level="12.2.1" data-path="recursos.html"><a href="recursos.html#para-calcular-tamaños-de-efectos"><i class="fa fa-check"></i><b>12.2.1</b> Para calcular tamaños de efectos</a></li>
@@ -247,8 +248,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <span class="kw">library</span>(ggplot2)
 <span class="kw">library</span>(reshape)
-<span class="kw">library</span>(plyr)
-<span class="kw">library</span>(Rmisc)</code></pre></div>
+<span class="kw">library</span>(plyr)</code></pre></div>
+<pre><code>## Warning: package &#39;plyr&#39; was built under R version 4.1.3</code></pre>
+<pre><code>## 
+## Attaching package: &#39;plyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:reshape&#39;:
+## 
+##     rename, round_any</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Rmisc)</code></pre></div>
+<pre><code>## Warning: package &#39;Rmisc&#39; was built under R version 4.1.3</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">facebookData &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;data/FacebookNarcissism.dat&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span>
 <span class="kw">head</span>(facebookData)</code></pre></div>
 <pre><code>##   id NPQC_R_Total Rating_Type Rating
@@ -324,7 +333,7 @@ graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_po
         <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
         <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
-<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
 <p>Pero, en general, se agrega una linea recta. Para ello usamos la función <strong>geom_smooth</strong>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scatter <span class="op">+</span>
@@ -335,7 +344,7 @@ graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_po
         <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
         <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
-<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
 <p>Opcionalmente se puede omitir la sombra.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scatter <span class="op">+</span>
@@ -346,7 +355,7 @@ graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_po
         <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
         <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
-<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
 <p>Además, podemos cambiar la transparencia de la línea, cambiando el parámetro <em>alpha</em>. Y también podamos cambiar el relleno (&quot;fill&quot;) de la sombra.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scatter <span class="op">+</span>
@@ -357,7 +366,7 @@ graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_po
         <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
         <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
-<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
 <p>¿Qué pasa si queremos hacer gráficos de dispersión en función de más de una variable? Por ejemplo, podríamos querer ver las distintas relaciones entre ansiedad y puntajes en la prueba, en función del género (hombres versus mujeres). Para ello debemos re-definir la estructura base del gráfico, y debemmos agregar la variable género dentro del parámetro aes.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scatter &lt;-<span class="st"> </span><span class="kw">ggplot</span>(examData, <span class="kw">aes</span>(Anxiety, Exam, <span class="dt">colour =</span> Gender))</code></pre></div>
@@ -369,7 +378,7 @@ graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_po
         <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
         <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
-<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
 <p>También podemos dibujar las líneas de acuerdo al género (y además podemos hacer las líneas transparentes). Para ello debemos definir un parámetro aes dentro de la función geom_smooth.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scatter <span class="op">+</span><span class="st"> </span>
@@ -380,7 +389,7 @@ graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_po
         <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
         <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
-<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
 </div>
 <div id="histograma" class="section level2">
@@ -492,7 +501,7 @@ festivalBoxplot <span class="op">+</span><span class="st"> </span><span class="k
         <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
         <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
-<pre><code>## Warning: Removed 546 rows containing non-finite values (stat_boxplot).</code></pre>
+<pre><code>## Warning: Removed 546 rows containing non-finite values (`stat_boxplot()`).</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
 <p>Y para el día 3.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">festivalBoxplot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(festivalData, <span class="kw">aes</span>(gender, day3))
@@ -502,7 +511,7 @@ festivalBoxplot <span class="op">+</span><span class="st"> </span><span class="k
         <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
         <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
-<pre><code>## Warning: Removed 687 rows containing non-finite values (stat_boxplot).</code></pre>
+<pre><code>## Warning: Removed 687 rows containing non-finite values (`stat_boxplot()`).</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-88-1.png" width="672" /></p>
 </div>
 <div id="gráfico-de-barras" class="section level2">
@@ -645,20 +654,24 @@ hiccups &lt;-<span class="st"> </span><span class="kw">stack</span>(hiccupsData)
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Si una variable es categórica se puede ver hacia el final de los datos que existen niveles.</span>
 <span class="co"># En este caso la variable &quot;Tratamieto&quot; tiene 4 niveles.</span>
 hiccups<span class="op">$</span>Tratamiento</code></pre></div>
-<pre><code>##  [1] Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base  
-## [16] Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto 
-## [31] Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar
-## [46] Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa 
+<pre><code>##  [1] Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base  
+## [12] Base   Base   Base   Base   Susto  Susto  Susto  Susto  Susto  Susto  Susto 
+## [23] Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Azucar Azucar Azucar
+## [34] Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar
+## [45] Azucar Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa 
+## [56] Bolsa  Bolsa  Bolsa  Bolsa  Bolsa 
 ## Levels: Base Susto Azucar Bolsa</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hiccups<span class="op">$</span>Tratamiento2 &lt;-<span class="st"> </span><span class="kw">factor</span>(hiccups<span class="op">$</span>Tratamiento,
                                 <span class="kw">levels</span>(hiccups<span class="op">$</span>Tratamiento)[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">3</span>)])
 
 
 hiccups<span class="op">$</span>Tratamiento2</code></pre></div>
-<pre><code>##  [1] Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base  
-## [16] Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto 
-## [31] Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar
-## [46] Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa 
+<pre><code>##  [1] Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base  
+## [12] Base   Base   Base   Base   Susto  Susto  Susto  Susto  Susto  Susto  Susto 
+## [23] Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Azucar Azucar Azucar
+## [34] Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar
+## [45] Azucar Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa 
+## [56] Bolsa  Bolsa  Bolsa  Bolsa  Bolsa 
 ## Levels: Base Bolsa Susto Azucar</code></pre>
 <p>Usamos la función <strong>summarySE</strong> para calcular el número de hipos promedio en función del tratamiento.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataSumm &lt;-<span class="st"> </span><span class="kw">summarySE</span>(hiccups, <span class="dt">measurevar=</span><span class="st">&quot;Hipos&quot;</span>, <span class="dt">groupvars=</span><span class="st">&quot;Tratamiento&quot;</span>)

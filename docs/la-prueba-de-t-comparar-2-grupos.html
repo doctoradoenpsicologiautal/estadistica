@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2023-02-21" />
+<meta name="date" content="2023-05-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -198,6 +198,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="12" data-path="recursos.html"><a href="recursos.html"><i class="fa fa-check"></i><b>12</b> Recursos</a><ul>
 <li class="chapter" data-level="12.1" data-path="recursos.html"><a href="recursos.html#apps"><i class="fa fa-check"></i><b>12.1</b> Apps</a><ul>
 <li class="chapter" data-level="12.1.1" data-path="recursos.html"><a href="recursos.html#convertidor-de-tamaños-de-efectos"><i class="fa fa-check"></i><b>12.1.1</b> Convertidor de tamaños de efectos</a></li>
+<li class="chapter" data-level="12.1.2" data-path="recursos.html"><a href="recursos.html#convertidor-de-tamaños-de-efectos-1"><i class="fa fa-check"></i><b>12.1.2</b> Convertidor de tamaños de efectos</a></li>
 </ul></li>
 <li class="chapter" data-level="12.2" data-path="recursos.html"><a href="recursos.html#librerías"><i class="fa fa-check"></i><b>12.2</b> Librerías</a><ul>
 <li class="chapter" data-level="12.2.1" data-path="recursos.html"><a href="recursos.html#para-calcular-tamaños-de-efectos"><i class="fa fa-check"></i><b>12.2.1</b> Para calcular tamaños de efectos</a></li>
@@ -317,16 +318,20 @@ datac &lt;-<span class="st"> </span><span class="kw">summarySE</span>(spiderLong
           <span class="dt">norm =</span> <span class="ot">TRUE</span>), 
        round, <span class="dv">2</span>)</code></pre></div>
 <pre><code>## $imagen
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
-##        40.00        40.00         2.68         5.90        86.36         9.29         0.23         0.00 
-##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##         0.00        -1.39        -0.57         0.97         0.85 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev 
+##        40.00        40.00         2.68         5.90        86.36         9.29 
+##     coef.var     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W 
+##         0.23         0.00         0.00        -1.39        -0.57         0.97 
+##   normtest.p 
+##         0.85 
 ## 
 ## $real
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
-##        50.00        47.00         3.18         7.01       121.64        11.03         0.23        -0.01 
-##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##         0.00        -1.46        -0.59         0.95         0.62</code></pre>
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev 
+##        50.00        47.00         3.18         7.01       121.64        11.03 
+##     coef.var     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W 
+##         0.23        -0.01         0.00        -1.46        -0.59         0.95 
+##   normtest.p 
+##         0.62</code></pre>
 <p>La función <strong>by</strong> permite calcular los estadísticos. La función <strong>round</strong> redondea los valores a dos décimas. Y la función <strong>lapply</strong> permite aplicar la función round de forma másiva.</p>
 <p>Ahora, vamos a realiza una regresión lineal. Lo que queremos es predecir los valores de <em>conductancia</em> en función de los grupos (o condiciones) que tenemos. Para realizar la regresión usamos la función <strong>lm</strong></p>
 <p>Luego de hacer la regresión lineal podemos revisar su contenido con la función <strong>summary</strong>. Recuerda mirar los coeficientes. ¿Qué ves?</p>
@@ -401,8 +406,8 @@ cohen_d</code></pre></div>
 <p>Por último, para realizar una prueba de t no paramétrica puede usar la función <strong>wilcox.test</strong>.<br />
 Este test también es conocido como prueba U de Mann-Whitney. Imaginemos que no se han cumplido los supuestos para hacer un análisis paramétrico en nuestros datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wilcox1 &lt;-<span class="st"> </span><span class="kw">wilcox.test</span>(Conductancia <span class="op">~</span><span class="st"> </span>Condicion, spiderLong)</code></pre></div>
-<pre><code>## Warning in wilcox.test.default(x = c(30L, 35L, 45L, 40L, 50L, 35L, 55L, : cannot compute exact p-value with
-## ties</code></pre>
+<pre><code>## Warning in wilcox.test.default(x = c(30L, 35L, 45L, 40L, 50L, 35L, 55L, : cannot
+## compute exact p-value with ties</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wilcox1</code></pre></div>
 <pre><code>## 
 ##  Wilcoxon rank sum test with continuity correction
@@ -452,10 +457,12 @@ datac2 &lt;-<span class="st"> </span><span class="kw">summarySEwithin</span>(spi
 <p>Luego podemos chequear algunos supuestos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spiderWide<span class="op">$</span>diff &lt;-<span class="st"> </span>spiderWide<span class="op">$</span>imagen <span class="op">-</span><span class="st"> </span>spiderWide<span class="op">$</span>real <span class="co"># calcula la diferencia</span>
 <span class="kw">stat.desc</span>(spiderWide<span class="op">$</span>diff, <span class="dt">basic =</span> <span class="ot">FALSE</span>, <span class="dt">norm =</span> <span class="ot">TRUE</span>) <span class="co"># calcula los estadísticos</span></code></pre></div>
-<pre><code>##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
-##   -7.5000000   -7.0000000    2.8311043    6.2312185   96.1818182    9.8072330   -1.4010333    0.2464810 
-##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##    0.1933785   -1.2342159   -0.5007991    0.9557903    0.7224801</code></pre>
+<pre><code>##       median         mean      SE.mean CI.mean.0.95          var      std.dev 
+##   -7.5000000   -7.0000000    2.8311043    6.2312185   96.1818182    9.8072330 
+##     coef.var     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W 
+##   -1.4010333    0.2464810    0.1933785   -1.2342159   -0.5007991    0.9557903 
+##   normtest.p 
+##    0.7224801</code></pre>
 <p>Y luego haces el t-test.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_test2 &lt;-<span class="st"> </span><span class="kw">t.test</span>(spiderWide<span class="op">$</span>real, spiderWide<span class="op">$</span>imagen, <span class="dt">paired =</span> <span class="ot">TRUE</span>)
 t_test2</code></pre></div>
@@ -501,10 +508,10 @@ r</code></pre></div>
 <p>Por último, para realizar una prueba de t no paramétrica puede usar la función <strong>wilcox.test</strong>.<br />
 Este test también es conocidp como prueba U de Mann-Whitney.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wilcox2 &lt;-<span class="st"> </span><span class="kw">wilcox.test</span>(spiderWide<span class="op">$</span>imagen, spiderWide<span class="op">$</span>real, <span class="dt">paired =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## Warning in wilcox.test.default(spiderWide$imagen, spiderWide$real, paired = TRUE): cannot compute exact p-value
-## with ties</code></pre>
-<pre><code>## Warning in wilcox.test.default(spiderWide$imagen, spiderWide$real, paired = TRUE): cannot compute exact p-value
-## with zeroes</code></pre>
+<pre><code>## Warning in wilcox.test.default(spiderWide$imagen, spiderWide$real, paired = TRUE):
+## cannot compute exact p-value with ties</code></pre>
+<pre><code>## Warning in wilcox.test.default(spiderWide$imagen, spiderWide$real, paired = TRUE):
+## cannot compute exact p-value with zeroes</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wilcox2</code></pre></div>
 <pre><code>## 
 ##  Wilcoxon signed rank test with continuity correction

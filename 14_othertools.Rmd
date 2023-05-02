@@ -7,6 +7,9 @@ Para complementar esta plataforma se van a listar algunos recursos útiles.
 ### Convertidor de tamaños de efectos 
 <a href="https://www.escal.site/" target="_blank">Effect size converter</a>
 
+### Convertidor de tamaños de efectos 
+<a href="https://www.escal.site/" target="_blank">Effect size converter</a>
+
 ## Librerías
 
 ### Para calcular tamaños de efectos
