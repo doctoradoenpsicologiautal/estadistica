@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2023-05-02" />
+<meta name="date" content="2023-09-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -299,7 +299,7 @@ gogglesData<span class="op">$</span>alcohol &lt;-<span class="st"> </span><span 
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
         <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))
 fig_boxplot1</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-217-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-218-1.png" width="672" /></p>
 <p>Este mismo gráfico, valores de atractivo en función del género y del consumo de alcohol, se puede hacer en formato de líneas.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_linesplot1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(gogglesData, <span class="kw">aes</span>(alcohol, attractiveness, <span class="dt">colour =</span> gender)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>) <span class="op">+</span>
@@ -313,10 +313,9 @@ fig_boxplot1</code></pre></div>
 <pre><code>## Warning: The `fun.y` argument of `stat_summary()` is deprecated as of ggplot2 3.3.0.
 ## i Please use the `fun` argument instead.
 ## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-## generated.</code></pre>
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_linesplot1</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-218-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-219-1.png" width="672" /></p>
 <p>O en formato de barras.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_barplot1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(gogglesData, <span class="kw">aes</span>(alcohol, attractiveness, <span class="dt">fill =</span> gender)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.data =</span> mean_cl_normal, <span class="dt">geom =</span> <span class="st">&quot;errorbar&quot;</span>,
@@ -327,7 +326,7 @@ fig_boxplot1</code></pre></div>
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
         <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))
 fig_barplot1</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-219-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-220-1.png" width="672" /></p>
 <p>Estos gráfico son muy informativos. ¿Que ves? Una manera de visualizar los efectos que estamos estudiando podemos separar los efectos. Esto es, podemos visualizar los niveles de atractivo en función de un sólo factor.</p>
 <p>Por ejemplo, podemos visualizar el efecto del género en los niveles de atractivo. Este efecto corresponde al <em>efecto principal</em> del género.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_bargender1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(gogglesData, <span class="kw">aes</span>(gender, attractiveness)) <span class="op">+</span>
@@ -341,7 +340,7 @@ fig_barplot1</code></pre></div>
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
         <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))
 fig_bargender1</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-220-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-221-1.png" width="672" /></p>
 <p>También podemos visualizar el efecto del consumo de alcohol en los niveles de atractivo. Este efecto corresponde al <em>efecto principal</em> del consumo de alcohol.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_barbeer1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(gogglesData, <span class="kw">aes</span>(alcohol, attractiveness)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;bar&quot;</span>, 
@@ -354,91 +353,69 @@ fig_bargender1</code></pre></div>
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
         <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))
 fig_barbeer1</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-221-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-222-1.png" width="672" /></p>
 <p>Antes de hacer los análisis propiamente tal podemos describir un poco los datos y evaluar los supuestos de la estadística parámetrica.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">describ &lt;-<span class="st"> </span><span class="kw">by</span>(gogglesData<span class="op">$</span>attractiveness, 
    gogglesData<span class="op">$</span>gender, stat.desc)
 <span class="kw">lapply</span>(describ, round, <span class="dv">2</span>)</code></pre></div>
 <pre><code>## $Female
-##      nbr.val     nbr.null       nbr.na          min          max        range 
-##        24.00         0.00         0.00        50.00        70.00        20.00 
-##          sum       median         mean      SE.mean CI.mean.0.95          var 
-##      1445.00        60.00        60.21         1.29         2.68        40.17 
-##      std.dev     coef.var 
-##         6.34         0.11 
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
+##        24.00         0.00         0.00        50.00        70.00        20.00      1445.00        60.00 
+##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        60.21         1.29         2.68        40.17         6.34         0.11 
 ## 
 ## $Male
-##      nbr.val     nbr.null       nbr.na          min          max        range 
-##        24.00         0.00         0.00        20.00        85.00        65.00 
-##          sum       median         mean      SE.mean CI.mean.0.95          var 
-##      1355.00        60.00        56.46         3.78         7.81       342.35 
-##      std.dev     coef.var 
-##        18.50         0.33</code></pre>
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
+##        24.00         0.00         0.00        20.00        85.00        65.00      1355.00        60.00 
+##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        56.46         3.78         7.81       342.35        18.50         0.33</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">describ &lt;-<span class="st"> </span><span class="kw">by</span>(gogglesData<span class="op">$</span>attractiveness, 
               gogglesData<span class="op">$</span>alcohol, stat.desc)
 <span class="kw">lapply</span>(describ, round, <span class="dv">2</span>)</code></pre></div>
 <pre><code>## $P0
-##      nbr.val     nbr.null       nbr.na          min          max        range 
-##        16.00         0.00         0.00        50.00        80.00        30.00 
-##          sum       median         mean      SE.mean CI.mean.0.95          var 
-##      1020.00        62.50        63.75         2.12         4.51        71.67 
-##      std.dev     coef.var 
-##         8.47         0.13 
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
+##        16.00         0.00         0.00        50.00        80.00        30.00      1020.00        62.50 
+##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        63.75         2.12         4.51        71.67         8.47         0.13 
 ## 
 ## $P2
-##      nbr.val     nbr.null       nbr.na          min          max        range 
-##        16.00         0.00         0.00        45.00        85.00        40.00 
-##          sum       median         mean      SE.mean CI.mean.0.95          var 
-##      1035.00        65.00        64.69         2.48         5.28        98.23 
-##      std.dev     coef.var 
-##         9.91         0.15 
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
+##        16.00         0.00         0.00        45.00        85.00        40.00      1035.00        65.00 
+##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        64.69         2.48         5.28        98.23         9.91         0.15 
 ## 
 ## $P4
-##      nbr.val     nbr.null       nbr.na          min          max        range 
-##        16.00         0.00         0.00        20.00        70.00        50.00 
-##          sum       median         mean      SE.mean CI.mean.0.95          var 
-##       745.00        50.00        46.56         3.59         7.64       205.73 
-##      std.dev     coef.var 
-##        14.34         0.31</code></pre>
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
+##        16.00         0.00         0.00        20.00        70.00        50.00       745.00        50.00 
+##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        46.56         3.59         7.64       205.73        14.34         0.31</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">describ &lt;-<span class="st"> </span><span class="kw">by</span>(gogglesData<span class="op">$</span>attractiveness, 
               <span class="kw">list</span>(gogglesData<span class="op">$</span>alcohol, gogglesData<span class="op">$</span>gender), 
               stat.desc, <span class="dt">basic =</span> <span class="ot">FALSE</span>)
 <span class="kw">lapply</span>(describ, round, <span class="dv">2</span>)</code></pre></div>
 <pre><code>## [[1]]
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev 
-##        60.00        60.62         1.75         4.14        24.55         4.96 
-##     coef.var 
-##         0.08 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        60.00        60.62         1.75         4.14        24.55         4.96         0.08 
 ## 
 ## [[2]]
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev 
-##        62.50        62.50         2.31         5.47        42.86         6.55 
-##     coef.var 
-##         0.10 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        62.50        62.50         2.31         5.47        42.86         6.55         0.10 
 ## 
 ## [[3]]
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev 
-##        55.00        57.50         2.50         5.91        50.00         7.07 
-##     coef.var 
-##         0.12 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        55.00        57.50         2.50         5.91        50.00         7.07         0.12 
 ## 
 ## [[4]]
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev 
-##        67.50        66.88         3.65         8.64       106.70        10.33 
-##     coef.var 
-##         0.15 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        67.50        66.88         3.65         8.64       106.70        10.33         0.15 
 ## 
 ## [[5]]
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev 
-##        67.50        66.88         4.43        10.47       156.70        12.52 
-##     coef.var 
-##         0.19 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        67.50        66.88         4.43        10.47       156.70        12.52         0.19 
 ## 
 ## [[6]]
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev 
-##        32.50        35.62         3.83         9.06       117.41        10.84 
-##     coef.var 
-##         0.30</code></pre>
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##        32.50        35.62         3.83         9.06       117.41        10.84         0.30</code></pre>
 <p>También podemos evaluar la homogenididad de varianza.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">leveneTest</span>(gogglesData<span class="op">$</span>attractiveness, 
            gogglesData<span class="op">$</span>gender, <span class="dt">center =</span> median)</code></pre></div>
@@ -488,11 +465,10 @@ fig_barbeer1</code></pre></div>
 <span class="kw">contrasts</span>(gogglesData<span class="op">$</span>gender) &lt;-<span class="st"> </span><span class="kw">cbind</span>(.M_vs_F)</code></pre></div>
 <p>Luego puedes verificar para el factor género, y ...</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gogglesData<span class="op">$</span>gender</code></pre></div>
-<pre><code>##  [1] Female Female Female Female Female Female Female Female Female Female Female
-## [12] Female Female Female Female Female Female Female Female Female Female Female
-## [23] Female Female Male   Male   Male   Male   Male   Male   Male   Male   Male  
-## [34] Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male  
-## [45] Male   Male   Male   Male  
+<pre><code>##  [1] Female Female Female Female Female Female Female Female Female Female Female Female Female Female
+## [15] Female Female Female Female Female Female Female Female Female Female Male   Male   Male   Male  
+## [29] Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male   Male  
+## [43] Male   Male   Male   Male   Male   Male  
 ## attr(,&quot;contrasts&quot;)
 ##        .M_vs_F
 ## Female      -1
@@ -500,8 +476,8 @@ fig_barbeer1</code></pre></div>
 ## Levels: Female Male</code></pre>
 <p>... consumo de alcohol</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gogglesData<span class="op">$</span>alcohol</code></pre></div>
-<pre><code>##  [1] P0 P0 P0 P0 P0 P0 P0 P0 P2 P2 P2 P2 P2 P2 P2 P2 P4 P4 P4 P4 P4 P4 P4 P4 P0 P0
-## [27] P0 P0 P0 P0 P0 P0 P2 P2 P2 P2 P2 P2 P2 P2 P4 P4 P4 P4 P4 P4 P4 P4
+<pre><code>##  [1] P0 P0 P0 P0 P0 P0 P0 P0 P2 P2 P2 P2 P2 P2 P2 P2 P4 P4 P4 P4 P4 P4 P4 P4 P0 P0 P0 P0 P0 P0 P0 P0 P2 P2
+## [35] P2 P2 P2 P2 P2 P2 P4 P4 P4 P4 P4 P4 P4 P4
 ## attr(,&quot;contrasts&quot;)
 ##    .Non_vs_P .P2_vs_P4
 ## P0        -2         0
@@ -525,7 +501,7 @@ fig_barbeer1</code></pre></div>
 <p>Si miras los valores de F verás que hay un efecto principal del alcohol y un efecto de interacción género-consumo de alcohol. El efecto principal que tenemos aquí refleja que hay un efecto del alcohol (mira el gráfico). Pero, fíjate que el efecto del alcohol en realidad esta calificado por una interación con el género. Es decir, el efecto del consumo de alcohol sobre los niveles de atractivo no son iguales para los dos géneros. En otras palabras. A la luz de una interacción no tiene sentido interpretar el efecto principal.</p>
 <p>¿Qué indican los resultados? Ten en cuenta los resultados estadísticos y el gráfico.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fig_linesplot1</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-238-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-239-1.png" width="672" /></p>
 <p>Los resultados muestran que las mujeres mantienen altos estándares en la selección de su pareja sin importar el consumo de alcohol. Los hombres toman 4 pints y terminan con parejas que tienen un menor atractivo. Es decir, ocurre el &quot;goggle bear effect&quot;.</p>
 <p>Veamos las comparaciones planificadas para revisar mayores detalles.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary.lm</span>(gogglesModel)</code></pre></div>
@@ -613,7 +589,7 @@ fig_barbeer1</code></pre></div>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Tipo de comida&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-244-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-245-1.png" width="672" /></p>
 <p>Luego podemos tener una descripción de los datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test &lt;-<span class="st"> </span><span class="kw">by</span>(dat1.long<span class="op">$</span>vomito, 
            dat1.long<span class="op">$</span>animal, 
@@ -622,36 +598,28 @@ fig_barbeer1</code></pre></div>
            <span class="dt">norm =</span> <span class="ot">TRUE</span>)
 <span class="kw">lapply</span>(test,round,<span class="dv">2</span>)</code></pre></div>
 <pre><code>## $insecto.al.palo
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev 
-##         8.00         8.12         0.79         1.87         4.98         2.23 
-##     coef.var     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W 
-##         0.27         0.27         0.18        -1.21        -0.41         0.98 
-##   normtest.p 
-##         0.97 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##         8.00         8.12         0.79         1.87         4.98         2.23         0.27         0.27 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.18        -1.21        -0.41         0.98         0.97 
 ## 
 ## $testiculo.de.canguro
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev 
-##         4.50         4.25         0.65         1.53         3.36         1.83 
-##     coef.var     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W 
-##         0.43         0.05         0.03        -1.66        -0.56         0.94 
-##   normtest.p 
-##         0.60 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##         4.50         4.25         0.65         1.53         3.36         1.83         0.43         0.05 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.03        -1.66        -0.56         0.94         0.60 
 ## 
 ## $ojos.de.pescado
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev 
-##         4.00         4.12         0.97         2.30         7.55         2.75 
-##     coef.var     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W 
-##         0.67         0.10         0.07        -1.86        -0.63         0.91 
-##   normtest.p 
-##         0.37 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##         4.00         4.12         0.97         2.30         7.55         2.75         0.67         0.10 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.07        -1.86        -0.63         0.91         0.37 
 ## 
 ## $larvas.de.polillas
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev 
-##         6.50         5.75         1.03         2.44         8.50         2.92 
-##     coef.var     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W 
-##         0.51        -0.51        -0.34        -1.49        -0.50         0.90 
-##   normtest.p 
-##         0.29</code></pre>
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##         6.50         5.75         1.03         2.44         8.50         2.92         0.51        -0.51 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##        -0.34        -1.49        -0.50         0.90         0.29</code></pre>
 <p>Finalmente, hacemos el análisis de ANOVA de medidas repetidas.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">ezANOVA</span>(<span class="dt">data =</span> dat1.long,
                  <span class="dt">dv =</span> .(vomito),
@@ -745,7 +713,7 @@ datac &lt;-<span class="st"> </span><span class="kw">summarySE</span>(dat1,
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Niveles de inteligencia&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-249-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-250-1.png" width="672" /></p>
 <p>Para el análisis de ANOVA observamos lo siguiente.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_AOV &lt;-<span class="st"> </span><span class="kw">aov</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Dosis, <span class="dt">data =</span> dat1)
 <span class="kw">summary</span>(m_AOV)</code></pre></div>
@@ -776,7 +744,7 @@ dat2<span class="op">$</span>dosis &lt;-<span class="st"> </span><span class="kw
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Dosis&quot;</span>, <span class="dt">y =</span><span class="st">&quot;Inteligencia&quot;</span>) <span class="op">+</span>
 <span class="st">     </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-253-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-254-1.png" width="672" /></p>
 <p>Podemos observar cómo cambian los niveles de inteligencia individual en función de los niveles de inteligencia de los progenitores. Y podemos ver como cambia estos para los distintos niveles de droga.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(dat2, <span class="kw">aes</span>(herencia, inteligencia, <span class="dt">colour =</span> dosis)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
@@ -785,7 +753,7 @@ dat2<span class="op">$</span>dosis &lt;-<span class="st"> </span><span class="kw
 <span class="st">   </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-254-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-255-1.png" width="672" /></p>
 <p>En seguida podemos hacer una descripción de los datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.data.frame</span>(<span class="kw">lapply</span>(<span class="kw">by</span>(dat2<span class="op">$</span>inteligencia, 
                         dat2<span class="op">$</span>dosis,
@@ -895,7 +863,7 @@ dat2<span class="op">$</span>dosis &lt;-<span class="st"> </span><span class="kw
 <p>Pero, evaluando los niveles de inteligencia controlando por los niveles de inteligencia heredada llegamos a una conclusión distinta.</p>
 <p>En el modelo de ANCOVA queda por mirar los gráficos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(ANCOVA_model)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-263-1.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-263-2.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-263-3.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-263-4.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-264-1.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-264-2.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-264-3.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-264-4.png" width="672" /></p>
 <p>¿Qué vemos? El primer gráfico se puede usar para evaluar la homogeneidad de la varianza: si tiene forma de embudo, entonces estamos en problemas. En nuestro caso vemos que la dispersión de puntajes es más amplia en algunos puntos que en otros. Esto implica que los residuales pueden estar distribuidos de forma heteroscedástica.</p>
 <p>El segundo gráfico es un gráfico Q-Q que nos informa sobre la normalidad de los residuos en el modelo. Queremos que nuestros residuos se distribuyan normalmente, lo que significa que los puntos en el gráfico deben flotar alrededor de la línea diagonal. En nuestro los puntos se alejan de esta tendencia. Nuevamente, esta no es una buena noticia para el modelo. Estos gráficos sugieren que sería necesario realizar una versión robusta de ANCOVA.</p>
 <p>A pesar de los problemas que hayamos detectado, y con el objetivo de hacer un análisis completo del análisis de ANCOVA veremos otros aspectos importantes.</p>
@@ -973,7 +941,7 @@ dat2<span class="op">$</span>dosis &lt;-<span class="st"> </span><span class="kw
 <span class="st">   </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-269-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-270-1.png" width="672" /></p>
 <p>Por último, también podemos hacer pruebas posthoc. Para hacer estos análisis en los promedios ajustados debemos usar la función <strong>glht</strong>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">postHocs &lt;-<span class="st"> </span><span class="kw">glht</span>(ANCOVA_model, <span class="dt">linfct =</span> <span class="kw">mcp</span>(<span class="dt">dosis =</span> <span class="st">&quot;Tukey&quot;</span>))
 <span class="kw">summary</span>(postHocs)</code></pre></div>
@@ -987,7 +955,7 @@ dat2<span class="op">$</span>dosis &lt;-<span class="st"> </span><span class="kw
 ## 
 ## Linear Hypotheses:
 ##                           Estimate Std. Error t value Pr(&gt;|t|)  
-## Low Dose - Placebo == 0     1.7857     0.8494   2.102   0.1088  
+## Low Dose - Placebo == 0     1.7857     0.8494   2.102   0.1089  
 ## High Dose - Placebo == 0    2.2249     0.8028   2.771   0.0266 *
 ## High Dose - Low Dose == 0   0.4392     0.8112   0.541   0.8516  
 ## ---
@@ -1002,15 +970,15 @@ dat2<span class="op">$</span>dosis &lt;-<span class="st"> </span><span class="kw
 ## 
 ## Fit: aov(formula = inteligencia ~ dosis + herencia, data = dat2)
 ## 
-## Quantile = 2.4838
+## Quantile = 2.4833
 ## 95% family-wise confidence level
 ##  
 ## 
 ## Linear Hypotheses:
 ##                           Estimate lwr     upr    
-## Low Dose - Placebo == 0    1.7857  -0.3240  3.8953
-## High Dose - Placebo == 0   2.2249   0.2309  4.2189
-## High Dose - Low Dose == 0  0.4392  -1.5757  2.4541</code></pre>
+## Low Dose - Placebo == 0    1.7857  -0.3235  3.8949
+## High Dose - Placebo == 0   2.2249   0.2312  4.2185
+## High Dose - Low Dose == 0  0.4392  -1.5753  2.4537</code></pre>
 <p>De este análisis observamos que sólo hay diferencias de inteligencia (cuando controlamos por los efecto de inteligencia heredada) cuando comparamos el placebo y la dosis alta de droga.</p>
 </div>
 <div id="manova" class="section level2">
@@ -1048,7 +1016,7 @@ ocdScatter <span class="op">+</span><span class="st"> </span><span class="kw">ge
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-275-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-276-1.png" width="672" /></p>
 <p>Hagamos un gráfico de barras.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ocdBar &lt;-<span class="st"> </span><span class="kw">ggplot</span>(ocdMelt, <span class="kw">aes</span>(Grupo, Frecuencia, <span class="dt">fill =</span> Medicion))
 ocdBar <span class="op">+</span><span class="st"> </span>
@@ -1063,7 +1031,7 @@ ocdBar <span class="op">+</span><span class="st"> </span>
 <span class="st">  scale_y_continuous(breaks = seq(0, 20, by = 2)) + </span>
 <span class="st">  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),</span>
 <span class="st">        panel.background = element_blank(), axis.line = element_line(colour = &quot;</span>black<span class="st">&quot;))</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-276-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-277-1.png" width="672" /></p>
 <p>Hagamos un histograma.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ocdBoxplot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(ocdMelt, <span class="kw">aes</span>(Grupo, Frecuencia, <span class="dt">colour =</span> Medicion))
 ocdBoxplot <span class="op">+</span><span class="st"> </span>
@@ -1072,7 +1040,7 @@ ocdBoxplot <span class="op">+</span><span class="st"> </span>
 <span class="st">  scale_y_continuous(breaks = seq(0, 20, by = 2)) + </span>
 <span class="st">  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),</span>
 <span class="st">        panel.background = element_blank(), axis.line = element_line(colour = &quot;</span>black<span class="st">&quot;))</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-277-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-278-1.png" width="672" /></p>
 <p>Luego podemos hacer una descripción de los datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">descrip &lt;-<span class="st"> </span><span class="kw">by</span>(ocdData<span class="op">$</span>Acciones, 
            ocdData<span class="op">$</span>Grupo, 
@@ -1081,28 +1049,22 @@ ocdBoxplot <span class="op">+</span><span class="st"> </span>
            <span class="dt">norm =</span> <span class="ot">TRUE</span>)
 <span class="kw">lapply</span>(descrip,round,<span class="dv">2</span>)</code></pre></div>
 <pre><code>## $NT
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev 
-##         5.00         5.00         0.33         0.75         1.11         1.05 
-##     coef.var     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W 
-##         0.21         0.51         0.37        -1.22        -0.46         0.86 
-##   normtest.p 
-##         0.07 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##         5.00         5.00         0.33         0.75         1.11         1.05         0.21         0.51 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.37        -1.22        -0.46         0.86         0.07 
 ## 
 ## $CBT
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev 
-##         5.00         4.90         0.38         0.86         1.43         1.20 
-##     coef.var     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W 
-##         0.24         0.17         0.12        -1.18        -0.44         0.95 
-##   normtest.p 
-##         0.69 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##         5.00         4.90         0.38         0.86         1.43         1.20         0.24         0.17 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.12        -1.18        -0.44         0.95         0.69 
 ## 
 ## $BT
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev 
-##         4.00         3.70         0.56         1.26         3.12         1.77 
-##     coef.var     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W 
-##         0.48        -0.46        -0.34        -1.45        -0.54         0.87 
-##   normtest.p 
-##         0.11</code></pre>
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##         4.00         3.70         0.56         1.26         3.12         1.77         0.48        -0.46 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##        -0.34        -1.45        -0.54         0.87         0.11</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">descrip &lt;-<span class="st"> </span><span class="kw">by</span>(ocdData<span class="op">$</span>Pensamientos, 
            ocdData<span class="op">$</span>Grupo, 
            stat.desc, 
@@ -1110,28 +1072,22 @@ ocdBoxplot <span class="op">+</span><span class="st"> </span>
            <span class="dt">norm =</span> <span class="ot">TRUE</span>)
 <span class="kw">lapply</span>(descrip,round,<span class="dv">2</span>)</code></pre></div>
 <pre><code>## $NT
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev 
-##        14.00        15.00         0.75         1.69         5.56         2.36 
-##     coef.var     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W 
-##         0.16         0.96         0.70        -0.54        -0.20         0.83 
-##   normtest.p 
-##         0.03 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##        14.00        15.00         0.75         1.69         5.56         2.36         0.16         0.96 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.70        -0.54        -0.20         0.83         0.03 
 ## 
 ## $CBT
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev 
-##        13.50        13.40         0.60         1.36         3.60         1.90 
-##     coef.var     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W 
-##         0.14         0.09         0.07        -1.67        -0.63         0.91 
-##   normtest.p 
-##         0.31 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##        13.50        13.40         0.60         1.36         3.60         1.90         0.14         0.09 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.07        -1.67        -0.63         0.91         0.31 
 ## 
 ## $BT
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev 
-##        14.50        15.20         0.66         1.50         4.40         2.10 
-##     coef.var     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W 
-##         0.14         0.61         0.44        -1.28        -0.48         0.88 
-##   normtest.p 
-##         0.12</code></pre>
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##        14.50        15.20         0.66         1.50         4.40         2.10         0.14         0.61 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##         0.44        -1.28        -0.48         0.88         0.12</code></pre>
 <p>Luego de describir los datos podemos comprobar algunos supuestos antes de hacer el análisis de MANOVA.</p>
 <p>Primero debemos chequear la homogeneidad de las matrices de covarianza, comparando los valores que encontremos. Idealmente deberían ser similares a través de los grupos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">by</span>(ocdData[, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>], ocdData<span class="op">$</span>Grupo , cov)</code></pre></div>
@@ -1139,12 +1095,12 @@ ocdBoxplot <span class="op">+</span><span class="st"> </span>
 ##               Acciones Pensamientos
 ## Acciones      1.111111    -1.111111
 ## Pensamientos -1.111111     5.555556
-## ------------------------------------------------------------------ 
+## ------------------------------------------------------------------------------- 
 ## ocdData$Grupo: CBT
 ##                Acciones Pensamientos
 ## Acciones     1.43333333   0.04444444
 ## Pensamientos 0.04444444   3.60000000
-## ------------------------------------------------------------------ 
+## ------------------------------------------------------------------------------- 
 ## ocdData$Grupo: BT
 ##              Acciones Pensamientos
 ## Acciones     3.122222     2.511111

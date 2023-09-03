@@ -376,6 +376,12 @@ Trata de importar algún archivo csv a tu sesión de R.
 
 ```
 
+Un truco en RStudio para trabajar rápidamente con los archivos que uno tiene en la misma carpeta es usar la siguiente línea de comando. De esta manera se setea el path al lugar dónde está el script.
+
+```{r}
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+```
+
 ## Seleccionar datos
 
 Una vez que tienes datos en tu espacio de trabajo en R la idea es que puedas manipular esos datos.

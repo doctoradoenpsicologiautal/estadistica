@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2023-05-02" />
+<meta name="date" content="2023-09-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -357,7 +357,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">festivalHistogram &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dlf, <span class="kw">aes</span>(day1))
 festivalHistogram <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-108-1.png" width="672" /></p>
 <p>Ya sabíamos de un antiguo capítulo que tenemos un outlier en esta base de datos. Para eliminarlo podemos usar la función <strong>ifelse</strong>. En esta función le decimos a R que todos los valores mayores a 20 se conviertan en 0.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dlf<span class="op">$</span>day1 &lt;-<span class="st"> </span><span class="kw">ifelse</span>(dlf<span class="op">$</span>day1 <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span>, <span class="ot">NA</span>, dlf<span class="op">$</span>day1)</code></pre></div>
 <p>Luego, hacer de nuevo un histograma.</p>
@@ -365,7 +365,7 @@ festivalHistogram <span class="op">+</span><span class="st"> </span><span class=
 festivalHistogram <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <pre><code>## Warning: Removed 1 rows containing non-finite values (`stat_bin()`).</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-109-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
 <p>En esta misma línea, podemos hacer unos ajustes. Podemos ajustar el eje Y para que se muestre la densidad (es sólo un re-escalamiento). Y podemos hacer el gráfico un poco mas claro.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hist.day1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dlf, <span class="kw">aes</span>(day1)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span><span class="st"> </span>
@@ -379,11 +379,10 @@ hist.day1</code></pre></div>
 <pre><code>## Warning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.
 ## i Please use `after_stat(density)` instead.
 ## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-## generated.</code></pre>
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <pre><code>## Warning: Removed 1 rows containing non-finite values (`stat_bin()`).</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
 <p>Para evaluar la normalidad podemos superponer una curva normal (en rojo) que se base en el promedio y la dispersión de los datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hist.day1 <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_function</span>(<span class="dt">fun =</span> dnorm, 
@@ -393,31 +392,27 @@ hist.day1</code></pre></div>
 <pre><code>## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 ## i Please use `linewidth` instead.
 ## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-## generated.</code></pre>
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <pre><code>## Warning: Removed 1 rows containing non-finite values (`stat_bin()`).</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
 <p>Para este set de datos la distribución de los datos se ve bastante normal si lo comparamos con la línea. Otra manera gráfica de revisar la normalidad es hacer un gráfico Q-Q</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">qqplot.day1 &lt;-<span class="st"> </span><span class="kw">qplot</span>(<span class="dt">sample =</span> dlf<span class="op">$</span>day1)</code></pre></div>
 <pre><code>## Warning: `qplot()` was deprecated in ggplot2 3.4.0.
 ## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-## generated.</code></pre>
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">qqplot.day1</code></pre></div>
 <pre><code>## Warning: Removed 1 rows containing non-finite values (`stat_qq()`).</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-113-1.png" width="672" /></p>
 <p>Si los datos están normalmente distribuidos deberíamos ver una línea diagonal contínua.</p>
 <p>Además de observar gráficamente podemos aplicar analisis de normalidad. Por ejemplo, usando la función <strong>stat.desc</strong> podemos describir los datos y testear la normalidad. Debemos fijarnos en el valor de p del test (&quot;normtest.p&quot;). Si es significativo significa que los datos no poseen una distribución normal.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">stat.desc</span>(dlf<span class="op">$</span>day1, 
           <span class="dt">basic =</span> <span class="ot">FALSE</span>, 
           <span class="dt">norm =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>##       median         mean      SE.mean CI.mean.0.95          var      std.dev 
-##  1.790000000  1.770828183  0.024396670  0.047888328  0.481514784  0.693912663 
-##     coef.var     skewness     skew.2SE     kurtosis     kurt.2SE   normtest.W 
-##  0.391857702 -0.003155393 -0.018353763 -0.423991408 -1.234611514  0.995907065 
-##   normtest.p 
-##  0.031838626</code></pre>
+<pre><code>##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
+##  1.790000000  1.770828183  0.024396670  0.047888328  0.481514784  0.693912663  0.391857702 -0.003155393 
+##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
+## -0.018353763 -0.423991408 -1.234611514  0.995907065  0.031838626</code></pre>
 <p>Podemos aplicar esta función a varias columnas al mismo tiempo.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">stat.desc</span>(<span class="kw">cbind</span>(dlf<span class="op">$</span>day1, dlf<span class="op">$</span>day2, dlf<span class="op">$</span>day3),
           <span class="dt">basic =</span> <span class="ot">FALSE</span>, 
@@ -486,7 +481,7 @@ rexam<span class="op">$</span>uni &lt;-<span class="st"> </span><span class="kw"
         <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))
 hexam</code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-118-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-119-1.png" width="672" /></p>
 <p>El gráfico sugiere que los valores de desempeño en los examenes no siguen una distribución normal.</p>
 <p>Nuevamente para evaluar la normalidad podemos superponer una curva normal (en rojo) que se base en el promedio y la dispersión de los datos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hexam <span class="op">+</span>
@@ -495,12 +490,12 @@ hexam</code></pre></div>
                             <span class="dt">sd =</span> <span class="kw">sd</span>(rexam<span class="op">$</span>exam, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)), 
                 <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>)</code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-119-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-120-1.png" width="672" /></p>
 <p>De hecho parece que hubieran una distribución bimodal, perteneciente a distribuciones de dos grupos diferentes.</p>
 <p>Veamos el gráfico Q-Q.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">qqplot.exam &lt;-<span class="st"> </span><span class="kw">qplot</span>(<span class="dt">sample =</span> rexam<span class="op">$</span>exam)
 qqplot.exam</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-120-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
 <p>Describamos los datos y apliquemos un analisis de normalidad con la función <strong>stat.desc</strong>. Debemos fijarnos en el valor de p del test (&quot;normtest.p&quot;). Si es significativo significa que los datos no poseen una distribución normal.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="kw">stat.desc</span>(rexam[, <span class="kw">c</span>(<span class="st">&quot;exam&quot;</span>,
                           <span class="st">&quot;computer&quot;</span>,
@@ -527,38 +522,34 @@ qqplot.exam</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">by</span>(<span class="dt">data =</span> rexam<span class="op">$</span>exam, <span class="dt">INDICES =</span> rexam<span class="op">$</span>uni, <span class="dt">FUN =</span> describe)</code></pre></div>
 <pre><code>## rexam$uni: Duncetown University
 ## dd[x, ] 
-##        n  missing distinct     Info     Mean      Gmd      .05      .10      .25 
-##       50        0       33    0.999    40.18    14.41    22.00    25.90    31.25 
-##      .50      .75      .90      .95 
-##    38.00    47.75    59.00    61.65 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10      .25      .50      .75 
+##       50        0       33    0.999    40.18    14.41    22.00    25.90    31.25    38.00    47.75 
+##      .90      .95 
+##    59.00    61.65 
 ## 
 ## lowest : 15 18 22 25 26, highest: 59 60 63 65 66
-## ------------------------------------------------------------- 
+## ------------------------------------------------------------------------------- 
 ## rexam$uni: Sussex University
 ## dd[x, ] 
-##        n  missing distinct     Info     Mean      Gmd      .05      .10      .25 
-##       50        0       30    0.998    76.02    11.64    60.00    63.80    69.00 
-##      .50      .75      .90      .95 
-##    75.00    81.00    89.30    94.55 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10      .25      .50      .75 
+##       50        0       30    0.998    76.02    11.64    60.00    63.80    69.00    75.00    81.00 
+##      .90      .95 
+##    89.30    94.55 
 ## 
 ## lowest : 56 58 60 62 64, highest: 92 94 95 97 99</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># o lo que es lo mismo: by(rexam$exam, rexam$uni, describe)</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">by</span>(<span class="dt">data =</span> rexam<span class="op">$</span>exam, <span class="dt">INDICES =</span> rexam<span class="op">$</span>uni, <span class="dt">FUN =</span> stat.desc)</code></pre></div>
 <pre><code>## rexam$uni: Duncetown University
-##      nbr.val     nbr.null       nbr.na          min          max        range 
-##   50.0000000    0.0000000    0.0000000   15.0000000   66.0000000   51.0000000 
-##          sum       median         mean      SE.mean CI.mean.0.95          var 
-## 2009.0000000   38.0000000   40.1800000    1.7803210    3.5776890  158.4771429 
-##      std.dev     coef.var 
-##   12.5887705    0.3133094 
-## ------------------------------------------------------------- 
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
+##   50.0000000    0.0000000    0.0000000   15.0000000   66.0000000   51.0000000 2009.0000000   38.0000000 
+##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##   40.1800000    1.7803210    3.5776890  158.4771429   12.5887705    0.3133094 
+## ------------------------------------------------------------------------------- 
 ## rexam$uni: Sussex University
-##      nbr.val     nbr.null       nbr.na          min          max        range 
-##   50.0000000    0.0000000    0.0000000   56.0000000   99.0000000   43.0000000 
-##          sum       median         mean      SE.mean CI.mean.0.95          var 
-## 3801.0000000   75.0000000   76.0200000    1.4432079    2.9002348  104.1424490 
-##      std.dev     coef.var 
-##   10.2050208    0.1342413</code></pre>
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
+##   50.0000000    0.0000000    0.0000000   56.0000000   99.0000000   43.0000000 3801.0000000   75.0000000 
+##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##   76.0200000    1.4432079    2.9002348  104.1424490   10.2050208    0.1342413</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># o lo que es lo mismo: by(rexam$exam, rexam$uni, stat.desc)</span></code></pre></div>
 <p>También se pueden describir simultáneamente varias variables.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">by</span>(rexam[, <span class="kw">c</span>(<span class="st">&quot;exam&quot;</span>, <span class="st">&quot;computer&quot;</span>, <span class="st">&quot;lectures&quot;</span>, <span class="st">&quot;numeracy&quot;</span>)],
@@ -581,7 +572,7 @@ qqplot.exam</code></pre></div>
 ## kurt.2SE      -0.5462122 -0.5121147  -0.4256518 -0.49226083
 ## normtest.W     0.9721662  0.9776351   0.9697413  0.94081692
 ## normtest.p     0.2828984  0.4571105   0.2259072  0.01451518
-## ------------------------------------------------------------- 
+## ------------------------------------------------------------------------------- 
 ## rexam$uni: Sussex University
 ##                     exam    computer    lectures     numeracy
 ## median        75.0000000 54.00000000  65.7500000  5.000000000
@@ -613,7 +604,7 @@ qqplot.exam</code></pre></div>
 ## data:  dd[x, ]
 ## W = 0.97217, p-value = 0.2829
 ## 
-## ------------------------------------------------------------- 
+## ------------------------------------------------------------------------------- 
 ## rexam$uni: Sussex University
 ## 
 ##  Shapiro-Wilk normality test
@@ -634,7 +625,7 @@ sussexData &lt;-<span class="st"> </span>rexam[rexam<span class="op">$</span>uni
                           <span class="dt">sd =</span> <span class="kw">sd</span>(dunceData<span class="op">$</span>exam, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)), 
                 <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">size=</span><span class="dv">1</span>)
 hist.exam.duncetown</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
 <p>Otro supuesto que debemos testear es la homogenidad de la varianza. Para ello aplicamos un test de Levene.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">leveneTest</span>(rexam<span class="op">$</span>exam, rexam<span class="op">$</span>uni)</code></pre></div>
 <pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
