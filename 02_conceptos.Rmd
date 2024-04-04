@@ -1,4 +1,4 @@
-# Conceptos estadísticos
+# Conceptos estadísticos importantes
 
 ## La significancia
 Revisa este <a href="https://www.youtube.com/watch?v=cOtuIWu9NQ0" target="_blank">video (9')</a> y trata de responder:
