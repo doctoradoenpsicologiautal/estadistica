@@ -86,3 +86,4 @@ herramientas-de-estadística
 cursos
 herramientas-de-estadística-1
 conceptos-estadísticos-importantes
+conceptos-estadísticos-importantes.
