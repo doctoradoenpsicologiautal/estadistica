@@ -1,4 +1,4 @@
-ID,Grupo,Sexo,Edad,Estado Civil,Nivel de estudios,Número de hijos,Altura,Peso,Pr.Arter.Máx,Pr.Arter.Mín
+ID,Grupo,Sexo,Edad,Estado Civil,Nivel de estudios,Numero de hijos,Altura,Peso,Pr.Arter.Max,Pr.Arter.Min
 1,1,Hombre,50,Casado,Licenciatura,2,"1,75",77,78,142
 2,1,Mujer,26,Soltero,Diplomatura,0,"1,7",69,87,137
 3,1,Hombre,35,Casado,ESO,3,"1,62",65,92,133

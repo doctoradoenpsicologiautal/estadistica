@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 6 La regresión | Estadística con R</title>
   <meta name="description" content="Capítulo 6 La regresión | Estadística con R" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 6 La regresión | Estadística con R" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2023-09-03" />
+<meta name="date" content="2024-04-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,43 +52,74 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -107,7 +138,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preámbulo</a></li>
-<li class="chapter" data-level="1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html"><i class="fa fa-check"></i><b>1</b> Introducción a la estadística</a><ul>
+<li class="chapter" data-level="1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html"><i class="fa fa-check"></i><b>1</b> Introducción a la estadística</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#qué-es-la-estadística"><i class="fa fa-check"></i><b>1.1</b> ¿Qué es la estadística?</a></li>
 <li class="chapter" data-level="1.2" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#qué-son-las-variables"><i class="fa fa-check"></i><b>1.2</b> ¿Qué son las variables?</a></li>
 <li class="chapter" data-level="1.3" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#diseños-experimentales"><i class="fa fa-check"></i><b>1.3</b> Diseños experimentales</a></li>
@@ -117,14 +149,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.7" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#el-origen-de-p"><i class="fa fa-check"></i><b>1.7</b> El origen de p</a></li>
 <li class="chapter" data-level="1.8" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#para-qué-randomizar"><i class="fa fa-check"></i><b>1.8</b> ¿Para qué randomizar?</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html"><i class="fa fa-check"></i><b>2</b> Conceptos estadísticos</a><ul>
-<li class="chapter" data-level="2.1" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#la-significancia"><i class="fa fa-check"></i><b>2.1</b> La significancia</a></li>
-<li class="chapter" data-level="2.2" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#las-colas"><i class="fa fa-check"></i><b>2.2</b> Las colas</a></li>
-<li class="chapter" data-level="2.3" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#los-errores-estadísticos"><i class="fa fa-check"></i><b>2.3</b> Los errores estadísticos</a></li>
-<li class="chapter" data-level="2.4" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#tamaño-poder"><i class="fa fa-check"></i><b>2.4</b> Tamaño &amp; poder</a></li>
-<li class="chapter" data-level="2.5" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#cómo-planificar-un-estudio"><i class="fa fa-check"></i><b>2.5</b> ¿Cómo planificar un estudio?</a></li>
+<li class="chapter" data-level="2" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html"><i class="fa fa-check"></i><b>2</b> Conceptos estadísticos claves</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#la-significancia"><i class="fa fa-check"></i><b>2.1</b> La significancia</a></li>
+<li class="chapter" data-level="2.2" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#las-colas"><i class="fa fa-check"></i><b>2.2</b> Las colas</a></li>
+<li class="chapter" data-level="2.3" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#los-errores-estadísticos"><i class="fa fa-check"></i><b>2.3</b> Los errores estadísticos</a></li>
+<li class="chapter" data-level="2.4" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#tamaño-poder"><i class="fa fa-check"></i><b>2.4</b> Tamaño &amp; poder</a></li>
+<li class="chapter" data-level="2.5" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#cómo-planificar-un-estudio"><i class="fa fa-check"></i><b>2.5</b> ¿Cómo planificar un estudio?</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="programación.html"><a href="programación.html"><i class="fa fa-check"></i><b>3</b> Programación</a><ul>
+<li class="chapter" data-level="3" data-path="programación.html"><a href="programación.html"><i class="fa fa-check"></i><b>3</b> Programación</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="programación.html"><a href="programación.html#qué-significa-programar"><i class="fa fa-check"></i><b>3.1</b> ¿Qué significa programar?</a></li>
 <li class="chapter" data-level="3.2" data-path="programación.html"><a href="programación.html#la-consola-versus-el-script"><i class="fa fa-check"></i><b>3.2</b> La consola versus el script</a></li>
 <li class="chapter" data-level="3.3" data-path="programación.html"><a href="programación.html#introducción-a-la-programación"><i class="fa fa-check"></i><b>3.3</b> Introducción a la programación</a></li>
@@ -136,7 +170,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.9" data-path="programación.html"><a href="programación.html#exportar-datos"><i class="fa fa-check"></i><b>3.9</b> Exportar datos</a></li>
 <li class="chapter" data-level="3.10" data-path="programación.html"><a href="programación.html#en-la-práctica"><i class="fa fa-check"></i><b>3.10</b> En la práctica</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="gráficos.html"><a href="gráficos.html"><i class="fa fa-check"></i><b>4</b> Gráficos</a><ul>
+<li class="chapter" data-level="4" data-path="gráficos.html"><a href="gráficos.html"><i class="fa fa-check"></i><b>4</b> Gráficos</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="gráficos.html"><a href="gráficos.html#cómo-graficamos-en-r"><i class="fa fa-check"></i><b>4.1</b> ¿Cómo graficamos en R?</a></li>
 <li class="chapter" data-level="4.2" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-puntos"><i class="fa fa-check"></i><b>4.2</b> Gráfico de puntos</a></li>
 <li class="chapter" data-level="4.3" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-dispersión"><i class="fa fa-check"></i><b>4.3</b> Gráfico de dispersión</a></li>
@@ -147,7 +182,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.8" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-líneas-2-factores"><i class="fa fa-check"></i><b>4.8</b> Gráfico de líneas (2 factores)</a></li>
 <li class="chapter" data-level="4.9" data-path="gráficos.html"><a href="gráficos.html#guardar-una-figura"><i class="fa fa-check"></i><b>4.9</b> Guardar una figura</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html"><i class="fa fa-check"></i><b>5</b> Caracterizar datos</a><ul>
+<li class="chapter" data-level="5" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html"><i class="fa fa-check"></i><b>5</b> Caracterizar datos</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#visualizar-los-datos"><i class="fa fa-check"></i><b>5.1</b> Visualizar los datos</a></li>
 <li class="chapter" data-level="5.2" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal"><i class="fa fa-check"></i><b>5.2</b> La curva normal</a></li>
 <li class="chapter" data-level="5.3" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal-en-la-práctica-1"><i class="fa fa-check"></i><b>5.3</b> La curva normal en la práctica (1)</a></li>
@@ -158,55 +194,66 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.8" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#los-intervalos-de-confianza-2"><i class="fa fa-check"></i><b>5.8</b> Los intervalos de confianza (2)</a></li>
 <li class="chapter" data-level="5.9" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#verificar-supuestos"><i class="fa fa-check"></i><b>5.9</b> Verificar supuestos</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="la-regresión.html"><a href="la-regresión.html"><i class="fa fa-check"></i><b>6</b> La regresión</a><ul>
+<li class="chapter" data-level="6" data-path="la-regresión.html"><a href="la-regresión.html"><i class="fa fa-check"></i><b>6</b> La regresión</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="la-regresión.html"><a href="la-regresión.html#modelos-estadísticos"><i class="fa fa-check"></i><b>6.1</b> Modelos estadísticos</a></li>
 <li class="chapter" data-level="6.2" data-path="la-regresión.html"><a href="la-regresión.html#la-ecuación-de-la-recta"><i class="fa fa-check"></i><b>6.2</b> La ecuación de la recta</a></li>
 <li class="chapter" data-level="6.3" data-path="la-regresión.html"><a href="la-regresión.html#la-suma-de-cuadrados"><i class="fa fa-check"></i><b>6.3</b> La suma de cuadrados</a></li>
 <li class="chapter" data-level="6.4" data-path="la-regresión.html"><a href="la-regresión.html#la-regresión-con-r"><i class="fa fa-check"></i><b>6.4</b> La regresión con R</a></li>
 <li class="chapter" data-level="6.5" data-path="la-regresión.html"><a href="la-regresión.html#la-correlación-con-r"><i class="fa fa-check"></i><b>6.5</b> La correlación con R</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html"><i class="fa fa-check"></i><b>7</b> La prueba de t (comparar 2 grupos)</a><ul>
+<li class="chapter" data-level="7" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html"><i class="fa fa-check"></i><b>7</b> La prueba de t (comparar 2 grupos)</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#cómo-comparamos-dos-grupos"><i class="fa fa-check"></i><b>7.1</b> ¿Cómo comparamos dos grupos?</a></li>
 <li class="chapter" data-level="7.2" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#la-distribución-normal-de-dos-grupos"><i class="fa fa-check"></i><b>7.2</b> La distribución normal de dos grupos</a></li>
 <li class="chapter" data-level="7.3" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#la-prueba-de-hipótesis"><i class="fa fa-check"></i><b>7.3</b> La prueba de hipótesis</a></li>
 <li class="chapter" data-level="7.4" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#el-t-test-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>7.4</b> El t-test como un modelo líneal general</a></li>
 <li class="chapter" data-level="7.5" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#el-t-test-con-r"><i class="fa fa-check"></i><b>7.5</b> El t-test con R</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html"><i class="fa fa-check"></i><b>8</b> ANOVA (comparar 3 grupos o más)</a><ul>
+<li class="chapter" data-level="8" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html"><i class="fa fa-check"></i><b>8</b> ANOVA (comparar 3 grupos o más)</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#por-qué-necesitamos-un-anova"><i class="fa fa-check"></i><b>8.1</b> ¿Por qué necesitamos un ANOVA?</a></li>
 <li class="chapter" data-level="8.2" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#el-anova-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>8.2</b> El ANOVA como un modelo líneal general</a></li>
 <li class="chapter" data-level="8.3" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#la-lógica-del-anova"><i class="fa fa-check"></i><b>8.3</b> La lógica del ANOVA</a></li>
 <li class="chapter" data-level="8.4" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#el-anova-con-r"><i class="fa fa-check"></i><b>8.4</b> El ANOVA con R</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="después-del-anova.html"><a href="después-del-anova.html"><i class="fa fa-check"></i><b>9</b> Después del ANOVA</a><ul>
+<li class="chapter" data-level="9" data-path="después-del-anova.html"><a href="después-del-anova.html"><i class="fa fa-check"></i><b>9</b> Después del ANOVA</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="después-del-anova.html"><a href="después-del-anova.html#qué-hacemos-después-de-un-anova"><i class="fa fa-check"></i><b>9.1</b> ¿Qué hacemos después de un ANOVA?</a></li>
 <li class="chapter" data-level="9.2" data-path="después-del-anova.html"><a href="después-del-anova.html#comparaciones-planificadas"><i class="fa fa-check"></i><b>9.2</b> Comparaciones planificadas</a></li>
 <li class="chapter" data-level="9.3" data-path="después-del-anova.html"><a href="después-del-anova.html#cálculos-con-r"><i class="fa fa-check"></i><b>9.3</b> Cálculos con R</a></li>
 <li class="chapter" data-level="9.4" data-path="después-del-anova.html"><a href="después-del-anova.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>9.4</b> Pruebas post-hoc</a></li>
 <li class="chapter" data-level="9.5" data-path="después-del-anova.html"><a href="después-del-anova.html#cálculos-con-r-1"><i class="fa fa-check"></i><b>9.5</b> Cálculos con R</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html"><i class="fa fa-check"></i><b>10</b> Más allá del ANOVA</a><ul>
+<li class="chapter" data-level="10" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html"><i class="fa fa-check"></i><b>10</b> Más allá del ANOVA</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#tipos-de-anova"><i class="fa fa-check"></i><b>10.1</b> Tipos de ANOVA</a></li>
 <li class="chapter" data-level="10.2" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#anova-factorial"><i class="fa fa-check"></i><b>10.2</b> ANOVA factorial</a></li>
 <li class="chapter" data-level="10.3" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#anova-de-medidas-repetidas"><i class="fa fa-check"></i><b>10.3</b> ANOVA de medidas repetidas</a></li>
 <li class="chapter" data-level="10.4" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#ancova"><i class="fa fa-check"></i><b>10.4</b> ANCOVA</a></li>
 <li class="chapter" data-level="10.5" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#manova"><i class="fa fa-check"></i><b>10.5</b> MANOVA</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>11</b> Otros análisis</a><ul>
+<li class="chapter" data-level="11" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>11</b> Otros análisis</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="otros-análisis.html"><a href="otros-análisis.html#análisis-de-proporciones"><i class="fa fa-check"></i><b>11.1</b> Análisis de proporciones</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="recursos.html"><a href="recursos.html"><i class="fa fa-check"></i><b>12</b> Recursos</a><ul>
-<li class="chapter" data-level="12.1" data-path="recursos.html"><a href="recursos.html#apps"><i class="fa fa-check"></i><b>12.1</b> Apps</a><ul>
+<li class="chapter" data-level="12" data-path="recursos.html"><a href="recursos.html"><i class="fa fa-check"></i><b>12</b> Recursos</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="recursos.html"><a href="recursos.html#apps"><i class="fa fa-check"></i><b>12.1</b> Apps</a>
+<ul>
 <li class="chapter" data-level="12.1.1" data-path="recursos.html"><a href="recursos.html#convertidor-de-tamaños-de-efectos"><i class="fa fa-check"></i><b>12.1.1</b> Convertidor de tamaños de efectos</a></li>
 <li class="chapter" data-level="12.1.2" data-path="recursos.html"><a href="recursos.html#convertidor-de-tamaños-de-efectos-1"><i class="fa fa-check"></i><b>12.1.2</b> Convertidor de tamaños de efectos</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="recursos.html"><a href="recursos.html#librerías"><i class="fa fa-check"></i><b>12.2</b> Librerías</a><ul>
+<li class="chapter" data-level="12.2" data-path="recursos.html"><a href="recursos.html#librerías"><i class="fa fa-check"></i><b>12.2</b> Librerías</a>
+<ul>
 <li class="chapter" data-level="12.2.1" data-path="recursos.html"><a href="recursos.html#para-calcular-tamaños-de-efectos"><i class="fa fa-check"></i><b>12.2.1</b> Para calcular tamaños de efectos</a></li>
 </ul></li>
-<li class="chapter" data-level="12.3" data-path="recursos.html"><a href="recursos.html#sitios-web"><i class="fa fa-check"></i><b>12.3</b> Sitios web</a><ul>
+<li class="chapter" data-level="12.3" data-path="recursos.html"><a href="recursos.html#sitios-web"><i class="fa fa-check"></i><b>12.3</b> Sitios web</a>
+<ul>
 <li class="chapter" data-level="12.3.1" data-path="recursos.html"><a href="recursos.html#herramientas-de-estadística"><i class="fa fa-check"></i><b>12.3.1</b> Herramientas de estadística</a></li>
 </ul></li>
-<li class="chapter" data-level="12.4" data-path="recursos.html"><a href="recursos.html#cursos"><i class="fa fa-check"></i><b>12.4</b> Cursos</a><ul>
+<li class="chapter" data-level="12.4" data-path="recursos.html"><a href="recursos.html#cursos"><i class="fa fa-check"></i><b>12.4</b> Cursos</a>
+<ul>
 <li class="chapter" data-level="12.4.1" data-path="recursos.html"><a href="recursos.html#herramientas-de-estadística-1"><i class="fa fa-check"></i><b>12.4.1</b> Herramientas de estadística</a></li>
 </ul></li>
 </ul></li>
@@ -229,12 +276,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="la-regresión" class="section level1">
+<div id="la-regresión" class="section level1" number="6">
 <h1><span class="header-section-number">Capítulo 6</span> La regresión</h1>
 <p>En este capítulo vamos a revisar el bloqueda fundamental de la estadística tradicional: la regresión.</p>
-<div id="modelos-estadísticos" class="section level2">
+<div id="modelos-estadísticos" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> Modelos estadísticos</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=DOIjIB1FGYY" target="_blank">video (17')</a> y trata de responder:</p>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=DOIjIB1FGYY" target="_blank">video (17’)</a> y trata de responder:</p>
 <ul>
 <li>¿Qué es un modelo estadístico?</li>
 <li>¿Por qué es importante tener buenos modelos?</li>
@@ -242,17 +289,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>¿Qué son los grados de libertad?</li>
 </ul>
 </div>
-<div id="la-ecuación-de-la-recta" class="section level2">
+<div id="la-ecuación-de-la-recta" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> La ecuación de la recta</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=In1vL_kZeYk" target="_blank">video (8')</a> y trata de responder:</p>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=In1vL_kZeYk" target="_blank">video (8’)</a> y trata de responder:</p>
 <ul>
 <li>¿Cómo se define la línea de la ecuación de un GLM que se ajuste mejor a los datos?</li>
 <li>¿Cuál es el modelo más básico con el cual se compara un modelo que uno construya?</li>
 </ul>
 </div>
-<div id="la-suma-de-cuadrados" class="section level2">
+<div id="la-suma-de-cuadrados" class="section level2" number="6.3">
 <h2><span class="header-section-number">6.3</span> La suma de cuadrados</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=maFx6TKuaQI" target="_blank">video (14')</a> y trata de responder:</p>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=maFx6TKuaQI" target="_blank">video (14’)</a> y trata de responder:</p>
 <ul>
 <li>¿Qué es la SS total?</li>
 <li>¿Qué es la SS de los residuales?</li>
@@ -261,17 +308,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>¿Cómo se establece cuan bueno es un modelo comparado con cuan malo es? ¿Lo que explica y lo que no explica un modelo?</li>
 </ul>
 </div>
-<div id="la-regresión-con-r" class="section level2">
+<div id="la-regresión-con-r" class="section level2" number="6.4">
 <h2><span class="header-section-number">6.4</span> La regresión con R</h2>
 <p>Ahora vamos a hacer un análisis básico de regresión. La regresión es un método estadístico utilizado para predecir el valor de una variable dependiente en función del valor de una o más variables independientes. En el análisis de regresión, se ajusta una línea o curva a los datos (modelo de regresión) y se usa para hacer predicciones de la variable dependiente.</p>
 <p>Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas). Luego importamos el set de datos y le damos una mirada.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
-
-<span class="kw">library</span>(ggplot2)
-<span class="kw">library</span>(car)</code></pre></div>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="la-regresión.html#cb307-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
+<span id="cb307-2"><a href="la-regresión.html#cb307-2" tabindex="-1"></a></span>
+<span id="cb307-3"><a href="la-regresión.html#cb307-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb307-4"><a href="la-regresión.html#cb307-4" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
 <p>Imagina que eres manager de un grupo musical y debes definir como invertir parte de tu presupuesto. A lo que aspiras en el fondo esa aumentar la venta de discos. Para ellos pirmero debes evaluar que factores afectan la venta de discos. Uno de estos factores es la cantidad de dineo invertido en la publicidad. En ese sentido, te gustaría saber cuál es la relación entre el dinero invertido en publicidad y el número de discos vendidos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">album1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/datos_ventas_de_discos_1.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span>
-<span class="kw">head</span>(album1)</code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="la-regresión.html#cb308-1" tabindex="-1"></a>album1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/datos_ventas_de_discos_1.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>) <span class="co"># load data</span></span>
+<span id="cb308-2"><a href="la-regresión.html#cb308-2" tabindex="-1"></a><span class="fu">head</span>(album1)</span></code></pre></div>
 <pre><code>##   publicidad ventas
 ## 1     10.256    330
 ## 2    985.685    120
@@ -280,17 +327,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 5    574.513    220
 ## 6    568.954    170</code></pre>
 <p>Primero graficamos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(album1,
-       <span class="kw">aes</span>(publicidad, ventas)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Cantidad de dinero gastado en publicidad&quot;</span>,
-       <span class="dt">y=</span><span class="st">&quot;Ventas&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="la-regresión.html#cb310-1" tabindex="-1"></a><span class="fu">ggplot</span>(album1,</span>
+<span id="cb310-2"><a href="la-regresión.html#cb310-2" tabindex="-1"></a>       <span class="fu">aes</span>(publicidad, ventas)) <span class="sc">+</span></span>
+<span id="cb310-3"><a href="la-regresión.html#cb310-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb310-4"><a href="la-regresión.html#cb310-4" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
+<span id="cb310-5"><a href="la-regresión.html#cb310-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Cantidad de dinero gastado en publicidad&quot;</span>,</span>
+<span id="cb310-6"><a href="la-regresión.html#cb310-6" tabindex="-1"></a>       <span class="at">y=</span><span class="st">&quot;Ventas&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
-<p>Lo que nos dice el sentido común, y lo que vemos en el gráfico efectivamente es que a mayor dinero invertido en publicidad debería haber mayores ventas. Es este un buen modelo para predecir el número de ventas a partir del dinero invertido en publicidad? Para analizar estos podemos hacer un modelo lineal con la función <strong>lm</strong>. En esta función usamos la típica relación entre resultado (ouctome) y variable explicativa (predictor), y le indicamos a R que base de datos usamos (datos): newModel &lt;- lm(outcome~predictor, datos) Luego podemos visualizar los resulatdos con la función <strong>summary</strong>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_album &lt;-<span class="st"> </span><span class="kw">lm</span>(ventas <span class="op">~</span><span class="st"> </span>publicidad, <span class="dt">data =</span> album1)
-<span class="kw">summary</span>(m_album)</code></pre></div>
+<p>Lo que nos dice el sentido común, y lo que vemos en el gráfico efectivamente es que a mayor dinero invertido en publicidad debería haber mayores ventas. Es este un buen modelo para predecir el número de ventas a partir del dinero invertido en publicidad? Para analizar estos podemos hacer un modelo lineal con la función <strong>lm</strong>. En esta función usamos la típica relación entre resultado (ouctome) y variable explicativa (predictor), y le indicamos a R que base de datos usamos (datos):
+newModel &lt;- lm(outcome~predictor, datos)
+Luego podemos visualizar los resulatdos con la función <strong>summary</strong>.</p>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="la-regresión.html#cb312-1" tabindex="-1"></a>m_album <span class="ot">&lt;-</span> <span class="fu">lm</span>(ventas <span class="sc">~</span> publicidad, <span class="at">data =</span> album1)</span>
+<span id="cb312-2"><a href="la-regresión.html#cb312-2" tabindex="-1"></a><span class="fu">summary</span>(m_album)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = ventas ~ publicidad, data = album1)
@@ -309,11 +358,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## Residual standard error: 65.99 on 198 degrees of freedom
 ## Multiple R-squared:  0.3346, Adjusted R-squared:  0.3313 
 ## F-statistic: 99.59 on 1 and 198 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>En qué debemos fijarnos dentro de los resultados que obtenemos al aplicar un módelo líneal? En la línea siguientes a &quot;Call&quot; aparece el módelo que usamos. También aparecen los llamados coeficientes que reflejan bajo el nombre de &quot;Estimate&quot; que refleja con que magnitud una variable predictora predice una variable resultado. Por ejemplo, por cada unidad de publicidad invertida el aumento en el número de ventas es 0.09. Y esta relación es significativa, o sea es diferente de 0 (lo que ocurre cuando no hay ninguna relación entre ambas variables).</p>
-<p>En el fondo este análisis nos dice que la publicidad si impacta sobre la venta de los discos. Sin embargo, a publicidad no es el único que podría afectar las ventas. En este sentido, podríamos estudiar otros factores que afectan esta variable resultados. Para ello hacemos lo que se llama una regresión múltiple.</p>
+<p>En qué debemos fijarnos dentro de los resultados que obtenemos al aplicar un módelo líneal?
+En la línea siguientes a “Call” aparece el módelo que usamos.
+También aparecen los llamados coeficientes que reflejan bajo el nombre de “Estimate” que refleja con que magnitud una variable predictora predice una variable resultado. Por ejemplo, por cada unidad de publicidad invertida el aumento en el número de ventas es 0.09. Y esta relación es significativa, o sea es diferente de 0 (lo que ocurre cuando no hay ninguna relación entre ambas variables).</p>
+<p>En el fondo este análisis nos dice que la publicidad si impacta sobre la venta de los discos.
+Sin embargo, a publicidad no es el único que podría afectar las ventas. En este sentido, podríamos estudiar otros factores que afectan esta variable resultados. Para ello hacemos lo que se llama una regresión múltiple.</p>
 <p>Primero cargamos los datos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">album2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/datos_ventas_de_discos_2.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span>
-<span class="kw">head</span>(album2)</code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="la-regresión.html#cb314-1" tabindex="-1"></a>album2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/datos_ventas_de_discos_2.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>) <span class="co"># load data</span></span>
+<span id="cb314-2"><a href="la-regresión.html#cb314-2" tabindex="-1"></a><span class="fu">head</span>(album2)</span></code></pre></div>
 <pre><code>##   publicidad ventas radio eventos
 ## 1     10.256    330    43      10
 ## 2    985.685    120    28       7
@@ -321,18 +373,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 4   1188.193    270    33       7
 ## 5    574.513    220    44       5
 ## 6    568.954    170    19       5</code></pre>
-<p>Podemos graficar la relación entre alguna variable de interés y el número de ventas. Por ejemplo, podríamos visualizar el impacto de la frecuencia de aparición de un tema musical en la radio.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(album2,
-       <span class="kw">aes</span>(publicidad, radio)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Número de apariciones en la radio&quot;</span>,
-       <span class="dt">y=</span><span class="st">&quot;Ventas&quot;</span>)</code></pre></div>
+<p>Podemos graficar la relación entre alguna variable de interés y el número de ventas.
+Por ejemplo, podríamos visualizar el impacto de la frecuencia de aparición de un tema musical en la radio.</p>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="la-regresión.html#cb316-1" tabindex="-1"></a><span class="fu">ggplot</span>(album2,</span>
+<span id="cb316-2"><a href="la-regresión.html#cb316-2" tabindex="-1"></a>       <span class="fu">aes</span>(publicidad, radio)) <span class="sc">+</span></span>
+<span id="cb316-3"><a href="la-regresión.html#cb316-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb316-4"><a href="la-regresión.html#cb316-4" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
+<span id="cb316-5"><a href="la-regresión.html#cb316-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Número de apariciones en la radio&quot;</span>,</span>
+<span id="cb316-6"><a href="la-regresión.html#cb316-6" tabindex="-1"></a>       <span class="at">y=</span><span class="st">&quot;Ventas&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-136-1.png" width="672" /></p>
 <p>Luego podríamos hacer un modelo para entender el impacto de distintos factores en la venta de discos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_album2 &lt;-<span class="st"> </span><span class="kw">lm</span>(ventas <span class="op">~</span><span class="st"> </span>publicidad <span class="op">+</span><span class="st"> </span>radio <span class="op">+</span><span class="st"> </span>eventos, <span class="dt">data =</span> album2)
-<span class="kw">summary</span>(m_album2)</code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="la-regresión.html#cb318-1" tabindex="-1"></a>m_album2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(ventas <span class="sc">~</span> publicidad <span class="sc">+</span> radio <span class="sc">+</span> eventos, <span class="at">data =</span> album2)</span>
+<span id="cb318-2"><a href="la-regresión.html#cb318-2" tabindex="-1"></a><span class="fu">summary</span>(m_album2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = ventas ~ publicidad + radio + eventos, data = album2)
@@ -355,43 +408,35 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## F-statistic: 129.5 on 3 and 196 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>¿Qué conclusiones sacas de este análisis?</p>
 </div>
-<div id="la-correlación-con-r" class="section level2">
+<div id="la-correlación-con-r" class="section level2" number="6.5">
 <h2><span class="header-section-number">6.5</span> La correlación con R</h2>
 <p>Ahora vamos a hacer un análisis de correlación. La regresión y la correlación son dos técnicas estadísticas que se utilizan a menudo para estudiar la relación entre dos variables. Sin embargo, la correlación se enfoca en proveer una medida estadística que describe la fuerza y dirección de la relación entre dos variables. Un coeficiente de correlación puede oscilar entre -1 (fuerte correlación negativa) y +1 (fuerte correlación positiva). Un valor de 0 indica que no hay correlación.</p>
 <p>Para empezar vamos a hacer un análisis de correlación clásico. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
-
-<span class="kw">library</span>(Hmisc)
-<span class="kw">library</span>(ggplot2)
-<span class="kw">library</span>(boot)</code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="la-regresión.html#cb320-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
+<span id="cb320-2"><a href="la-regresión.html#cb320-2" tabindex="-1"></a></span>
+<span id="cb320-3"><a href="la-regresión.html#cb320-3" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
+<span id="cb320-4"><a href="la-regresión.html#cb320-4" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb320-5"><a href="la-regresión.html#cb320-5" tabindex="-1"></a><span class="fu">library</span>(boot)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;boot&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:car&#39;:
 ## 
 ##     logit</code></pre>
-<pre><code>## The following object is masked from &#39;package:survival&#39;:
-## 
-##     aml</code></pre>
 <pre><code>## The following object is masked from &#39;package:lattice&#39;:
 ## 
 ##     melanoma</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggm)</code></pre></div>
-<pre><code>## Warning: package &#39;ggm&#39; was built under R version 4.1.3</code></pre>
-<pre><code>## 
-## Attaching package: &#39;ggm&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:Hmisc&#39;:
-## 
-##     rcorr</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggpubr)</code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="la-regresión.html#cb324-1" tabindex="-1"></a><span class="fu">library</span>(ggm)</span>
+<span id="cb324-2"><a href="la-regresión.html#cb324-2" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span></code></pre></div>
+<pre><code>## Warning: package &#39;ggpubr&#39; was built under R version 4.3.3</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;ggpubr&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:plyr&#39;:
 ## 
 ##     mutate</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggcorrplot)</code></pre></div>
-<pre><code>## Warning: package &#39;ggcorrplot&#39; was built under R version 4.1.3</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre></div>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.1.3</code></pre>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="la-regresión.html#cb328-1" tabindex="-1"></a><span class="fu">library</span>(ggcorrplot)</span></code></pre></div>
+<pre><code>## Warning: package &#39;ggcorrplot&#39; was built under R version 4.3.3</code></pre>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="la-regresión.html#cb330-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.3.3</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;dplyr&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:car&#39;:
@@ -416,8 +461,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
 <p>Luego importamos el set de datos y le damos una mirada.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">examData &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;data/ExamAnxiety.dat&quot;</span>,  <span class="dt">header =</span> <span class="ot">TRUE</span>)
-<span class="kw">head</span>(examData)</code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="la-regresión.html#cb340-1" tabindex="-1"></a>examData <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">&quot;data/ExamAnxiety.dat&quot;</span>,  <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb340-2"><a href="la-regresión.html#cb340-2" tabindex="-1"></a><span class="fu">head</span>(examData)</span></code></pre></div>
 <pre><code>##   Code Revise Exam Anxiety Gender
 ## 1    1      4   40  86.298   Male
 ## 2    2     11   65  88.716 Female
@@ -425,24 +470,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 4    4     53   80  61.312   Male
 ## 5    5      4   40  89.522   Male
 ## 6    6     22   70  60.506 Female</code></pre>
-<p>Recuerda siempre hacer un gráfico para ver los datos. Por ejemplo, podríamos graficar los niveles de ansiedad versus los resultados en un exámen.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scatter &lt;-<span class="st"> </span><span class="kw">ggplot</span>(examData, <span class="kw">aes</span>(Anxiety, Exam))
-scatter <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;Red&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Niveles de ansiedad&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Desempeño en el examen (%)&quot;</span>)</code></pre></div>
+<p>Recuerda siempre hacer un gráfico para ver los datos.
+Por ejemplo, podríamos graficar los niveles de ansiedad versus los resultados en un exámen.</p>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="la-regresión.html#cb342-1" tabindex="-1"></a>scatter <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(examData, <span class="fu">aes</span>(Anxiety, Exam))</span>
+<span id="cb342-2"><a href="la-regresión.html#cb342-2" tabindex="-1"></a>scatter <span class="sc">+</span> </span>
+<span id="cb342-3"><a href="la-regresión.html#cb342-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;Red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb342-4"><a href="la-regresión.html#cb342-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Niveles de ansiedad&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Desempeño en el examen (%)&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-140-1.png" width="672" /></p>
 <p>Para hacer una correlación podemos simplemente usar la función <strong>cor</strong> seleccionando nuestras colmunas de interés. Esta función nos devuelve los coeficientes de correlación. Por defecto se ejecuta una correlación de <em>Pearson</em>.</p>
 <p>La correlación de Pearson se calcula como la covarianza de las dos variables dividida por el producto de sus desviaciones estándar, y es un medida paramétrica de la relación entre dos variables. La correlación de <em>Spearman</em> es una medida no paramétrica de una correlación. Se calcula determinando el rango de cada valor en las dos variables y luego calculando el coeficiente de correlación de Pearson entre los rangos. La correlación de <em>Kendall</em> es también una medida no paramétrica de una correlación. Se calcula determinando el número de pares concordantes (donde los rangos son los mismos) y el número de pares discordantes (donde los rangos son diferentes) entre las dos variables, y luego se divide por el número total de pares.</p>
 <p>Una valor de correlación siempre está entre -1 (fuerte correlación negativa) y 1 (fuerte correlación positiva). Un coeficiente de 0 refleja que no hay ninguna correlación.</p>
 <p>En general, la correlación de Pearson es más adecuada para datos distribuidos normalmente, mientras que la correlación de Spearman y Kendall son más adecuadas para datos no distribuidos normalmente o datos que no son continuos. Pero, además, la elección de qué medida usar dependerá de la naturaleza de los datos y la pregunta de investigación que se aborde.</p>
-<p>En general, en R siempre hay más de una opción de correlación. Para ello se puede setear el parámetro <em>method</em> a &quot;pearson&quot;, &quot;spearman&quot; o &quot;kendall&quot;.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(examData[, <span class="kw">c</span>(<span class="st">&quot;Exam&quot;</span>, <span class="st">&quot;Anxiety&quot;</span>)])</code></pre></div>
+<p>En general, en R siempre hay más de una opción de correlación. Para ello se puede setear el parámetro <em>method</em> a “pearson”, “spearman” o “kendall”.</p>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="la-regresión.html#cb344-1" tabindex="-1"></a><span class="fu">cor</span>(examData[, <span class="fu">c</span>(<span class="st">&quot;Exam&quot;</span>, <span class="st">&quot;Anxiety&quot;</span>)])</span></code></pre></div>
 <pre><code>##               Exam    Anxiety
 ## Exam     1.0000000 -0.4409934
 ## Anxiety -0.4409934  1.0000000</code></pre>
 <p>Otra función que podemos usar <strong>rcorr</strong>. Esta función nos devuelve los coeficientes de correlación. Fíjate que para usar esta función le decimos a R explícitamente que librería queremos usar, es decir, Hmisc.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Hmisc<span class="op">::</span><span class="kw">rcorr</span>(<span class="kw">as.matrix</span>(examData[, <span class="kw">c</span>(<span class="st">&quot;Exam&quot;</span>, <span class="st">&quot;Anxiety&quot;</span>)]))</code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="la-regresión.html#cb346-1" tabindex="-1"></a>Hmisc<span class="sc">::</span><span class="fu">rcorr</span>(<span class="fu">as.matrix</span>(examData[, <span class="fu">c</span>(<span class="st">&quot;Exam&quot;</span>, <span class="st">&quot;Anxiety&quot;</span>)]))</span></code></pre></div>
 <pre><code>##          Exam Anxiety
 ## Exam     1.00   -0.44
 ## Anxiety -0.44    1.00
@@ -455,7 +501,7 @@ scatter <span class="op">+</span><span class="st"> </span>
 ## Exam          0     
 ## Anxiety  0</code></pre>
 <p>Por último otra función que podemos usar <strong>cor.test</strong>. Esta función nos devuelve Varias cosas: el valor de p y el coeficiente de correlación.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor.test</span>(examData<span class="op">$</span>Anxiety, examData<span class="op">$</span>Exam)</code></pre></div>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="la-regresión.html#cb348-1" tabindex="-1"></a><span class="fu">cor.test</span>(examData<span class="sc">$</span>Anxiety, examData<span class="sc">$</span>Exam)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
@@ -468,36 +514,35 @@ scatter <span class="op">+</span><span class="st"> </span>
 ##        cor 
 ## -0.4409934</code></pre>
 <p>También existen otras funciones que nos permiten hacer un gráfico que contenga</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggscatter</span>(examData, <span class="dt">x =</span> <span class="st">&quot;Anxiety&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Exam&quot;</span>,
-               <span class="dt">add =</span> <span class="st">&quot;reg.line&quot;</span>, <span class="dt">conf.int =</span> <span class="ot">TRUE</span>,
-               <span class="dt">cor.coef =</span> <span class="ot">TRUE</span>, <span class="dt">cor.method =</span> <span class="st">&quot;pearson&quot;</span>,
-               <span class="dt">xlab =</span> <span class="st">&quot;Niveles de ansiedad &quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Desempeño en el examen (%)&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">15</span>))</code></pre></div>
-<pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="la-regresión.html#cb350-1" tabindex="-1"></a><span class="fu">ggscatter</span>(examData, <span class="at">x =</span> <span class="st">&quot;Anxiety&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Exam&quot;</span>,</span>
+<span id="cb350-2"><a href="la-regresión.html#cb350-2" tabindex="-1"></a>               <span class="at">add =</span> <span class="st">&quot;reg.line&quot;</span>, <span class="at">conf.int =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb350-3"><a href="la-regresión.html#cb350-3" tabindex="-1"></a>               <span class="at">cor.coef =</span> <span class="cn">TRUE</span>, <span class="at">cor.method =</span> <span class="st">&quot;pearson&quot;</span>,</span>
+<span id="cb350-4"><a href="la-regresión.html#cb350-4" tabindex="-1"></a>               <span class="at">xlab =</span> <span class="st">&quot;Niveles de ansiedad &quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Desempeño en el examen (%)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb350-5"><a href="la-regresión.html#cb350-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">15</span>))</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-144-1.png" width="672" /></p>
 <p>El coeficiente de determinación es una medida que indica la varianza en una variable que es comparida por otra variable. El coeficiente de determinación se puede calcular desde el coeficiente de correlación, elevándolo al cuadrado, y adicionalmente lo podemos multiplicar por 100 para leerlo como porcentaje.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(examData[, <span class="kw">c</span>(<span class="st">&quot;Exam&quot;</span>, <span class="st">&quot;Anxiety&quot;</span>)])<span class="op">^</span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">100</span></code></pre></div>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="la-regresión.html#cb351-1" tabindex="-1"></a><span class="fu">cor</span>(examData[, <span class="fu">c</span>(<span class="st">&quot;Exam&quot;</span>, <span class="st">&quot;Anxiety&quot;</span>)])<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div>
 <pre><code>##              Exam   Anxiety
 ## Exam    100.00000  19.44752
 ## Anxiety  19.44752 100.00000</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">corr_selected &lt;-<span class="st"> </span>examData <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Revise, Exam, Anxiety) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">cor</span>(<span class="dt">use =</span> <span class="st">&quot;pairwise&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">round</span>(<span class="dv">1</span>)
-
-<span class="kw">ggcorrplot</span>(corr_selected, <span class="dt">type =</span> <span class="st">&quot;lower&quot;</span>, <span class="dt">lab =</span> <span class="ot">TRUE</span>, <span class="dt">show.legend =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="la-regresión.html#cb353-1" tabindex="-1"></a>corr_selected <span class="ot">&lt;-</span> examData <span class="sc">%&gt;%</span> </span>
+<span id="cb353-2"><a href="la-regresión.html#cb353-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Revise, Exam, Anxiety) <span class="sc">%&gt;%</span> </span>
+<span id="cb353-3"><a href="la-regresión.html#cb353-3" tabindex="-1"></a>  <span class="fu">cor</span>(<span class="at">use =</span> <span class="st">&quot;pairwise&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb353-4"><a href="la-regresión.html#cb353-4" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">1</span>)</span>
+<span id="cb353-5"><a href="la-regresión.html#cb353-5" tabindex="-1"></a></span>
+<span id="cb353-6"><a href="la-regresión.html#cb353-6" tabindex="-1"></a><span class="fu">ggcorrplot</span>(corr_selected, <span class="at">type =</span> <span class="st">&quot;lower&quot;</span>, <span class="at">lab =</span> <span class="cn">TRUE</span>, <span class="at">show.legend =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-146-1.png" width="672" /></p>
 <p>Un paso mas allá de las correlaciones bivariadas (entre dos variables) son las correlaciones parciales. La correlación nos permiten investigar la asociación entre dos variables, tomando en cuenta una tercera variable. Es decir, estudiamos una correlación entre dos variables controlando por el efecto de una tercera variable.</p>
 <p>Para trabajar esto en R primero vamos a seleccionar algunas columnas de interés.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">examData2 &lt;-<span class="st"> </span>examData[, <span class="kw">c</span>(<span class="st">&quot;Exam&quot;</span>, <span class="st">&quot;Anxiety&quot;</span>, <span class="st">&quot;Revise&quot;</span>)]</code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="la-regresión.html#cb354-1" tabindex="-1"></a>examData2 <span class="ot">&lt;-</span> examData[, <span class="fu">c</span>(<span class="st">&quot;Exam&quot;</span>, <span class="st">&quot;Anxiety&quot;</span>, <span class="st">&quot;Revise&quot;</span>)]</span></code></pre></div>
 <p>Luego aplicamos la función <strong>pcor</strong>. En esta función las primeras dos variables son las que queremos estudiar, y en tercer lugar la variables por la que queremos controlar. En el siguiente ejemplo queremos estudiar la relación entre el desempeño en una examen y los niveles de ansiedad, controlando por el tiempo que pasaron los estudiantes haciendo revisión antes del examen.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(pc &lt;-<span class="st"> </span><span class="kw">pcor</span>(<span class="kw">c</span>(<span class="st">&quot;Exam&quot;</span>, <span class="st">&quot;Anxiety&quot;</span>, <span class="st">&quot;Revise&quot;</span>), <span class="kw">var</span>(examData2)))</code></pre></div>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="la-regresión.html#cb355-1" tabindex="-1"></a>(pc <span class="ot">&lt;-</span> <span class="fu">pcor</span>(<span class="fu">c</span>(<span class="st">&quot;Exam&quot;</span>, <span class="st">&quot;Anxiety&quot;</span>, <span class="st">&quot;Revise&quot;</span>), <span class="fu">var</span>(examData2)))</span></code></pre></div>
 <pre><code>## [1] -0.2466658</code></pre>
 <p>Nuevamente podemos calcular el coeficiente de determinación</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pc<span class="op">^</span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">100</span></code></pre></div>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="la-regresión.html#cb357-1" tabindex="-1"></a>pc<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div>
 <pre><code>## [1] 6.084403</code></pre>
 <p>Para obtener mas información podemos usar la función <strong>pcor.test</strong> a la que le inyectamos el objeto que recién creamos. Al usar la función primero hay que decirle cuál es la variable dónde esta los datos (pc en nuestro caso), luego cuantas variables controles hay (1 en nuestro caso) y finalmente cuál es el tamaño de la muestra (103 en nuestro caso).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pcor.test</span>(pc, <span class="dv">1</span>, <span class="dv">103</span>)</code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="la-regresión.html#cb359-1" tabindex="-1"></a><span class="fu">pcor.test</span>(pc, <span class="dv">1</span>, <span class="dv">103</span>)</span></code></pre></div>
 <pre><code>## $tval
 ## [1] -2.545307
 ## 

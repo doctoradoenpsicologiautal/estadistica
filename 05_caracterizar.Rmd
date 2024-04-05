@@ -77,7 +77,7 @@ Para verificar estas suposiciones se pueden realizar gráficos (histogramas o di
 Ahora vamos a hacer estos análisis. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas). Luego importamos el set de datos y le damos una mirada.
 
 ```{r}
-setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+setwd(Sys.getenv("BOOKDOWN_PROJECT_PATH"))
 
 library(ggplot2)
 library(Hmisc)

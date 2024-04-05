@@ -12,7 +12,7 @@ Revisa este <a href="https://www.youtube.com/watch?v=ha_fahDpbSg" target="_blank
 Ahora vamos a hacer un análisis de ANOVA factorial. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).
 
 ```{r}
-setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+setwd(Sys.getenv("BOOKDOWN_PROJECT_PATH"))
 
 library(ggplot2)
 library(Hmisc)
@@ -287,7 +287,7 @@ Tercero. En las interacciones (gender.M_vs_F:alcohol.Non_vs_P y gender.M_vs_F:al
 Ahora vamos a hacer un análisis un ANOVA de medidas repetidas. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).
 
 ```{r}
-setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+setwd(Sys.getenv("BOOKDOWN_PROJECT_PATH"))
 
 library(ggplot2)
 library(Rmisc)
@@ -384,7 +384,7 @@ Ahora vamos a hacer un análisis un ANCOVA.
 Imagina que estuvimos estudiando el efecto de una droga sobre los niveles de inteligencia de unos individuos (revisa el capítulo sobre ANOVA).
 
 ```{r}
-setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+setwd(Sys.getenv("BOOKDOWN_PROJECT_PATH"))
 
 library(ggplot2)
 library(Hmisc)
@@ -633,7 +633,7 @@ En el siguiente estudio se aplicaron distintos tratamientos para enfrentar ciert
 Para empezar carguemos las librerías.
 
 ```{r}
-setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+setwd(Sys.getenv("BOOKDOWN_PROJECT_PATH"))
 
 library(car)
 library(ggplot2)

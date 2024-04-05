@@ -17,7 +17,7 @@ Al mismo tiempo se cargan otras librerías que nos serviran. Si no tienes estas 
 Finalmente importamos un set de datos y lo miramos.
 
 ```{r}
-setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+setwd(Sys.getenv("BOOKDOWN_PROJECT_PATH"))
 
 library(ggplot2)
 library(reshape)

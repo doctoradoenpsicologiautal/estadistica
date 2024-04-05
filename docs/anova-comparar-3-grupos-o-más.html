@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 8 ANOVA (comparar 3 grupos o más) | Estadística con R</title>
   <meta name="description" content="Capítulo 8 ANOVA (comparar 3 grupos o más) | Estadística con R" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 8 ANOVA (comparar 3 grupos o más) | Estadística con R" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2023-09-03" />
+<meta name="date" content="2024-04-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,43 +52,74 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -107,7 +138,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preámbulo</a></li>
-<li class="chapter" data-level="1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html"><i class="fa fa-check"></i><b>1</b> Introducción a la estadística</a><ul>
+<li class="chapter" data-level="1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html"><i class="fa fa-check"></i><b>1</b> Introducción a la estadística</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#qué-es-la-estadística"><i class="fa fa-check"></i><b>1.1</b> ¿Qué es la estadística?</a></li>
 <li class="chapter" data-level="1.2" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#qué-son-las-variables"><i class="fa fa-check"></i><b>1.2</b> ¿Qué son las variables?</a></li>
 <li class="chapter" data-level="1.3" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#diseños-experimentales"><i class="fa fa-check"></i><b>1.3</b> Diseños experimentales</a></li>
@@ -117,14 +149,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.7" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#el-origen-de-p"><i class="fa fa-check"></i><b>1.7</b> El origen de p</a></li>
 <li class="chapter" data-level="1.8" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#para-qué-randomizar"><i class="fa fa-check"></i><b>1.8</b> ¿Para qué randomizar?</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html"><i class="fa fa-check"></i><b>2</b> Conceptos estadísticos</a><ul>
-<li class="chapter" data-level="2.1" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#la-significancia"><i class="fa fa-check"></i><b>2.1</b> La significancia</a></li>
-<li class="chapter" data-level="2.2" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#las-colas"><i class="fa fa-check"></i><b>2.2</b> Las colas</a></li>
-<li class="chapter" data-level="2.3" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#los-errores-estadísticos"><i class="fa fa-check"></i><b>2.3</b> Los errores estadísticos</a></li>
-<li class="chapter" data-level="2.4" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#tamaño-poder"><i class="fa fa-check"></i><b>2.4</b> Tamaño &amp; poder</a></li>
-<li class="chapter" data-level="2.5" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#cómo-planificar-un-estudio"><i class="fa fa-check"></i><b>2.5</b> ¿Cómo planificar un estudio?</a></li>
+<li class="chapter" data-level="2" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html"><i class="fa fa-check"></i><b>2</b> Conceptos estadísticos claves</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#la-significancia"><i class="fa fa-check"></i><b>2.1</b> La significancia</a></li>
+<li class="chapter" data-level="2.2" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#las-colas"><i class="fa fa-check"></i><b>2.2</b> Las colas</a></li>
+<li class="chapter" data-level="2.3" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#los-errores-estadísticos"><i class="fa fa-check"></i><b>2.3</b> Los errores estadísticos</a></li>
+<li class="chapter" data-level="2.4" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#tamaño-poder"><i class="fa fa-check"></i><b>2.4</b> Tamaño &amp; poder</a></li>
+<li class="chapter" data-level="2.5" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#cómo-planificar-un-estudio"><i class="fa fa-check"></i><b>2.5</b> ¿Cómo planificar un estudio?</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="programación.html"><a href="programación.html"><i class="fa fa-check"></i><b>3</b> Programación</a><ul>
+<li class="chapter" data-level="3" data-path="programación.html"><a href="programación.html"><i class="fa fa-check"></i><b>3</b> Programación</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="programación.html"><a href="programación.html#qué-significa-programar"><i class="fa fa-check"></i><b>3.1</b> ¿Qué significa programar?</a></li>
 <li class="chapter" data-level="3.2" data-path="programación.html"><a href="programación.html#la-consola-versus-el-script"><i class="fa fa-check"></i><b>3.2</b> La consola versus el script</a></li>
 <li class="chapter" data-level="3.3" data-path="programación.html"><a href="programación.html#introducción-a-la-programación"><i class="fa fa-check"></i><b>3.3</b> Introducción a la programación</a></li>
@@ -136,7 +170,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.9" data-path="programación.html"><a href="programación.html#exportar-datos"><i class="fa fa-check"></i><b>3.9</b> Exportar datos</a></li>
 <li class="chapter" data-level="3.10" data-path="programación.html"><a href="programación.html#en-la-práctica"><i class="fa fa-check"></i><b>3.10</b> En la práctica</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="gráficos.html"><a href="gráficos.html"><i class="fa fa-check"></i><b>4</b> Gráficos</a><ul>
+<li class="chapter" data-level="4" data-path="gráficos.html"><a href="gráficos.html"><i class="fa fa-check"></i><b>4</b> Gráficos</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="gráficos.html"><a href="gráficos.html#cómo-graficamos-en-r"><i class="fa fa-check"></i><b>4.1</b> ¿Cómo graficamos en R?</a></li>
 <li class="chapter" data-level="4.2" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-puntos"><i class="fa fa-check"></i><b>4.2</b> Gráfico de puntos</a></li>
 <li class="chapter" data-level="4.3" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-dispersión"><i class="fa fa-check"></i><b>4.3</b> Gráfico de dispersión</a></li>
@@ -147,7 +182,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.8" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-líneas-2-factores"><i class="fa fa-check"></i><b>4.8</b> Gráfico de líneas (2 factores)</a></li>
 <li class="chapter" data-level="4.9" data-path="gráficos.html"><a href="gráficos.html#guardar-una-figura"><i class="fa fa-check"></i><b>4.9</b> Guardar una figura</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html"><i class="fa fa-check"></i><b>5</b> Caracterizar datos</a><ul>
+<li class="chapter" data-level="5" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html"><i class="fa fa-check"></i><b>5</b> Caracterizar datos</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#visualizar-los-datos"><i class="fa fa-check"></i><b>5.1</b> Visualizar los datos</a></li>
 <li class="chapter" data-level="5.2" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal"><i class="fa fa-check"></i><b>5.2</b> La curva normal</a></li>
 <li class="chapter" data-level="5.3" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal-en-la-práctica-1"><i class="fa fa-check"></i><b>5.3</b> La curva normal en la práctica (1)</a></li>
@@ -158,55 +194,66 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.8" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#los-intervalos-de-confianza-2"><i class="fa fa-check"></i><b>5.8</b> Los intervalos de confianza (2)</a></li>
 <li class="chapter" data-level="5.9" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#verificar-supuestos"><i class="fa fa-check"></i><b>5.9</b> Verificar supuestos</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="la-regresión.html"><a href="la-regresión.html"><i class="fa fa-check"></i><b>6</b> La regresión</a><ul>
+<li class="chapter" data-level="6" data-path="la-regresión.html"><a href="la-regresión.html"><i class="fa fa-check"></i><b>6</b> La regresión</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="la-regresión.html"><a href="la-regresión.html#modelos-estadísticos"><i class="fa fa-check"></i><b>6.1</b> Modelos estadísticos</a></li>
 <li class="chapter" data-level="6.2" data-path="la-regresión.html"><a href="la-regresión.html#la-ecuación-de-la-recta"><i class="fa fa-check"></i><b>6.2</b> La ecuación de la recta</a></li>
 <li class="chapter" data-level="6.3" data-path="la-regresión.html"><a href="la-regresión.html#la-suma-de-cuadrados"><i class="fa fa-check"></i><b>6.3</b> La suma de cuadrados</a></li>
 <li class="chapter" data-level="6.4" data-path="la-regresión.html"><a href="la-regresión.html#la-regresión-con-r"><i class="fa fa-check"></i><b>6.4</b> La regresión con R</a></li>
 <li class="chapter" data-level="6.5" data-path="la-regresión.html"><a href="la-regresión.html#la-correlación-con-r"><i class="fa fa-check"></i><b>6.5</b> La correlación con R</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html"><i class="fa fa-check"></i><b>7</b> La prueba de t (comparar 2 grupos)</a><ul>
+<li class="chapter" data-level="7" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html"><i class="fa fa-check"></i><b>7</b> La prueba de t (comparar 2 grupos)</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#cómo-comparamos-dos-grupos"><i class="fa fa-check"></i><b>7.1</b> ¿Cómo comparamos dos grupos?</a></li>
 <li class="chapter" data-level="7.2" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#la-distribución-normal-de-dos-grupos"><i class="fa fa-check"></i><b>7.2</b> La distribución normal de dos grupos</a></li>
 <li class="chapter" data-level="7.3" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#la-prueba-de-hipótesis"><i class="fa fa-check"></i><b>7.3</b> La prueba de hipótesis</a></li>
 <li class="chapter" data-level="7.4" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#el-t-test-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>7.4</b> El t-test como un modelo líneal general</a></li>
 <li class="chapter" data-level="7.5" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#el-t-test-con-r"><i class="fa fa-check"></i><b>7.5</b> El t-test con R</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html"><i class="fa fa-check"></i><b>8</b> ANOVA (comparar 3 grupos o más)</a><ul>
+<li class="chapter" data-level="8" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html"><i class="fa fa-check"></i><b>8</b> ANOVA (comparar 3 grupos o más)</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#por-qué-necesitamos-un-anova"><i class="fa fa-check"></i><b>8.1</b> ¿Por qué necesitamos un ANOVA?</a></li>
 <li class="chapter" data-level="8.2" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#el-anova-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>8.2</b> El ANOVA como un modelo líneal general</a></li>
 <li class="chapter" data-level="8.3" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#la-lógica-del-anova"><i class="fa fa-check"></i><b>8.3</b> La lógica del ANOVA</a></li>
 <li class="chapter" data-level="8.4" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#el-anova-con-r"><i class="fa fa-check"></i><b>8.4</b> El ANOVA con R</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="después-del-anova.html"><a href="después-del-anova.html"><i class="fa fa-check"></i><b>9</b> Después del ANOVA</a><ul>
+<li class="chapter" data-level="9" data-path="después-del-anova.html"><a href="después-del-anova.html"><i class="fa fa-check"></i><b>9</b> Después del ANOVA</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="después-del-anova.html"><a href="después-del-anova.html#qué-hacemos-después-de-un-anova"><i class="fa fa-check"></i><b>9.1</b> ¿Qué hacemos después de un ANOVA?</a></li>
 <li class="chapter" data-level="9.2" data-path="después-del-anova.html"><a href="después-del-anova.html#comparaciones-planificadas"><i class="fa fa-check"></i><b>9.2</b> Comparaciones planificadas</a></li>
 <li class="chapter" data-level="9.3" data-path="después-del-anova.html"><a href="después-del-anova.html#cálculos-con-r"><i class="fa fa-check"></i><b>9.3</b> Cálculos con R</a></li>
 <li class="chapter" data-level="9.4" data-path="después-del-anova.html"><a href="después-del-anova.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>9.4</b> Pruebas post-hoc</a></li>
 <li class="chapter" data-level="9.5" data-path="después-del-anova.html"><a href="después-del-anova.html#cálculos-con-r-1"><i class="fa fa-check"></i><b>9.5</b> Cálculos con R</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html"><i class="fa fa-check"></i><b>10</b> Más allá del ANOVA</a><ul>
+<li class="chapter" data-level="10" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html"><i class="fa fa-check"></i><b>10</b> Más allá del ANOVA</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#tipos-de-anova"><i class="fa fa-check"></i><b>10.1</b> Tipos de ANOVA</a></li>
 <li class="chapter" data-level="10.2" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#anova-factorial"><i class="fa fa-check"></i><b>10.2</b> ANOVA factorial</a></li>
 <li class="chapter" data-level="10.3" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#anova-de-medidas-repetidas"><i class="fa fa-check"></i><b>10.3</b> ANOVA de medidas repetidas</a></li>
 <li class="chapter" data-level="10.4" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#ancova"><i class="fa fa-check"></i><b>10.4</b> ANCOVA</a></li>
 <li class="chapter" data-level="10.5" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#manova"><i class="fa fa-check"></i><b>10.5</b> MANOVA</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>11</b> Otros análisis</a><ul>
+<li class="chapter" data-level="11" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>11</b> Otros análisis</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="otros-análisis.html"><a href="otros-análisis.html#análisis-de-proporciones"><i class="fa fa-check"></i><b>11.1</b> Análisis de proporciones</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="recursos.html"><a href="recursos.html"><i class="fa fa-check"></i><b>12</b> Recursos</a><ul>
-<li class="chapter" data-level="12.1" data-path="recursos.html"><a href="recursos.html#apps"><i class="fa fa-check"></i><b>12.1</b> Apps</a><ul>
+<li class="chapter" data-level="12" data-path="recursos.html"><a href="recursos.html"><i class="fa fa-check"></i><b>12</b> Recursos</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="recursos.html"><a href="recursos.html#apps"><i class="fa fa-check"></i><b>12.1</b> Apps</a>
+<ul>
 <li class="chapter" data-level="12.1.1" data-path="recursos.html"><a href="recursos.html#convertidor-de-tamaños-de-efectos"><i class="fa fa-check"></i><b>12.1.1</b> Convertidor de tamaños de efectos</a></li>
 <li class="chapter" data-level="12.1.2" data-path="recursos.html"><a href="recursos.html#convertidor-de-tamaños-de-efectos-1"><i class="fa fa-check"></i><b>12.1.2</b> Convertidor de tamaños de efectos</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="recursos.html"><a href="recursos.html#librerías"><i class="fa fa-check"></i><b>12.2</b> Librerías</a><ul>
+<li class="chapter" data-level="12.2" data-path="recursos.html"><a href="recursos.html#librerías"><i class="fa fa-check"></i><b>12.2</b> Librerías</a>
+<ul>
 <li class="chapter" data-level="12.2.1" data-path="recursos.html"><a href="recursos.html#para-calcular-tamaños-de-efectos"><i class="fa fa-check"></i><b>12.2.1</b> Para calcular tamaños de efectos</a></li>
 </ul></li>
-<li class="chapter" data-level="12.3" data-path="recursos.html"><a href="recursos.html#sitios-web"><i class="fa fa-check"></i><b>12.3</b> Sitios web</a><ul>
+<li class="chapter" data-level="12.3" data-path="recursos.html"><a href="recursos.html#sitios-web"><i class="fa fa-check"></i><b>12.3</b> Sitios web</a>
+<ul>
 <li class="chapter" data-level="12.3.1" data-path="recursos.html"><a href="recursos.html#herramientas-de-estadística"><i class="fa fa-check"></i><b>12.3.1</b> Herramientas de estadística</a></li>
 </ul></li>
-<li class="chapter" data-level="12.4" data-path="recursos.html"><a href="recursos.html#cursos"><i class="fa fa-check"></i><b>12.4</b> Cursos</a><ul>
+<li class="chapter" data-level="12.4" data-path="recursos.html"><a href="recursos.html#cursos"><i class="fa fa-check"></i><b>12.4</b> Cursos</a>
+<ul>
 <li class="chapter" data-level="12.4.1" data-path="recursos.html"><a href="recursos.html#herramientas-de-estadística-1"><i class="fa fa-check"></i><b>12.4.1</b> Herramientas de estadística</a></li>
 </ul></li>
 </ul></li>
@@ -229,12 +276,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="anova-comparar-3-grupos-o-más" class="section level1">
+<div id="anova-comparar-3-grupos-o-más" class="section level1" number="8">
 <h1><span class="header-section-number">Capítulo 8</span> ANOVA (comparar 3 grupos o más)</h1>
 <p>En este capítulo vamos a revisar el típico análisis para comparar más de dos grupos, el ANOVA.</p>
-<div id="por-qué-necesitamos-un-anova" class="section level2">
+<div id="por-qué-necesitamos-un-anova" class="section level2" number="8.1">
 <h2><span class="header-section-number">8.1</span> ¿Por qué necesitamos un ANOVA?</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=hzasDQY0GVk" target="_blank">video (9')</a> y trata de responder:</p>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=hzasDQY0GVk" target="_blank">video (9’)</a> y trata de responder:</p>
 <ul>
 <li>¿Cómo comparamos varias condiciones experimentales?</li>
 <li>¿Cuántos distintos tipos de ANOVA existen?</li>
@@ -248,9 +295,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>¿Cuáles son los supuestos del ANOVA?</li>
 </ul>
 </div>
-<div id="el-anova-como-un-modelo-líneal-general" class="section level2">
+<div id="el-anova-como-un-modelo-líneal-general" class="section level2" number="8.2">
 <h2><span class="header-section-number">8.2</span> El ANOVA como un modelo líneal general</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=CyrNtF3C0Mc" target="_blank">video (18')</a> y trata de responder:</p>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=CyrNtF3C0Mc" target="_blank">video (18’)</a> y trata de responder:</p>
 <ul>
 <li>¿Qué nos dice el valor F en un ANOVA?</li>
 <li>¿Por qué el ANOVA se puede representar como una regresión?</li>
@@ -260,9 +307,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>¿Qué reflejan los coeficientes (o betas) de la ecuación que representa el ANOVA?</li>
 </ul>
 </div>
-<div id="la-lógica-del-anova" class="section level2">
+<div id="la-lógica-del-anova" class="section level2" number="8.3">
 <h2><span class="header-section-number">8.3</span> La lógica del ANOVA</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=sWdZHcBWTGg" target="_blank">video (15')</a> y trata de responder:</p>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=sWdZHcBWTGg" target="_blank">video (15’)</a> y trata de responder:</p>
 <ul>
 <li>¿Qué reflejan los coeficientes (o betas) de la ecuación que representa el ANOVA?</li>
 <li>¿Cómo serían los promedios de los grupos si la hipótesis nula se tuviera que aceptar?</li>
@@ -271,27 +318,28 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>¿Qué es la suma de cuadrados (SS) de los residuales?</li>
 </ul>
 </div>
-<div id="el-anova-con-r" class="section level2">
+<div id="el-anova-con-r" class="section level2" number="8.4">
 <h2><span class="header-section-number">8.4</span> El ANOVA con R</h2>
 <p>Ahora vamos a hacer el análisis. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
-
-<span class="kw">library</span>(ggplot2)
-<span class="kw">library</span>(Hmisc)
-<span class="kw">library</span>(Rmisc)
-<span class="kw">library</span>(effsize)
-<span class="kw">library</span>(pastecs)
-<span class="kw">library</span>(reshape2)
-<span class="kw">library</span>(car)
-<span class="kw">library</span>(effsize)
-<span class="kw">library</span>(effectsize)
-<span class="kw">library</span>(lsr)</code></pre></div>
-<pre><code>## Warning: package &#39;lsr&#39; was built under R version 4.1.3</code></pre>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="anova-comparar-3-grupos-o-más.html#cb404-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
+<span id="cb404-2"><a href="anova-comparar-3-grupos-o-más.html#cb404-2" tabindex="-1"></a></span>
+<span id="cb404-3"><a href="anova-comparar-3-grupos-o-más.html#cb404-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb404-4"><a href="anova-comparar-3-grupos-o-más.html#cb404-4" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
+<span id="cb404-5"><a href="anova-comparar-3-grupos-o-más.html#cb404-5" tabindex="-1"></a><span class="fu">library</span>(Rmisc)</span>
+<span id="cb404-6"><a href="anova-comparar-3-grupos-o-más.html#cb404-6" tabindex="-1"></a><span class="fu">library</span>(effsize)</span>
+<span id="cb404-7"><a href="anova-comparar-3-grupos-o-más.html#cb404-7" tabindex="-1"></a><span class="fu">library</span>(pastecs)</span>
+<span id="cb404-8"><a href="anova-comparar-3-grupos-o-más.html#cb404-8" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb404-9"><a href="anova-comparar-3-grupos-o-más.html#cb404-9" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb404-10"><a href="anova-comparar-3-grupos-o-más.html#cb404-10" tabindex="-1"></a><span class="fu">library</span>(effsize)</span>
+<span id="cb404-11"><a href="anova-comparar-3-grupos-o-más.html#cb404-11" tabindex="-1"></a><span class="fu">library</span>(effectsize)</span></code></pre></div>
+<pre><code>## Warning: package &#39;effectsize&#39; was built under R version 4.3.3</code></pre>
+<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="anova-comparar-3-grupos-o-más.html#cb406-1" tabindex="-1"></a><span class="fu">library</span>(lsr)</span></code></pre></div>
+<pre><code>## Warning: package &#39;lsr&#39; was built under R version 4.3.3</code></pre>
 <p>Luego importamos el set de datos. Aprovechamos de agregar unas etiquetas que nos sirvan a visualizar las condiciones experimentales. Y le damos una mirada.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/inteligencia.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
-dat1<span class="op">$</span>Dosis &lt;-<span class="st"> </span><span class="kw">factor</span>(dat1<span class="op">$</span>Dosis, 
-                            <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))
-dat1</code></pre></div>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="anova-comparar-3-grupos-o-más.html#cb408-1" tabindex="-1"></a>dat1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/inteligencia.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb408-2"><a href="anova-comparar-3-grupos-o-más.html#cb408-2" tabindex="-1"></a>dat1<span class="sc">$</span>Dosis <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat1<span class="sc">$</span>Dosis, </span>
+<span id="cb408-3"><a href="anova-comparar-3-grupos-o-más.html#cb408-3" tabindex="-1"></a>                            <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))</span>
+<span id="cb408-4"><a href="anova-comparar-3-grupos-o-más.html#cb408-4" tabindex="-1"></a>dat1</span></code></pre></div>
 <pre><code>##      Dosis Inteligencia
 ## 1  Placebo            3
 ## 2  Placebo            2
@@ -309,61 +357,63 @@ dat1</code></pre></div>
 ## 14    Alta            3
 ## 15    Alta            6</code></pre>
 <p>Luego, mirar los datos siempre es bueno graficar.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Podemos usar esta función para calcular los estadísticos a través de los participantes.</span>
-datac &lt;-<span class="st"> </span><span class="kw">summarySE</span>(dat1, 
-                   <span class="dt">measurevar=</span><span class="st">&quot;Inteligencia&quot;</span>, 
-                   <span class="dt">groupvars=</span><span class="st">&quot;Dosis&quot;</span>)
-
-<span class="co"># Luego hacemos el gráfico</span>
-<span class="kw">ggplot</span>(datac, <span class="kw">aes</span>(<span class="dt">x=</span>Dosis, <span class="dt">y=</span>Inteligencia, <span class="dt">group=</span><span class="dv">1</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">width=</span>.<span class="dv">1</span>, <span class="kw">aes</span>(<span class="dt">ymin=</span>Inteligencia<span class="op">-</span>se, <span class="dt">ymax=</span>Inteligencia<span class="op">+</span>se)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">colour =</span> <span class="st">&quot;Red&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Niveles de inteligencia&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
+<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="anova-comparar-3-grupos-o-más.html#cb410-1" tabindex="-1"></a><span class="co"># Podemos usar esta función para calcular los estadísticos a través de los participantes.</span></span>
+<span id="cb410-2"><a href="anova-comparar-3-grupos-o-más.html#cb410-2" tabindex="-1"></a>datac <span class="ot">&lt;-</span> <span class="fu">summarySE</span>(dat1, </span>
+<span id="cb410-3"><a href="anova-comparar-3-grupos-o-más.html#cb410-3" tabindex="-1"></a>                   <span class="at">measurevar=</span><span class="st">&quot;Inteligencia&quot;</span>, </span>
+<span id="cb410-4"><a href="anova-comparar-3-grupos-o-más.html#cb410-4" tabindex="-1"></a>                   <span class="at">groupvars=</span><span class="st">&quot;Dosis&quot;</span>)</span>
+<span id="cb410-5"><a href="anova-comparar-3-grupos-o-más.html#cb410-5" tabindex="-1"></a></span>
+<span id="cb410-6"><a href="anova-comparar-3-grupos-o-más.html#cb410-6" tabindex="-1"></a><span class="co"># Luego hacemos el gráfico</span></span>
+<span id="cb410-7"><a href="anova-comparar-3-grupos-o-más.html#cb410-7" tabindex="-1"></a><span class="fu">ggplot</span>(datac, <span class="fu">aes</span>(<span class="at">x=</span>Dosis, <span class="at">y=</span>Inteligencia, <span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb410-8"><a href="anova-comparar-3-grupos-o-más.html#cb410-8" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">width=</span>.<span class="dv">1</span>, <span class="fu">aes</span>(<span class="at">ymin=</span>Inteligencia<span class="sc">-</span>se, <span class="at">ymax=</span>Inteligencia<span class="sc">+</span>se)) <span class="sc">+</span></span>
+<span id="cb410-9"><a href="anova-comparar-3-grupos-o-más.html#cb410-9" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">&quot;Red&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb410-10"><a href="anova-comparar-3-grupos-o-más.html#cb410-10" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb410-11"><a href="anova-comparar-3-grupos-o-más.html#cb410-11" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Niveles de inteligencia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb410-12"><a href="anova-comparar-3-grupos-o-más.html#cb410-12" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb410-13"><a href="anova-comparar-3-grupos-o-más.html#cb410-13" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-172-1.png" width="672" /></p>
 <p>Luego podemos hacer una descripción de los datos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test &lt;-<span class="st"> </span><span class="kw">by</span>(dat1<span class="op">$</span>Inteligencia, 
-           dat1<span class="op">$</span>Dosis, 
-           stat.desc, <span class="dt">basic =</span> <span class="ot">FALSE</span>, 
-           <span class="dt">norm =</span> <span class="ot">TRUE</span>)
-<span class="kw">lapply</span>(test,round,<span class="dv">2</span>)</code></pre></div>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="anova-comparar-3-grupos-o-más.html#cb411-1" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">by</span>(dat1<span class="sc">$</span>Inteligencia, </span>
+<span id="cb411-2"><a href="anova-comparar-3-grupos-o-más.html#cb411-2" tabindex="-1"></a>           dat1<span class="sc">$</span>Dosis, </span>
+<span id="cb411-3"><a href="anova-comparar-3-grupos-o-más.html#cb411-3" tabindex="-1"></a>           stat.desc, <span class="at">basic =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb411-4"><a href="anova-comparar-3-grupos-o-más.html#cb411-4" tabindex="-1"></a>           <span class="at">norm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb411-5"><a href="anova-comparar-3-grupos-o-más.html#cb411-5" tabindex="-1"></a><span class="fu">lapply</span>(test,round,<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## $Placebo
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
-##         2.00         2.20         0.58         1.62         1.70         1.30         0.59         0.26 
-##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##         0.14        -1.96        -0.49         0.90         0.42 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness     skew.2SE 
+##         2.00         2.20         0.58         1.62         1.70         1.30         0.59         0.26         0.14 
+##     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##        -1.96        -0.49         0.90         0.42 
 ## 
 ## $Baja
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
-##         3.00         3.20         0.58         1.62         1.70         1.30         0.41         0.26 
-##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##         0.14        -1.96        -0.49         0.90         0.42 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness     skew.2SE 
+##         3.00         3.20         0.58         1.62         1.70         1.30         0.41         0.26         0.14 
+##     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##        -1.96        -0.49         0.90         0.42 
 ## 
 ## $Alta
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
-##         5.00         5.00         0.71         1.96         2.50         1.58         0.32         0.00 
-##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##         0.00        -1.91        -0.48         0.99         0.97</code></pre>
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness     skew.2SE 
+##         5.00         5.00         0.71         1.96         2.50         1.58         0.32         0.00         0.00 
+##     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##        -1.91        -0.48         0.99         0.97</code></pre>
 <p>La función <strong>by</strong> permite calcular los estadísticos. La función <strong>round</strong> redondea los valores a dos décimas. Y la función <strong>lapply</strong> permite aplicar la función round de forma másiva.</p>
 <p>Antes de hacer el ANOVA verificamos si existen problemas de homgeneidad de varianza. Podemos hacerlo con la función <strong>leveneTest</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">leveneTest</span>(dat1<span class="op">$</span>Inteligencia, dat1<span class="op">$</span>Dosis, <span class="dt">center =</span> mean)</code></pre></div>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="anova-comparar-3-grupos-o-más.html#cb413-1" tabindex="-1"></a><span class="fu">leveneTest</span>(dat1<span class="sc">$</span>Inteligencia, dat1<span class="sc">$</span>Dosis, <span class="at">center =</span> mean)</span></code></pre></div>
 <pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = mean)
 ##       Df F value Pr(&gt;F)
 ## group  2  0.0917  0.913
 ##       12</code></pre>
-<p>Si la prueba de Levene es significativa entonces las varianzas son diferentes entre los grupos. En ese caso podemos aplicar la F de Welch a los datos. Esta prueba hace ajustes por las diferencias que hay entre las varianzas de cada grupo.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">AOV_W &lt;-<span class="st"> </span><span class="kw">oneway.test</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Dosis, <span class="dt">data =</span> dat1)
-AOV_W</code></pre></div>
+<p>Si la prueba de Levene es significativa entonces las varianzas son diferentes entre los grupos.
+En ese caso podemos aplicar la F de Welch a los datos. Esta prueba hace ajustes por las diferencias que hay entre las varianzas de cada grupo.</p>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="anova-comparar-3-grupos-o-más.html#cb415-1" tabindex="-1"></a>AOV_W <span class="ot">&lt;-</span> <span class="fu">oneway.test</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> dat1)</span>
+<span id="cb415-2"><a href="anova-comparar-3-grupos-o-más.html#cb415-2" tabindex="-1"></a>AOV_W</span></code></pre></div>
 <pre><code>## 
 ##  One-way analysis of means (not assuming equal variances)
 ## 
 ## data:  Inteligencia and Dosis
 ## F = 4.3205, num df = 2.0000, denom df = 7.9434, p-value = 0.05374</code></pre>
-<p>En nuestro caso no tuvimos problema en relación a la homgeneidad de varianza. Podemos hacer entonces el análisis estadístico, aplicando la función <strong>aov</strong>. Enseguida aplicamos la función <strong>sumary</strong> para visualizar los resultados del test.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_AOV &lt;-<span class="st"> </span><span class="kw">aov</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Dosis, <span class="dt">data =</span> dat1)
-<span class="kw">summary</span>(m_AOV)</code></pre></div>
+<p>En nuestro caso no tuvimos problema en relación a la homgeneidad de varianza. Podemos hacer entonces el análisis estadístico, aplicando la función <strong>aov</strong>.
+Enseguida aplicamos la función <strong>sumary</strong> para visualizar los resultados del test.</p>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="anova-comparar-3-grupos-o-más.html#cb417-1" tabindex="-1"></a>m_AOV <span class="ot">&lt;-</span> <span class="fu">aov</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> dat1)</span>
+<span id="cb417-2"><a href="anova-comparar-3-grupos-o-más.html#cb417-2" tabindex="-1"></a><span class="fu">summary</span>(m_AOV)</span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)  
 ## Dosis        2  20.13  10.067   5.119 0.0247 *
 ## Residuals   12  23.60   1.967                 
@@ -371,12 +421,14 @@ AOV_W</code></pre></div>
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Pr(&gt;F) indica la probabilidad de que ocurra un F-ratio del tamaño del obtenido si no hubiera efecto en la población.</p>
 <p>En esta punto sabemos que existe un efecto en alguna parte. El ANOVA es un test omnibus. Pero todavía no sabemos exactamente dónde esta el efecto. Es decir, entre qué grupos hay diferencias.</p>
-<p>Vamos a volver sobre las ideas comentadas en los videos anteriores. ¿Te acuerdas que reflejan el intercepto y la pendiente (o beta) de una ecuación que represente el ANOVA?</p>
-<p>Vamos a usar el dummy coding para desarrollar esta idea. Primero carguemos uno base de datos idéntica a la anterior pero con una columna extra con el dumming coding.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/inteligencia_c_Variables.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
-dat2<span class="op">$</span>Dosis &lt;-<span class="st"> </span><span class="kw">factor</span>(dat2<span class="op">$</span>Dosis, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>),
-                         <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))
-dat2</code></pre></div>
+<p>Vamos a volver sobre las ideas comentadas en los videos anteriores.
+¿Te acuerdas que reflejan el intercepto y la pendiente (o beta) de una ecuación que represente el ANOVA?</p>
+<p>Vamos a usar el dummy coding para desarrollar esta idea.
+Primero carguemos uno base de datos idéntica a la anterior pero con una columna extra con el dumming coding.</p>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="anova-comparar-3-grupos-o-más.html#cb419-1" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/inteligencia_c_Variables.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb419-2"><a href="anova-comparar-3-grupos-o-más.html#cb419-2" tabindex="-1"></a>dat2<span class="sc">$</span>Dosis <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat2<span class="sc">$</span>Dosis, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>),</span>
+<span id="cb419-3"><a href="anova-comparar-3-grupos-o-más.html#cb419-3" tabindex="-1"></a>                         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))</span>
+<span id="cb419-4"><a href="anova-comparar-3-grupos-o-más.html#cb419-4" tabindex="-1"></a>dat2</span></code></pre></div>
 <pre><code>##      Dosis Inteligencia Baja Alta
 ## 1  Placebo            3    0    0
 ## 2  Placebo            2    0    0
@@ -394,8 +446,8 @@ dat2</code></pre></div>
 ## 14    Alta            3    0    1
 ## 15    Alta            6    0    1</code></pre>
 <p>Vamos a hacer un modelo lineal dónde tratemos de predecir los niveles de inteligencia en base a nuestro dummy coding (que en el fondo refleja los efectos que resultan de comparar los grupos experimentales con un grupo base).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_dummy1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Baja <span class="op">+</span><span class="st"> </span>Alta, <span class="dt">data =</span> dat2)
-<span class="kw">summary</span>(m_dummy1)</code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="anova-comparar-3-grupos-o-más.html#cb421-1" tabindex="-1"></a>m_dummy1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Inteligencia <span class="sc">~</span> Baja <span class="sc">+</span> Alta, <span class="at">data =</span> dat2)</span>
+<span id="cb421-2"><a href="anova-comparar-3-grupos-o-más.html#cb421-2" tabindex="-1"></a><span class="fu">summary</span>(m_dummy1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Inteligencia ~ Baja + Alta, data = dat2)
@@ -416,19 +468,20 @@ dat2</code></pre></div>
 ## Multiple R-squared:  0.4604, Adjusted R-squared:  0.3704 
 ## F-statistic: 5.119 on 2 and 12 DF,  p-value: 0.02469</code></pre>
 <p>Al mismo tiempo aprovechemos de calcular los promedios para los valores de inteligencia de acuerdo a cada grupo experimental</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(dat2<span class="op">$</span>Inteligencia, <span class="kw">list</span>(dat2<span class="op">$</span>Dosis), mean)</code></pre></div>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="anova-comparar-3-grupos-o-más.html#cb423-1" tabindex="-1"></a><span class="fu">aggregate</span>(dat2<span class="sc">$</span>Inteligencia, <span class="fu">list</span>(dat2<span class="sc">$</span>Dosis), mean)</span></code></pre></div>
 <pre><code>##   Group.1   x
 ## 1 Placebo 2.2
 ## 2    Baja 3.2
 ## 3    Alta 5.0</code></pre>
 <p>Fíjate que:</p>
-<p>El intercepto del modelo (el &quot;Estimate&quot; de la fila &quot;Intercept&quot;) corresponde al promedio en los niveles de inteligencia para el grupo placebo.</p>
-<p>El beta 1 del modelo (el &quot;Estimate&quot; de la fila &quot;Baja&quot;) corresponde a la diferencia en los niveles de inteligencia entre el grupo con dosis baja y el grupo placebo.</p>
-<p>El beta 2 del modelo (el &quot;Estimate&quot; de la fila &quot;Alta&quot;) corresponde a la diferencia en los niveles de inteligencia entre el grupo con dosis alta y el grupo placebo.</p>
-<p>Tal como lo habíamos concebido anteriormente! ¿Necesitamos definir un dummy coding para hacer esto? En realidad R lo hace por defecto.</p>
+<p>El intercepto del modelo (el “Estimate” de la fila “Intercept”) corresponde al promedio en los niveles de inteligencia para el grupo placebo.</p>
+<p>El beta 1 del modelo (el “Estimate” de la fila “Baja”) corresponde a la diferencia en los niveles de inteligencia entre el grupo con dosis baja y el grupo placebo.</p>
+<p>El beta 2 del modelo (el “Estimate” de la fila “Alta”) corresponde a la diferencia en los niveles de inteligencia entre el grupo con dosis alta y el grupo placebo.</p>
+<p>Tal como lo habíamos concebido anteriormente!
+¿Necesitamos definir un dummy coding para hacer esto? En realidad R lo hace por defecto.</p>
 <p>Si hacemos un modelo para predecir los niveles de inteligencia directamente de la columna que indica las dosis obtenemos exactamente el mismo modelo.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_dummy2 &lt;-<span class="st"> </span><span class="kw">lm</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Dosis, <span class="dt">data =</span> dat2)
-<span class="kw">summary</span>(m_dummy2)</code></pre></div>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="anova-comparar-3-grupos-o-más.html#cb425-1" tabindex="-1"></a>m_dummy2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> dat2)</span>
+<span id="cb425-2"><a href="anova-comparar-3-grupos-o-más.html#cb425-2" tabindex="-1"></a><span class="fu">summary</span>(m_dummy2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Inteligencia ~ Dosis, data = dat2)
@@ -449,7 +502,7 @@ dat2</code></pre></div>
 ## Multiple R-squared:  0.4604, Adjusted R-squared:  0.3704 
 ## F-statistic: 5.119 on 2 and 12 DF,  p-value: 0.02469</code></pre>
 <p>Por úlitmo, fíjate que cuando usamos la función <strong>aov</strong> para hacer el ANOVA obtuvimos una versión resumida de lo que obtenemos al realizar el modelo lineal con la función <strong>lm</strong>. En el fondo esto refleja que una ANOVA es un modelo lineal que esta disfrazado. Esto es lo que se llama una función <em>wraper</em>. De hecho podemos ver el modelo completo si al resultado del <strong>aov</strong> le aplicamos la función <strong>summary.lm</strong>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary.lm</span>(m_AOV)</code></pre></div>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="anova-comparar-3-grupos-o-más.html#cb427-1" tabindex="-1"></a><span class="fu">summary.lm</span>(m_AOV)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## aov(formula = Inteligencia ~ Dosis, data = dat1)
@@ -470,36 +523,40 @@ dat2</code></pre></div>
 ## Multiple R-squared:  0.4604, Adjusted R-squared:  0.3704 
 ## F-statistic: 5.119 on 2 and 12 DF,  p-value: 0.02469</code></pre>
 <p>Finalmente, podemos hacer algunos gráficos que podemos extraer del modelo de ANOVA.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(m_AOV)</code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="anova-comparar-3-grupos-o-más.html#cb429-1" tabindex="-1"></a><span class="fu">plot</span>(m_AOV)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-182-1.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-182-2.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-182-3.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-182-4.png" width="672" /></p>
-<p>Los dos primeros gráficos son los mas importantes. El gráfico 1 muestra la homogeneidad de varianza. Si ves una forma de embudo entonces hay en problemas en la homgeneidad de varianza. La idea es que los puntos estén igualmente repartidos. Es decir, las variaciones son similares entre los grupos. El gráfico 2 es un gráfico Q-Q. Si los puntos están sobre la diagonal entonces se cumple el suspuesto de la normalidad de los datos.</p>
-<p>Para terminar siempre es bueno calcular el tamaño del efecto. Recuerda que hicimos en el ANOVA.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_AOV &lt;-<span class="st"> </span><span class="kw">aov</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Dosis, <span class="dt">data =</span> dat1)
-summModel &lt;-<span class="st"> </span><span class="kw">summary.lm</span>(m_AOV)</code></pre></div>
-<p>En el contexto de ANOVA, r^2 generalmente se llama eta cuadrado. Se puede obtener desde el modelo.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summModel<span class="op">$</span>r.squared</code></pre></div>
+<p>Los dos primeros gráficos son los mas importantes.
+El gráfico 1 muestra la homogeneidad de varianza. Si ves una forma de embudo entonces hay en problemas en la homgeneidad de varianza. La idea es que los puntos estén igualmente repartidos. Es decir, las variaciones son similares entre los grupos.
+El gráfico 2 es un gráfico Q-Q. Si los puntos están sobre la diagonal entonces se cumple el suspuesto de la normalidad de los datos.</p>
+<p>Para terminar siempre es bueno calcular el tamaño del efecto.
+Recuerda que hicimos en el ANOVA.</p>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="anova-comparar-3-grupos-o-más.html#cb430-1" tabindex="-1"></a>m_AOV <span class="ot">&lt;-</span> <span class="fu">aov</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> dat1)</span>
+<span id="cb430-2"><a href="anova-comparar-3-grupos-o-más.html#cb430-2" tabindex="-1"></a>summModel <span class="ot">&lt;-</span> <span class="fu">summary.lm</span>(m_AOV)</span></code></pre></div>
+<p>En el contexto de ANOVA, r^2 generalmente se llama eta cuadrado.
+Se puede obtener desde el modelo.</p>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="anova-comparar-3-grupos-o-más.html#cb431-1" tabindex="-1"></a>summModel<span class="sc">$</span>r.squared</span></code></pre></div>
 <pre><code>## [1] 0.4603659</code></pre>
 <p>Pero también se puede calcular con la función <strong>etaSquared</strong> (de la librería <em>effsize</em>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">etaSquared</span>(m_AOV)</code></pre></div>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="anova-comparar-3-grupos-o-más.html#cb433-1" tabindex="-1"></a><span class="fu">etaSquared</span>(m_AOV)</span></code></pre></div>
 <pre><code>##          eta.sq eta.sq.part
 ## Dosis 0.4603659   0.4603659</code></pre>
 <p>Alternativamente también podemos calcular Omega cuadrado usando una función.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">omega &lt;-<span class="st"> </span><span class="cf">function</span>(SSm, SSr, dfm, MSr)
-{
-  SSt =<span class="st"> </span>SSm <span class="op">+</span><span class="st"> </span>SSr
-  omega =<span class="st"> </span>(SSm<span class="op">-</span>(dfm<span class="op">*</span>MSr))<span class="op">/</span>(SSt<span class="op">+</span>MSr)
-  <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;Omega-Squared: &quot;</span>, omega))
-  omega
-}
-
-omega1 &lt;-<span class="st"> </span><span class="kw">omega</span>(<span class="fl">20.133</span>, <span class="fl">23.600</span>, <span class="dv">2</span>, <span class="fl">1.9667</span>)</code></pre></div>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="anova-comparar-3-grupos-o-más.html#cb435-1" tabindex="-1"></a>omega <span class="ot">&lt;-</span> <span class="cf">function</span>(SSm, SSr, dfm, MSr)</span>
+<span id="cb435-2"><a href="anova-comparar-3-grupos-o-más.html#cb435-2" tabindex="-1"></a>{</span>
+<span id="cb435-3"><a href="anova-comparar-3-grupos-o-más.html#cb435-3" tabindex="-1"></a>  SSt <span class="ot">=</span> SSm <span class="sc">+</span> SSr</span>
+<span id="cb435-4"><a href="anova-comparar-3-grupos-o-más.html#cb435-4" tabindex="-1"></a>  omega <span class="ot">=</span> (SSm<span class="sc">-</span>(dfm<span class="sc">*</span>MSr))<span class="sc">/</span>(SSt<span class="sc">+</span>MSr)</span>
+<span id="cb435-5"><a href="anova-comparar-3-grupos-o-más.html#cb435-5" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Omega-Squared: &quot;</span>, omega))</span>
+<span id="cb435-6"><a href="anova-comparar-3-grupos-o-más.html#cb435-6" tabindex="-1"></a>  omega</span>
+<span id="cb435-7"><a href="anova-comparar-3-grupos-o-más.html#cb435-7" tabindex="-1"></a>}</span>
+<span id="cb435-8"><a href="anova-comparar-3-grupos-o-más.html#cb435-8" tabindex="-1"></a></span>
+<span id="cb435-9"><a href="anova-comparar-3-grupos-o-más.html#cb435-9" tabindex="-1"></a>omega1 <span class="ot">&lt;-</span> <span class="fu">omega</span>(<span class="fl">20.133</span>, <span class="fl">23.600</span>, <span class="dv">2</span>, <span class="fl">1.9667</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Omega-Squared:  0.35447935106795&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">omega1</code></pre></div>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="anova-comparar-3-grupos-o-más.html#cb437-1" tabindex="-1"></a>omega1</span></code></pre></div>
 <pre><code>## [1] 0.3544794</code></pre>
 <p>O también usar la función <strong>omega_squared</strong> (de la librería <em>effectsize</em>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">omega_squared</span>(m_AOV)</code></pre></div>
-<pre><code>## For one-way between subjects designs, partial omega squared is equivalent to omega squared.
-##   Returning omega squared.</code></pre>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="anova-comparar-3-grupos-o-más.html#cb439-1" tabindex="-1"></a><span class="fu">omega_squared</span>(m_AOV)</span></code></pre></div>
+<pre><code>## For one-way between subjects designs, partial omega squared is equivalent to omega squared. Returning omega
+##   squared.</code></pre>
 <pre><code>## # Effect Size for ANOVA
 ## 
 ## Parameter | Omega2 |       95% CI
@@ -507,8 +564,9 @@ omega1 &lt;-<span class="st"> </span><span class="kw">omega</span>(<span class="
 ## Dosis     |   0.35 | [0.00, 1.00]
 ## 
 ## - One-sided CIs: upper bound fixed at [1.00].</code></pre>
-<p>Por último, para realizar un ANOVA no paramétrico puedes usar la función <strong>kruskal.test</strong>. Supongamos que para nuestros datos no logramos cumplir con los supuestos para aplicar estadística paramétrica.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kruskal.test</span>(Inteligencia <span class="op">~</span><span class="st"> </span>Dosis, <span class="dt">data =</span> dat1)</code></pre></div>
+<p>Por último, para realizar un ANOVA no paramétrico puedes usar la función <strong>kruskal.test</strong>.
+Supongamos que para nuestros datos no logramos cumplir con los supuestos para aplicar estadística paramétrica.</p>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="anova-comparar-3-grupos-o-más.html#cb442-1" tabindex="-1"></a><span class="fu">kruskal.test</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> dat1)</span></code></pre></div>
 <pre><code>## 
 ##  Kruskal-Wallis rank sum test
 ## 

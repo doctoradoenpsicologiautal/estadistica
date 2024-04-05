@@ -40,7 +40,7 @@ Revisa este <a href="https://www.youtube.com/watch?v=sWdZHcBWTGg" target="_blank
 Ahora vamos a hacer el análisis. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).
 
 ```{r}
-setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+setwd(Sys.getenv("BOOKDOWN_PROJECT_PATH"))
 
 library(ggplot2)
 library(Hmisc)

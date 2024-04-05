@@ -7,7 +7,7 @@ la-prueba-estadística
 que-diseño-usar
 el-origen-de-p
 para-qué-randomizar
-conceptos-estadísticos
+conceptos-estadísticos-claves
 la-significancia
 las-colas
 los-errores-estadísticos
@@ -85,5 +85,3 @@ sitios-web
 herramientas-de-estadística
 cursos
 herramientas-de-estadística-1
-conceptos-estadísticos-importantes
-conceptos-estadísticos-importantes.

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 5 Caracterizar datos | Estadística con R</title>
   <meta name="description" content="Capítulo 5 Caracterizar datos | Estadística con R" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 5 Caracterizar datos | Estadística con R" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2023-09-03" />
+<meta name="date" content="2024-04-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,43 +52,74 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -107,7 +138,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preámbulo</a></li>
-<li class="chapter" data-level="1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html"><i class="fa fa-check"></i><b>1</b> Introducción a la estadística</a><ul>
+<li class="chapter" data-level="1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html"><i class="fa fa-check"></i><b>1</b> Introducción a la estadística</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#qué-es-la-estadística"><i class="fa fa-check"></i><b>1.1</b> ¿Qué es la estadística?</a></li>
 <li class="chapter" data-level="1.2" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#qué-son-las-variables"><i class="fa fa-check"></i><b>1.2</b> ¿Qué son las variables?</a></li>
 <li class="chapter" data-level="1.3" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#diseños-experimentales"><i class="fa fa-check"></i><b>1.3</b> Diseños experimentales</a></li>
@@ -117,14 +149,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.7" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#el-origen-de-p"><i class="fa fa-check"></i><b>1.7</b> El origen de p</a></li>
 <li class="chapter" data-level="1.8" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#para-qué-randomizar"><i class="fa fa-check"></i><b>1.8</b> ¿Para qué randomizar?</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html"><i class="fa fa-check"></i><b>2</b> Conceptos estadísticos</a><ul>
-<li class="chapter" data-level="2.1" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#la-significancia"><i class="fa fa-check"></i><b>2.1</b> La significancia</a></li>
-<li class="chapter" data-level="2.2" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#las-colas"><i class="fa fa-check"></i><b>2.2</b> Las colas</a></li>
-<li class="chapter" data-level="2.3" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#los-errores-estadísticos"><i class="fa fa-check"></i><b>2.3</b> Los errores estadísticos</a></li>
-<li class="chapter" data-level="2.4" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#tamaño-poder"><i class="fa fa-check"></i><b>2.4</b> Tamaño &amp; poder</a></li>
-<li class="chapter" data-level="2.5" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#cómo-planificar-un-estudio"><i class="fa fa-check"></i><b>2.5</b> ¿Cómo planificar un estudio?</a></li>
+<li class="chapter" data-level="2" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html"><i class="fa fa-check"></i><b>2</b> Conceptos estadísticos claves</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#la-significancia"><i class="fa fa-check"></i><b>2.1</b> La significancia</a></li>
+<li class="chapter" data-level="2.2" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#las-colas"><i class="fa fa-check"></i><b>2.2</b> Las colas</a></li>
+<li class="chapter" data-level="2.3" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#los-errores-estadísticos"><i class="fa fa-check"></i><b>2.3</b> Los errores estadísticos</a></li>
+<li class="chapter" data-level="2.4" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#tamaño-poder"><i class="fa fa-check"></i><b>2.4</b> Tamaño &amp; poder</a></li>
+<li class="chapter" data-level="2.5" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#cómo-planificar-un-estudio"><i class="fa fa-check"></i><b>2.5</b> ¿Cómo planificar un estudio?</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="programación.html"><a href="programación.html"><i class="fa fa-check"></i><b>3</b> Programación</a><ul>
+<li class="chapter" data-level="3" data-path="programación.html"><a href="programación.html"><i class="fa fa-check"></i><b>3</b> Programación</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="programación.html"><a href="programación.html#qué-significa-programar"><i class="fa fa-check"></i><b>3.1</b> ¿Qué significa programar?</a></li>
 <li class="chapter" data-level="3.2" data-path="programación.html"><a href="programación.html#la-consola-versus-el-script"><i class="fa fa-check"></i><b>3.2</b> La consola versus el script</a></li>
 <li class="chapter" data-level="3.3" data-path="programación.html"><a href="programación.html#introducción-a-la-programación"><i class="fa fa-check"></i><b>3.3</b> Introducción a la programación</a></li>
@@ -136,7 +170,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.9" data-path="programación.html"><a href="programación.html#exportar-datos"><i class="fa fa-check"></i><b>3.9</b> Exportar datos</a></li>
 <li class="chapter" data-level="3.10" data-path="programación.html"><a href="programación.html#en-la-práctica"><i class="fa fa-check"></i><b>3.10</b> En la práctica</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="gráficos.html"><a href="gráficos.html"><i class="fa fa-check"></i><b>4</b> Gráficos</a><ul>
+<li class="chapter" data-level="4" data-path="gráficos.html"><a href="gráficos.html"><i class="fa fa-check"></i><b>4</b> Gráficos</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="gráficos.html"><a href="gráficos.html#cómo-graficamos-en-r"><i class="fa fa-check"></i><b>4.1</b> ¿Cómo graficamos en R?</a></li>
 <li class="chapter" data-level="4.2" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-puntos"><i class="fa fa-check"></i><b>4.2</b> Gráfico de puntos</a></li>
 <li class="chapter" data-level="4.3" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-dispersión"><i class="fa fa-check"></i><b>4.3</b> Gráfico de dispersión</a></li>
@@ -147,7 +182,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.8" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-líneas-2-factores"><i class="fa fa-check"></i><b>4.8</b> Gráfico de líneas (2 factores)</a></li>
 <li class="chapter" data-level="4.9" data-path="gráficos.html"><a href="gráficos.html#guardar-una-figura"><i class="fa fa-check"></i><b>4.9</b> Guardar una figura</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html"><i class="fa fa-check"></i><b>5</b> Caracterizar datos</a><ul>
+<li class="chapter" data-level="5" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html"><i class="fa fa-check"></i><b>5</b> Caracterizar datos</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#visualizar-los-datos"><i class="fa fa-check"></i><b>5.1</b> Visualizar los datos</a></li>
 <li class="chapter" data-level="5.2" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal"><i class="fa fa-check"></i><b>5.2</b> La curva normal</a></li>
 <li class="chapter" data-level="5.3" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal-en-la-práctica-1"><i class="fa fa-check"></i><b>5.3</b> La curva normal en la práctica (1)</a></li>
@@ -158,55 +194,66 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.8" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#los-intervalos-de-confianza-2"><i class="fa fa-check"></i><b>5.8</b> Los intervalos de confianza (2)</a></li>
 <li class="chapter" data-level="5.9" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#verificar-supuestos"><i class="fa fa-check"></i><b>5.9</b> Verificar supuestos</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="la-regresión.html"><a href="la-regresión.html"><i class="fa fa-check"></i><b>6</b> La regresión</a><ul>
+<li class="chapter" data-level="6" data-path="la-regresión.html"><a href="la-regresión.html"><i class="fa fa-check"></i><b>6</b> La regresión</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="la-regresión.html"><a href="la-regresión.html#modelos-estadísticos"><i class="fa fa-check"></i><b>6.1</b> Modelos estadísticos</a></li>
 <li class="chapter" data-level="6.2" data-path="la-regresión.html"><a href="la-regresión.html#la-ecuación-de-la-recta"><i class="fa fa-check"></i><b>6.2</b> La ecuación de la recta</a></li>
 <li class="chapter" data-level="6.3" data-path="la-regresión.html"><a href="la-regresión.html#la-suma-de-cuadrados"><i class="fa fa-check"></i><b>6.3</b> La suma de cuadrados</a></li>
 <li class="chapter" data-level="6.4" data-path="la-regresión.html"><a href="la-regresión.html#la-regresión-con-r"><i class="fa fa-check"></i><b>6.4</b> La regresión con R</a></li>
 <li class="chapter" data-level="6.5" data-path="la-regresión.html"><a href="la-regresión.html#la-correlación-con-r"><i class="fa fa-check"></i><b>6.5</b> La correlación con R</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html"><i class="fa fa-check"></i><b>7</b> La prueba de t (comparar 2 grupos)</a><ul>
+<li class="chapter" data-level="7" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html"><i class="fa fa-check"></i><b>7</b> La prueba de t (comparar 2 grupos)</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#cómo-comparamos-dos-grupos"><i class="fa fa-check"></i><b>7.1</b> ¿Cómo comparamos dos grupos?</a></li>
 <li class="chapter" data-level="7.2" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#la-distribución-normal-de-dos-grupos"><i class="fa fa-check"></i><b>7.2</b> La distribución normal de dos grupos</a></li>
 <li class="chapter" data-level="7.3" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#la-prueba-de-hipótesis"><i class="fa fa-check"></i><b>7.3</b> La prueba de hipótesis</a></li>
 <li class="chapter" data-level="7.4" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#el-t-test-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>7.4</b> El t-test como un modelo líneal general</a></li>
 <li class="chapter" data-level="7.5" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#el-t-test-con-r"><i class="fa fa-check"></i><b>7.5</b> El t-test con R</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html"><i class="fa fa-check"></i><b>8</b> ANOVA (comparar 3 grupos o más)</a><ul>
+<li class="chapter" data-level="8" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html"><i class="fa fa-check"></i><b>8</b> ANOVA (comparar 3 grupos o más)</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#por-qué-necesitamos-un-anova"><i class="fa fa-check"></i><b>8.1</b> ¿Por qué necesitamos un ANOVA?</a></li>
 <li class="chapter" data-level="8.2" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#el-anova-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>8.2</b> El ANOVA como un modelo líneal general</a></li>
 <li class="chapter" data-level="8.3" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#la-lógica-del-anova"><i class="fa fa-check"></i><b>8.3</b> La lógica del ANOVA</a></li>
 <li class="chapter" data-level="8.4" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#el-anova-con-r"><i class="fa fa-check"></i><b>8.4</b> El ANOVA con R</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="después-del-anova.html"><a href="después-del-anova.html"><i class="fa fa-check"></i><b>9</b> Después del ANOVA</a><ul>
+<li class="chapter" data-level="9" data-path="después-del-anova.html"><a href="después-del-anova.html"><i class="fa fa-check"></i><b>9</b> Después del ANOVA</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="después-del-anova.html"><a href="después-del-anova.html#qué-hacemos-después-de-un-anova"><i class="fa fa-check"></i><b>9.1</b> ¿Qué hacemos después de un ANOVA?</a></li>
 <li class="chapter" data-level="9.2" data-path="después-del-anova.html"><a href="después-del-anova.html#comparaciones-planificadas"><i class="fa fa-check"></i><b>9.2</b> Comparaciones planificadas</a></li>
 <li class="chapter" data-level="9.3" data-path="después-del-anova.html"><a href="después-del-anova.html#cálculos-con-r"><i class="fa fa-check"></i><b>9.3</b> Cálculos con R</a></li>
 <li class="chapter" data-level="9.4" data-path="después-del-anova.html"><a href="después-del-anova.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>9.4</b> Pruebas post-hoc</a></li>
 <li class="chapter" data-level="9.5" data-path="después-del-anova.html"><a href="después-del-anova.html#cálculos-con-r-1"><i class="fa fa-check"></i><b>9.5</b> Cálculos con R</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html"><i class="fa fa-check"></i><b>10</b> Más allá del ANOVA</a><ul>
+<li class="chapter" data-level="10" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html"><i class="fa fa-check"></i><b>10</b> Más allá del ANOVA</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#tipos-de-anova"><i class="fa fa-check"></i><b>10.1</b> Tipos de ANOVA</a></li>
 <li class="chapter" data-level="10.2" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#anova-factorial"><i class="fa fa-check"></i><b>10.2</b> ANOVA factorial</a></li>
 <li class="chapter" data-level="10.3" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#anova-de-medidas-repetidas"><i class="fa fa-check"></i><b>10.3</b> ANOVA de medidas repetidas</a></li>
 <li class="chapter" data-level="10.4" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#ancova"><i class="fa fa-check"></i><b>10.4</b> ANCOVA</a></li>
 <li class="chapter" data-level="10.5" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#manova"><i class="fa fa-check"></i><b>10.5</b> MANOVA</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>11</b> Otros análisis</a><ul>
+<li class="chapter" data-level="11" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>11</b> Otros análisis</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="otros-análisis.html"><a href="otros-análisis.html#análisis-de-proporciones"><i class="fa fa-check"></i><b>11.1</b> Análisis de proporciones</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="recursos.html"><a href="recursos.html"><i class="fa fa-check"></i><b>12</b> Recursos</a><ul>
-<li class="chapter" data-level="12.1" data-path="recursos.html"><a href="recursos.html#apps"><i class="fa fa-check"></i><b>12.1</b> Apps</a><ul>
+<li class="chapter" data-level="12" data-path="recursos.html"><a href="recursos.html"><i class="fa fa-check"></i><b>12</b> Recursos</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="recursos.html"><a href="recursos.html#apps"><i class="fa fa-check"></i><b>12.1</b> Apps</a>
+<ul>
 <li class="chapter" data-level="12.1.1" data-path="recursos.html"><a href="recursos.html#convertidor-de-tamaños-de-efectos"><i class="fa fa-check"></i><b>12.1.1</b> Convertidor de tamaños de efectos</a></li>
 <li class="chapter" data-level="12.1.2" data-path="recursos.html"><a href="recursos.html#convertidor-de-tamaños-de-efectos-1"><i class="fa fa-check"></i><b>12.1.2</b> Convertidor de tamaños de efectos</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="recursos.html"><a href="recursos.html#librerías"><i class="fa fa-check"></i><b>12.2</b> Librerías</a><ul>
+<li class="chapter" data-level="12.2" data-path="recursos.html"><a href="recursos.html#librerías"><i class="fa fa-check"></i><b>12.2</b> Librerías</a>
+<ul>
 <li class="chapter" data-level="12.2.1" data-path="recursos.html"><a href="recursos.html#para-calcular-tamaños-de-efectos"><i class="fa fa-check"></i><b>12.2.1</b> Para calcular tamaños de efectos</a></li>
 </ul></li>
-<li class="chapter" data-level="12.3" data-path="recursos.html"><a href="recursos.html#sitios-web"><i class="fa fa-check"></i><b>12.3</b> Sitios web</a><ul>
+<li class="chapter" data-level="12.3" data-path="recursos.html"><a href="recursos.html#sitios-web"><i class="fa fa-check"></i><b>12.3</b> Sitios web</a>
+<ul>
 <li class="chapter" data-level="12.3.1" data-path="recursos.html"><a href="recursos.html#herramientas-de-estadística"><i class="fa fa-check"></i><b>12.3.1</b> Herramientas de estadística</a></li>
 </ul></li>
-<li class="chapter" data-level="12.4" data-path="recursos.html"><a href="recursos.html#cursos"><i class="fa fa-check"></i><b>12.4</b> Cursos</a><ul>
+<li class="chapter" data-level="12.4" data-path="recursos.html"><a href="recursos.html#cursos"><i class="fa fa-check"></i><b>12.4</b> Cursos</a>
+<ul>
 <li class="chapter" data-level="12.4.1" data-path="recursos.html"><a href="recursos.html#herramientas-de-estadística-1"><i class="fa fa-check"></i><b>12.4.1</b> Herramientas de estadística</a></li>
 </ul></li>
 </ul></li>
@@ -229,48 +276,48 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="caracterizar-datos" class="section level1">
+<div id="caracterizar-datos" class="section level1" number="5">
 <h1><span class="header-section-number">Capítulo 5</span> Caracterizar datos</h1>
 <p>En este capítulo vamos a revisar algunos elementos relacionados con la estadística inferencial. Para entender estas ideas primero vamos a hablar sobre como caracterizamos y visualizamos nuestros datos.</p>
-<div id="visualizar-los-datos" class="section level2">
+<div id="visualizar-los-datos" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> Visualizar los datos</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=IFNrCATEjxY" target="_blank">video (17')</a> y trata de responder:</p>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=IFNrCATEjxY" target="_blank">video (17’)</a> y trata de responder:</p>
 <ul>
 <li>¿Por qué es importante graficar los datos?</li>
 <li>¿Cómo se calcula la desviación estándar?</li>
 <li>¿Qué es la suma de cuadrados (o suma de los errores al cuadrado)?</li>
 </ul>
 </div>
-<div id="la-curva-normal" class="section level2">
+<div id="la-curva-normal" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> La curva normal</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=AdPw4jita2o" target="_blank">video (10')</a> y trata de responder:</p>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=AdPw4jita2o" target="_blank">video (10’)</a> y trata de responder:</p>
 <ul>
-<li>¿Cómo se puede visualizar la &quot;forma&quot; de los datos?</li>
+<li>¿Cómo se puede visualizar la “forma” de los datos?</li>
 <li>¿Qué características tiene la curva normal?</li>
 <li>¿Cómo estimamos cuantas observaciones caen entre dos valores para una set de datos?</li>
 <li>¿Qué porcentaje de los datos esta entre -1 SD y 1 SD?</li>
 </ul>
 </div>
-<div id="la-curva-normal-en-la-práctica-1" class="section level2">
+<div id="la-curva-normal-en-la-práctica-1" class="section level2" number="5.3">
 <h2><span class="header-section-number">5.3</span> La curva normal en la práctica (1)</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=kcxyC1b-QZM" target="_blank">video (8')</a> y trata de responder:</p>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=kcxyC1b-QZM" target="_blank">video (8’)</a> y trata de responder:</p>
 <ul>
 <li>¿Cuantos vehículos anduvieron a exceso de velocidad? PAUSA el video para responder</li>
 <li>¿Qué porcentaje de los datos esta entre -2 SD y 2 SD?</li>
 <li>¿Qué porcentaje de los datos esta entre -2.5 SD y 2.5 SD?</li>
 </ul>
 </div>
-<div id="la-curva-normal-en-la-práctica-2" class="section level2">
+<div id="la-curva-normal-en-la-práctica-2" class="section level2" number="5.4">
 <h2><span class="header-section-number">5.4</span> La curva normal en la práctica (2)</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=zKnxXD9C-78" target="_blank">video (9')</a> y trata de responder:</p>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=zKnxXD9C-78" target="_blank">video (9’)</a> y trata de responder:</p>
 <ul>
 <li>¿Entre cuantas SD tenemos prácticamente todos los puntos de un set de datos?</li>
 <li>¿Entre Linda y Bill quien saco mejor puntaje dentro de su cohorte? PAUSA el video para responder</li>
 </ul>
 </div>
-<div id="de-la-muestra-a-la-población" class="section level2">
+<div id="de-la-muestra-a-la-población" class="section level2" number="5.5">
 <h2><span class="header-section-number">5.5</span> De la muestra a la población</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=BpH3_BJf5do" target="_blank">video (17')</a> y trata de responder:</p>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=BpH3_BJf5do" target="_blank">video (17’)</a> y trata de responder:</p>
 <ul>
 <li>¿Qué significa generalizar nuestros hallazgos?</li>
 <li>¿Qué son los parámetros?</li>
@@ -279,32 +326,32 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>¿Qué representa el promedio de los promedios de las muestras?</li>
 </ul>
 </div>
-<div id="la-muestra-en-la-vida-real" class="section level2">
+<div id="la-muestra-en-la-vida-real" class="section level2" number="5.6">
 <h2><span class="header-section-number">5.6</span> La muestra en la vida real</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=SF4vsowPyrw" target="_blank">video (10')</a> y trata de responder:</p>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=SF4vsowPyrw" target="_blank">video (10’)</a> y trata de responder:</p>
 <ul>
 <li>¿Qué pasa en la vida con respecto a la distribución de los promedios de las muestras?</li>
 <li>¿Qué es el error estándar y como se calcula?</li>
 </ul>
 </div>
-<div id="los-intervalos-de-confianza-1" class="section level2">
+<div id="los-intervalos-de-confianza-1" class="section level2" number="5.7">
 <h2><span class="header-section-number">5.7</span> Los intervalos de confianza (1)</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=WPgwrvY8SEw" target="_blank">video (13')</a> y trata de responder:</p>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=WPgwrvY8SEw" target="_blank">video (13’)</a> y trata de responder:</p>
 <ul>
 <li>¿Cómo se calcula el SE?</li>
 <li>¿Cómo se estima el promedio de la población?</li>
 <li>¿Qué son los intervalos de confianza?</li>
 </ul>
 </div>
-<div id="los-intervalos-de-confianza-2" class="section level2">
+<div id="los-intervalos-de-confianza-2" class="section level2" number="5.8">
 <h2><span class="header-section-number">5.8</span> Los intervalos de confianza (2)</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=tHovt9mI7Xg" target="_blank">video (6')</a> y trata de responder:</p>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=tHovt9mI7Xg" target="_blank">video (6’)</a> y trata de responder:</p>
 <ul>
 <li>¿Qué significa que cálculemos un promedio con un intervalo de confianza al 68%?</li>
 <li>¿Qué significa que cálculemos un promedio con un intervalo de confianza al 95%?</li>
 </ul>
 </div>
-<div id="verificar-supuestos" class="section level2">
+<div id="verificar-supuestos" class="section level2" number="5.9">
 <h2><span class="header-section-number">5.9</span> Verificar supuestos</h2>
 <p>Verificar los supuestos es un paso importante en la realización de un análisis estadístico. Los supuestos son condiciones que deben cumplirse para que los métodos estadísticos que se utilizan sean válidos. Si no se cumplen estos supuestos, los resultados del análisis pueden ser inexactos.</p>
 <p>Algunas suposiciones comunes que a menudo se verifican en el análisis estadístico incluyen:</p>
@@ -316,36 +363,39 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>Para verificar estas suposiciones se pueden realizar gráficos (histogramas o diagramas de dispersión) y pruebas estadísticas (la prueba de normalidad de Shapiro-Wilk o la prueba de Levene para varianzas iguales).</p>
 <p>Ahora vamos a hacer estos análisis. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas). Luego importamos el set de datos y le damos una mirada.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
-
-<span class="kw">library</span>(ggplot2)
-<span class="kw">library</span>(Hmisc)</code></pre></div>
-<pre><code>## Warning: package &#39;Hmisc&#39; was built under R version 4.1.3</code></pre>
-<pre><code>## Loading required package: survival</code></pre>
-<pre><code>## Loading required package: Formula</code></pre>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="caracterizar-datos.html#cb238-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
+<span id="cb238-2"><a href="caracterizar-datos.html#cb238-2" tabindex="-1"></a></span>
+<span id="cb238-3"><a href="caracterizar-datos.html#cb238-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb238-4"><a href="caracterizar-datos.html#cb238-4" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span></code></pre></div>
+<pre><code>## Warning: package &#39;Hmisc&#39; was built under R version 4.3.3</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;Hmisc&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:plyr&#39;:
 ## 
 ##     is.discrete, summarize</code></pre>
+<pre><code>## The following object is masked from &#39;package:ggm&#39;:
+## 
+##     rcorr</code></pre>
 <pre><code>## The following objects are masked from &#39;package:base&#39;:
 ## 
 ##     format.pval, units</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Rmisc)
-<span class="kw">library</span>(reshape2)</code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="caracterizar-datos.html#cb244-1" tabindex="-1"></a><span class="fu">library</span>(Rmisc)</span>
+<span id="cb244-2"><a href="caracterizar-datos.html#cb244-2" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span></code></pre></div>
+<pre><code>## Warning: package &#39;reshape2&#39; was built under R version 4.3.3</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;reshape2&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:reshape&#39;:
 ## 
 ##     colsplit, melt, recast</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pastecs)
-<span class="kw">library</span>(car)</code></pre></div>
-<pre><code>## Warning: package &#39;car&#39; was built under R version 4.1.3</code></pre>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="caracterizar-datos.html#cb248-1" tabindex="-1"></a><span class="fu">library</span>(pastecs)</span></code></pre></div>
+<pre><code>## Warning: package &#39;pastecs&#39; was built under R version 4.3.3</code></pre>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="caracterizar-datos.html#cb250-1" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
+<pre><code>## Warning: package &#39;car&#39; was built under R version 4.3.3</code></pre>
 <pre><code>## Loading required package: carData</code></pre>
-<pre><code>## Warning: package &#39;carData&#39; was built under R version 4.1.3</code></pre>
+<pre><code>## Warning: package &#39;carData&#39; was built under R version 4.3.3</code></pre>
 <p>Para un estudio se investigaron los niveles de higiene de personas que asistieron a distintos días de un festival de música. Mientras más alto es el valor hay mayores niveles de higiene.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dlf &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/DownloadFestival.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
-<span class="kw">head</span>(dlf)</code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="caracterizar-datos.html#cb254-1" tabindex="-1"></a>dlf <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/DownloadFestival.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb254-2"><a href="caracterizar-datos.html#cb254-2" tabindex="-1"></a><span class="fu">head</span>(dlf)</span></code></pre></div>
 <pre><code>##   ticknumb gender day1 day2 day3
 ## 1     2111   Male 2.64 1.35 1.61
 ## 2     2229 Female 0.97 1.41 0.29
@@ -354,69 +404,73 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 5     2401 Female 0.88 0.08   NA
 ## 6     2405   Male 0.85   NA   NA</code></pre>
 <p>En seguida podemos hacer un gráfico</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">festivalHistogram &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dlf, <span class="kw">aes</span>(day1))
-festivalHistogram <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="caracterizar-datos.html#cb256-1" tabindex="-1"></a>festivalHistogram <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dlf, <span class="fu">aes</span>(day1))</span>
+<span id="cb256-2"><a href="caracterizar-datos.html#cb256-2" tabindex="-1"></a>festivalHistogram <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-108-1.png" width="672" /></p>
-<p>Ya sabíamos de un antiguo capítulo que tenemos un outlier en esta base de datos. Para eliminarlo podemos usar la función <strong>ifelse</strong>. En esta función le decimos a R que todos los valores mayores a 20 se conviertan en 0.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dlf<span class="op">$</span>day1 &lt;-<span class="st"> </span><span class="kw">ifelse</span>(dlf<span class="op">$</span>day1 <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span>, <span class="ot">NA</span>, dlf<span class="op">$</span>day1)</code></pre></div>
+<p>Ya sabíamos de un antiguo capítulo que tenemos un outlier en esta base de datos.
+Para eliminarlo podemos usar la función <strong>ifelse</strong>. En esta función le decimos a R que todos los valores mayores a 20 se conviertan en 0.</p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="caracterizar-datos.html#cb258-1" tabindex="-1"></a>dlf<span class="sc">$</span>day1 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dlf<span class="sc">$</span>day1 <span class="sc">&gt;</span> <span class="dv">20</span>, <span class="cn">NA</span>, dlf<span class="sc">$</span>day1)</span></code></pre></div>
 <p>Luego, hacer de nuevo un histograma.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">festivalHistogram &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dlf, <span class="kw">aes</span>(day1))
-festivalHistogram <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="caracterizar-datos.html#cb259-1" tabindex="-1"></a>festivalHistogram <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dlf, <span class="fu">aes</span>(day1))</span>
+<span id="cb259-2"><a href="caracterizar-datos.html#cb259-2" tabindex="-1"></a>festivalHistogram <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<pre><code>## Warning: Removed 1 rows containing non-finite values (`stat_bin()`).</code></pre>
+<pre><code>## Warning: Removed 1 row containing non-finite outside the scale range (`stat_bin()`).</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
-<p>En esta misma línea, podemos hacer unos ajustes. Podemos ajustar el eje Y para que se muestre la densidad (es sólo un re-escalamiento). Y podemos hacer el gráfico un poco mas claro.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hist.day1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dlf, <span class="kw">aes</span>(day1)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">y =</span> ..density..), <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Hygiene score on day 1&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Density&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))
-hist.day1</code></pre></div>
+<p>En esta misma línea, podemos hacer unos ajustes.
+Podemos ajustar el eje Y para que se muestre la densidad (es sólo un re-escalamiento).
+Y podemos hacer el gráfico un poco mas claro.</p>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="caracterizar-datos.html#cb262-1" tabindex="-1"></a>hist.day1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dlf, <span class="fu">aes</span>(day1)) <span class="sc">+</span> </span>
+<span id="cb262-2"><a href="caracterizar-datos.html#cb262-2" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb262-3"><a href="caracterizar-datos.html#cb262-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..), <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb262-4"><a href="caracterizar-datos.html#cb262-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Hygiene score on day 1&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Density&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb262-5"><a href="caracterizar-datos.html#cb262-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb262-6"><a href="caracterizar-datos.html#cb262-6" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb262-7"><a href="caracterizar-datos.html#cb262-7" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb262-8"><a href="caracterizar-datos.html#cb262-8" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span>
+<span id="cb262-9"><a href="caracterizar-datos.html#cb262-9" tabindex="-1"></a>hist.day1</span></code></pre></div>
 <pre><code>## Warning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.
-## i Please use `after_stat(density)` instead.
+## ℹ Please use `after_stat(density)` instead.
 ## This warning is displayed once every 8 hours.
 ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<pre><code>## Warning: Removed 1 rows containing non-finite values (`stat_bin()`).</code></pre>
+<pre><code>## Warning: Removed 1 row containing non-finite outside the scale range (`stat_bin()`).</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
 <p>Para evaluar la normalidad podemos superponer una curva normal (en rojo) que se base en el promedio y la dispersión de los datos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hist.day1 <span class="op">+</span>
-<span class="st">  </span><span class="kw">stat_function</span>(<span class="dt">fun =</span> dnorm, 
-                <span class="dt">args =</span> <span class="kw">list</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(dlf<span class="op">$</span>day1, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), 
-                            <span class="dt">sd =</span> <span class="kw">sd</span>(dlf<span class="op">$</span>day1, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)), 
-                <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="caracterizar-datos.html#cb266-1" tabindex="-1"></a>hist.day1 <span class="sc">+</span></span>
+<span id="cb266-2"><a href="caracterizar-datos.html#cb266-2" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, </span>
+<span id="cb266-3"><a href="caracterizar-datos.html#cb266-3" tabindex="-1"></a>                <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(dlf<span class="sc">$</span>day1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb266-4"><a href="caracterizar-datos.html#cb266-4" tabindex="-1"></a>                            <span class="at">sd =</span> <span class="fu">sd</span>(dlf<span class="sc">$</span>day1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)), </span>
+<span id="cb266-5"><a href="caracterizar-datos.html#cb266-5" tabindex="-1"></a>                <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-## i Please use `linewidth` instead.
+## ℹ Please use `linewidth` instead.
 ## This warning is displayed once every 8 hours.
 ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<pre><code>## Warning: Removed 1 rows containing non-finite values (`stat_bin()`).</code></pre>
+<pre><code>## Warning: Removed 1 row containing non-finite outside the scale range (`stat_bin()`).</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
-<p>Para este set de datos la distribución de los datos se ve bastante normal si lo comparamos con la línea. Otra manera gráfica de revisar la normalidad es hacer un gráfico Q-Q</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">qqplot.day1 &lt;-<span class="st"> </span><span class="kw">qplot</span>(<span class="dt">sample =</span> dlf<span class="op">$</span>day1)</code></pre></div>
+<p>Para este set de datos la distribución de los datos se ve bastante normal si lo comparamos con la línea.
+Otra manera gráfica de revisar la normalidad es hacer un gráfico Q-Q</p>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="caracterizar-datos.html#cb270-1" tabindex="-1"></a>qqplot.day1 <span class="ot">&lt;-</span> <span class="fu">qplot</span>(<span class="at">sample =</span> dlf<span class="sc">$</span>day1)</span></code></pre></div>
 <pre><code>## Warning: `qplot()` was deprecated in ggplot2 3.4.0.
 ## This warning is displayed once every 8 hours.
 ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">qqplot.day1</code></pre></div>
-<pre><code>## Warning: Removed 1 rows containing non-finite values (`stat_qq()`).</code></pre>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="caracterizar-datos.html#cb272-1" tabindex="-1"></a>qqplot.day1</span></code></pre></div>
+<pre><code>## Warning: Removed 1 row containing non-finite outside the scale range (`stat_qq()`).</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-113-1.png" width="672" /></p>
 <p>Si los datos están normalmente distribuidos deberíamos ver una línea diagonal contínua.</p>
-<p>Además de observar gráficamente podemos aplicar analisis de normalidad. Por ejemplo, usando la función <strong>stat.desc</strong> podemos describir los datos y testear la normalidad. Debemos fijarnos en el valor de p del test (&quot;normtest.p&quot;). Si es significativo significa que los datos no poseen una distribución normal.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">stat.desc</span>(dlf<span class="op">$</span>day1, 
-          <span class="dt">basic =</span> <span class="ot">FALSE</span>, 
-          <span class="dt">norm =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
-##  1.790000000  1.770828183  0.024396670  0.047888328  0.481514784  0.693912663  0.391857702 -0.003155393 
-##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-## -0.018353763 -0.423991408 -1.234611514  0.995907065  0.031838626</code></pre>
+<p>Además de observar gráficamente podemos aplicar analisis de normalidad. Por ejemplo, usando la función <strong>stat.desc</strong> podemos describir los datos y testear la normalidad. Debemos fijarnos en el valor de p del test (“normtest.p”). Si es significativo significa que los datos no poseen una distribución normal.</p>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="caracterizar-datos.html#cb274-1" tabindex="-1"></a><span class="fu">stat.desc</span>(dlf<span class="sc">$</span>day1, </span>
+<span id="cb274-2"><a href="caracterizar-datos.html#cb274-2" tabindex="-1"></a>          <span class="at">basic =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb274-3"><a href="caracterizar-datos.html#cb274-3" tabindex="-1"></a>          <span class="at">norm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness     skew.2SE 
+##  1.790000000  1.770828183  0.024396670  0.047888328  0.481514784  0.693912663  0.391857702 -0.003155393 -0.018353763 
+##     kurtosis     kurt.2SE   normtest.W   normtest.p 
+## -0.423991408 -1.234611514  0.995907065  0.031838626</code></pre>
 <p>Podemos aplicar esta función a varias columnas al mismo tiempo.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">stat.desc</span>(<span class="kw">cbind</span>(dlf<span class="op">$</span>day1, dlf<span class="op">$</span>day2, dlf<span class="op">$</span>day3),
-          <span class="dt">basic =</span> <span class="ot">FALSE</span>, 
-          <span class="dt">norm =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="caracterizar-datos.html#cb276-1" tabindex="-1"></a><span class="fu">stat.desc</span>(<span class="fu">cbind</span>(dlf<span class="sc">$</span>day1, dlf<span class="sc">$</span>day2, dlf<span class="sc">$</span>day3),</span>
+<span id="cb276-2"><a href="caracterizar-datos.html#cb276-2" tabindex="-1"></a>          <span class="at">basic =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb276-3"><a href="caracterizar-datos.html#cb276-3" tabindex="-1"></a>          <span class="at">norm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##                        V1           V2           V3
 ## median        1.790000000 7.900000e-01 7.600000e-01
 ## mean          1.770828183 9.609091e-01 9.765041e-01
@@ -432,10 +486,10 @@ hist.day1</code></pre></div>
 ## normtest.W    0.995907065 9.083191e-01 9.077516e-01
 ## normtest.p    0.031838626 1.281630e-11 3.804486e-07</code></pre>
 <p>Y podemos definir el número de cifras significativas para tener una tabla mas leíble.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="kw">stat.desc</span>(dlf[, <span class="kw">c</span>(<span class="st">&quot;day1&quot;</span>, <span class="st">&quot;day2&quot;</span>, <span class="st">&quot;day3&quot;</span>)],
-                <span class="dt">basic =</span> <span class="ot">FALSE</span>, 
-                <span class="dt">norm =</span> <span class="ot">TRUE</span>), 
-      <span class="dt">digits =</span> <span class="dv">3</span>)</code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="caracterizar-datos.html#cb278-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">stat.desc</span>(dlf[, <span class="fu">c</span>(<span class="st">&quot;day1&quot;</span>, <span class="st">&quot;day2&quot;</span>, <span class="st">&quot;day3&quot;</span>)],</span>
+<span id="cb278-2"><a href="caracterizar-datos.html#cb278-2" tabindex="-1"></a>                <span class="at">basic =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb278-3"><a href="caracterizar-datos.html#cb278-3" tabindex="-1"></a>                <span class="at">norm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb278-4"><a href="caracterizar-datos.html#cb278-4" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##                day1  day2  day3
 ## median        1.790 0.790 0.760
 ## mean          1.771 0.961 0.977
@@ -451,7 +505,7 @@ hist.day1</code></pre></div>
 ## normtest.W    0.996 0.908 0.908
 ## normtest.p    0.032 0.000 0.000</code></pre>
 <p>Utlizar esta función es equivalente a usar la función <strong>shapiro.test</strong>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">shapiro.test</span>(dlf<span class="op">$</span>day1)</code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="caracterizar-datos.html#cb280-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(dlf<span class="sc">$</span>day1)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -459,10 +513,10 @@ hist.day1</code></pre></div>
 ## W = 0.99591, p-value = 0.03184</code></pre>
 <p>veamos otra base de datos para destacar un aspecto importante de este análisis.</p>
 <p>Para este otro estudio se investigaron distintos dominios de conocimiento y hábitos en una cohorte de estudiantes: desempeño en los examenes (exam), habilidades computacionales (computer), número de clases asistidas (lectures) y habilidad númerica (numeracy). Esta medición se realizó en 2 instituciones diferentes (uni).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rexam &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;data/rexam.dat&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
-rexam<span class="op">$</span>uni &lt;-<span class="st"> </span><span class="kw">factor</span>(rexam<span class="op">$</span>uni, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">1</span>), 
-                    <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Duncetown University&quot;</span>, <span class="st">&quot;Sussex University&quot;</span>))
-<span class="kw">head</span>(rexam)</code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="caracterizar-datos.html#cb282-1" tabindex="-1"></a>rexam <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">&quot;data/rexam.dat&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb282-2"><a href="caracterizar-datos.html#cb282-2" tabindex="-1"></a>rexam<span class="sc">$</span>uni <span class="ot">&lt;-</span> <span class="fu">factor</span>(rexam<span class="sc">$</span>uni, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>), </span>
+<span id="cb282-3"><a href="caracterizar-datos.html#cb282-3" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Duncetown University&quot;</span>, <span class="st">&quot;Sussex University&quot;</span>))</span>
+<span id="cb282-4"><a href="caracterizar-datos.html#cb282-4" tabindex="-1"></a><span class="fu">head</span>(rexam)</span></code></pre></div>
 <pre><code>##   exam computer lectures numeracy                  uni
 ## 1   18       54     75.0        7 Duncetown University
 ## 2   30       47      8.5        1 Duncetown University
@@ -471,38 +525,38 @@ rexam<span class="op">$</span>uni &lt;-<span class="st"> </span><span class="kw"
 ## 5   40       53     44.5        2 Duncetown University
 ## 6   15       48     76.5        8 Duncetown University</code></pre>
 <p>Primero graficamos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hexam &lt;-<span class="st"> </span><span class="kw">ggplot</span>(rexam, <span class="kw">aes</span>(exam)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">y =</span> ..density..), <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Exam&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Density&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))
-hexam</code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="caracterizar-datos.html#cb284-1" tabindex="-1"></a>hexam <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(rexam, <span class="fu">aes</span>(exam)) <span class="sc">+</span></span>
+<span id="cb284-2"><a href="caracterizar-datos.html#cb284-2" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb284-3"><a href="caracterizar-datos.html#cb284-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..), <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb284-4"><a href="caracterizar-datos.html#cb284-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Exam&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Density&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb284-5"><a href="caracterizar-datos.html#cb284-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb284-6"><a href="caracterizar-datos.html#cb284-6" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb284-7"><a href="caracterizar-datos.html#cb284-7" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb284-8"><a href="caracterizar-datos.html#cb284-8" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span>
+<span id="cb284-9"><a href="caracterizar-datos.html#cb284-9" tabindex="-1"></a>hexam</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-119-1.png" width="672" /></p>
 <p>El gráfico sugiere que los valores de desempeño en los examenes no siguen una distribución normal.</p>
 <p>Nuevamente para evaluar la normalidad podemos superponer una curva normal (en rojo) que se base en el promedio y la dispersión de los datos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hexam <span class="op">+</span>
-<span class="st">  </span><span class="kw">stat_function</span>(<span class="dt">fun =</span> dnorm, 
-                <span class="dt">args =</span> <span class="kw">list</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(rexam<span class="op">$</span>exam, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), 
-                            <span class="dt">sd =</span> <span class="kw">sd</span>(rexam<span class="op">$</span>exam, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)), 
-                <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="caracterizar-datos.html#cb286-1" tabindex="-1"></a>hexam <span class="sc">+</span></span>
+<span id="cb286-2"><a href="caracterizar-datos.html#cb286-2" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, </span>
+<span id="cb286-3"><a href="caracterizar-datos.html#cb286-3" tabindex="-1"></a>                <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(rexam<span class="sc">$</span>exam, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb286-4"><a href="caracterizar-datos.html#cb286-4" tabindex="-1"></a>                            <span class="at">sd =</span> <span class="fu">sd</span>(rexam<span class="sc">$</span>exam, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)), </span>
+<span id="cb286-5"><a href="caracterizar-datos.html#cb286-5" tabindex="-1"></a>                <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-120-1.png" width="672" /></p>
 <p>De hecho parece que hubieran una distribución bimodal, perteneciente a distribuciones de dos grupos diferentes.</p>
 <p>Veamos el gráfico Q-Q.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">qqplot.exam &lt;-<span class="st"> </span><span class="kw">qplot</span>(<span class="dt">sample =</span> rexam<span class="op">$</span>exam)
-qqplot.exam</code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="caracterizar-datos.html#cb288-1" tabindex="-1"></a>qqplot.exam <span class="ot">&lt;-</span> <span class="fu">qplot</span>(<span class="at">sample =</span> rexam<span class="sc">$</span>exam)</span>
+<span id="cb288-2"><a href="caracterizar-datos.html#cb288-2" tabindex="-1"></a>qqplot.exam</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
-<p>Describamos los datos y apliquemos un analisis de normalidad con la función <strong>stat.desc</strong>. Debemos fijarnos en el valor de p del test (&quot;normtest.p&quot;). Si es significativo significa que los datos no poseen una distribución normal.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="kw">stat.desc</span>(rexam[, <span class="kw">c</span>(<span class="st">&quot;exam&quot;</span>,
-                          <span class="st">&quot;computer&quot;</span>,
-                          <span class="st">&quot;lectures&quot;</span>,
-                          <span class="st">&quot;numeracy&quot;</span>)],
-                <span class="dt">basic =</span> <span class="ot">FALSE</span>, <span class="dt">norm =</span> <span class="ot">TRUE</span>),
-      <span class="dt">digits =</span> <span class="dv">2</span>)  </code></pre></div>
+<p>Describamos los datos y apliquemos un analisis de normalidad con la función <strong>stat.desc</strong>. Debemos fijarnos en el valor de p del test (“normtest.p”). Si es significativo significa que los datos no poseen una distribución normal.</p>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="caracterizar-datos.html#cb289-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">stat.desc</span>(rexam[, <span class="fu">c</span>(<span class="st">&quot;exam&quot;</span>,</span>
+<span id="cb289-2"><a href="caracterizar-datos.html#cb289-2" tabindex="-1"></a>                          <span class="st">&quot;computer&quot;</span>,</span>
+<span id="cb289-3"><a href="caracterizar-datos.html#cb289-3" tabindex="-1"></a>                          <span class="st">&quot;lectures&quot;</span>,</span>
+<span id="cb289-4"><a href="caracterizar-datos.html#cb289-4" tabindex="-1"></a>                          <span class="st">&quot;numeracy&quot;</span>)],</span>
+<span id="cb289-5"><a href="caracterizar-datos.html#cb289-5" tabindex="-1"></a>                <span class="at">basic =</span> <span class="cn">FALSE</span>, <span class="at">norm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb289-6"><a href="caracterizar-datos.html#cb289-6" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">2</span>)  </span></code></pre></div>
 <pre><code>##                exam computer lectures numeracy
 ## median        60.00    51.50    62.00     4.00
 ## mean          58.10    50.71    59.76     4.85
@@ -517,46 +571,43 @@ qqplot.exam</code></pre></div>
 ## kurt.2SE      -1.20     0.23    -0.30     0.80
 ## normtest.W     0.96     0.99     0.98     0.92
 ## normtest.p     0.00     0.44     0.08     0.00</code></pre>
-<p>En este punto es importante destacar que todos estos análisis dependen netamente de la pregunta de investigación. En el caso que queramos comparar el desempeño en los examenes entre las 2 instituciones académicas entonces lo que importa es la distribución de los valores dentro de cada grupo.</p>
+<p>En este punto es importante destacar que todos estos análisis dependen netamente de la pregunta de investigación.
+En el caso que queramos comparar el desempeño en los examenes entre las 2 instituciones académicas entonces lo que importa es la distribución de los valores dentro de cada grupo.</p>
 <p>Para hacer una descripción de los datos por grupo podemos usar la función <strong>by</strong>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">by</span>(<span class="dt">data =</span> rexam<span class="op">$</span>exam, <span class="dt">INDICES =</span> rexam<span class="op">$</span>uni, <span class="dt">FUN =</span> describe)</code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="caracterizar-datos.html#cb291-1" tabindex="-1"></a><span class="fu">by</span>(<span class="at">data =</span> rexam<span class="sc">$</span>exam, <span class="at">INDICES =</span> rexam<span class="sc">$</span>uni, <span class="at">FUN =</span> describe)</span></code></pre></div>
 <pre><code>## rexam$uni: Duncetown University
 ## dd[x, ] 
-##        n  missing distinct     Info     Mean      Gmd      .05      .10      .25      .50      .75 
-##       50        0       33    0.999    40.18    14.41    22.00    25.90    31.25    38.00    47.75 
-##      .90      .95 
-##    59.00    61.65 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10      .25      .50      .75      .90      .95 
+##       50        0       33    0.999    40.18    14.41    22.00    25.90    31.25    38.00    47.75    59.00    61.65 
 ## 
 ## lowest : 15 18 22 25 26, highest: 59 60 63 65 66
-## ------------------------------------------------------------------------------- 
+## ------------------------------------------------------------------------------------------ 
 ## rexam$uni: Sussex University
 ## dd[x, ] 
-##        n  missing distinct     Info     Mean      Gmd      .05      .10      .25      .50      .75 
-##       50        0       30    0.998    76.02    11.64    60.00    63.80    69.00    75.00    81.00 
-##      .90      .95 
-##    89.30    94.55 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10      .25      .50      .75      .90      .95 
+##       50        0       30    0.998    76.02    11.64    60.00    63.80    69.00    75.00    81.00    89.30    94.55 
 ## 
 ## lowest : 56 58 60 62 64, highest: 92 94 95 97 99</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># o lo que es lo mismo: by(rexam$exam, rexam$uni, describe)</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">by</span>(<span class="dt">data =</span> rexam<span class="op">$</span>exam, <span class="dt">INDICES =</span> rexam<span class="op">$</span>uni, <span class="dt">FUN =</span> stat.desc)</code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="caracterizar-datos.html#cb293-1" tabindex="-1"></a><span class="co"># o lo que es lo mismo: by(rexam$exam, rexam$uni, describe)</span></span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="caracterizar-datos.html#cb294-1" tabindex="-1"></a><span class="fu">by</span>(<span class="at">data =</span> rexam<span class="sc">$</span>exam, <span class="at">INDICES =</span> rexam<span class="sc">$</span>uni, <span class="at">FUN =</span> stat.desc)</span></code></pre></div>
 <pre><code>## rexam$uni: Duncetown University
-##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
-##   50.0000000    0.0000000    0.0000000   15.0000000   66.0000000   51.0000000 2009.0000000   38.0000000 
-##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
-##   40.1800000    1.7803210    3.5776890  158.4771429   12.5887705    0.3133094 
-## ------------------------------------------------------------------------------- 
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median         mean 
+##   50.0000000    0.0000000    0.0000000   15.0000000   66.0000000   51.0000000 2009.0000000   38.0000000   40.1800000 
+##      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##    1.7803210    3.5776890  158.4771429   12.5887705    0.3133094 
+## ------------------------------------------------------------------------------------------ 
 ## rexam$uni: Sussex University
-##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median 
-##   50.0000000    0.0000000    0.0000000   56.0000000   99.0000000   43.0000000 3801.0000000   75.0000000 
-##         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var 
-##   76.0200000    1.4432079    2.9002348  104.1424490   10.2050208    0.1342413</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># o lo que es lo mismo: by(rexam$exam, rexam$uni, stat.desc)</span></code></pre></div>
+##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median         mean 
+##   50.0000000    0.0000000    0.0000000   56.0000000   99.0000000   43.0000000 3801.0000000   75.0000000   76.0200000 
+##      SE.mean CI.mean.0.95          var      std.dev     coef.var 
+##    1.4432079    2.9002348  104.1424490   10.2050208    0.1342413</code></pre>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="caracterizar-datos.html#cb296-1" tabindex="-1"></a><span class="co"># o lo que es lo mismo: by(rexam$exam, rexam$uni, stat.desc)</span></span></code></pre></div>
 <p>También se pueden describir simultáneamente varias variables.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">by</span>(rexam[, <span class="kw">c</span>(<span class="st">&quot;exam&quot;</span>, <span class="st">&quot;computer&quot;</span>, <span class="st">&quot;lectures&quot;</span>, <span class="st">&quot;numeracy&quot;</span>)],
-   rexam<span class="op">$</span>uni, 
-   stat.desc,
-   <span class="dt">basic =</span> <span class="ot">FALSE</span>, 
-   <span class="dt">norm =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="caracterizar-datos.html#cb297-1" tabindex="-1"></a><span class="fu">by</span>(rexam[, <span class="fu">c</span>(<span class="st">&quot;exam&quot;</span>, <span class="st">&quot;computer&quot;</span>, <span class="st">&quot;lectures&quot;</span>, <span class="st">&quot;numeracy&quot;</span>)],</span>
+<span id="cb297-2"><a href="caracterizar-datos.html#cb297-2" tabindex="-1"></a>   rexam<span class="sc">$</span>uni, </span>
+<span id="cb297-3"><a href="caracterizar-datos.html#cb297-3" tabindex="-1"></a>   stat.desc,</span>
+<span id="cb297-4"><a href="caracterizar-datos.html#cb297-4" tabindex="-1"></a>   <span class="at">basic =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb297-5"><a href="caracterizar-datos.html#cb297-5" tabindex="-1"></a>   <span class="at">norm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## rexam$uni: Duncetown University
 ##                     exam   computer    lectures    numeracy
 ## median        38.0000000 49.0000000  60.5000000  4.00000000
@@ -572,7 +623,7 @@ qqplot.exam</code></pre></div>
 ## kurt.2SE      -0.5462122 -0.5121147  -0.4256518 -0.49226083
 ## normtest.W     0.9721662  0.9776351   0.9697413  0.94081692
 ## normtest.p     0.2828984  0.4571105   0.2259072  0.01451518
-## ------------------------------------------------------------------------------- 
+## ------------------------------------------------------------------------------------------ 
 ## rexam$uni: Sussex University
 ##                     exam    computer    lectures     numeracy
 ## median        75.0000000 54.00000000  65.7500000  5.000000000
@@ -588,15 +639,16 @@ qqplot.exam</code></pre></div>
 ## kurt.2SE      -0.3482086  0.72823358  -0.3198197 -0.004864766
 ## normtest.W     0.9837115  0.94392221   0.9817164  0.932346126
 ## normtest.p     0.7151182  0.01931372   0.6262649  0.006786803</code></pre>
-<p>Estos análisis son equivalentes a usar la función <strong>shapiro.test</strong>. Nuevamente, dependiendo de la pregunta de investigación miramos la normalidad de todos los datos de desempeño en el examen.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">shapiro.test</span>(rexam<span class="op">$</span>exam)</code></pre></div>
+<p>Estos análisis son equivalentes a usar la función <strong>shapiro.test</strong>.
+Nuevamente, dependiendo de la pregunta de investigación miramos la normalidad de todos los datos de desempeño en el examen.</p>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="caracterizar-datos.html#cb299-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(rexam<span class="sc">$</span>exam)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  rexam$exam
 ## W = 0.96131, p-value = 0.004991</code></pre>
 <p>O miramos los datos de desempeño en el examen en función de los grupos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">by</span>(rexam<span class="op">$</span>exam, rexam<span class="op">$</span>uni, shapiro.test)</code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="caracterizar-datos.html#cb301-1" tabindex="-1"></a><span class="fu">by</span>(rexam<span class="sc">$</span>exam, rexam<span class="sc">$</span>uni, shapiro.test)</span></code></pre></div>
 <pre><code>## rexam$uni: Duncetown University
 ## 
 ##  Shapiro-Wilk normality test
@@ -604,7 +656,7 @@ qqplot.exam</code></pre></div>
 ## data:  dd[x, ]
 ## W = 0.97217, p-value = 0.2829
 ## 
-## ------------------------------------------------------------------------------- 
+## ------------------------------------------------------------------------------------------ 
 ## rexam$uni: Sussex University
 ## 
 ##  Shapiro-Wilk normality test
@@ -612,22 +664,23 @@ qqplot.exam</code></pre></div>
 ## data:  dd[x, ]
 ## W = 0.98371, p-value = 0.7151</code></pre>
 <p>Para graficar podemos separar los datos en función de las instituciones.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dunceData &lt;-<span class="st"> </span>rexam[rexam<span class="op">$</span>uni<span class="op">==</span><span class="st">&quot;Duncetown University&quot;</span>,]
-sussexData &lt;-<span class="st"> </span>rexam[rexam<span class="op">$</span>uni<span class="op">==</span><span class="st">&quot;Sussex University&quot;</span>,]</code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="caracterizar-datos.html#cb303-1" tabindex="-1"></a>dunceData <span class="ot">&lt;-</span> rexam[rexam<span class="sc">$</span>uni<span class="sc">==</span><span class="st">&quot;Duncetown University&quot;</span>,]</span>
+<span id="cb303-2"><a href="caracterizar-datos.html#cb303-2" tabindex="-1"></a>sussexData <span class="ot">&lt;-</span> rexam[rexam<span class="sc">$</span>uni<span class="sc">==</span><span class="st">&quot;Sussex University&quot;</span>,]</span></code></pre></div>
 <p>Luego podemos graficar por ejemplo los valores en el desempeño del examen para una de las instituciones.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hist.exam.duncetown &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dunceData, <span class="kw">aes</span>(exam)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">y =</span> ..density..), <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">binwidth =</span> <span class="dv">1</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Numeracy Score&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Density&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Duncetown&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">stat_function</span>(<span class="dt">fun=</span>dnorm, 
-                <span class="dt">args=</span><span class="kw">list</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(dunceData<span class="op">$</span>exam, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), 
-                          <span class="dt">sd =</span> <span class="kw">sd</span>(dunceData<span class="op">$</span>exam, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)), 
-                <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">size=</span><span class="dv">1</span>)
-hist.exam.duncetown</code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="caracterizar-datos.html#cb304-1" tabindex="-1"></a>hist.exam.duncetown <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dunceData, <span class="fu">aes</span>(exam)) <span class="sc">+</span></span>
+<span id="cb304-2"><a href="caracterizar-datos.html#cb304-2" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb304-3"><a href="caracterizar-datos.html#cb304-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..), <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb304-4"><a href="caracterizar-datos.html#cb304-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Numeracy Score&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Density&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb304-5"><a href="caracterizar-datos.html#cb304-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Duncetown&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb304-6"><a href="caracterizar-datos.html#cb304-6" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun=</span>dnorm, </span>
+<span id="cb304-7"><a href="caracterizar-datos.html#cb304-7" tabindex="-1"></a>                <span class="at">args=</span><span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(dunceData<span class="sc">$</span>exam, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb304-8"><a href="caracterizar-datos.html#cb304-8" tabindex="-1"></a>                          <span class="at">sd =</span> <span class="fu">sd</span>(dunceData<span class="sc">$</span>exam, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)), </span>
+<span id="cb304-9"><a href="caracterizar-datos.html#cb304-9" tabindex="-1"></a>                <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">1</span>)</span>
+<span id="cb304-10"><a href="caracterizar-datos.html#cb304-10" tabindex="-1"></a>hist.exam.duncetown</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
-<p>Otro supuesto que debemos testear es la homogenidad de la varianza. Para ello aplicamos un test de Levene.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">leveneTest</span>(rexam<span class="op">$</span>exam, rexam<span class="op">$</span>uni)</code></pre></div>
+<p>Otro supuesto que debemos testear es la homogenidad de la varianza.
+Para ello aplicamos un test de Levene.</p>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="caracterizar-datos.html#cb305-1" tabindex="-1"></a><span class="fu">leveneTest</span>(rexam<span class="sc">$</span>exam, rexam<span class="sc">$</span>uni)</span></code></pre></div>
 <pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
 ##       Df F value Pr(&gt;F)
 ## group  1  2.0886 0.1516

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 7 La prueba de t (comparar 2 grupos) | Estadística con R</title>
   <meta name="description" content="Capítulo 7 La prueba de t (comparar 2 grupos) | Estadística con R" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 7 La prueba de t (comparar 2 grupos) | Estadística con R" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2023-09-03" />
+<meta name="date" content="2024-04-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,43 +52,74 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -107,7 +138,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preámbulo</a></li>
-<li class="chapter" data-level="1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html"><i class="fa fa-check"></i><b>1</b> Introducción a la estadística</a><ul>
+<li class="chapter" data-level="1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html"><i class="fa fa-check"></i><b>1</b> Introducción a la estadística</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#qué-es-la-estadística"><i class="fa fa-check"></i><b>1.1</b> ¿Qué es la estadística?</a></li>
 <li class="chapter" data-level="1.2" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#qué-son-las-variables"><i class="fa fa-check"></i><b>1.2</b> ¿Qué son las variables?</a></li>
 <li class="chapter" data-level="1.3" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#diseños-experimentales"><i class="fa fa-check"></i><b>1.3</b> Diseños experimentales</a></li>
@@ -117,14 +149,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.7" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#el-origen-de-p"><i class="fa fa-check"></i><b>1.7</b> El origen de p</a></li>
 <li class="chapter" data-level="1.8" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#para-qué-randomizar"><i class="fa fa-check"></i><b>1.8</b> ¿Para qué randomizar?</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html"><i class="fa fa-check"></i><b>2</b> Conceptos estadísticos</a><ul>
-<li class="chapter" data-level="2.1" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#la-significancia"><i class="fa fa-check"></i><b>2.1</b> La significancia</a></li>
-<li class="chapter" data-level="2.2" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#las-colas"><i class="fa fa-check"></i><b>2.2</b> Las colas</a></li>
-<li class="chapter" data-level="2.3" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#los-errores-estadísticos"><i class="fa fa-check"></i><b>2.3</b> Los errores estadísticos</a></li>
-<li class="chapter" data-level="2.4" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#tamaño-poder"><i class="fa fa-check"></i><b>2.4</b> Tamaño &amp; poder</a></li>
-<li class="chapter" data-level="2.5" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#cómo-planificar-un-estudio"><i class="fa fa-check"></i><b>2.5</b> ¿Cómo planificar un estudio?</a></li>
+<li class="chapter" data-level="2" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html"><i class="fa fa-check"></i><b>2</b> Conceptos estadísticos claves</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#la-significancia"><i class="fa fa-check"></i><b>2.1</b> La significancia</a></li>
+<li class="chapter" data-level="2.2" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#las-colas"><i class="fa fa-check"></i><b>2.2</b> Las colas</a></li>
+<li class="chapter" data-level="2.3" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#los-errores-estadísticos"><i class="fa fa-check"></i><b>2.3</b> Los errores estadísticos</a></li>
+<li class="chapter" data-level="2.4" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#tamaño-poder"><i class="fa fa-check"></i><b>2.4</b> Tamaño &amp; poder</a></li>
+<li class="chapter" data-level="2.5" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#cómo-planificar-un-estudio"><i class="fa fa-check"></i><b>2.5</b> ¿Cómo planificar un estudio?</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="programación.html"><a href="programación.html"><i class="fa fa-check"></i><b>3</b> Programación</a><ul>
+<li class="chapter" data-level="3" data-path="programación.html"><a href="programación.html"><i class="fa fa-check"></i><b>3</b> Programación</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="programación.html"><a href="programación.html#qué-significa-programar"><i class="fa fa-check"></i><b>3.1</b> ¿Qué significa programar?</a></li>
 <li class="chapter" data-level="3.2" data-path="programación.html"><a href="programación.html#la-consola-versus-el-script"><i class="fa fa-check"></i><b>3.2</b> La consola versus el script</a></li>
 <li class="chapter" data-level="3.3" data-path="programación.html"><a href="programación.html#introducción-a-la-programación"><i class="fa fa-check"></i><b>3.3</b> Introducción a la programación</a></li>
@@ -136,7 +170,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.9" data-path="programación.html"><a href="programación.html#exportar-datos"><i class="fa fa-check"></i><b>3.9</b> Exportar datos</a></li>
 <li class="chapter" data-level="3.10" data-path="programación.html"><a href="programación.html#en-la-práctica"><i class="fa fa-check"></i><b>3.10</b> En la práctica</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="gráficos.html"><a href="gráficos.html"><i class="fa fa-check"></i><b>4</b> Gráficos</a><ul>
+<li class="chapter" data-level="4" data-path="gráficos.html"><a href="gráficos.html"><i class="fa fa-check"></i><b>4</b> Gráficos</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="gráficos.html"><a href="gráficos.html#cómo-graficamos-en-r"><i class="fa fa-check"></i><b>4.1</b> ¿Cómo graficamos en R?</a></li>
 <li class="chapter" data-level="4.2" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-puntos"><i class="fa fa-check"></i><b>4.2</b> Gráfico de puntos</a></li>
 <li class="chapter" data-level="4.3" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-dispersión"><i class="fa fa-check"></i><b>4.3</b> Gráfico de dispersión</a></li>
@@ -147,7 +182,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.8" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-líneas-2-factores"><i class="fa fa-check"></i><b>4.8</b> Gráfico de líneas (2 factores)</a></li>
 <li class="chapter" data-level="4.9" data-path="gráficos.html"><a href="gráficos.html#guardar-una-figura"><i class="fa fa-check"></i><b>4.9</b> Guardar una figura</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html"><i class="fa fa-check"></i><b>5</b> Caracterizar datos</a><ul>
+<li class="chapter" data-level="5" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html"><i class="fa fa-check"></i><b>5</b> Caracterizar datos</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#visualizar-los-datos"><i class="fa fa-check"></i><b>5.1</b> Visualizar los datos</a></li>
 <li class="chapter" data-level="5.2" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal"><i class="fa fa-check"></i><b>5.2</b> La curva normal</a></li>
 <li class="chapter" data-level="5.3" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal-en-la-práctica-1"><i class="fa fa-check"></i><b>5.3</b> La curva normal en la práctica (1)</a></li>
@@ -158,55 +194,66 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.8" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#los-intervalos-de-confianza-2"><i class="fa fa-check"></i><b>5.8</b> Los intervalos de confianza (2)</a></li>
 <li class="chapter" data-level="5.9" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#verificar-supuestos"><i class="fa fa-check"></i><b>5.9</b> Verificar supuestos</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="la-regresión.html"><a href="la-regresión.html"><i class="fa fa-check"></i><b>6</b> La regresión</a><ul>
+<li class="chapter" data-level="6" data-path="la-regresión.html"><a href="la-regresión.html"><i class="fa fa-check"></i><b>6</b> La regresión</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="la-regresión.html"><a href="la-regresión.html#modelos-estadísticos"><i class="fa fa-check"></i><b>6.1</b> Modelos estadísticos</a></li>
 <li class="chapter" data-level="6.2" data-path="la-regresión.html"><a href="la-regresión.html#la-ecuación-de-la-recta"><i class="fa fa-check"></i><b>6.2</b> La ecuación de la recta</a></li>
 <li class="chapter" data-level="6.3" data-path="la-regresión.html"><a href="la-regresión.html#la-suma-de-cuadrados"><i class="fa fa-check"></i><b>6.3</b> La suma de cuadrados</a></li>
 <li class="chapter" data-level="6.4" data-path="la-regresión.html"><a href="la-regresión.html#la-regresión-con-r"><i class="fa fa-check"></i><b>6.4</b> La regresión con R</a></li>
 <li class="chapter" data-level="6.5" data-path="la-regresión.html"><a href="la-regresión.html#la-correlación-con-r"><i class="fa fa-check"></i><b>6.5</b> La correlación con R</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html"><i class="fa fa-check"></i><b>7</b> La prueba de t (comparar 2 grupos)</a><ul>
+<li class="chapter" data-level="7" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html"><i class="fa fa-check"></i><b>7</b> La prueba de t (comparar 2 grupos)</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#cómo-comparamos-dos-grupos"><i class="fa fa-check"></i><b>7.1</b> ¿Cómo comparamos dos grupos?</a></li>
 <li class="chapter" data-level="7.2" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#la-distribución-normal-de-dos-grupos"><i class="fa fa-check"></i><b>7.2</b> La distribución normal de dos grupos</a></li>
 <li class="chapter" data-level="7.3" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#la-prueba-de-hipótesis"><i class="fa fa-check"></i><b>7.3</b> La prueba de hipótesis</a></li>
 <li class="chapter" data-level="7.4" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#el-t-test-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>7.4</b> El t-test como un modelo líneal general</a></li>
 <li class="chapter" data-level="7.5" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#el-t-test-con-r"><i class="fa fa-check"></i><b>7.5</b> El t-test con R</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html"><i class="fa fa-check"></i><b>8</b> ANOVA (comparar 3 grupos o más)</a><ul>
+<li class="chapter" data-level="8" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html"><i class="fa fa-check"></i><b>8</b> ANOVA (comparar 3 grupos o más)</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#por-qué-necesitamos-un-anova"><i class="fa fa-check"></i><b>8.1</b> ¿Por qué necesitamos un ANOVA?</a></li>
 <li class="chapter" data-level="8.2" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#el-anova-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>8.2</b> El ANOVA como un modelo líneal general</a></li>
 <li class="chapter" data-level="8.3" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#la-lógica-del-anova"><i class="fa fa-check"></i><b>8.3</b> La lógica del ANOVA</a></li>
 <li class="chapter" data-level="8.4" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#el-anova-con-r"><i class="fa fa-check"></i><b>8.4</b> El ANOVA con R</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="después-del-anova.html"><a href="después-del-anova.html"><i class="fa fa-check"></i><b>9</b> Después del ANOVA</a><ul>
+<li class="chapter" data-level="9" data-path="después-del-anova.html"><a href="después-del-anova.html"><i class="fa fa-check"></i><b>9</b> Después del ANOVA</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="después-del-anova.html"><a href="después-del-anova.html#qué-hacemos-después-de-un-anova"><i class="fa fa-check"></i><b>9.1</b> ¿Qué hacemos después de un ANOVA?</a></li>
 <li class="chapter" data-level="9.2" data-path="después-del-anova.html"><a href="después-del-anova.html#comparaciones-planificadas"><i class="fa fa-check"></i><b>9.2</b> Comparaciones planificadas</a></li>
 <li class="chapter" data-level="9.3" data-path="después-del-anova.html"><a href="después-del-anova.html#cálculos-con-r"><i class="fa fa-check"></i><b>9.3</b> Cálculos con R</a></li>
 <li class="chapter" data-level="9.4" data-path="después-del-anova.html"><a href="después-del-anova.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>9.4</b> Pruebas post-hoc</a></li>
 <li class="chapter" data-level="9.5" data-path="después-del-anova.html"><a href="después-del-anova.html#cálculos-con-r-1"><i class="fa fa-check"></i><b>9.5</b> Cálculos con R</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html"><i class="fa fa-check"></i><b>10</b> Más allá del ANOVA</a><ul>
+<li class="chapter" data-level="10" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html"><i class="fa fa-check"></i><b>10</b> Más allá del ANOVA</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#tipos-de-anova"><i class="fa fa-check"></i><b>10.1</b> Tipos de ANOVA</a></li>
 <li class="chapter" data-level="10.2" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#anova-factorial"><i class="fa fa-check"></i><b>10.2</b> ANOVA factorial</a></li>
 <li class="chapter" data-level="10.3" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#anova-de-medidas-repetidas"><i class="fa fa-check"></i><b>10.3</b> ANOVA de medidas repetidas</a></li>
 <li class="chapter" data-level="10.4" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#ancova"><i class="fa fa-check"></i><b>10.4</b> ANCOVA</a></li>
 <li class="chapter" data-level="10.5" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#manova"><i class="fa fa-check"></i><b>10.5</b> MANOVA</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>11</b> Otros análisis</a><ul>
+<li class="chapter" data-level="11" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>11</b> Otros análisis</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="otros-análisis.html"><a href="otros-análisis.html#análisis-de-proporciones"><i class="fa fa-check"></i><b>11.1</b> Análisis de proporciones</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="recursos.html"><a href="recursos.html"><i class="fa fa-check"></i><b>12</b> Recursos</a><ul>
-<li class="chapter" data-level="12.1" data-path="recursos.html"><a href="recursos.html#apps"><i class="fa fa-check"></i><b>12.1</b> Apps</a><ul>
+<li class="chapter" data-level="12" data-path="recursos.html"><a href="recursos.html"><i class="fa fa-check"></i><b>12</b> Recursos</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="recursos.html"><a href="recursos.html#apps"><i class="fa fa-check"></i><b>12.1</b> Apps</a>
+<ul>
 <li class="chapter" data-level="12.1.1" data-path="recursos.html"><a href="recursos.html#convertidor-de-tamaños-de-efectos"><i class="fa fa-check"></i><b>12.1.1</b> Convertidor de tamaños de efectos</a></li>
 <li class="chapter" data-level="12.1.2" data-path="recursos.html"><a href="recursos.html#convertidor-de-tamaños-de-efectos-1"><i class="fa fa-check"></i><b>12.1.2</b> Convertidor de tamaños de efectos</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="recursos.html"><a href="recursos.html#librerías"><i class="fa fa-check"></i><b>12.2</b> Librerías</a><ul>
+<li class="chapter" data-level="12.2" data-path="recursos.html"><a href="recursos.html#librerías"><i class="fa fa-check"></i><b>12.2</b> Librerías</a>
+<ul>
 <li class="chapter" data-level="12.2.1" data-path="recursos.html"><a href="recursos.html#para-calcular-tamaños-de-efectos"><i class="fa fa-check"></i><b>12.2.1</b> Para calcular tamaños de efectos</a></li>
 </ul></li>
-<li class="chapter" data-level="12.3" data-path="recursos.html"><a href="recursos.html#sitios-web"><i class="fa fa-check"></i><b>12.3</b> Sitios web</a><ul>
+<li class="chapter" data-level="12.3" data-path="recursos.html"><a href="recursos.html#sitios-web"><i class="fa fa-check"></i><b>12.3</b> Sitios web</a>
+<ul>
 <li class="chapter" data-level="12.3.1" data-path="recursos.html"><a href="recursos.html#herramientas-de-estadística"><i class="fa fa-check"></i><b>12.3.1</b> Herramientas de estadística</a></li>
 </ul></li>
-<li class="chapter" data-level="12.4" data-path="recursos.html"><a href="recursos.html#cursos"><i class="fa fa-check"></i><b>12.4</b> Cursos</a><ul>
+<li class="chapter" data-level="12.4" data-path="recursos.html"><a href="recursos.html#cursos"><i class="fa fa-check"></i><b>12.4</b> Cursos</a>
+<ul>
 <li class="chapter" data-level="12.4.1" data-path="recursos.html"><a href="recursos.html#herramientas-de-estadística-1"><i class="fa fa-check"></i><b>12.4.1</b> Herramientas de estadística</a></li>
 </ul></li>
 </ul></li>
@@ -229,56 +276,57 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="la-prueba-de-t-comparar-2-grupos" class="section level1">
+<div id="la-prueba-de-t-comparar-2-grupos" class="section level1" number="7">
 <h1><span class="header-section-number">Capítulo 7</span> La prueba de t (comparar 2 grupos)</h1>
 <p>En este capítulo vamos a revisar la típica prueba para comparar dos grupos, el t-test.</p>
-<div id="cómo-comparamos-dos-grupos" class="section level2">
+<div id="cómo-comparamos-dos-grupos" class="section level2" number="7.1">
 <h2><span class="header-section-number">7.1</span> ¿Cómo comparamos dos grupos?</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=3JKMXCpQvzw" target="_blank">video (10')</a> y trata de responder:</p>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=3JKMXCpQvzw" target="_blank">video (10’)</a> y trata de responder:</p>
 <ul>
 <li>¿Cómo se sabe si dos muestras viene de una misma población o de poblaciones diferentes?</li>
 <li>¿Cómo podemos usar los intervalos de confianzar para estimar las diferencias entre dos muestras?</li>
 </ul>
 </div>
-<div id="la-distribución-normal-de-dos-grupos" class="section level2">
+<div id="la-distribución-normal-de-dos-grupos" class="section level2" number="7.2">
 <h2><span class="header-section-number">7.2</span> La distribución normal de dos grupos</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=nUutIbaRWCQ" target="_blank">video (9')</a> y trata de responder:</p>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=nUutIbaRWCQ" target="_blank">video (9’)</a> y trata de responder:</p>
 <ul>
 <li>¿Para que nos sirve la distribución normal para compara dos muestras?</li>
 </ul>
 </div>
-<div id="la-prueba-de-hipótesis" class="section level2">
+<div id="la-prueba-de-hipótesis" class="section level2" number="7.3">
 <h2><span class="header-section-number">7.3</span> La prueba de hipótesis</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=L3SbEqzEWW0" target="_blank">video (12')</a> y trata de responder:</p>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=L3SbEqzEWW0" target="_blank">video (12’)</a> y trata de responder:</p>
 <ul>
 <li>¿Cuál es la hipótesis nula cuando comparamos dos muestras?</li>
 </ul>
 </div>
-<div id="el-t-test-como-un-modelo-líneal-general" class="section level2">
+<div id="el-t-test-como-un-modelo-líneal-general" class="section level2" number="7.4">
 <h2><span class="header-section-number">7.4</span> El t-test como un modelo líneal general</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=RS79Z69iu5U" target="_blank">video (15')</a> y trata de responder:</p>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=RS79Z69iu5U" target="_blank">video (15’)</a> y trata de responder:</p>
 <ul>
 <li>¿Cómo se refleja un t-test en un modelo lineal general (GLM)?</li>
 <li>¿Qué representa el intercepto de la ecuación de un GLM para una variable outcome cuando se comparan dos grupos?</li>
 <li>¿Qué representa la pendiente de la ecuación de un GLM para una variable outcome cuando se comparan dos grupos?</li>
 </ul>
 </div>
-<div id="el-t-test-con-r" class="section level2">
+<div id="el-t-test-con-r" class="section level2" number="7.5">
 <h2><span class="header-section-number">7.5</span> El t-test con R</h2>
 <p>Ahora vamos a hacer el análisis. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas). Luego importamos el set de datos y le damos una mirada.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
-
-<span class="kw">library</span>(ggplot2)
-<span class="kw">library</span>(Hmisc)
-<span class="kw">library</span>(Rmisc)
-<span class="kw">library</span>(effsize)
-<span class="kw">library</span>(pastecs)
-<span class="kw">library</span>(reshape2)
-<span class="kw">library</span>(car)
-<span class="kw">library</span>(effsize)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spiderLong &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/ansiedad_por_arañas_indep.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span>
-spiderLong<span class="op">$</span>Condicion &lt;-<span class="st"> </span><span class="kw">factor</span>(spiderLong<span class="op">$</span>Condicion)
-<span class="kw">head</span>(spiderLong)</code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb361-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
+<span id="cb361-2"><a href="la-prueba-de-t-comparar-2-grupos.html#cb361-2" tabindex="-1"></a></span>
+<span id="cb361-3"><a href="la-prueba-de-t-comparar-2-grupos.html#cb361-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb361-4"><a href="la-prueba-de-t-comparar-2-grupos.html#cb361-4" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
+<span id="cb361-5"><a href="la-prueba-de-t-comparar-2-grupos.html#cb361-5" tabindex="-1"></a><span class="fu">library</span>(Rmisc)</span>
+<span id="cb361-6"><a href="la-prueba-de-t-comparar-2-grupos.html#cb361-6" tabindex="-1"></a><span class="fu">library</span>(effsize)</span></code></pre></div>
+<pre><code>## Warning: package &#39;effsize&#39; was built under R version 4.3.3</code></pre>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb363-1" tabindex="-1"></a><span class="fu">library</span>(pastecs)</span>
+<span id="cb363-2"><a href="la-prueba-de-t-comparar-2-grupos.html#cb363-2" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb363-3"><a href="la-prueba-de-t-comparar-2-grupos.html#cb363-3" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb363-4"><a href="la-prueba-de-t-comparar-2-grupos.html#cb363-4" tabindex="-1"></a><span class="fu">library</span>(effsize)</span></code></pre></div>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb364-1" tabindex="-1"></a>spiderLong <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/ansiedad_por_arañas_indep.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>) <span class="co"># load data</span></span>
+<span id="cb364-2"><a href="la-prueba-de-t-comparar-2-grupos.html#cb364-2" tabindex="-1"></a>spiderLong<span class="sc">$</span>Condicion <span class="ot">&lt;-</span> <span class="fu">factor</span>(spiderLong<span class="sc">$</span>Condicion)</span>
+<span id="cb364-3"><a href="la-prueba-de-t-comparar-2-grupos.html#cb364-3" tabindex="-1"></a><span class="fu">head</span>(spiderLong)</span></code></pre></div>
 <pre><code>##   Sujeto Condicion Conductancia
 ## 1      1    imagen           30
 ## 2      2    imagen           35
@@ -287,52 +335,53 @@ spiderLong<span class="op">$</span>Condicion &lt;-<span class="st"> </span><span
 ## 5      5    imagen           50
 ## 6      6    imagen           35</code></pre>
 <p>Luego, mirar los datos siempre es bueno graficar.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Podemos usar esta función para calcular los estadísticos a través de los participantes.</span>
-datac &lt;-<span class="st"> </span><span class="kw">summarySE</span>(spiderLong, 
-                   <span class="dt">measurevar=</span><span class="st">&quot;Conductancia&quot;</span>, 
-                   <span class="dt">groupvars =</span> <span class="st">&quot;Condicion&quot;</span>)
-
-<span class="co"># Luego hacemos el gráfico</span>
-<span class="kw">ggplot</span>(datac, <span class="kw">aes</span>(<span class="dt">x =</span> Condicion, <span class="dt">y =</span> Conductancia)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>),
-           <span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>, 
-           <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, 
-           <span class="dt">fill =</span> <span class="st">&quot;White&quot;</span>, 
-           <span class="dt">show.legend=</span><span class="ot">FALSE</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">position=</span><span class="kw">position_dodge</span>(.<span class="dv">9</span>), 
-                <span class="dt">width=</span>.<span class="dv">25</span>, 
-                <span class="kw">aes</span>(<span class="dt">ymin =</span> Conductancia, <span class="dt">ymax =</span> Conductancia<span class="op">+</span>se)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">55</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">55</span>, <span class="dv">10</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Conductancia&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb366-1" tabindex="-1"></a><span class="co"># Podemos usar esta función para calcular los estadísticos a través de los participantes.</span></span>
+<span id="cb366-2"><a href="la-prueba-de-t-comparar-2-grupos.html#cb366-2" tabindex="-1"></a>datac <span class="ot">&lt;-</span> <span class="fu">summarySE</span>(spiderLong, </span>
+<span id="cb366-3"><a href="la-prueba-de-t-comparar-2-grupos.html#cb366-3" tabindex="-1"></a>                   <span class="at">measurevar=</span><span class="st">&quot;Conductancia&quot;</span>, </span>
+<span id="cb366-4"><a href="la-prueba-de-t-comparar-2-grupos.html#cb366-4" tabindex="-1"></a>                   <span class="at">groupvars =</span> <span class="st">&quot;Condicion&quot;</span>)</span>
+<span id="cb366-5"><a href="la-prueba-de-t-comparar-2-grupos.html#cb366-5" tabindex="-1"></a></span>
+<span id="cb366-6"><a href="la-prueba-de-t-comparar-2-grupos.html#cb366-6" tabindex="-1"></a><span class="co"># Luego hacemos el gráfico</span></span>
+<span id="cb366-7"><a href="la-prueba-de-t-comparar-2-grupos.html#cb366-7" tabindex="-1"></a><span class="fu">ggplot</span>(datac, <span class="fu">aes</span>(<span class="at">x =</span> Condicion, <span class="at">y =</span> Conductancia)) <span class="sc">+</span></span>
+<span id="cb366-8"><a href="la-prueba-de-t-comparar-2-grupos.html#cb366-8" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
+<span id="cb366-9"><a href="la-prueba-de-t-comparar-2-grupos.html#cb366-9" tabindex="-1"></a>           <span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, </span>
+<span id="cb366-10"><a href="la-prueba-de-t-comparar-2-grupos.html#cb366-10" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, </span>
+<span id="cb366-11"><a href="la-prueba-de-t-comparar-2-grupos.html#cb366-11" tabindex="-1"></a>           <span class="at">fill =</span> <span class="st">&quot;White&quot;</span>, </span>
+<span id="cb366-12"><a href="la-prueba-de-t-comparar-2-grupos.html#cb366-12" tabindex="-1"></a>           <span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb366-13"><a href="la-prueba-de-t-comparar-2-grupos.html#cb366-13" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">position=</span><span class="fu">position_dodge</span>(.<span class="dv">9</span>), </span>
+<span id="cb366-14"><a href="la-prueba-de-t-comparar-2-grupos.html#cb366-14" tabindex="-1"></a>                <span class="at">width=</span>.<span class="dv">25</span>, </span>
+<span id="cb366-15"><a href="la-prueba-de-t-comparar-2-grupos.html#cb366-15" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">ymin =</span> Conductancia, <span class="at">ymax =</span> Conductancia<span class="sc">+</span>se)) <span class="sc">+</span></span>
+<span id="cb366-16"><a href="la-prueba-de-t-comparar-2-grupos.html#cb366-16" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb366-17"><a href="la-prueba-de-t-comparar-2-grupos.html#cb366-17" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb366-18"><a href="la-prueba-de-t-comparar-2-grupos.html#cb366-18" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb366-19"><a href="la-prueba-de-t-comparar-2-grupos.html#cb366-19" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb366-20"><a href="la-prueba-de-t-comparar-2-grupos.html#cb366-20" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">55</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">55</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb366-21"><a href="la-prueba-de-t-comparar-2-grupos.html#cb366-21" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Conductancia&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-153-1.png" width="672" /></p>
 <p>Recordando lo que acabamos de aprender vamos a comparar los promedios por cada grupo con la información que resulta de aplicar una regresión lineal a estos datos.</p>
 <p>Primero describamos los datos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lapply</span>(<span class="kw">by</span>(spiderLong<span class="op">$</span>Conductancia, 
-          spiderLong<span class="op">$</span>Condicion, 
-          stat.desc, 
-          <span class="dt">basic =</span> <span class="ot">FALSE</span>, 
-          <span class="dt">norm =</span> <span class="ot">TRUE</span>), 
-       round, <span class="dv">2</span>)</code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb367-1" tabindex="-1"></a><span class="fu">lapply</span>(<span class="fu">by</span>(spiderLong<span class="sc">$</span>Conductancia, </span>
+<span id="cb367-2"><a href="la-prueba-de-t-comparar-2-grupos.html#cb367-2" tabindex="-1"></a>          spiderLong<span class="sc">$</span>Condicion, </span>
+<span id="cb367-3"><a href="la-prueba-de-t-comparar-2-grupos.html#cb367-3" tabindex="-1"></a>          stat.desc, </span>
+<span id="cb367-4"><a href="la-prueba-de-t-comparar-2-grupos.html#cb367-4" tabindex="-1"></a>          <span class="at">basic =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb367-5"><a href="la-prueba-de-t-comparar-2-grupos.html#cb367-5" tabindex="-1"></a>          <span class="at">norm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb367-6"><a href="la-prueba-de-t-comparar-2-grupos.html#cb367-6" tabindex="-1"></a>       round, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## $imagen
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
-##        40.00        40.00         2.68         5.90        86.36         9.29         0.23         0.00 
-##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##         0.00        -1.39        -0.57         0.97         0.85 
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness     skew.2SE 
+##        40.00        40.00         2.68         5.90        86.36         9.29         0.23         0.00         0.00 
+##     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##        -1.39        -0.57         0.97         0.85 
 ## 
 ## $real
-##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
-##        50.00        47.00         3.18         7.01       121.64        11.03         0.23        -0.01 
-##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##         0.00        -1.46        -0.59         0.95         0.62</code></pre>
+##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness     skew.2SE 
+##        50.00        47.00         3.18         7.01       121.64        11.03         0.23        -0.01         0.00 
+##     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##        -1.46        -0.59         0.95         0.62</code></pre>
 <p>La función <strong>by</strong> permite calcular los estadísticos. La función <strong>round</strong> redondea los valores a dos décimas. Y la función <strong>lapply</strong> permite aplicar la función round de forma másiva.</p>
 <p>Ahora, vamos a realiza una regresión lineal. Lo que queremos es predecir los valores de <em>conductancia</em> en función de los grupos (o condiciones) que tenemos. Para realizar la regresión usamos la función <strong>lm</strong></p>
-<p>Luego de hacer la regresión lineal podemos revisar su contenido con la función <strong>summary</strong>. Recuerda mirar los coeficientes. ¿Qué ves?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Conductancia <span class="op">~</span><span class="st"> </span>Condicion, <span class="dt">data=</span>spiderLong)
-<span class="kw">summary</span>(m1)</code></pre></div>
+<p>Luego de hacer la regresión lineal podemos revisar su contenido con la función <strong>summary</strong>.
+Recuerda mirar los coeficientes. ¿Qué ves?</p>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb369-1" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Conductancia <span class="sc">~</span> Condicion, <span class="at">data=</span>spiderLong)</span>
+<span id="cb369-2"><a href="la-prueba-de-t-comparar-2-grupos.html#cb369-2" tabindex="-1"></a><span class="fu">summary</span>(m1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Conductancia ~ Condicion, data = spiderLong)
@@ -352,17 +401,19 @@ datac &lt;-<span class="st"> </span><span class="kw">summarySE</span>(spiderLong
 ## Multiple R-squared:  0.1139, Adjusted R-squared:  0.07359 
 ## F-statistic: 2.827 on 1 and 22 DF,  p-value: 0.1068</code></pre>
 <p>Finalmente, podemos hacer el t-test. Pero, antes de hacerlo debemos verificar si existen problemas de homgeneidad de varianza. Podemos hacerlo con la función <strong>leveneTest</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">leveneTest</span>(spiderLong<span class="op">$</span>Conductancia, spiderLong<span class="op">$</span>Condicion)</code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb371-1" tabindex="-1"></a><span class="fu">leveneTest</span>(spiderLong<span class="sc">$</span>Conductancia, spiderLong<span class="sc">$</span>Condicion)</span></code></pre></div>
 <pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
 ##       Df F value Pr(&gt;F)
 ## group  1  0.2991   0.59
 ##       22</code></pre>
-<p>Luego podemos hacer el análisis estadístico, aplicando la función <strong>t.test</strong>. De la siguiente forma: newModel &lt;- t.test(outcome ~ predictor, data=df, var.equal = TRUE/FALSE, paired=TRUE/FALSE). Ya que no tenemos problemas de homogeneidad de varianzar seteamos var.equal a FALSE.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_test1 &lt;-<span class="st"> </span><span class="kw">t.test</span>(Conductancia <span class="op">~</span><span class="st"> </span>Condicion, 
-                  <span class="dt">data=</span>spiderLong, 
-                  <span class="dt">var.equal =</span> <span class="ot">TRUE</span>,
-                  <span class="dt">paired =</span> <span class="ot">FALSE</span>)
-t_test1</code></pre></div>
+<p>Luego podemos hacer el análisis estadístico, aplicando la función <strong>t.test</strong>.
+De la siguiente forma: newModel &lt;- t.test(outcome ~ predictor, data=df, var.equal = TRUE/FALSE, paired=TRUE/FALSE).
+Ya que no tenemos problemas de homogeneidad de varianzar seteamos var.equal a FALSE.</p>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb373-1" tabindex="-1"></a>t_test1 <span class="ot">&lt;-</span> <span class="fu">t.test</span>(Conductancia <span class="sc">~</span> Condicion, </span>
+<span id="cb373-2"><a href="la-prueba-de-t-comparar-2-grupos.html#cb373-2" tabindex="-1"></a>                  <span class="at">data=</span>spiderLong, </span>
+<span id="cb373-3"><a href="la-prueba-de-t-comparar-2-grupos.html#cb373-3" tabindex="-1"></a>                  <span class="at">var.equal =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb373-4"><a href="la-prueba-de-t-comparar-2-grupos.html#cb373-4" tabindex="-1"></a>                  <span class="at">paired =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb373-5"><a href="la-prueba-de-t-comparar-2-grupos.html#cb373-5" tabindex="-1"></a>t_test1</span></code></pre></div>
 <pre><code>## 
 ##  Two Sample t-test
 ## 
@@ -374,24 +425,25 @@ t_test1</code></pre></div>
 ## sample estimates:
 ## mean in group imagen   mean in group real 
 ##                   40                   47</code></pre>
-<p>Para terminar siempre es bueno calcular el tamaño del efecto. Un tamaño del efecto que podemos calcular es el r de Pearson.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span>t_test1<span class="op">$</span>statistic[[<span class="dv">1</span>]]
-df &lt;-<span class="st"> </span>t_test1<span class="op">$</span>parameter[[<span class="dv">1</span>]]
-r &lt;-<span class="st"> </span><span class="kw">sqrt</span>(t<span class="op">^</span><span class="dv">2</span><span class="op">/</span>(t<span class="op">^</span><span class="dv">2</span><span class="op">+</span>df))
-r</code></pre></div>
+<p>Para terminar siempre es bueno calcular el tamaño del efecto.
+Un tamaño del efecto que podemos calcular es el r de Pearson.</p>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb375-1" tabindex="-1"></a>t <span class="ot">&lt;-</span> t_test1<span class="sc">$</span>statistic[[<span class="dv">1</span>]]</span>
+<span id="cb375-2"><a href="la-prueba-de-t-comparar-2-grupos.html#cb375-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> t_test1<span class="sc">$</span>parameter[[<span class="dv">1</span>]]</span>
+<span id="cb375-3"><a href="la-prueba-de-t-comparar-2-grupos.html#cb375-3" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(t<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(t<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>df))</span>
+<span id="cb375-4"><a href="la-prueba-de-t-comparar-2-grupos.html#cb375-4" tabindex="-1"></a>r</span></code></pre></div>
 <pre><code>## [1] 0.3374392</code></pre>
 <p>Otra tamaño del efecto que podemos calcular es el d de Cohen.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># SDpooled = sqrt((SD1^2 + SD2^2)/ 2)</span>
-<span class="co"># Cohens_d = (M2 - M1) / SDpooled</span>
-
-SDpooled &lt;-<span class="st"> </span><span class="kw">sqrt</span>((datac<span class="op">$</span>sd[<span class="dv">1</span>]<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>datac<span class="op">$</span>sd[<span class="dv">2</span>]<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span><span class="st"> </span><span class="dv">2</span>)
-Cohens_d &lt;-<span class="st"> </span>(datac<span class="op">$</span>Conductancia[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>datac<span class="op">$</span>Conductancia[<span class="dv">2</span>]) <span class="op">/</span><span class="st"> </span>SDpooled
-Cohens_d</code></pre></div>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb377-1" tabindex="-1"></a><span class="co"># SDpooled = sqrt((SD1^2 + SD2^2)/ 2)</span></span>
+<span id="cb377-2"><a href="la-prueba-de-t-comparar-2-grupos.html#cb377-2" tabindex="-1"></a><span class="co"># Cohens_d = (M2 - M1) / SDpooled</span></span>
+<span id="cb377-3"><a href="la-prueba-de-t-comparar-2-grupos.html#cb377-3" tabindex="-1"></a></span>
+<span id="cb377-4"><a href="la-prueba-de-t-comparar-2-grupos.html#cb377-4" tabindex="-1"></a>SDpooled <span class="ot">&lt;-</span> <span class="fu">sqrt</span>((datac<span class="sc">$</span>sd[<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> datac<span class="sc">$</span>sd[<span class="dv">2</span>]<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb377-5"><a href="la-prueba-de-t-comparar-2-grupos.html#cb377-5" tabindex="-1"></a>Cohens_d <span class="ot">&lt;-</span> (datac<span class="sc">$</span>Conductancia[<span class="dv">1</span>] <span class="sc">-</span> datac<span class="sc">$</span>Conductancia[<span class="dv">2</span>]) <span class="sc">/</span> SDpooled</span>
+<span id="cb377-6"><a href="la-prueba-de-t-comparar-2-grupos.html#cb377-6" tabindex="-1"></a>Cohens_d</span></code></pre></div>
 <pre><code>## [1] -0.6864065</code></pre>
 <p>La cual también se puede calcular con la función <strong>cohen.d</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Compute Cohen&#39;s effect size</span>
-cohen_d &lt;-<span class="st"> </span><span class="kw">cohen.d</span>(Conductancia <span class="op">~</span><span class="st"> </span>Condicion, spiderLong)
-cohen_d</code></pre></div>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb379-1" tabindex="-1"></a><span class="co"># Compute Cohen&#39;s effect size</span></span>
+<span id="cb379-2"><a href="la-prueba-de-t-comparar-2-grupos.html#cb379-2" tabindex="-1"></a>cohen_d <span class="ot">&lt;-</span> <span class="fu">cohen.d</span>(Conductancia <span class="sc">~</span> Condicion, spiderLong)</span>
+<span id="cb379-3"><a href="la-prueba-de-t-comparar-2-grupos.html#cb379-3" tabindex="-1"></a>cohen_d</span></code></pre></div>
 <pre><code>## 
 ## Cohen&#39;s d
 ## 
@@ -400,11 +452,11 @@ cohen_d</code></pre></div>
 ##      lower      upper 
 ## -1.5576365  0.1848236</code></pre>
 <p>Por último, para realizar una prueba de t no paramétrica puede usar la función <strong>wilcox.test</strong>.<br />
-Este test también es conocido como prueba U de Mann-Whitney. Imaginemos que no se han cumplido los supuestos para hacer un análisis paramétrico en nuestros datos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wilcox1 &lt;-<span class="st"> </span><span class="kw">wilcox.test</span>(Conductancia <span class="op">~</span><span class="st"> </span>Condicion, spiderLong)</code></pre></div>
-<pre><code>## Warning in wilcox.test.default(x = c(30L, 35L, 45L, 40L, 50L, 35L, 55L, : cannot compute exact p-value
-## with ties</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wilcox1</code></pre></div>
+Este test también es conocido como prueba U de Mann-Whitney.
+Imaginemos que no se han cumplido los supuestos para hacer un análisis paramétrico en nuestros datos.</p>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb381-1" tabindex="-1"></a>wilcox1 <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(Conductancia <span class="sc">~</span> Condicion, spiderLong)</span></code></pre></div>
+<pre><code>## Warning in wilcox.test.default(x = DATA[[1L]], y = DATA[[2L]], ...): cannot compute exact p-value with ties</code></pre>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb383-1" tabindex="-1"></a>wilcox1</span></code></pre></div>
 <pre><code>## 
 ##  Wilcoxon rank sum test with continuity correction
 ## 
@@ -412,9 +464,10 @@ Este test también es conocido como prueba U de Mann-Whitney. Imaginemos que no 
 ## W = 46, p-value = 0.1372
 ## alternative hypothesis: true location shift is not equal to 0</code></pre>
 <hr />
-<p>Ahora, imaginemos que en realidad nuestro diseño experimental era intra-sujetos. Vamos a usar exactamente los mismos datos que antes pero asumiendo un diseño intra-sujetos. Y asumiremos que estos datos viendo en un formato wide.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spiderWide &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/ansiedad_por_arañas_dep.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span>
-<span class="kw">head</span> (spiderWide)</code></pre></div>
+<p>Ahora, imaginemos que en realidad nuestro diseño experimental era intra-sujetos.
+Vamos a usar exactamente los mismos datos que antes pero asumiendo un diseño intra-sujetos. Y asumiremos que estos datos viendo en un formato wide.</p>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb385-1" tabindex="-1"></a>spiderWide <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/ansiedad_por_arañas_dep.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>) <span class="co"># load data</span></span>
+<span id="cb385-2"><a href="la-prueba-de-t-comparar-2-grupos.html#cb385-2" tabindex="-1"></a><span class="fu">head</span> (spiderWide)</span></code></pre></div>
 <pre><code>##   Sujeto imagen real
 ## 1      1     30   40
 ## 2      2     35   35
@@ -423,75 +476,76 @@ Este test también es conocido como prueba U de Mann-Whitney. Imaginemos que no 
 ## 5      5     50   65
 ## 6      6     35   55</code></pre>
 <p>Para realizar el gráfico primero transformamos los datos a formato Long.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spiderLongNew &lt;-<span class="st"> </span><span class="kw">melt</span>(spiderWide,
-                     <span class="dt">id =</span> <span class="kw">c</span>(<span class="st">&quot;Sujeto&quot;</span>), 
-                     <span class="dt">measured =</span> <span class="kw">c</span>(<span class="st">&quot;imagen&quot;</span>, <span class="st">&quot;real&quot;</span>))
-<span class="kw">names</span>(spiderLongNew) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Sujeto&quot;</span>, <span class="st">&quot;Condicion&quot;</span>, <span class="st">&quot;Conductancia&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb387-1" tabindex="-1"></a>spiderLongNew <span class="ot">&lt;-</span> <span class="fu">melt</span>(spiderWide,</span>
+<span id="cb387-2"><a href="la-prueba-de-t-comparar-2-grupos.html#cb387-2" tabindex="-1"></a>                     <span class="at">id =</span> <span class="fu">c</span>(<span class="st">&quot;Sujeto&quot;</span>), </span>
+<span id="cb387-3"><a href="la-prueba-de-t-comparar-2-grupos.html#cb387-3" tabindex="-1"></a>                     <span class="at">measured =</span> <span class="fu">c</span>(<span class="st">&quot;imagen&quot;</span>, <span class="st">&quot;real&quot;</span>))</span>
+<span id="cb387-4"><a href="la-prueba-de-t-comparar-2-grupos.html#cb387-4" tabindex="-1"></a><span class="fu">names</span>(spiderLongNew) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Sujeto&quot;</span>, <span class="st">&quot;Condicion&quot;</span>, <span class="st">&quot;Conductancia&quot;</span>)</span></code></pre></div>
 <p>Luego procedemos como antes.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Podemos usar esta función para calcular los estadísticos para un diseño intra-sujetos.</span>
-datac2 &lt;-<span class="st"> </span><span class="kw">summarySEwithin</span>(spiderLongNew, 
-                          <span class="dt">measurevar=</span><span class="st">&quot;Conductancia&quot;</span>, 
-                          <span class="dt">withinvars=</span><span class="st">&quot;Condicion&quot;</span>, 
-                          <span class="dt">idvar=</span><span class="st">&quot;Sujeto&quot;</span>)
-
-<span class="kw">ggplot</span>(datac2, <span class="kw">aes</span>(<span class="dt">x=</span>Condicion, <span class="dt">y=</span>Conductancia)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>),
-           <span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, 
-           <span class="dt">color=</span><span class="st">&quot;black&quot;</span>, 
-           <span class="dt">fill=</span><span class="st">&quot;White&quot;</span>, 
-           <span class="dt">show.legend=</span><span class="ot">FALSE</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">position=</span><span class="kw">position_dodge</span>(.<span class="dv">9</span>), 
-                <span class="dt">width=</span>.<span class="dv">25</span>, 
-                <span class="kw">aes</span>(<span class="dt">ymin=</span>Conductancia, <span class="dt">ymax=</span>Conductancia<span class="op">+</span>se)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">55</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">55</span>, <span class="dv">10</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Conductancia&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb388-1" tabindex="-1"></a><span class="co"># Podemos usar esta función para calcular los estadísticos para un diseño intra-sujetos.</span></span>
+<span id="cb388-2"><a href="la-prueba-de-t-comparar-2-grupos.html#cb388-2" tabindex="-1"></a>datac2 <span class="ot">&lt;-</span> <span class="fu">summarySEwithin</span>(spiderLongNew, </span>
+<span id="cb388-3"><a href="la-prueba-de-t-comparar-2-grupos.html#cb388-3" tabindex="-1"></a>                          <span class="at">measurevar=</span><span class="st">&quot;Conductancia&quot;</span>, </span>
+<span id="cb388-4"><a href="la-prueba-de-t-comparar-2-grupos.html#cb388-4" tabindex="-1"></a>                          <span class="at">withinvars=</span><span class="st">&quot;Condicion&quot;</span>, </span>
+<span id="cb388-5"><a href="la-prueba-de-t-comparar-2-grupos.html#cb388-5" tabindex="-1"></a>                          <span class="at">idvar=</span><span class="st">&quot;Sujeto&quot;</span>)</span>
+<span id="cb388-6"><a href="la-prueba-de-t-comparar-2-grupos.html#cb388-6" tabindex="-1"></a></span>
+<span id="cb388-7"><a href="la-prueba-de-t-comparar-2-grupos.html#cb388-7" tabindex="-1"></a><span class="fu">ggplot</span>(datac2, <span class="fu">aes</span>(<span class="at">x=</span>Condicion, <span class="at">y=</span>Conductancia)) <span class="sc">+</span></span>
+<span id="cb388-8"><a href="la-prueba-de-t-comparar-2-grupos.html#cb388-8" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>),</span>
+<span id="cb388-9"><a href="la-prueba-de-t-comparar-2-grupos.html#cb388-9" tabindex="-1"></a>           <span class="at">stat=</span><span class="st">&quot;identity&quot;</span>, </span>
+<span id="cb388-10"><a href="la-prueba-de-t-comparar-2-grupos.html#cb388-10" tabindex="-1"></a>           <span class="at">color=</span><span class="st">&quot;black&quot;</span>, </span>
+<span id="cb388-11"><a href="la-prueba-de-t-comparar-2-grupos.html#cb388-11" tabindex="-1"></a>           <span class="at">fill=</span><span class="st">&quot;White&quot;</span>, </span>
+<span id="cb388-12"><a href="la-prueba-de-t-comparar-2-grupos.html#cb388-12" tabindex="-1"></a>           <span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb388-13"><a href="la-prueba-de-t-comparar-2-grupos.html#cb388-13" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">position=</span><span class="fu">position_dodge</span>(.<span class="dv">9</span>), </span>
+<span id="cb388-14"><a href="la-prueba-de-t-comparar-2-grupos.html#cb388-14" tabindex="-1"></a>                <span class="at">width=</span>.<span class="dv">25</span>, </span>
+<span id="cb388-15"><a href="la-prueba-de-t-comparar-2-grupos.html#cb388-15" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">ymin=</span>Conductancia, <span class="at">ymax=</span>Conductancia<span class="sc">+</span>se)) <span class="sc">+</span></span>
+<span id="cb388-16"><a href="la-prueba-de-t-comparar-2-grupos.html#cb388-16" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb388-17"><a href="la-prueba-de-t-comparar-2-grupos.html#cb388-17" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb388-18"><a href="la-prueba-de-t-comparar-2-grupos.html#cb388-18" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb388-19"><a href="la-prueba-de-t-comparar-2-grupos.html#cb388-19" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb388-20"><a href="la-prueba-de-t-comparar-2-grupos.html#cb388-20" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">55</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">55</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb388-21"><a href="la-prueba-de-t-comparar-2-grupos.html#cb388-21" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Conductancia&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-164-1.png" width="672" /></p>
 <p>Luego podemos chequear algunos supuestos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spiderWide<span class="op">$</span>diff &lt;-<span class="st"> </span>spiderWide<span class="op">$</span>imagen <span class="op">-</span><span class="st"> </span>spiderWide<span class="op">$</span>real <span class="co"># calcula la diferencia</span>
-<span class="kw">stat.desc</span>(spiderWide<span class="op">$</span>diff, <span class="dt">basic =</span> <span class="ot">FALSE</span>, <span class="dt">norm =</span> <span class="ot">TRUE</span>) <span class="co"># calcula los estadísticos</span></code></pre></div>
-<pre><code>##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness 
-##   -7.5000000   -7.0000000    2.8311043    6.2312185   96.1818182    9.8072330   -1.4010333    0.2464810 
-##     skew.2SE     kurtosis     kurt.2SE   normtest.W   normtest.p 
-##    0.1933785   -1.2342159   -0.5007991    0.9557903    0.7224801</code></pre>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb389-1" tabindex="-1"></a>spiderWide<span class="sc">$</span>diff <span class="ot">&lt;-</span> spiderWide<span class="sc">$</span>imagen <span class="sc">-</span> spiderWide<span class="sc">$</span>real <span class="co"># calcula la diferencia</span></span>
+<span id="cb389-2"><a href="la-prueba-de-t-comparar-2-grupos.html#cb389-2" tabindex="-1"></a><span class="fu">stat.desc</span>(spiderWide<span class="sc">$</span>diff, <span class="at">basic =</span> <span class="cn">FALSE</span>, <span class="at">norm =</span> <span class="cn">TRUE</span>) <span class="co"># calcula los estadísticos</span></span></code></pre></div>
+<pre><code>##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness     skew.2SE 
+##   -7.5000000   -7.0000000    2.8311043    6.2312185   96.1818182    9.8072330   -1.4010333    0.2464810    0.1933785 
+##     kurtosis     kurt.2SE   normtest.W   normtest.p 
+##   -1.2342159   -0.5007991    0.9557903    0.7224801</code></pre>
 <p>Y luego haces el t-test.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_test2 &lt;-<span class="st"> </span><span class="kw">t.test</span>(spiderWide<span class="op">$</span>real, spiderWide<span class="op">$</span>imagen, <span class="dt">paired =</span> <span class="ot">TRUE</span>)
-t_test2</code></pre></div>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb391-1" tabindex="-1"></a>t_test2 <span class="ot">&lt;-</span> <span class="fu">t.test</span>(spiderWide<span class="sc">$</span>real, spiderWide<span class="sc">$</span>imagen, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb391-2"><a href="la-prueba-de-t-comparar-2-grupos.html#cb391-2" tabindex="-1"></a>t_test2</span></code></pre></div>
 <pre><code>## 
 ##  Paired t-test
 ## 
 ## data:  spiderWide$real and spiderWide$imagen
 ## t = 2.4725, df = 11, p-value = 0.03098
-## alternative hypothesis: true difference in means is not equal to 0
+## alternative hypothesis: true mean difference is not equal to 0
 ## 95 percent confidence interval:
 ##   0.7687815 13.2312185
 ## sample estimates:
-## mean of the differences 
-##                       7</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Pero también lo podrías hacer si estuvieran en formato Long.</span>
-<span class="kw">t.test</span>(Conductancia <span class="op">~</span><span class="st"> </span>Condicion, <span class="dt">data=</span>spiderLong, <span class="dt">paired =</span> <span class="ot">TRUE</span>)</code></pre></div>
+## mean difference 
+##               7</code></pre>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb393-1" tabindex="-1"></a><span class="co"># Pero también lo podrías hacer si estuvieran en formato Long.</span></span>
+<span id="cb393-2"><a href="la-prueba-de-t-comparar-2-grupos.html#cb393-2" tabindex="-1"></a><span class="fu">t.test</span>(Conductancia <span class="sc">~</span> Condicion, <span class="at">data=</span>spiderLong, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Paired t-test
 ## 
 ## data:  Conductancia by Condicion
 ## t = -2.4725, df = 11, p-value = 0.03098
-## alternative hypothesis: true difference in means is not equal to 0
+## alternative hypothesis: true mean difference is not equal to 0
 ## 95 percent confidence interval:
 ##  -13.2312185  -0.7687815
 ## sample estimates:
-## mean of the differences 
-##                      -7</code></pre>
-<p>Para terminar siempre es bueno calcular el tamaño del efecto. Podemos calcular el r de Pearson.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span>t_test2<span class="op">$</span>statistic[[<span class="dv">1</span>]]
-df &lt;-<span class="st"> </span>t_test2<span class="op">$</span>parameter[[<span class="dv">1</span>]]
-r &lt;-<span class="st"> </span><span class="kw">sqrt</span>(t<span class="op">**</span><span class="dv">2</span><span class="op">/</span>(t<span class="op">**</span><span class="dv">2</span><span class="op">+</span>df))
-r</code></pre></div>
+## mean difference 
+##              -7</code></pre>
+<p>Para terminar siempre es bueno calcular el tamaño del efecto.
+Podemos calcular el r de Pearson.</p>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb395-1" tabindex="-1"></a>t <span class="ot">&lt;-</span> t_test2<span class="sc">$</span>statistic[[<span class="dv">1</span>]]</span>
+<span id="cb395-2"><a href="la-prueba-de-t-comparar-2-grupos.html#cb395-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> t_test2<span class="sc">$</span>parameter[[<span class="dv">1</span>]]</span>
+<span id="cb395-3"><a href="la-prueba-de-t-comparar-2-grupos.html#cb395-3" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(t<span class="sc">**</span><span class="dv">2</span><span class="sc">/</span>(t<span class="sc">**</span><span class="dv">2</span><span class="sc">+</span>df))</span>
+<span id="cb395-4"><a href="la-prueba-de-t-comparar-2-grupos.html#cb395-4" tabindex="-1"></a>r</span></code></pre></div>
 <pre><code>## [1] 0.5976869</code></pre>
 <p>O podemos calcular el d de Cohen.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cohen.d</span>(spiderWide<span class="op">$</span>real, spiderWide<span class="op">$</span>imagen, <span class="dt">paired =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb397-1" tabindex="-1"></a><span class="fu">cohen.d</span>(spiderWide<span class="sc">$</span>real, spiderWide<span class="sc">$</span>imagen, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ## Cohen&#39;s d
 ## 
@@ -501,12 +555,12 @@ r</code></pre></div>
 ## 0.04707723 1.31395743</code></pre>
 <p>Por último, para realizar una prueba de t no paramétrica puede usar la función <strong>wilcox.test</strong>.<br />
 Este test también es conocidp como prueba U de Mann-Whitney.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wilcox2 &lt;-<span class="st"> </span><span class="kw">wilcox.test</span>(spiderWide<span class="op">$</span>imagen, spiderWide<span class="op">$</span>real, <span class="dt">paired =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## Warning in wilcox.test.default(spiderWide$imagen, spiderWide$real, paired = TRUE): cannot compute exact
-## p-value with ties</code></pre>
-<pre><code>## Warning in wilcox.test.default(spiderWide$imagen, spiderWide$real, paired = TRUE): cannot compute exact
-## p-value with zeroes</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wilcox2</code></pre></div>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb399-1" tabindex="-1"></a>wilcox2 <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(spiderWide<span class="sc">$</span>imagen, spiderWide<span class="sc">$</span>real, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## Warning in wilcox.test.default(spiderWide$imagen, spiderWide$real, paired = TRUE): cannot compute exact p-value with
+## ties</code></pre>
+<pre><code>## Warning in wilcox.test.default(spiderWide$imagen, spiderWide$real, paired = TRUE): cannot compute exact p-value with
+## zeroes</code></pre>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="la-prueba-de-t-comparar-2-grupos.html#cb402-1" tabindex="-1"></a>wilcox2</span></code></pre></div>
 <pre><code>## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 

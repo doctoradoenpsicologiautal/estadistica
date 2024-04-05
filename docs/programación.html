@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 3 Programación | Estadística con R</title>
   <meta name="description" content="Capítulo 3 Programación | Estadística con R" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 3 Programación | Estadística con R" />
   <meta property="og:type" content="book" />
@@ -23,14 +23,14 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2023-09-03" />
+<meta name="date" content="2024-04-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="conceptos-estadísticos.html"/>
+<link rel="prev" href="conceptos-estadísticos-claves.html"/>
 <link rel="next" href="gráficos.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -52,43 +52,74 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -107,7 +138,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preámbulo</a></li>
-<li class="chapter" data-level="1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html"><i class="fa fa-check"></i><b>1</b> Introducción a la estadística</a><ul>
+<li class="chapter" data-level="1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html"><i class="fa fa-check"></i><b>1</b> Introducción a la estadística</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#qué-es-la-estadística"><i class="fa fa-check"></i><b>1.1</b> ¿Qué es la estadística?</a></li>
 <li class="chapter" data-level="1.2" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#qué-son-las-variables"><i class="fa fa-check"></i><b>1.2</b> ¿Qué son las variables?</a></li>
 <li class="chapter" data-level="1.3" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#diseños-experimentales"><i class="fa fa-check"></i><b>1.3</b> Diseños experimentales</a></li>
@@ -117,14 +149,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.7" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#el-origen-de-p"><i class="fa fa-check"></i><b>1.7</b> El origen de p</a></li>
 <li class="chapter" data-level="1.8" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#para-qué-randomizar"><i class="fa fa-check"></i><b>1.8</b> ¿Para qué randomizar?</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html"><i class="fa fa-check"></i><b>2</b> Conceptos estadísticos</a><ul>
-<li class="chapter" data-level="2.1" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#la-significancia"><i class="fa fa-check"></i><b>2.1</b> La significancia</a></li>
-<li class="chapter" data-level="2.2" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#las-colas"><i class="fa fa-check"></i><b>2.2</b> Las colas</a></li>
-<li class="chapter" data-level="2.3" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#los-errores-estadísticos"><i class="fa fa-check"></i><b>2.3</b> Los errores estadísticos</a></li>
-<li class="chapter" data-level="2.4" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#tamaño-poder"><i class="fa fa-check"></i><b>2.4</b> Tamaño &amp; poder</a></li>
-<li class="chapter" data-level="2.5" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#cómo-planificar-un-estudio"><i class="fa fa-check"></i><b>2.5</b> ¿Cómo planificar un estudio?</a></li>
+<li class="chapter" data-level="2" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html"><i class="fa fa-check"></i><b>2</b> Conceptos estadísticos claves</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#la-significancia"><i class="fa fa-check"></i><b>2.1</b> La significancia</a></li>
+<li class="chapter" data-level="2.2" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#las-colas"><i class="fa fa-check"></i><b>2.2</b> Las colas</a></li>
+<li class="chapter" data-level="2.3" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#los-errores-estadísticos"><i class="fa fa-check"></i><b>2.3</b> Los errores estadísticos</a></li>
+<li class="chapter" data-level="2.4" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#tamaño-poder"><i class="fa fa-check"></i><b>2.4</b> Tamaño &amp; poder</a></li>
+<li class="chapter" data-level="2.5" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#cómo-planificar-un-estudio"><i class="fa fa-check"></i><b>2.5</b> ¿Cómo planificar un estudio?</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="programación.html"><a href="programación.html"><i class="fa fa-check"></i><b>3</b> Programación</a><ul>
+<li class="chapter" data-level="3" data-path="programación.html"><a href="programación.html"><i class="fa fa-check"></i><b>3</b> Programación</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="programación.html"><a href="programación.html#qué-significa-programar"><i class="fa fa-check"></i><b>3.1</b> ¿Qué significa programar?</a></li>
 <li class="chapter" data-level="3.2" data-path="programación.html"><a href="programación.html#la-consola-versus-el-script"><i class="fa fa-check"></i><b>3.2</b> La consola versus el script</a></li>
 <li class="chapter" data-level="3.3" data-path="programación.html"><a href="programación.html#introducción-a-la-programación"><i class="fa fa-check"></i><b>3.3</b> Introducción a la programación</a></li>
@@ -136,7 +170,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.9" data-path="programación.html"><a href="programación.html#exportar-datos"><i class="fa fa-check"></i><b>3.9</b> Exportar datos</a></li>
 <li class="chapter" data-level="3.10" data-path="programación.html"><a href="programación.html#en-la-práctica"><i class="fa fa-check"></i><b>3.10</b> En la práctica</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="gráficos.html"><a href="gráficos.html"><i class="fa fa-check"></i><b>4</b> Gráficos</a><ul>
+<li class="chapter" data-level="4" data-path="gráficos.html"><a href="gráficos.html"><i class="fa fa-check"></i><b>4</b> Gráficos</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="gráficos.html"><a href="gráficos.html#cómo-graficamos-en-r"><i class="fa fa-check"></i><b>4.1</b> ¿Cómo graficamos en R?</a></li>
 <li class="chapter" data-level="4.2" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-puntos"><i class="fa fa-check"></i><b>4.2</b> Gráfico de puntos</a></li>
 <li class="chapter" data-level="4.3" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-dispersión"><i class="fa fa-check"></i><b>4.3</b> Gráfico de dispersión</a></li>
@@ -147,7 +182,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.8" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-líneas-2-factores"><i class="fa fa-check"></i><b>4.8</b> Gráfico de líneas (2 factores)</a></li>
 <li class="chapter" data-level="4.9" data-path="gráficos.html"><a href="gráficos.html#guardar-una-figura"><i class="fa fa-check"></i><b>4.9</b> Guardar una figura</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html"><i class="fa fa-check"></i><b>5</b> Caracterizar datos</a><ul>
+<li class="chapter" data-level="5" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html"><i class="fa fa-check"></i><b>5</b> Caracterizar datos</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#visualizar-los-datos"><i class="fa fa-check"></i><b>5.1</b> Visualizar los datos</a></li>
 <li class="chapter" data-level="5.2" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal"><i class="fa fa-check"></i><b>5.2</b> La curva normal</a></li>
 <li class="chapter" data-level="5.3" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal-en-la-práctica-1"><i class="fa fa-check"></i><b>5.3</b> La curva normal en la práctica (1)</a></li>
@@ -158,55 +194,66 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.8" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#los-intervalos-de-confianza-2"><i class="fa fa-check"></i><b>5.8</b> Los intervalos de confianza (2)</a></li>
 <li class="chapter" data-level="5.9" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#verificar-supuestos"><i class="fa fa-check"></i><b>5.9</b> Verificar supuestos</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="la-regresión.html"><a href="la-regresión.html"><i class="fa fa-check"></i><b>6</b> La regresión</a><ul>
+<li class="chapter" data-level="6" data-path="la-regresión.html"><a href="la-regresión.html"><i class="fa fa-check"></i><b>6</b> La regresión</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="la-regresión.html"><a href="la-regresión.html#modelos-estadísticos"><i class="fa fa-check"></i><b>6.1</b> Modelos estadísticos</a></li>
 <li class="chapter" data-level="6.2" data-path="la-regresión.html"><a href="la-regresión.html#la-ecuación-de-la-recta"><i class="fa fa-check"></i><b>6.2</b> La ecuación de la recta</a></li>
 <li class="chapter" data-level="6.3" data-path="la-regresión.html"><a href="la-regresión.html#la-suma-de-cuadrados"><i class="fa fa-check"></i><b>6.3</b> La suma de cuadrados</a></li>
 <li class="chapter" data-level="6.4" data-path="la-regresión.html"><a href="la-regresión.html#la-regresión-con-r"><i class="fa fa-check"></i><b>6.4</b> La regresión con R</a></li>
 <li class="chapter" data-level="6.5" data-path="la-regresión.html"><a href="la-regresión.html#la-correlación-con-r"><i class="fa fa-check"></i><b>6.5</b> La correlación con R</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html"><i class="fa fa-check"></i><b>7</b> La prueba de t (comparar 2 grupos)</a><ul>
+<li class="chapter" data-level="7" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html"><i class="fa fa-check"></i><b>7</b> La prueba de t (comparar 2 grupos)</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#cómo-comparamos-dos-grupos"><i class="fa fa-check"></i><b>7.1</b> ¿Cómo comparamos dos grupos?</a></li>
 <li class="chapter" data-level="7.2" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#la-distribución-normal-de-dos-grupos"><i class="fa fa-check"></i><b>7.2</b> La distribución normal de dos grupos</a></li>
 <li class="chapter" data-level="7.3" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#la-prueba-de-hipótesis"><i class="fa fa-check"></i><b>7.3</b> La prueba de hipótesis</a></li>
 <li class="chapter" data-level="7.4" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#el-t-test-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>7.4</b> El t-test como un modelo líneal general</a></li>
 <li class="chapter" data-level="7.5" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#el-t-test-con-r"><i class="fa fa-check"></i><b>7.5</b> El t-test con R</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html"><i class="fa fa-check"></i><b>8</b> ANOVA (comparar 3 grupos o más)</a><ul>
+<li class="chapter" data-level="8" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html"><i class="fa fa-check"></i><b>8</b> ANOVA (comparar 3 grupos o más)</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#por-qué-necesitamos-un-anova"><i class="fa fa-check"></i><b>8.1</b> ¿Por qué necesitamos un ANOVA?</a></li>
 <li class="chapter" data-level="8.2" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#el-anova-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>8.2</b> El ANOVA como un modelo líneal general</a></li>
 <li class="chapter" data-level="8.3" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#la-lógica-del-anova"><i class="fa fa-check"></i><b>8.3</b> La lógica del ANOVA</a></li>
 <li class="chapter" data-level="8.4" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#el-anova-con-r"><i class="fa fa-check"></i><b>8.4</b> El ANOVA con R</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="después-del-anova.html"><a href="después-del-anova.html"><i class="fa fa-check"></i><b>9</b> Después del ANOVA</a><ul>
+<li class="chapter" data-level="9" data-path="después-del-anova.html"><a href="después-del-anova.html"><i class="fa fa-check"></i><b>9</b> Después del ANOVA</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="después-del-anova.html"><a href="después-del-anova.html#qué-hacemos-después-de-un-anova"><i class="fa fa-check"></i><b>9.1</b> ¿Qué hacemos después de un ANOVA?</a></li>
 <li class="chapter" data-level="9.2" data-path="después-del-anova.html"><a href="después-del-anova.html#comparaciones-planificadas"><i class="fa fa-check"></i><b>9.2</b> Comparaciones planificadas</a></li>
 <li class="chapter" data-level="9.3" data-path="después-del-anova.html"><a href="después-del-anova.html#cálculos-con-r"><i class="fa fa-check"></i><b>9.3</b> Cálculos con R</a></li>
 <li class="chapter" data-level="9.4" data-path="después-del-anova.html"><a href="después-del-anova.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>9.4</b> Pruebas post-hoc</a></li>
 <li class="chapter" data-level="9.5" data-path="después-del-anova.html"><a href="después-del-anova.html#cálculos-con-r-1"><i class="fa fa-check"></i><b>9.5</b> Cálculos con R</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html"><i class="fa fa-check"></i><b>10</b> Más allá del ANOVA</a><ul>
+<li class="chapter" data-level="10" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html"><i class="fa fa-check"></i><b>10</b> Más allá del ANOVA</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#tipos-de-anova"><i class="fa fa-check"></i><b>10.1</b> Tipos de ANOVA</a></li>
 <li class="chapter" data-level="10.2" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#anova-factorial"><i class="fa fa-check"></i><b>10.2</b> ANOVA factorial</a></li>
 <li class="chapter" data-level="10.3" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#anova-de-medidas-repetidas"><i class="fa fa-check"></i><b>10.3</b> ANOVA de medidas repetidas</a></li>
 <li class="chapter" data-level="10.4" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#ancova"><i class="fa fa-check"></i><b>10.4</b> ANCOVA</a></li>
 <li class="chapter" data-level="10.5" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#manova"><i class="fa fa-check"></i><b>10.5</b> MANOVA</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>11</b> Otros análisis</a><ul>
+<li class="chapter" data-level="11" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>11</b> Otros análisis</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="otros-análisis.html"><a href="otros-análisis.html#análisis-de-proporciones"><i class="fa fa-check"></i><b>11.1</b> Análisis de proporciones</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="recursos.html"><a href="recursos.html"><i class="fa fa-check"></i><b>12</b> Recursos</a><ul>
-<li class="chapter" data-level="12.1" data-path="recursos.html"><a href="recursos.html#apps"><i class="fa fa-check"></i><b>12.1</b> Apps</a><ul>
+<li class="chapter" data-level="12" data-path="recursos.html"><a href="recursos.html"><i class="fa fa-check"></i><b>12</b> Recursos</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="recursos.html"><a href="recursos.html#apps"><i class="fa fa-check"></i><b>12.1</b> Apps</a>
+<ul>
 <li class="chapter" data-level="12.1.1" data-path="recursos.html"><a href="recursos.html#convertidor-de-tamaños-de-efectos"><i class="fa fa-check"></i><b>12.1.1</b> Convertidor de tamaños de efectos</a></li>
 <li class="chapter" data-level="12.1.2" data-path="recursos.html"><a href="recursos.html#convertidor-de-tamaños-de-efectos-1"><i class="fa fa-check"></i><b>12.1.2</b> Convertidor de tamaños de efectos</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="recursos.html"><a href="recursos.html#librerías"><i class="fa fa-check"></i><b>12.2</b> Librerías</a><ul>
+<li class="chapter" data-level="12.2" data-path="recursos.html"><a href="recursos.html#librerías"><i class="fa fa-check"></i><b>12.2</b> Librerías</a>
+<ul>
 <li class="chapter" data-level="12.2.1" data-path="recursos.html"><a href="recursos.html#para-calcular-tamaños-de-efectos"><i class="fa fa-check"></i><b>12.2.1</b> Para calcular tamaños de efectos</a></li>
 </ul></li>
-<li class="chapter" data-level="12.3" data-path="recursos.html"><a href="recursos.html#sitios-web"><i class="fa fa-check"></i><b>12.3</b> Sitios web</a><ul>
+<li class="chapter" data-level="12.3" data-path="recursos.html"><a href="recursos.html#sitios-web"><i class="fa fa-check"></i><b>12.3</b> Sitios web</a>
+<ul>
 <li class="chapter" data-level="12.3.1" data-path="recursos.html"><a href="recursos.html#herramientas-de-estadística"><i class="fa fa-check"></i><b>12.3.1</b> Herramientas de estadística</a></li>
 </ul></li>
-<li class="chapter" data-level="12.4" data-path="recursos.html"><a href="recursos.html#cursos"><i class="fa fa-check"></i><b>12.4</b> Cursos</a><ul>
+<li class="chapter" data-level="12.4" data-path="recursos.html"><a href="recursos.html#cursos"><i class="fa fa-check"></i><b>12.4</b> Cursos</a>
+<ul>
 <li class="chapter" data-level="12.4.1" data-path="recursos.html"><a href="recursos.html#herramientas-de-estadística-1"><i class="fa fa-check"></i><b>12.4.1</b> Herramientas de estadística</a></li>
 </ul></li>
 </ul></li>
@@ -229,208 +276,232 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="programación" class="section level1">
+<div id="programación" class="section level1" number="3">
 <h1><span class="header-section-number">Capítulo 3</span> Programación</h1>
 <p>En este capítulo te voy a mostrar las primeras ideas para que puedas programar en R.</p>
-<div id="qué-significa-programar" class="section level2">
+<div id="qué-significa-programar" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> ¿Qué significa programar?</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=oY6OMnVRkjM" target="_blank">video (8')</a> y trata de responder:</p>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=oY6OMnVRkjM" target="_blank">video (8’)</a> y trata de responder:</p>
 <ul>
 <li>¿Qué habilidades permite desarrollar el conocimiento de programación?</li>
 <li>¿Qué es un algoritmo?</li>
 <li>¿Qué es un lenguaje de programación?</li>
 </ul>
 </div>
-<div id="la-consola-versus-el-script" class="section level2">
+<div id="la-consola-versus-el-script" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> La consola versus el script</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=ryTQ33oOsMw" target="_blank">video (6')</a> y trata de responder:</p>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=ryTQ33oOsMw" target="_blank">video (6’)</a> y trata de responder:</p>
 <ul>
 <li>¿Cuál es la diferencia entre un compilador y un intérprete?</li>
 <li>¿Cuál es la diferencia entre usar la consola (shell) y usar un script?</li>
 <li>¿Qué es el CRAN?</li>
 </ul>
 </div>
-<div id="introducción-a-la-programación" class="section level2">
+<div id="introducción-a-la-programación" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Introducción a la programación</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=UREdS1HRKN4" target="_blank">video (16')</a> para comenzar a trabajar en RStudio. Mas abajo repetiré el mismo contenido para que vayas viendo como usar el material que viene mas abajo. La idea es que vayas trabajando tus propios scripts ordenadamente en tu computador.</p>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=UREdS1HRKN4" target="_blank">video (16’)</a> para comenzar a trabajar en RStudio. Mas abajo repetiré el mismo contenido para que vayas viendo como usar el material que viene mas abajo. La idea es que vayas trabajando tus propios scripts ordenadamente en tu computador.</p>
 </div>
-<div id="empezar-a-programar" class="section level2">
+<div id="empezar-a-programar" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Empezar a programar</h2>
-<p>En lo que sigue te recomiendo que crees un script (lo nombres &quot;Curso_1&quot; o algo así) y que vayas escribiendo o copiando lo que vamos viendo más abajo. En general, luego de una línea de código aparece el resultado precedido por ##.</p>
-<p>En un script es esencial incluir comentarios. De esta manera puedes acordarte (y otros puedes entender) que está haciendo tu código.<br />
-Para escribir un comentario debes anteponer un #. En el inicio de un script es un buen hábito poner una fecha y tus iniciales. Por ejemplo:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># JLUF 16/08/2022</span></code></pre></div>
+<p>En lo que sigue te recomiendo que crees un script (lo nombres “Curso_1” o algo así) y que vayas escribiendo o copiando lo que vamos viendo más abajo.
+En general, luego de una línea de código aparece el resultado precedido por ##.</p>
+<p>En un script es esencial incluir comentarios.
+De esta manera puedes acordarte (y otros puedes entender) que está haciendo tu código.<br />
+Para escribir un comentario debes anteponer un #.
+En el inicio de un script es un buen hábito poner una fecha y tus iniciales. Por ejemplo:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="programación.html#cb1-1" tabindex="-1"></a><span class="co"># JLUF 16/08/2022</span></span></code></pre></div>
 <p>También es buena idea que agregues una breve descripción de lo que hace tu código.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># JLUF 16/08/2022</span>
-<span class="co"># Estadística descriptiva</span></code></pre></div>
-<p>R tiene algunas funciones integradas. Por ejemplo: el promedio (<strong>mean</strong>) y la desviación estándar (<strong>sd</strong>). Para probar estas funciones podemos aplicarlas a una series de números (o vector). Para crear un vector podemos usar la <em>c</em> y un paréntesis. Lo que hacemos con la <em>c</em> es combinar números.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># JLUF 16/08/2022</span>
-<span class="co"># Estadística descriptiva</span>
-
-<span class="co"># Promedio entre 2 y 3</span>
-<span class="kw">mean</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="programación.html#cb2-1" tabindex="-1"></a><span class="co"># JLUF 16/08/2022</span></span>
+<span id="cb2-2"><a href="programación.html#cb2-2" tabindex="-1"></a><span class="co"># Estadística descriptiva</span></span></code></pre></div>
+<p>R tiene algunas funciones integradas. Por ejemplo: el promedio (<strong>mean</strong>) y la desviación estándar (<strong>sd</strong>).
+Para probar estas funciones podemos aplicarlas a una series de números (o vector). Para crear un vector podemos usar la <em>c</em> y un paréntesis. Lo que hacemos con la <em>c</em> es combinar números.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="programación.html#cb3-1" tabindex="-1"></a><span class="co"># JLUF 16/08/2022</span></span>
+<span id="cb3-2"><a href="programación.html#cb3-2" tabindex="-1"></a><span class="co"># Estadística descriptiva</span></span>
+<span id="cb3-3"><a href="programación.html#cb3-3" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="programación.html#cb3-4" tabindex="-1"></a><span class="co"># Promedio entre 2 y 3</span></span>
+<span id="cb3-5"><a href="programación.html#cb3-5" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</span></code></pre></div>
 <pre><code>## [1] 2.5</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Deviación estándar entre 2 y 3</span>
-<span class="kw">sd</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="programación.html#cb5-1" tabindex="-1"></a><span class="co"># Deviación estándar entre 2 y 3</span></span>
+<span id="cb5-2"><a href="programación.html#cb5-2" tabindex="-1"></a><span class="fu">sd</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</span></code></pre></div>
 <pre><code>## [1] 0.7071068</code></pre>
 <p>Comúnmente para hacer un cálculo de manera óptima usamos algo que se llama asignación.<br />
 Es decir, creamos una variable y le asignamos un valor.<br />
-Por ejemplo, definimos que &quot;a&quot; equivale a 2 y &quot;b&quot; equivale a 3.<br />
+Por ejemplo, definimos que “a” equivale a 2 y “b” equivale a 3.<br />
 Luego podemos usar solamente esas variables para hacer cálculos.<br />
-Para asignar ponemos una flecha: &quot;&lt;-&quot;</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">2</span>
-b &lt;-<span class="st"> </span><span class="dv">3</span>
-<span class="kw">mean</span>(<span class="kw">c</span>(a,b))</code></pre></div>
+Para asignar ponemos una flecha: “&lt;-”</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="programación.html#cb7-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb7-2"><a href="programación.html#cb7-2" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb7-3"><a href="programación.html#cb7-3" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(a,b))</span></code></pre></div>
 <pre><code>## [1] 2.5</code></pre>
 <p>También podemos crear variables que contengan texto.<br />
 Por ejemplo, podemos crear una lista con los integrantes de Metallica.<br />
 </p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallica &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Lars&quot;</span>, <span class="st">&quot;James&quot;</span>, <span class="st">&quot;Jason&quot;</span>, <span class="st">&quot;Kirk&quot;</span>)
-metallica</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="programación.html#cb9-1" tabindex="-1"></a>metallica <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Lars&quot;</span>, <span class="st">&quot;James&quot;</span>, <span class="st">&quot;Jason&quot;</span>, <span class="st">&quot;Kirk&quot;</span>)</span>
+<span id="cb9-2"><a href="programación.html#cb9-2" tabindex="-1"></a>metallica</span></code></pre></div>
 <pre><code>## [1] &quot;Lars&quot;  &quot;James&quot; &quot;Jason&quot; &quot;Kirk&quot;</code></pre>
-<p>Este es un vector de carácteres. Además, puedes usar las funciones <strong>str()</strong> y <strong>class()</strong> para averiguar la naturaleza de estas variables.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(metallica)</code></pre></div>
+<p>Este es un vector de carácteres.
+Además, puedes usar las funciones <strong>str()</strong> y <strong>class()</strong> para averiguar la naturaleza de estas variables.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="programación.html#cb11-1" tabindex="-1"></a><span class="fu">class</span>(metallica)</span></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(metallica)</code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="programación.html#cb13-1" tabindex="-1"></a><span class="fu">str</span>(metallica)</span></code></pre></div>
 <pre><code>##  chr [1:4] &quot;Lars&quot; &quot;James&quot; &quot;Jason&quot; &quot;Kirk&quot;</code></pre>
 <p>Para inspeccionar cada elemento de esta variable puedes usar el paréntesis cuadrado.<br />
-Esto se llama <em>indexar</em>. Por ejemplo, para ver el primer elemento puedes hacer lo siguiente:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallica[<span class="dv">1</span>]</code></pre></div>
+Esto se llama <em>indexar</em>.
+Por ejemplo, para ver el primer elemento puedes hacer lo siguiente:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="programación.html#cb15-1" tabindex="-1"></a>metallica[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;Lars&quot;</code></pre>
 <p>O podrías ver desde el primero al segundo.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallica[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="programación.html#cb17-1" tabindex="-1"></a>metallica[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;Lars&quot;  &quot;James&quot;</code></pre>
 <p>O podrías ver desde el segundo al tercero.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallica[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="programación.html#cb19-1" tabindex="-1"></a>metallica[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;James&quot; &quot;Jason&quot;</code></pre>
-<p>Si te das cuenta que tu lista tiene un elemento incorrecto lo puedes eliminar. Para ello debes crear una nueva variable a partir de <em>metallica</em> pero dentro del paréntesis cuadrado usamos una fórmula lógica. La fórmula nos permite seleccionar ciertos elementos. Por ejemplo, si queremos todos los elementos de la variable metallica excepto el elemento Jason (de ahí viene la parte <em>!=</em>) podemos hacer lo siguente:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">new_metallica &lt;-<span class="st"> </span>metallica[metallica <span class="op">!=</span><span class="st"> &quot;Jason&quot;</span>]
-new_metallica</code></pre></div>
+<p>Si te das cuenta que tu lista tiene un elemento incorrecto lo puedes eliminar.
+Para ello debes crear una nueva variable a partir de <em>metallica</em> pero dentro del paréntesis cuadrado usamos una fórmula lógica. La fórmula nos permite seleccionar ciertos elementos.
+Por ejemplo, si queremos todos los elementos de la variable metallica excepto el elemento Jason (de ahí viene la parte <em>!=</em>) podemos hacer lo siguente:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="programación.html#cb21-1" tabindex="-1"></a>new_metallica <span class="ot">&lt;-</span> metallica[metallica <span class="sc">!=</span> <span class="st">&quot;Jason&quot;</span>]</span>
+<span id="cb21-2"><a href="programación.html#cb21-2" tabindex="-1"></a>new_metallica</span></code></pre></div>
 <pre><code>## [1] &quot;Lars&quot;  &quot;James&quot; &quot;Kirk&quot;</code></pre>
 <p>También puedes eliminar dos elementos indicandole a R que quieres eliminar los elementos del 2 al 3:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallica_duo &lt;-<span class="st"> </span>metallica[<span class="op">-</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>)]
-metallica_duo</code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="programación.html#cb23-1" tabindex="-1"></a>metallica_duo <span class="ot">&lt;-</span> metallica[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>)]</span>
+<span id="cb23-2"><a href="programación.html#cb23-2" tabindex="-1"></a>metallica_duo</span></code></pre></div>
 <pre><code>## [1] &quot;Lars&quot; &quot;Kirk&quot;</code></pre>
 <p>Lo que podríamos hacer enseguida es agregar un nuevo elemento.<br />
 Para hacer esto concatenamos, usado la <em>c</em>, un variable con otra variable.<br />
-Por ejemplo, para concatenar new_metallica con &quot;Rob&quot; hacemos lo siguiente:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">last_metallica &lt;-<span class="st"> </span><span class="kw">c</span>(new_metallica, <span class="st">&quot;Rob&quot;</span>)
-last_metallica</code></pre></div>
+Por ejemplo, para concatenar new_metallica con “Rob” hacemos lo siguiente:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="programación.html#cb25-1" tabindex="-1"></a>last_metallica <span class="ot">&lt;-</span> <span class="fu">c</span>(new_metallica, <span class="st">&quot;Rob&quot;</span>)</span>
+<span id="cb25-2"><a href="programación.html#cb25-2" tabindex="-1"></a>last_metallica</span></code></pre></div>
 <pre><code>## [1] &quot;Lars&quot;  &quot;James&quot; &quot;Kirk&quot;  &quot;Rob&quot;</code></pre>
 <p>Incluso podríamos elegir dónde agregar a Rob.<br />
 Por ejemplo, lo podemos agregar al final.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">last_metallica_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Rob&quot;</span>, new_metallica)
-last_metallica_<span class="dv">2</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="programación.html#cb27-1" tabindex="-1"></a>last_metallica_2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Rob&quot;</span>, new_metallica)</span>
+<span id="cb27-2"><a href="programación.html#cb27-2" tabindex="-1"></a>last_metallica_2</span></code></pre></div>
 <pre><code>## [1] &quot;Rob&quot;   &quot;Lars&quot;  &quot;James&quot; &quot;Kirk&quot;</code></pre>
 <p>O lo podemos agregar en la penúltima posición:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">last_metallica_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">c</span>(new_metallica[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="st">&quot;Rob&quot;</span>, new_metallica[<span class="dv">3</span>])
-last_metallica_<span class="dv">3</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="programación.html#cb29-1" tabindex="-1"></a>last_metallica_3 <span class="ot">&lt;-</span> <span class="fu">c</span>(new_metallica[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="st">&quot;Rob&quot;</span>, new_metallica[<span class="dv">3</span>])</span>
+<span id="cb29-2"><a href="programación.html#cb29-2" tabindex="-1"></a>last_metallica_3</span></code></pre></div>
 <pre><code>## [1] &quot;Lars&quot;  &quot;James&quot; &quot;Rob&quot;   &quot;Kirk&quot;</code></pre>
 <pre><code>Ejercicio:
 Crea una variable que represente a tu banda favorita.
 </code></pre>
 </div>
-<div id="trabajar-con-data-frames" class="section level2">
+<div id="trabajar-con-data-frames" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Trabajar con data frames</h2>
 <p>Podemos crear variables de distintos tipos (lista de palabras o listas de números):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaNames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Lars&quot;</span>, <span class="st">&quot;James&quot;</span>, <span class="st">&quot;Kirk&quot;</span>, <span class="st">&quot;Rob&quot;</span>)
-metallicaNames</code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="programación.html#cb32-1" tabindex="-1"></a>metallicaNames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Lars&quot;</span>, <span class="st">&quot;James&quot;</span>, <span class="st">&quot;Kirk&quot;</span>, <span class="st">&quot;Rob&quot;</span>)</span>
+<span id="cb32-2"><a href="programación.html#cb32-2" tabindex="-1"></a>metallicaNames</span></code></pre></div>
 <pre><code>## [1] &quot;Lars&quot;  &quot;James&quot; &quot;Kirk&quot;  &quot;Rob&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaAges &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">47</span>, <span class="dv">47</span>, <span class="dv">48</span>, <span class="dv">46</span>)
-metallicaAges</code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="programación.html#cb34-1" tabindex="-1"></a>metallicaAges <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">47</span>, <span class="dv">47</span>, <span class="dv">48</span>, <span class="dv">46</span>)</span>
+<span id="cb34-2"><a href="programación.html#cb34-2" tabindex="-1"></a>metallicaAges</span></code></pre></div>
 <pre><code>## [1] 47 47 48 46</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaColor &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Blue&quot;</span>, <span class="st">&quot;Red&quot;</span>, <span class="st">&quot;Yellow&quot;</span>, <span class="st">&quot;Green&quot;</span>)
-metallicaColor</code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="programación.html#cb36-1" tabindex="-1"></a>metallicaColor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Blue&quot;</span>, <span class="st">&quot;Red&quot;</span>, <span class="st">&quot;Yellow&quot;</span>, <span class="st">&quot;Green&quot;</span>)</span>
+<span id="cb36-2"><a href="programación.html#cb36-2" tabindex="-1"></a>metallicaColor</span></code></pre></div>
 <pre><code>## [1] &quot;Blue&quot;   &quot;Red&quot;    &quot;Yellow&quot; &quot;Green&quot;</code></pre>
-<p>Pero más importante que eso es que podemos reunir estas variables en una estructura mas compleja. Esta estructura se llama <em>data frame</em>. Un data frame puede acomodar distintos tipos de datos y los pone en distintas &quot;cajas&quot;. Para crear un data frame usamos la función <strong>data.frame</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame &lt;-<span class="st"> </span><span class="kw">data.frame</span>(metallicaNames, metallicaAges, metallicaColor)
-metallicaDataFrame</code></pre></div>
+<p>Pero más importante que eso es que podemos reunir estas variables en una estructura mas compleja.
+Esta estructura se llama <em>data frame</em>.
+Un data frame puede acomodar distintos tipos de datos y los pone en distintas “cajas”.
+Para crear un data frame usamos la función <strong>data.frame</strong></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="programación.html#cb38-1" tabindex="-1"></a>metallicaDataFrame <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(metallicaNames, metallicaAges, metallicaColor)</span>
+<span id="cb38-2"><a href="programación.html#cb38-2" tabindex="-1"></a>metallicaDataFrame</span></code></pre></div>
 <pre><code>##   metallicaNames metallicaAges metallicaColor
 ## 1           Lars            47           Blue
 ## 2          James            47            Red
 ## 3           Kirk            48         Yellow
 ## 4            Rob            46          Green</code></pre>
-<p>Fijate que al crear el data frame el nombre de la variable se vuelve el encabezado de esos datos en el dataframe. Si queremos podemos cambiarle el nombre a estos encabezados. Podemos hacer esto usando la función <strong>colnames</strong>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(metallicaDataFrame) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;color&quot;</span>)
-metallicaDataFrame</code></pre></div>
+<p>Fijate que al crear el data frame el nombre de la variable se vuelve el encabezado de esos datos en el dataframe.
+Si queremos podemos cambiarle el nombre a estos encabezados.
+Podemos hacer esto usando la función <strong>colnames</strong>.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="programación.html#cb40-1" tabindex="-1"></a><span class="fu">colnames</span>(metallicaDataFrame) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;color&quot;</span>)</span>
+<span id="cb40-2"><a href="programación.html#cb40-2" tabindex="-1"></a>metallicaDataFrame</span></code></pre></div>
 <pre><code>##    name age  color
 ## 1  Lars  47   Blue
 ## 2 James  47    Red
 ## 3  Kirk  48 Yellow
 ## 4   Rob  46  Green</code></pre>
 <p>O mejor aún puedes definirlo al momento de crear la data frame:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Name =</span> metallicaNames, <span class="dt">Age =</span> metallicaAges, <span class="dt">Color =</span> metallicaColor)
-metallicaDataFrame</code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="programación.html#cb42-1" tabindex="-1"></a>metallicaDataFrame <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Name =</span> metallicaNames, <span class="at">Age =</span> metallicaAges, <span class="at">Color =</span> metallicaColor)</span>
+<span id="cb42-2"><a href="programación.html#cb42-2" tabindex="-1"></a>metallicaDataFrame</span></code></pre></div>
 <pre><code>##    Name Age  Color
 ## 1  Lars  47   Blue
 ## 2 James  47    Red
 ## 3  Kirk  48 Yellow
 ## 4   Rob  46  Green</code></pre>
-<p>Mira también la estructura de este data frame. Verás que hay 4 observacions y 3 variables. Dos de estas listas son carácteres.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(metallicaDataFrame)</code></pre></div>
+<p>Mira también la estructura de este data frame.
+Verás que hay 4 observacions y 3 variables.
+Dos de estas listas son carácteres.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="programación.html#cb44-1" tabindex="-1"></a><span class="fu">str</span>(metallicaDataFrame)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    4 obs. of  3 variables:
 ##  $ Name : chr  &quot;Lars&quot; &quot;James&quot; &quot;Kirk&quot; &quot;Rob&quot;
 ##  $ Age  : num  47 47 48 46
 ##  $ Color: chr  &quot;Blue&quot; &quot;Red&quot; &quot;Yellow&quot; &quot;Green&quot;</code></pre>
 <p>Para mirar cada una de las lista puedes usar el símbolo <strong>$</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame<span class="op">$</span>Name</code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="programación.html#cb46-1" tabindex="-1"></a>metallicaDataFrame<span class="sc">$</span>Name</span></code></pre></div>
 <pre><code>## [1] &quot;Lars&quot;  &quot;James&quot; &quot;Kirk&quot;  &quot;Rob&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame<span class="op">$</span>Age</code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="programación.html#cb48-1" tabindex="-1"></a>metallicaDataFrame<span class="sc">$</span>Age</span></code></pre></div>
 <pre><code>## [1] 47 47 48 46</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame<span class="op">$</span>Color</code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="programación.html#cb50-1" tabindex="-1"></a>metallicaDataFrame<span class="sc">$</span>Color</span></code></pre></div>
 <pre><code>## [1] &quot;Blue&quot;   &quot;Red&quot;    &quot;Yellow&quot; &quot;Green&quot;</code></pre>
 <p>Además, podemos eliminar una de estas listas si no nos interesa.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame<span class="op">$</span>Color &lt;-<span class="st"> </span><span class="ot">NULL</span>
-metallicaDataFrame</code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="programación.html#cb52-1" tabindex="-1"></a>metallicaDataFrame<span class="sc">$</span>Color <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb52-2"><a href="programación.html#cb52-2" tabindex="-1"></a>metallicaDataFrame</span></code></pre></div>
 <pre><code>##    Name Age
 ## 1  Lars  47
 ## 2 James  47
 ## 3  Kirk  48
 ## 4   Rob  46</code></pre>
-<p>Mas importante aún es el hecho que podemos hacer cálculos matemáticos de forma masiva. Primero, agreguemos una columna nueva:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame<span class="op">$</span>ChildAge &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">4</span>, <span class="dv">6</span>)
-metallicaDataFrame</code></pre></div>
+<p>Mas importante aún es el hecho que podemos hacer cálculos matemáticos de forma masiva.
+Primero, agreguemos una columna nueva:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="programación.html#cb54-1" tabindex="-1"></a>metallicaDataFrame<span class="sc">$</span>ChildAge <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">4</span>, <span class="dv">6</span>)</span>
+<span id="cb54-2"><a href="programación.html#cb54-2" tabindex="-1"></a>metallicaDataFrame</span></code></pre></div>
 <pre><code>##    Name Age ChildAge
 ## 1  Lars  47       12
 ## 2 James  47       12
 ## 3  Kirk  48        4
 ## 4   Rob  46        6</code></pre>
 <p>Luego, podemos calcular la diferencia entre estas dos columnas y la asignamos a una nueva columna:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metallicaDataFrame<span class="op">$</span>FatherhoodAge &lt;-<span class="st"> </span>metallicaDataFrame<span class="op">$</span>Age <span class="op">-</span><span class="st"> </span>metallicaDataFrame<span class="op">$</span>ChildAge
-metallicaDataFrame</code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="programación.html#cb56-1" tabindex="-1"></a>metallicaDataFrame<span class="sc">$</span>FatherhoodAge <span class="ot">&lt;-</span> metallicaDataFrame<span class="sc">$</span>Age <span class="sc">-</span> metallicaDataFrame<span class="sc">$</span>ChildAge</span>
+<span id="cb56-2"><a href="programación.html#cb56-2" tabindex="-1"></a>metallicaDataFrame</span></code></pre></div>
 <pre><code>##    Name Age ChildAge FatherhoodAge
 ## 1  Lars  47       12            35
 ## 2 James  47       12            35
 ## 3  Kirk  48        4            44
 ## 4   Rob  46        6            40</code></pre>
-<p>Podemos agregar mas datos a partir de otra variable. Y para crear variables podemos concatenar pedazos de datos. Por ejemplo, podríamos querer crear un set de datos de 15 valores que representen 3 condiciones experimentales. Cada condición experimental podría estar repetida 5 veces. Si queremos repetir la condición 1 tres veces hacemos:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">5</span>)</code></pre></div>
+<p>Podemos agregar mas datos a partir de otra variable.
+Y para crear variables podemos concatenar pedazos de datos.
+Por ejemplo, podríamos querer crear un set de datos de 15 valores que representen 3 condiciones experimentales.
+Cada condición experimental podría estar repetida 5 veces.
+Si queremos repetir la condición 1 tres veces hacemos:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="programación.html#cb58-1" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 1 1 1 1 1</code></pre>
-<p>El primer parámetro dentro de la función <strong>rep</strong> es el número que quieres repetir. El segundo parámetro define las veces que se va a definir ese número.</p>
+<p>El primer parámetro dentro de la función <strong>rep</strong> es el número que quieres repetir.
+El segundo parámetro define las veces que se va a definir ese número.</p>
 <p>Luego, podemos concatenar repeticiones de distintos números.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vector1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">5</span>), <span class="kw">rep</span>(<span class="dv">2</span>,<span class="dv">5</span>), <span class="kw">rep</span>(<span class="dv">3</span>,<span class="dv">5</span>))
-vector1</code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="programación.html#cb60-1" tabindex="-1"></a>vector1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">5</span>), <span class="fu">rep</span>(<span class="dv">2</span>,<span class="dv">5</span>), <span class="fu">rep</span>(<span class="dv">3</span>,<span class="dv">5</span>))</span>
+<span id="cb60-2"><a href="programación.html#cb60-2" tabindex="-1"></a>vector1</span></code></pre></div>
 <pre><code>##  [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3</code></pre>
 <p>Y eso lo podemos agregar luego en una data frame.</p>
-<p>Veamos un ejemplo mas elaborado. Vamos a crear un base de datos sobre el nombre, la fecha de nacimiento y el trabajo de distintas personas. Para que R identifique los números como fechas usamos la función <strong>as.Date</strong> (por defecto el formato es yyyy-mm-dd).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">name &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Ben&quot;</span>, <span class="st">&quot;Martin&quot;</span>,<span class="st">&quot;Andy&quot;</span>,<span class="st">&quot;Paul&quot;</span>, <span class="st">&quot;Graham&quot;</span>,<span class="st">&quot;Carina&quot;</span>,<span class="st">&quot;Karina&quot;</span>,<span class="st">&quot;Doug&quot;</span>,<span class="st">&quot;Mark&quot;</span>, <span class="st">&quot;Zoe&quot;</span>)
-name</code></pre></div>
+<p>Veamos un ejemplo mas elaborado.
+Vamos a crear un base de datos sobre el nombre, la fecha de nacimiento y el trabajo de distintas personas.
+Para que R identifique los números como fechas usamos la función <strong>as.Date</strong> (por defecto el formato es yyyy-mm-dd).</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="programación.html#cb62-1" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Ben&quot;</span>, <span class="st">&quot;Martin&quot;</span>,<span class="st">&quot;Andy&quot;</span>,<span class="st">&quot;Paul&quot;</span>, <span class="st">&quot;Graham&quot;</span>,<span class="st">&quot;Carina&quot;</span>,<span class="st">&quot;Karina&quot;</span>,<span class="st">&quot;Doug&quot;</span>,<span class="st">&quot;Mark&quot;</span>, <span class="st">&quot;Zoe&quot;</span>)</span>
+<span id="cb62-2"><a href="programación.html#cb62-2" tabindex="-1"></a>name</span></code></pre></div>
 <pre><code>##  [1] &quot;Ben&quot;    &quot;Martin&quot; &quot;Andy&quot;   &quot;Paul&quot;   &quot;Graham&quot; &quot;Carina&quot; &quot;Karina&quot; &quot;Doug&quot;   &quot;Mark&quot;   &quot;Zoe&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">birth_date &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">c</span>(<span class="st">&quot;1977-07-03&quot;</span>, <span class="st">&quot;1969-05-24&quot;</span>, <span class="st">&quot;1973-06-21&quot;</span>, <span class="st">&quot;1970-07-16&quot;</span>, <span class="st">&quot;1949-10-10&quot;</span>, <span class="st">&quot;1983-11-05&quot;</span>, <span class="st">&quot;1987-10-08&quot;</span>, <span class="st">&quot;1989-09-16&quot;</span>, <span class="st">&quot;1973-05-20&quot;</span>, <span class="st">&quot;1984-11-12&quot;</span>))
-birth_date</code></pre></div>
-<pre><code>##  [1] &quot;1977-07-03&quot; &quot;1969-05-24&quot; &quot;1973-06-21&quot; &quot;1970-07-16&quot; &quot;1949-10-10&quot; &quot;1983-11-05&quot; &quot;1987-10-08&quot;
-##  [8] &quot;1989-09-16&quot; &quot;1973-05-20&quot; &quot;1984-11-12&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">job &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">5</span>), <span class="kw">rep</span>(<span class="dv">2</span>, <span class="dv">5</span>)) <span class="co"># que es el equivalente a: job &lt;- c(1,1,1,1,1,2,2,2,2,2)</span>
-job</code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="programación.html#cb64-1" tabindex="-1"></a>birth_date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">&quot;1977-07-03&quot;</span>, <span class="st">&quot;1969-05-24&quot;</span>, <span class="st">&quot;1973-06-21&quot;</span>, <span class="st">&quot;1970-07-16&quot;</span>, <span class="st">&quot;1949-10-10&quot;</span>, <span class="st">&quot;1983-11-05&quot;</span>, <span class="st">&quot;1987-10-08&quot;</span>, <span class="st">&quot;1989-09-16&quot;</span>, <span class="st">&quot;1973-05-20&quot;</span>, <span class="st">&quot;1984-11-12&quot;</span>))</span>
+<span id="cb64-2"><a href="programación.html#cb64-2" tabindex="-1"></a>birth_date</span></code></pre></div>
+<pre><code>##  [1] &quot;1977-07-03&quot; &quot;1969-05-24&quot; &quot;1973-06-21&quot; &quot;1970-07-16&quot; &quot;1949-10-10&quot; &quot;1983-11-05&quot; &quot;1987-10-08&quot; &quot;1989-09-16&quot; &quot;1973-05-20&quot;
+## [10] &quot;1984-11-12&quot;</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="programación.html#cb66-1" tabindex="-1"></a>job <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">5</span>), <span class="fu">rep</span>(<span class="dv">2</span>, <span class="dv">5</span>)) <span class="co"># que es el equivalente a: job &lt;- c(1,1,1,1,1,2,2,2,2,2)</span></span>
+<span id="cb66-2"><a href="programación.html#cb66-2" tabindex="-1"></a>job</span></code></pre></div>
 <pre><code>##  [1] 1 1 1 1 1 2 2 2 2 2</code></pre>
-<p>La variable <em>job</em> es categórica. El número 1 indica que es un profesor y el 2 indica que es un estudiante. Para R son sólo números. Para decirle a R que es una variable categórica (o en el lenguaje de R un factor) tenemos que indicarselo usando la función <strong>factor</strong>. Además, podemos crear etiquetas o nombres que nos hagan mas sentido a nosotros. En este caso este factor tiene dos niveles: Lecturer y Student.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">job &lt;-<span class="st"> </span><span class="kw">factor</span>(job, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Lecturer&quot;</span>, <span class="st">&quot;Student&quot;</span>))
-job</code></pre></div>
+<p>La variable <em>job</em> es categórica. El número 1 indica que es un profesor y el 2 indica que es un estudiante.
+Para R son sólo números. Para decirle a R que es una variable categórica (o en el lenguaje de R un factor) tenemos que indicarselo usando la función <strong>factor</strong>. Además, podemos crear etiquetas o nombres que nos hagan mas sentido a nosotros. En este caso este factor tiene dos niveles: Lecturer y Student.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="programación.html#cb68-1" tabindex="-1"></a>job <span class="ot">&lt;-</span> <span class="fu">factor</span>(job, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Lecturer&quot;</span>, <span class="st">&quot;Student&quot;</span>))</span>
+<span id="cb68-2"><a href="programación.html#cb68-2" tabindex="-1"></a>job</span></code></pre></div>
 <pre><code>##  [1] Lecturer Lecturer Lecturer Lecturer Lecturer Student  Student  Student  Student  Student 
 ## Levels: Lecturer Student</code></pre>
 <p>Luego, el paso final es poner todo junto:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataframe1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(name, birth_date, job)
-dataframe1</code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="programación.html#cb70-1" tabindex="-1"></a>dataframe1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(name, birth_date, job)</span>
+<span id="cb70-2"><a href="programación.html#cb70-2" tabindex="-1"></a>dataframe1</span></code></pre></div>
 <pre><code>##      name birth_date      job
 ## 1     Ben 1977-07-03 Lecturer
 ## 2  Martin 1969-05-24 Lecturer
@@ -447,17 +518,21 @@ Crea una data frame con los integrantes de tu grupo familiar o de tu curso.
 En tu data frame agrega el nombre, apellido y la edad.
 </code></pre>
 </div>
-<div id="importar-datos" class="section level2">
+<div id="importar-datos" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Importar datos</h2>
-<p>La mayoría del tiempo vas a importar más que crear datos. Para ello cuando trabajes en R debes decirle en que carpeta de tu computador están esos archivos. Es decir, debes definir tu directorio de trabajo con la función <strong>setwd</strong></p>
-<p>Por ejemplo, para mí sería algo así: setwd(&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Stats_UTalca/database_2020_DocPsychol&quot;)</p>
+<p>La mayoría del tiempo vas a importar más que crear datos.
+Para ello cuando trabajes en R debes decirle en que carpeta de tu computador están esos archivos.
+Es decir, debes definir tu directorio de trabajo con la función <strong>setwd</strong></p>
+<p>Por ejemplo, para mí sería algo así:
+setwd(“C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Stats_UTalca/database_2020_DocPsychol”)</p>
 <p>La función <strong>getwd()</strong> (sin nada entre paréntesis) te permite sabes cual es tu directorio actual.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getwd</span>()</code></pre></div>
-<pre><code>## [1] &quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</code></pre>
-<p>Para importar datos puedes usar distintas funciones. Por ejemplo, para importar datos de tipo .txt debemos usar la función <strong>read.delim</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
-dat &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="dt">file =</span> <span class="st">&quot;data/facebook_friends_1.txt&quot;</span>)
-dat</code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="programación.html#cb73-1" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;C:/Users/Usuario/Documents/R_estadistica_con_R/estadistica&quot;</code></pre>
+<p>Para importar datos puedes usar distintas funciones.
+Por ejemplo, para importar datos de tipo .txt debemos usar la función <strong>read.delim</strong></p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="programación.html#cb75-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
+<span id="cb75-2"><a href="programación.html#cb75-2" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="at">file =</span> <span class="st">&quot;data/facebook_friends_1.txt&quot;</span>)</span>
+<span id="cb75-3"><a href="programación.html#cb75-3" tabindex="-1"></a>dat</span></code></pre></div>
 <pre><code>##    X108
 ## 1   103
 ## 2   252
@@ -469,10 +544,14 @@ dat</code></pre></div>
 ## 8    22
 ## 9   116
 ## 10   98</code></pre>
-<p>Si ejecutas este comando en tu computador y lo comparas con los datos originales te darás cuenta que hay un error. Cuando importate tus datos a R perdiste el 108. Esto occurre porque por defecto esta función asume que tus datos tienen un encabezado (el &quot;header&quot;). Es decir, el parámetro llamado &quot;header&quot; esta fijado en &quot;TRUE&quot;&quot;, que significa que la función espera un encabezado. Para corregir esto debes explícitamente decirle a R que no hay header, así:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
-dat &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="dt">file =</span> <span class="st">&quot;data/facebook_friends_1.txt&quot;</span>, <span class="dt">header =</span> <span class="ot">FALSE</span>)
-dat</code></pre></div>
+<p>Si ejecutas este comando en tu computador y lo comparas con los datos originales te darás cuenta que hay un error.
+Cuando importate tus datos a R perdiste el 108.
+Esto occurre porque por defecto esta función asume que tus datos tienen un encabezado (el “header”).
+Es decir, el parámetro llamado “header” esta fijado en “TRUE”“, que significa que la función espera un encabezado.
+Para corregir esto debes explícitamente decirle a R que no hay header, así:</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="programación.html#cb77-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
+<span id="cb77-2"><a href="programación.html#cb77-2" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="at">file =</span> <span class="st">&quot;data/facebook_friends_1.txt&quot;</span>, <span class="at">header =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb77-3"><a href="programación.html#cb77-3" tabindex="-1"></a>dat</span></code></pre></div>
 <pre><code>##     V1
 ## 1  108
 ## 2  103
@@ -485,9 +564,11 @@ dat</code></pre></div>
 ## 9   22
 ## 10 116
 ## 11  98</code></pre>
-<p>Fijate ahora que R le asigna un nombre a tu columna (V1). Es buena práctica ponerme un nombre a tu columna que haga sentido. Por ejemplo, podemos llamarla &quot;friends&quot;:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(dat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;friends&quot;</span>)
-dat</code></pre></div>
+<p>Fijate ahora que R le asigna un nombre a tu columna (V1).
+Es buena práctica ponerme un nombre a tu columna que haga sentido.
+Por ejemplo, podemos llamarla “friends”:</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="programación.html#cb79-1" tabindex="-1"></a><span class="fu">colnames</span>(dat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;friends&quot;</span>)</span>
+<span id="cb79-2"><a href="programación.html#cb79-2" tabindex="-1"></a>dat</span></code></pre></div>
 <pre><code>##    friends
 ## 1      108
 ## 2      103
@@ -500,10 +581,11 @@ dat</code></pre></div>
 ## 9       22
 ## 10     116
 ## 11      98</code></pre>
-<p>Cuando tus datos ya tienen un encabezado te ahorras estos problemas. Fjate que para importar este otro archivo no necesitas definir que el header a FALSE.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
-dat &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="dt">file =</span> <span class="st">&quot;data/facebook_friends_2.txt&quot;</span>)
-dat</code></pre></div>
+<p>Cuando tus datos ya tienen un encabezado te ahorras estos problemas.
+Fjate que para importar este otro archivo no necesitas definir que el header a FALSE.</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="programación.html#cb81-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
+<span id="cb81-2"><a href="programación.html#cb81-2" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="at">file =</span> <span class="st">&quot;data/facebook_friends_2.txt&quot;</span>)</span>
+<span id="cb81-3"><a href="programación.html#cb81-3" tabindex="-1"></a>dat</span></code></pre></div>
 <pre><code>##    AMIGOS
 ## 1     108
 ## 2     103
@@ -516,10 +598,11 @@ dat</code></pre></div>
 ## 9      22
 ## 10    116
 ## 11     98</code></pre>
-<p>Típicamente vas a importar que has registrado en archivos de tipo Excel (.xls o .xlsx). El archivo Excel se puede transformar en un archivo de tipo csv. Este arhivo csv se importa de la siguiente manera:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
-dat2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/facebook_friends_1.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">FALSE</span>)
-dat2</code></pre></div>
+<p>Típicamente vas a importar que has registrado en archivos de tipo Excel (.xls o .xlsx).
+El archivo Excel se puede transformar en un archivo de tipo csv. Este arhivo csv se importa de la siguiente manera:</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="programación.html#cb83-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
+<span id="cb83-2"><a href="programación.html#cb83-2" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/facebook_friends_1.csv&quot;</span>, <span class="at">header =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb83-3"><a href="programación.html#cb83-3" tabindex="-1"></a>dat2</span></code></pre></div>
 <pre><code>##     V1
 ## 1  108
 ## 2  103
@@ -532,20 +615,23 @@ dat2</code></pre></div>
 ## 9   22
 ## 10 116
 ## 11  98</code></pre>
-<p>En relación a la importación de datos en formato csv debo realizar una pequeña advertencia. Por alguna razón misteriosa a veces el comando <strong>read.csv</strong> no funciona bien e importa de manera defectuosa (todas las variables se ubican en una sola columna). A veces la solución es usar la versión 2 de esta función. Es decir usar <strong>read.csv2</strong>.</p>
+<p>En relación a la importación de datos en formato csv debo realizar una pequeña advertencia.
+Por alguna razón misteriosa a veces el comando <strong>read.csv</strong> no funciona bien e importa de manera defectuosa (todas las variables se ubican en una sola columna). A veces la solución es usar la versión 2 de esta función. Es decir usar <strong>read.csv2</strong>.</p>
 <p>Para importar archivos siempre asegurate que has seteado bien tu directorio de trabajo y que los archivos están ahí.</p>
 <pre><code>Ejercicio:
 Trata de importar algún archivo csv a tu sesión de R.
 </code></pre>
 <p>Un truco en RStudio para trabajar rápidamente con los archivos que uno tiene en la misma carpeta es usar la siguiente línea de comando. De esta manera se setea el path al lugar dónde está el script.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="kw">dirname</span>(rstudioapi<span class="op">::</span><span class="kw">getActiveDocumentContext</span>()<span class="op">$</span>path))</code></pre></div>
+<p>setwd(dirname(rstudioapi::getActiveDocumentContext()$path))</p>
 </div>
-<div id="seleccionar-datos" class="section level2">
+<div id="seleccionar-datos" class="section level2" number="3.7">
 <h2><span class="header-section-number">3.7</span> Seleccionar datos</h2>
-<p>Una vez que tienes datos en tu espacio de trabajo en R la idea es que puedas manipular esos datos. Uno de los aspectos fundamentales de esta manipulación es la selección de datos. Primero, importemos alguna base de datos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
-lecturerDat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/lecturer_data.csv&quot;</span>)
-lecturerDat</code></pre></div>
+<p>Una vez que tienes datos en tu espacio de trabajo en R la idea es que puedas manipular esos datos.
+Uno de los aspectos fundamentales de esta manipulación es la selección de datos.
+Primero, importemos alguna base de datos.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="programación.html#cb86-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
+<span id="cb86-2"><a href="programación.html#cb86-2" tabindex="-1"></a>lecturerDat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/lecturer_data.csv&quot;</span>)</span>
+<span id="cb86-3"><a href="programación.html#cb86-3" tabindex="-1"></a>lecturerDat</span></code></pre></div>
 <pre><code>##      name birth_date job friends alcohol income neurotic
 ## 1     Ben 07/03/1977   1       5      10  20000       10
 ## 2  Martin  5/24/1969   1       2      15  40000       17
@@ -557,11 +643,12 @@ lecturerDat</code></pre></div>
 ## 8    Doug  1/23/1989   2      15      16   3000        9
 ## 9    Mark  5/20/1973   2      12      17  10000       14
 ## 10    Zoe 11/12/1984   2      17      18     10       13</code></pre>
-<p>Antes de proceder vamos a transformar la variable &quot;job&quot; a factor, y vamos a crear rótulos que nos hagan mas sentido. Esto lo podemos hacer porque sabemos que el rótulo 1 corresponde a &quot;Lecturer&quot; y el rótulo 2 corresponde a &quot;Student&quot;.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lecturerDat<span class="op">$</span>job &lt;-<span class="st"> </span><span class="kw">factor</span>(lecturerDat<span class="op">$</span>job,
-                          <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>),
-                          <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Lecturer&quot;</span>, <span class="st">&quot;Student&quot;</span>))
-lecturerDat</code></pre></div>
+<p>Antes de proceder vamos a transformar la variable “job” a factor, y vamos a crear rótulos que nos hagan mas sentido.
+Esto lo podemos hacer porque sabemos que el rótulo 1 corresponde a “Lecturer” y el rótulo 2 corresponde a “Student”.</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="programación.html#cb88-1" tabindex="-1"></a>lecturerDat<span class="sc">$</span>job <span class="ot">&lt;-</span> <span class="fu">factor</span>(lecturerDat<span class="sc">$</span>job,</span>
+<span id="cb88-2"><a href="programación.html#cb88-2" tabindex="-1"></a>                          <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>),</span>
+<span id="cb88-3"><a href="programación.html#cb88-3" tabindex="-1"></a>                          <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Lecturer&quot;</span>, <span class="st">&quot;Student&quot;</span>))</span>
+<span id="cb88-4"><a href="programación.html#cb88-4" tabindex="-1"></a>lecturerDat</span></code></pre></div>
 <pre><code>##      name birth_date      job friends alcohol income neurotic
 ## 1     Ben 07/03/1977 Lecturer       5      10  20000       10
 ## 2  Martin  5/24/1969 Lecturer       2      15  40000       17
@@ -573,9 +660,10 @@ lecturerDat</code></pre></div>
 ## 8    Doug  1/23/1989  Student      15      16   3000        9
 ## 9    Mark  5/20/1973  Student      12      17  10000       14
 ## 10    Zoe 11/12/1984  Student      17      18     10       13</code></pre>
-<p>Ahora, imagina que quieres seleccionar datos de aquellos participantes que eran sólo &quot;Lecturer&quot;. Podemos seleccionar esos datos y asignarlos a una nueva variable, así:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">onlyLecturer &lt;-<span class="st"> </span>lecturerDat[lecturerDat<span class="op">$</span>job <span class="op">==</span><span class="st"> &quot;Lecturer&quot;</span>,]
-onlyLecturer</code></pre></div>
+<p>Ahora, imagina que quieres seleccionar datos de aquellos participantes que eran sólo “Lecturer”.
+Podemos seleccionar esos datos y asignarlos a una nueva variable, así:</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="programación.html#cb90-1" tabindex="-1"></a>onlyLecturer <span class="ot">&lt;-</span> lecturerDat[lecturerDat<span class="sc">$</span>job <span class="sc">==</span> <span class="st">&quot;Lecturer&quot;</span>,]</span>
+<span id="cb90-2"><a href="programación.html#cb90-2" tabindex="-1"></a>onlyLecturer</span></code></pre></div>
 <pre><code>##     name birth_date      job friends alcohol income neurotic
 ## 1    Ben 07/03/1977 Lecturer       5      10  20000       10
 ## 2 Martin  5/24/1969 Lecturer       2      15  40000       17
@@ -583,15 +671,15 @@ onlyLecturer</code></pre></div>
 ## 4   Paul  7/16/1970 Lecturer       4       5  22000       13
 ## 5 Graham 10/10/1949 Lecturer       1      30  50000       21</code></pre>
 <p>Ahora, imagina que quieres seleccionar datos de aquellos participantes cuyo nivel de alcohol es menor o igual a 15:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lightAlcoholics &lt;-<span class="st"> </span>lecturerDat[lecturerDat<span class="op">$</span>alcohol <span class="op">&lt;=</span><span class="st"> </span><span class="dv">15</span>,]
-lightAlcoholics</code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="programación.html#cb92-1" tabindex="-1"></a>lightAlcoholics <span class="ot">&lt;-</span> lecturerDat[lecturerDat<span class="sc">$</span>alcohol <span class="sc">&lt;=</span> <span class="dv">15</span>,]</span>
+<span id="cb92-2"><a href="programación.html#cb92-2" tabindex="-1"></a>lightAlcoholics</span></code></pre></div>
 <pre><code>##     name birth_date      job friends alcohol income neurotic
 ## 1    Ben 07/03/1977 Lecturer       5      10  20000       10
 ## 2 Martin  5/24/1969 Lecturer       2      15  40000       17
 ## 4   Paul  7/16/1970 Lecturer       4       5  22000       13</code></pre>
-<p>Lo que acabas de hacer es seleccionar sólo algunas filas. Algo que también puedes realizar es seleccionar sólo algunas columnas. Por ejemplo, podrías seleccionar sólo aquellos datos relacionados con las columnas &quot;friends&quot;, &quot;alcohol&quot; y &quot;neurotic&quot;. Para ello puedes hacer:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lecturerPersonality &lt;-<span class="st"> </span>lecturerDat[, <span class="kw">c</span>(<span class="st">&quot;friends&quot;</span>, <span class="st">&quot;alcohol&quot;</span>, <span class="st">&quot;neurotic&quot;</span>)]
-lecturerPersonality</code></pre></div>
+<p>Lo que acabas de hacer es seleccionar sólo algunas filas. Algo que también puedes realizar es seleccionar sólo algunas columnas. Por ejemplo, podrías seleccionar sólo aquellos datos relacionados con las columnas “friends”, “alcohol” y “neurotic”. Para ello puedes hacer:</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="programación.html#cb94-1" tabindex="-1"></a>lecturerPersonality <span class="ot">&lt;-</span> lecturerDat[, <span class="fu">c</span>(<span class="st">&quot;friends&quot;</span>, <span class="st">&quot;alcohol&quot;</span>, <span class="st">&quot;neurotic&quot;</span>)]</span>
+<span id="cb94-2"><a href="programación.html#cb94-2" tabindex="-1"></a>lecturerPersonality</span></code></pre></div>
 <pre><code>##    friends alcohol neurotic
 ## 1        5      10       10
 ## 2        2      15       17
@@ -603,20 +691,22 @@ lecturerPersonality</code></pre></div>
 ## 8       15      16        9
 ## 9       12      17       14
 ## 10      17      18       13</code></pre>
-<p>Incluso puedes combinar la selección de filas y de columnas. Por ejemplo podrías seleccionar las columnas &quot;friends&quot;, &quot;alcohol&quot; y &quot;neurotic&quot; de aquello participantes cuyo nivel de alcohol es menor o igual a 15:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lightAlcoholicsPerso &lt;-<span class="st"> </span>lecturerDat[lecturerDat<span class="op">$</span>alcohol <span class="op">&lt;=</span><span class="st"> </span><span class="dv">15</span>, <span class="kw">c</span>(<span class="st">&quot;friends&quot;</span>, <span class="st">&quot;alcohol&quot;</span>, <span class="st">&quot;neurotic&quot;</span>)]
-lightAlcoholicsPerso</code></pre></div>
+<p>Incluso puedes combinar la selección de filas y de columnas.
+Por ejemplo podrías seleccionar las columnas “friends”, “alcohol” y “neurotic” de aquello participantes cuyo nivel de alcohol es menor o igual a 15:</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="programación.html#cb96-1" tabindex="-1"></a>lightAlcoholicsPerso <span class="ot">&lt;-</span> lecturerDat[lecturerDat<span class="sc">$</span>alcohol <span class="sc">&lt;=</span> <span class="dv">15</span>, <span class="fu">c</span>(<span class="st">&quot;friends&quot;</span>, <span class="st">&quot;alcohol&quot;</span>, <span class="st">&quot;neurotic&quot;</span>)]</span>
+<span id="cb96-2"><a href="programación.html#cb96-2" tabindex="-1"></a>lightAlcoholicsPerso</span></code></pre></div>
 <pre><code>##   friends alcohol neurotic
 ## 1       5      10       10
 ## 2       2      15       17
 ## 4       4       5       13</code></pre>
 </div>
-<div id="transformar-datos-long-vs-wide" class="section level2">
+<div id="transformar-datos-long-vs-wide" class="section level2" number="3.8">
 <h2><span class="header-section-number">3.8</span> Transformar datos (long vs wide)</h2>
-<p>Otro aspecto muy importante que debes entender es como transformar de un formato a otro en R. En R hay dos formatos típicos. Cuando hay múltiples mediciones de un mismo sujeto, por ejemplo, a lo largo del tiempo o cuando se realizan distintas mediciones los datos a menudo se anotan en formato <em>wide</em>. En un formato <em>wide</em> la data frame contiene valores que no se repiten en la primera columna. En un formato <em>long</em> la data frame contiene valores que se repiten en la primera columna. Por ejemplo, importemos un set de datos que está en formato <em>wide</em>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
-satisfactionData &lt;-<span class="st">  </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Honeymoon_Period.csv&quot;</span>)
-<span class="kw">head</span>(satisfactionData)</code></pre></div>
+<p>Otro aspecto muy importante que debes entender es como transformar de un formato a otro en R.
+En R hay dos formatos típicos. Cuando hay múltiples mediciones de un mismo sujeto, por ejemplo, a lo largo del tiempo o cuando se realizan distintas mediciones los datos a menudo se anotan en formato <em>wide</em>. En un formato <em>wide</em> la data frame contiene valores que no se repiten en la primera columna. En un formato <em>long</em> la data frame contiene valores que se repiten en la primera columna. Por ejemplo, importemos un set de datos que está en formato <em>wide</em>:</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="programación.html#cb98-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
+<span id="cb98-2"><a href="programación.html#cb98-2" tabindex="-1"></a>satisfactionData <span class="ot">&lt;-</span>  <span class="fu">read.csv</span>(<span class="st">&quot;data/Honeymoon_Period.csv&quot;</span>)</span>
+<span id="cb98-3"><a href="programación.html#cb98-3" tabindex="-1"></a><span class="fu">head</span>(satisfactionData)</span></code></pre></div>
 <pre><code>##   Person Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months Satisfaction_18_Months Gender
 ## 1      1                 6                     6                      5                      2      0
 ## 2      2                 7                     7                      8                      4      1
@@ -624,18 +714,21 @@ satisfactionData &lt;-<span class="st">  </span><span class="kw">read.csv</span>
 ## 4      4                 6                     9                      4                      1      0
 ## 5      5                 6                     7                      6                      6      0
 ## 6      6                 5                    10                      4                      2      1</code></pre>
-<p>Con <strong>head</strong> miramos sólo los primeras 6 filas de la base de datos. En esta data frame están los niveles de satisfacción con la pareja al momento de casarse, y luego de 6, 12 y 18 meses. Además está el género del entrevistado.</p>
-<p>Esta data frame la podemos a transformar a un formato <em>long</em> usando la función <strong>stack</strong>. Esta función la usamos de la siguiente manera: newDataFrame &lt;- stack(oldDataFrame, select = c(variable_list))</p>
+<p>Con <strong>head</strong> miramos sólo los primeras 6 filas de la base de datos.
+En esta data frame están los niveles de satisfacción con la pareja al momento de casarse, y luego de 6, 12 y 18 meses. Además está el género del entrevistado.</p>
+<p>Esta data frame la podemos a transformar a un formato <em>long</em> usando la función <strong>stack</strong>.
+Esta función la usamos de la siguiente manera:
+newDataFrame &lt;- stack(oldDataFrame, select = c(variable_list))</p>
 <p>En nuestro ejemplo podemos hacerlo así:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">satisfactionStacked &lt;-<span class="st"> </span><span class="kw">stack</span>(satisfactionData, 
-                             <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;Satisfaction_Base&quot;</span>,
-                                        <span class="st">&quot;Satisfaction_6_Months&quot;</span>,
-                                        <span class="st">&quot;Satisfaction_12_Months&quot;</span>,
-                                        <span class="st">&quot;Satisfaction_18_Months&quot;</span>))
-
-<span class="kw">colnames</span>(satisfactionStacked) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Values&quot;</span>, <span class="st">&quot;SatisfType&quot;</span>) <span class="co"># cambiamos los encabezados</span>
-
-<span class="kw">head</span>(satisfactionStacked)</code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="programación.html#cb100-1" tabindex="-1"></a>satisfactionStacked <span class="ot">&lt;-</span> <span class="fu">stack</span>(satisfactionData, </span>
+<span id="cb100-2"><a href="programación.html#cb100-2" tabindex="-1"></a>                             <span class="at">select =</span> <span class="fu">c</span>(<span class="st">&quot;Satisfaction_Base&quot;</span>,</span>
+<span id="cb100-3"><a href="programación.html#cb100-3" tabindex="-1"></a>                                        <span class="st">&quot;Satisfaction_6_Months&quot;</span>,</span>
+<span id="cb100-4"><a href="programación.html#cb100-4" tabindex="-1"></a>                                        <span class="st">&quot;Satisfaction_12_Months&quot;</span>,</span>
+<span id="cb100-5"><a href="programación.html#cb100-5" tabindex="-1"></a>                                        <span class="st">&quot;Satisfaction_18_Months&quot;</span>))</span>
+<span id="cb100-6"><a href="programación.html#cb100-6" tabindex="-1"></a></span>
+<span id="cb100-7"><a href="programación.html#cb100-7" tabindex="-1"></a><span class="fu">colnames</span>(satisfactionStacked) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Values&quot;</span>, <span class="st">&quot;SatisfType&quot;</span>) <span class="co"># cambiamos los encabezados</span></span>
+<span id="cb100-8"><a href="programación.html#cb100-8" tabindex="-1"></a></span>
+<span id="cb100-9"><a href="programación.html#cb100-9" tabindex="-1"></a><span class="fu">head</span>(satisfactionStacked)</span></code></pre></div>
 <pre><code>##   Values        SatisfType
 ## 1      6 Satisfaction_Base
 ## 2      7 Satisfaction_Base
@@ -644,12 +737,14 @@ satisfactionData &lt;-<span class="st">  </span><span class="kw">read.csv</span>
 ## 5      6 Satisfaction_Base
 ## 6      5 Satisfaction_Base</code></pre>
 <p>En esta data frame se puede ver que los valores de satisfacción se ubican en una columna y la condición se ubica en otra columna. El problema con esta transformación es que perdemos la información de género y el número de la persona. Más adelante veremos una manera de hacer esta transformación sin perder esta información.</p>
-<p>Esta data frame la podemos reconvertir en formato wide con la función <strong>unstack</strong>. Esta función la usamos de la siguiente manera:<br />
-newDataFrame &lt;- unstack(oldDataFrame, scores ~ columns) O simplemente: newDataFrame &lt;- unstack(oldDataFrame)</p>
+<p>Esta data frame la podemos reconvertir en formato wide con la función <strong>unstack</strong>.
+Esta función la usamos de la siguiente manera:<br />
+newDataFrame &lt;- unstack(oldDataFrame, scores ~ columns)
+O simplemente: newDataFrame &lt;- unstack(oldDataFrame)</p>
 <p>En nuestro ejemplo podemos hacerlo así:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">satisfactionUnstacked &lt;-<span class="st"> </span><span class="kw">unstack</span>(satisfactionStacked)
-
-<span class="kw">head</span>(satisfactionUnstacked)</code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="programación.html#cb102-1" tabindex="-1"></a>satisfactionUnstacked <span class="ot">&lt;-</span> <span class="fu">unstack</span>(satisfactionStacked)</span>
+<span id="cb102-2"><a href="programación.html#cb102-2" tabindex="-1"></a></span>
+<span id="cb102-3"><a href="programación.html#cb102-3" tabindex="-1"></a><span class="fu">head</span>(satisfactionUnstacked)</span></code></pre></div>
 <pre><code>##   Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months Satisfaction_18_Months
 ## 1                 6                     6                      5                      2
 ## 2                 7                     7                      8                      4
@@ -657,10 +752,10 @@ newDataFrame &lt;- unstack(oldDataFrame, scores ~ columns) O simplemente: newDat
 ## 4                 6                     9                      4                      1
 ## 5                 6                     7                      6                      6
 ## 6                 5                    10                      4                      2</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">satisfactionUnstacked2 &lt;-<span class="st"> </span><span class="kw">unstack</span>(satisfactionStacked,
-                                  Values <span class="op">~</span><span class="st"> </span>SatisfType)
-
-<span class="kw">head</span>(satisfactionUnstacked2)</code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="programación.html#cb104-1" tabindex="-1"></a>satisfactionUnstacked2 <span class="ot">&lt;-</span> <span class="fu">unstack</span>(satisfactionStacked,</span>
+<span id="cb104-2"><a href="programación.html#cb104-2" tabindex="-1"></a>                                  Values <span class="sc">~</span> SatisfType)</span>
+<span id="cb104-3"><a href="programación.html#cb104-3" tabindex="-1"></a></span>
+<span id="cb104-4"><a href="programación.html#cb104-4" tabindex="-1"></a><span class="fu">head</span>(satisfactionUnstacked2)</span></code></pre></div>
 <pre><code>##   Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months Satisfaction_18_Months
 ## 1                 6                     6                      5                      2
 ## 2                 7                     7                      8                      4
@@ -668,21 +763,25 @@ newDataFrame &lt;- unstack(oldDataFrame, scores ~ columns) O simplemente: newDat
 ## 4                 6                     9                      4                      1
 ## 5                 6                     7                      6                      6
 ## 6                 5                    10                      4                      2</code></pre>
-<p>Otra manera de transformar datos a formato <em>long</em> es usando la función <strong>melt</strong>. Para ello necesitamos cargar la librería <strong>reshape</strong>.</p>
-<p>Esta función la usamos de la siguiente manera: newDataFrame &lt;- melt(oldDataFrame, id = c(constant_variables), measured = c(variables_that_change_across_columns))</p>
+<p>Otra manera de transformar datos a formato <em>long</em> es usando la función <strong>melt</strong>.
+Para ello necesitamos cargar la librería <strong>reshape</strong>.</p>
+<p>Esta función la usamos de la siguiente manera:
+newDataFrame &lt;- melt(oldDataFrame,
+id = c(constant_variables),
+measured = c(variables_that_change_across_columns))</p>
 <p>En nuestro ejemplo podemos hacerlo así:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(reshape)</code></pre></div>
-<pre><code>## Warning: package &#39;reshape&#39; was built under R version 4.1.3</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">restructuredData &lt;-<span class="st"> </span><span class="kw">melt</span>(satisfactionData,
-                         <span class="dt">id =</span> <span class="kw">c</span>(<span class="st">&quot;Person&quot;</span>, <span class="st">&quot;Gender&quot;</span>),
-                         <span class="dt">measured =</span> <span class="kw">c</span>(<span class="st">&quot;Satisfaction_Base&quot;</span>,
-                                      <span class="st">&quot;Satisfaction_6_Months&quot;</span>,
-                                      <span class="st">&quot;Satisfaction_12_Months&quot;</span>,
-                                      <span class="st">&quot;Satisfaction_18_Months&quot;</span>))
-
-<span class="kw">colnames</span>(restructuredData)[<span class="dv">3</span><span class="op">:</span><span class="dv">4</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;SatisfType&quot;</span>, <span class="st">&quot;Values&quot;</span>) <span class="co"># cambiamos los encabezados</span>
-
-<span class="kw">head</span>(restructuredData)</code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="programación.html#cb106-1" tabindex="-1"></a><span class="fu">library</span>(reshape)</span></code></pre></div>
+<pre><code>## Warning: package &#39;reshape&#39; was built under R version 4.3.3</code></pre>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="programación.html#cb108-1" tabindex="-1"></a>restructuredData <span class="ot">&lt;-</span> <span class="fu">melt</span>(satisfactionData,</span>
+<span id="cb108-2"><a href="programación.html#cb108-2" tabindex="-1"></a>                         <span class="at">id =</span> <span class="fu">c</span>(<span class="st">&quot;Person&quot;</span>, <span class="st">&quot;Gender&quot;</span>),</span>
+<span id="cb108-3"><a href="programación.html#cb108-3" tabindex="-1"></a>                         <span class="at">measured =</span> <span class="fu">c</span>(<span class="st">&quot;Satisfaction_Base&quot;</span>,</span>
+<span id="cb108-4"><a href="programación.html#cb108-4" tabindex="-1"></a>                                      <span class="st">&quot;Satisfaction_6_Months&quot;</span>,</span>
+<span id="cb108-5"><a href="programación.html#cb108-5" tabindex="-1"></a>                                      <span class="st">&quot;Satisfaction_12_Months&quot;</span>,</span>
+<span id="cb108-6"><a href="programación.html#cb108-6" tabindex="-1"></a>                                      <span class="st">&quot;Satisfaction_18_Months&quot;</span>))</span>
+<span id="cb108-7"><a href="programación.html#cb108-7" tabindex="-1"></a></span>
+<span id="cb108-8"><a href="programación.html#cb108-8" tabindex="-1"></a><span class="fu">colnames</span>(restructuredData)[<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SatisfType&quot;</span>, <span class="st">&quot;Values&quot;</span>) <span class="co"># cambiamos los encabezados</span></span>
+<span id="cb108-9"><a href="programación.html#cb108-9" tabindex="-1"></a></span>
+<span id="cb108-10"><a href="programación.html#cb108-10" tabindex="-1"></a><span class="fu">head</span>(restructuredData)</span></code></pre></div>
 <pre><code>##   Person Gender        SatisfType Values
 ## 1      1      0 Satisfaction_Base      6
 ## 2      2      1 Satisfaction_Base      7
@@ -690,10 +789,11 @@ newDataFrame &lt;- unstack(oldDataFrame, scores ~ columns) O simplemente: newDat
 ## 4      4      0 Satisfaction_Base      6
 ## 5      5      0 Satisfaction_Base      6
 ## 6      6      1 Satisfaction_Base      5</code></pre>
-<p>Bonus.También podemos aprovechar de reordenar los datos. Para ello usamos la función <strong>order</strong>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">reorder2 &lt;-<span class="st"> </span>restructuredData[<span class="kw">order</span>(restructuredData<span class="op">$</span>Person),]
-
-<span class="kw">head</span>(reorder2)</code></pre></div>
+<p>Bonus.También podemos aprovechar de reordenar los datos.
+Para ello usamos la función <strong>order</strong>.</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="programación.html#cb110-1" tabindex="-1"></a>reorder2 <span class="ot">&lt;-</span> restructuredData[<span class="fu">order</span>(restructuredData<span class="sc">$</span>Person),]</span>
+<span id="cb110-2"><a href="programación.html#cb110-2" tabindex="-1"></a></span>
+<span id="cb110-3"><a href="programación.html#cb110-3" tabindex="-1"></a><span class="fu">head</span>(reorder2)</span></code></pre></div>
 <pre><code>##     Person Gender             SatisfType Values
 ## 1        1      0      Satisfaction_Base      6
 ## 116      1      0  Satisfaction_6_Months      6
@@ -702,11 +802,15 @@ newDataFrame &lt;- unstack(oldDataFrame, scores ~ columns) O simplemente: newDat
 ## 2        2      1      Satisfaction_Base      7
 ## 117      2      1  Satisfaction_6_Months      7</code></pre>
 <p>En esta data frame se puede ver que los valores de satisfacción se ubican en una columna y la condición se ubica en otra columna. La ventaja de <strong>melt</strong> es que conserva la información de género y el número de la persona.</p>
-<p>Por último, esta data frame la podemos reconvertir en formato wide con la función <strong>cast</strong>. Esta función la usamos de la siguiente manera: newData &lt;- cast(longData, variables_coded_within_a_single_column ~ variables_coded_across_many_columns, value = &quot;outcome_variable&quot;)</p>
+<p>Por último, esta data frame la podemos reconvertir en formato wide con la función <strong>cast</strong>.
+Esta función la usamos de la siguiente manera:
+newData &lt;- cast(longData,
+variables_coded_within_a_single_column ~ variables_coded_across_many_columns,
+value = “outcome_variable”)</p>
 <p>En nuestro ejemplo podemos hacerlo así:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wideData &lt;-<span class="st"> </span><span class="kw">cast</span>(restructuredData, Person <span class="op">+</span><span class="st"> </span>Gender <span class="op">~</span><span class="st"> </span>SatisfType, <span class="dt">value =</span> <span class="st">&quot;Values&quot;</span>)
-
-<span class="kw">head</span>(wideData)</code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="programación.html#cb112-1" tabindex="-1"></a>wideData <span class="ot">&lt;-</span> <span class="fu">cast</span>(restructuredData, Person <span class="sc">+</span> Gender <span class="sc">~</span> SatisfType, <span class="at">value =</span> <span class="st">&quot;Values&quot;</span>)</span>
+<span id="cb112-2"><a href="programación.html#cb112-2" tabindex="-1"></a></span>
+<span id="cb112-3"><a href="programación.html#cb112-3" tabindex="-1"></a><span class="fu">head</span>(wideData)</span></code></pre></div>
 <pre><code>##   Person Gender Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months Satisfaction_18_Months
 ## 1      1      0                 6                     6                      5                      2
 ## 2      2      1                 7                     7                      8                      4
@@ -715,71 +819,73 @@ newDataFrame &lt;- unstack(oldDataFrame, scores ~ columns) O simplemente: newDat
 ## 5      5      0                 6                     7                      6                      6
 ## 6      6      1                 5                    10                      4                      2</code></pre>
 </div>
-<div id="exportar-datos" class="section level2">
+<div id="exportar-datos" class="section level2" number="3.9">
 <h2><span class="header-section-number">3.9</span> Exportar datos</h2>
-<p>Finalmente podrías querer exportar estos datos seleccionados. Para ello puede crear archivos de tipo txt o csv aplicado algunas funciones. Los archivos se crearán en tu actual directorio (para saber cual es puedes hacer <strong>getwd()</strong>)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.table</span>(lightAlcoholics, <span class="st">&quot;datoExportado.txt&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)
-<span class="kw">write.csv</span>(lightAlcoholics, <span class="st">&quot;datoExportado.csv&quot;</span>)</code></pre></div>
+<p>Finalmente podrías querer exportar estos datos seleccionados.
+Para ello puede crear archivos de tipo txt o csv aplicado algunas funciones.
+Los archivos se crearán en tu actual directorio (para saber cual es puedes hacer <strong>getwd()</strong>)</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="programación.html#cb114-1" tabindex="-1"></a><span class="fu">write.table</span>(lightAlcoholics, <span class="st">&quot;datoExportado.txt&quot;</span>, <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)</span>
+<span id="cb114-2"><a href="programación.html#cb114-2" tabindex="-1"></a><span class="fu">write.csv</span>(lightAlcoholics, <span class="st">&quot;datoExportado.csv&quot;</span>)</span></code></pre></div>
 </div>
-<div id="en-la-práctica" class="section level2">
+<div id="en-la-práctica" class="section level2" number="3.10">
 <h2><span class="header-section-number">3.10</span> En la práctica</h2>
 <p>Veamos que información podemos sacar de datos que importamos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
-
-<span class="kw">library</span>(ggplot2)</code></pre></div>
-<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.1.3</code></pre>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="programación.html#cb115-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
+<span id="cb115-2"><a href="programación.html#cb115-2" tabindex="-1"></a></span>
+<span id="cb115-3"><a href="programación.html#cb115-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.3.3</code></pre>
 <p>Primero importemos datos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/latidos_cardiacos.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="programación.html#cb117-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/latidos_cardiacos.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>) <span class="co"># load data</span></span></code></pre></div>
 <p>Luego calculemos algunos estadísticos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(dat<span class="op">$</span>latidos)</code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="programación.html#cb118-1" tabindex="-1"></a><span class="fu">mean</span>(dat<span class="sc">$</span>latidos)</span></code></pre></div>
 <pre><code>## [1] 79.08</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(dat<span class="op">$</span>latidos)</code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="programación.html#cb120-1" tabindex="-1"></a><span class="fu">sd</span>(dat<span class="sc">$</span>latidos)</span></code></pre></div>
 <pre><code>## [1] 7.674075</code></pre>
 <p>Y hagamos algunos gráficos (más de esto luego).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat, <span class="kw">aes</span>(latidos))
-h1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="programación.html#cb122-1" tabindex="-1"></a>h1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(latidos))</span>
+<span id="cb122-2"><a href="programación.html#cb122-2" tabindex="-1"></a>h1 <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat, <span class="kw">aes</span>(<span class="st">&quot;&quot;</span>, latidos))
-h1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()</code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="programación.html#cb124-1" tabindex="-1"></a>h1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="st">&quot;&quot;</span>, latidos))</span>
+<span id="cb124-2"><a href="programación.html#cb124-2" tabindex="-1"></a>h1 <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
 <p>Veámos otros datos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/demografia_salud.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(dat<span class="op">$</span>Sexo)</code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="programación.html#cb125-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/demografia_salud.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>) <span class="co"># load data</span></span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="programación.html#cb126-1" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>Sexo)</span></code></pre></div>
 <pre><code>## 
 ## Hombre  Mujer 
 ##     24     16</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(dat<span class="op">$</span>Estado.Civil)</code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="programación.html#cb128-1" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>Estado.Civil)</span></code></pre></div>
 <pre><code>## 
 ##     Casado Divorciado    Soltero      Viudo 
 ##         24          6          6          4</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(dat<span class="op">$</span>Número.de.hijos)</code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="programación.html#cb130-1" tabindex="-1"></a><span class="fu">mean</span>(dat<span class="sc">$</span>Numero.de.hijos)</span></code></pre></div>
 <pre><code>## [1] 1.475</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(dat<span class="op">$</span>Número.de.hijos)</code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="programación.html#cb132-1" tabindex="-1"></a><span class="fu">sd</span>(dat<span class="sc">$</span>Numero.de.hijos)</span></code></pre></div>
 <pre><code>## [1] 1.154423</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">min</span>(dat<span class="op">$</span>Peso)</code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="programación.html#cb134-1" tabindex="-1"></a><span class="fu">min</span>(dat<span class="sc">$</span>Peso)</span></code></pre></div>
 <pre><code>## [1] 58</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(dat<span class="op">$</span>Peso)</code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="programación.html#cb136-1" tabindex="-1"></a><span class="fu">max</span>(dat<span class="sc">$</span>Peso)</span></code></pre></div>
 <pre><code>## [1] 89</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat<span class="op">$</span>Altura &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">gsub</span>(<span class="st">&quot;,&quot;</span>, <span class="st">&quot;.&quot;</span>, dat<span class="op">$</span>Altura))
-<span class="kw">aggregate</span>(Altura <span class="op">~</span><span class="st"> </span>Sexo, <span class="dt">data =</span> dat, mean)</code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="programación.html#cb138-1" tabindex="-1"></a>dat<span class="sc">$</span>Altura <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">&quot;,&quot;</span>, <span class="st">&quot;.&quot;</span>, dat<span class="sc">$</span>Altura))</span>
+<span id="cb138-2"><a href="programación.html#cb138-2" tabindex="-1"></a><span class="fu">aggregate</span>(Altura <span class="sc">~</span> Sexo, <span class="at">data =</span> dat, mean)</span></code></pre></div>
 <pre><code>##     Sexo   Altura
 ## 1 Hombre 1.703333
 ## 2  Mujer 1.646875</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(Altura <span class="op">~</span><span class="st"> </span>Sexo, <span class="dt">data =</span> dat, sd)</code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="programación.html#cb140-1" tabindex="-1"></a><span class="fu">aggregate</span>(Altura <span class="sc">~</span> Sexo, <span class="at">data =</span> dat, sd)</span></code></pre></div>
 <pre><code>##     Sexo     Altura
 ## 1 Hombre 0.07653738
 ## 2  Mujer 0.06279265</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat<span class="op">$</span>PA.Min &lt;-<span class="st"> </span>dat<span class="op">$</span>Pr.Arter.Máx
-dat<span class="op">$</span>PA.Max &lt;-<span class="st"> </span>dat<span class="op">$</span>Pr.Arter.Mín
-
-<span class="kw">aggregate</span>(PA.Max <span class="op">~</span><span class="st"> </span>Estado.Civil, <span class="dt">data =</span> dat, mean)</code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="programación.html#cb142-1" tabindex="-1"></a>dat<span class="sc">$</span>PA.Min <span class="ot">&lt;-</span> dat<span class="sc">$</span>Pr.Arter.Max</span>
+<span id="cb142-2"><a href="programación.html#cb142-2" tabindex="-1"></a>dat<span class="sc">$</span>PA.Max <span class="ot">&lt;-</span> dat<span class="sc">$</span>Pr.Arter.Min</span>
+<span id="cb142-3"><a href="programación.html#cb142-3" tabindex="-1"></a></span>
+<span id="cb142-4"><a href="programación.html#cb142-4" tabindex="-1"></a><span class="fu">aggregate</span>(PA.Max <span class="sc">~</span> Estado.Civil, <span class="at">data =</span> dat, mean)</span></code></pre></div>
 <pre><code>##   Estado.Civil   PA.Max
 ## 1       Casado 141.7917
 ## 2   Divorciado 137.1667
 ## 3      Soltero 142.0000
 ## 4        Viudo 144.2500</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(PA.Max <span class="op">~</span><span class="st"> </span>Estado.Civil, <span class="dt">data =</span> dat, sd)</code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="programación.html#cb144-1" tabindex="-1"></a><span class="fu">aggregate</span>(PA.Max <span class="sc">~</span> Estado.Civil, <span class="at">data =</span> dat, sd)</span></code></pre></div>
 <pre><code>##   Estado.Civil    PA.Max
 ## 1       Casado  9.002315
 ## 2   Divorciado 10.553041
@@ -793,7 +899,7 @@ dat<span class="op">$</span>PA.Max &lt;-<span class="st"> </span>dat<span class=
           </div>
         </div>
       </div>
-<a href="conceptos-estadísticos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conceptos-estadísticos-claves.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="gráficos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

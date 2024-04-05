@@ -9,7 +9,7 @@ Imagina que estás analizando una base de datos dónde los participantes tenían
 Primero seteamos nuestro directorio de trabajo y graficar los datos. Cargamos la librería **ggplot2** y otras librerías que nos serviran. Si no tienes estas librerías debes instalarlas. Luego importamos nuestro set de datos y lo miramos.
 
 ```{r}
-setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+setwd(Sys.getenv("BOOKDOWN_PROJECT_PATH"))
 
 prefsAB <- read.csv("data/prefsAB.csv")
 prefsAB$Participante <- factor(prefsAB$Participante) # convertimos Participante a factor

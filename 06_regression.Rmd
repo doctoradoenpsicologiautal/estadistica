@@ -32,7 +32,7 @@ Ahora vamos a hacer un análisis básico de regresión. La regresión es un mét
 Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas). Luego importamos el set de datos y le damos una mirada.
 
 ```{r}
-setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+setwd(Sys.getenv("BOOKDOWN_PROJECT_PATH"))
 
 library(ggplot2)
 library(car)
@@ -106,7 +106,7 @@ Ahora vamos a hacer un análisis de correlación. La regresión y la correlació
 Para empezar vamos a hacer un análisis de correlación clásico. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).
 
 ```{r}
-setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+setwd(Sys.getenv("BOOKDOWN_PROJECT_PATH"))
 
 library(Hmisc)
 library(ggplot2)

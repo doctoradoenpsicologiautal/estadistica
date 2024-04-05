@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 4 Gráficos | Estadística con R</title>
   <meta name="description" content="Capítulo 4 Gráficos | Estadística con R" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 4 Gráficos | Estadística con R" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2023-09-03" />
+<meta name="date" content="2024-04-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,43 +52,74 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -107,7 +138,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preámbulo</a></li>
-<li class="chapter" data-level="1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html"><i class="fa fa-check"></i><b>1</b> Introducción a la estadística</a><ul>
+<li class="chapter" data-level="1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html"><i class="fa fa-check"></i><b>1</b> Introducción a la estadística</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#qué-es-la-estadística"><i class="fa fa-check"></i><b>1.1</b> ¿Qué es la estadística?</a></li>
 <li class="chapter" data-level="1.2" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#qué-son-las-variables"><i class="fa fa-check"></i><b>1.2</b> ¿Qué son las variables?</a></li>
 <li class="chapter" data-level="1.3" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#diseños-experimentales"><i class="fa fa-check"></i><b>1.3</b> Diseños experimentales</a></li>
@@ -117,14 +149,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.7" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#el-origen-de-p"><i class="fa fa-check"></i><b>1.7</b> El origen de p</a></li>
 <li class="chapter" data-level="1.8" data-path="introducción-a-la-estadística.html"><a href="introducción-a-la-estadística.html#para-qué-randomizar"><i class="fa fa-check"></i><b>1.8</b> ¿Para qué randomizar?</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html"><i class="fa fa-check"></i><b>2</b> Conceptos estadísticos</a><ul>
-<li class="chapter" data-level="2.1" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#la-significancia"><i class="fa fa-check"></i><b>2.1</b> La significancia</a></li>
-<li class="chapter" data-level="2.2" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#las-colas"><i class="fa fa-check"></i><b>2.2</b> Las colas</a></li>
-<li class="chapter" data-level="2.3" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#los-errores-estadísticos"><i class="fa fa-check"></i><b>2.3</b> Los errores estadísticos</a></li>
-<li class="chapter" data-level="2.4" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#tamaño-poder"><i class="fa fa-check"></i><b>2.4</b> Tamaño &amp; poder</a></li>
-<li class="chapter" data-level="2.5" data-path="conceptos-estadísticos.html"><a href="conceptos-estadísticos.html#cómo-planificar-un-estudio"><i class="fa fa-check"></i><b>2.5</b> ¿Cómo planificar un estudio?</a></li>
+<li class="chapter" data-level="2" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html"><i class="fa fa-check"></i><b>2</b> Conceptos estadísticos claves</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#la-significancia"><i class="fa fa-check"></i><b>2.1</b> La significancia</a></li>
+<li class="chapter" data-level="2.2" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#las-colas"><i class="fa fa-check"></i><b>2.2</b> Las colas</a></li>
+<li class="chapter" data-level="2.3" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#los-errores-estadísticos"><i class="fa fa-check"></i><b>2.3</b> Los errores estadísticos</a></li>
+<li class="chapter" data-level="2.4" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#tamaño-poder"><i class="fa fa-check"></i><b>2.4</b> Tamaño &amp; poder</a></li>
+<li class="chapter" data-level="2.5" data-path="conceptos-estadísticos-claves.html"><a href="conceptos-estadísticos-claves.html#cómo-planificar-un-estudio"><i class="fa fa-check"></i><b>2.5</b> ¿Cómo planificar un estudio?</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="programación.html"><a href="programación.html"><i class="fa fa-check"></i><b>3</b> Programación</a><ul>
+<li class="chapter" data-level="3" data-path="programación.html"><a href="programación.html"><i class="fa fa-check"></i><b>3</b> Programación</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="programación.html"><a href="programación.html#qué-significa-programar"><i class="fa fa-check"></i><b>3.1</b> ¿Qué significa programar?</a></li>
 <li class="chapter" data-level="3.2" data-path="programación.html"><a href="programación.html#la-consola-versus-el-script"><i class="fa fa-check"></i><b>3.2</b> La consola versus el script</a></li>
 <li class="chapter" data-level="3.3" data-path="programación.html"><a href="programación.html#introducción-a-la-programación"><i class="fa fa-check"></i><b>3.3</b> Introducción a la programación</a></li>
@@ -136,7 +170,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.9" data-path="programación.html"><a href="programación.html#exportar-datos"><i class="fa fa-check"></i><b>3.9</b> Exportar datos</a></li>
 <li class="chapter" data-level="3.10" data-path="programación.html"><a href="programación.html#en-la-práctica"><i class="fa fa-check"></i><b>3.10</b> En la práctica</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="gráficos.html"><a href="gráficos.html"><i class="fa fa-check"></i><b>4</b> Gráficos</a><ul>
+<li class="chapter" data-level="4" data-path="gráficos.html"><a href="gráficos.html"><i class="fa fa-check"></i><b>4</b> Gráficos</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="gráficos.html"><a href="gráficos.html#cómo-graficamos-en-r"><i class="fa fa-check"></i><b>4.1</b> ¿Cómo graficamos en R?</a></li>
 <li class="chapter" data-level="4.2" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-puntos"><i class="fa fa-check"></i><b>4.2</b> Gráfico de puntos</a></li>
 <li class="chapter" data-level="4.3" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-dispersión"><i class="fa fa-check"></i><b>4.3</b> Gráfico de dispersión</a></li>
@@ -147,7 +182,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.8" data-path="gráficos.html"><a href="gráficos.html#gráfico-de-líneas-2-factores"><i class="fa fa-check"></i><b>4.8</b> Gráfico de líneas (2 factores)</a></li>
 <li class="chapter" data-level="4.9" data-path="gráficos.html"><a href="gráficos.html#guardar-una-figura"><i class="fa fa-check"></i><b>4.9</b> Guardar una figura</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html"><i class="fa fa-check"></i><b>5</b> Caracterizar datos</a><ul>
+<li class="chapter" data-level="5" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html"><i class="fa fa-check"></i><b>5</b> Caracterizar datos</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#visualizar-los-datos"><i class="fa fa-check"></i><b>5.1</b> Visualizar los datos</a></li>
 <li class="chapter" data-level="5.2" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal"><i class="fa fa-check"></i><b>5.2</b> La curva normal</a></li>
 <li class="chapter" data-level="5.3" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#la-curva-normal-en-la-práctica-1"><i class="fa fa-check"></i><b>5.3</b> La curva normal en la práctica (1)</a></li>
@@ -158,55 +194,66 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.8" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#los-intervalos-de-confianza-2"><i class="fa fa-check"></i><b>5.8</b> Los intervalos de confianza (2)</a></li>
 <li class="chapter" data-level="5.9" data-path="caracterizar-datos.html"><a href="caracterizar-datos.html#verificar-supuestos"><i class="fa fa-check"></i><b>5.9</b> Verificar supuestos</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="la-regresión.html"><a href="la-regresión.html"><i class="fa fa-check"></i><b>6</b> La regresión</a><ul>
+<li class="chapter" data-level="6" data-path="la-regresión.html"><a href="la-regresión.html"><i class="fa fa-check"></i><b>6</b> La regresión</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="la-regresión.html"><a href="la-regresión.html#modelos-estadísticos"><i class="fa fa-check"></i><b>6.1</b> Modelos estadísticos</a></li>
 <li class="chapter" data-level="6.2" data-path="la-regresión.html"><a href="la-regresión.html#la-ecuación-de-la-recta"><i class="fa fa-check"></i><b>6.2</b> La ecuación de la recta</a></li>
 <li class="chapter" data-level="6.3" data-path="la-regresión.html"><a href="la-regresión.html#la-suma-de-cuadrados"><i class="fa fa-check"></i><b>6.3</b> La suma de cuadrados</a></li>
 <li class="chapter" data-level="6.4" data-path="la-regresión.html"><a href="la-regresión.html#la-regresión-con-r"><i class="fa fa-check"></i><b>6.4</b> La regresión con R</a></li>
 <li class="chapter" data-level="6.5" data-path="la-regresión.html"><a href="la-regresión.html#la-correlación-con-r"><i class="fa fa-check"></i><b>6.5</b> La correlación con R</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html"><i class="fa fa-check"></i><b>7</b> La prueba de t (comparar 2 grupos)</a><ul>
+<li class="chapter" data-level="7" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html"><i class="fa fa-check"></i><b>7</b> La prueba de t (comparar 2 grupos)</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#cómo-comparamos-dos-grupos"><i class="fa fa-check"></i><b>7.1</b> ¿Cómo comparamos dos grupos?</a></li>
 <li class="chapter" data-level="7.2" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#la-distribución-normal-de-dos-grupos"><i class="fa fa-check"></i><b>7.2</b> La distribución normal de dos grupos</a></li>
 <li class="chapter" data-level="7.3" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#la-prueba-de-hipótesis"><i class="fa fa-check"></i><b>7.3</b> La prueba de hipótesis</a></li>
 <li class="chapter" data-level="7.4" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#el-t-test-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>7.4</b> El t-test como un modelo líneal general</a></li>
 <li class="chapter" data-level="7.5" data-path="la-prueba-de-t-comparar-2-grupos.html"><a href="la-prueba-de-t-comparar-2-grupos.html#el-t-test-con-r"><i class="fa fa-check"></i><b>7.5</b> El t-test con R</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html"><i class="fa fa-check"></i><b>8</b> ANOVA (comparar 3 grupos o más)</a><ul>
+<li class="chapter" data-level="8" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html"><i class="fa fa-check"></i><b>8</b> ANOVA (comparar 3 grupos o más)</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#por-qué-necesitamos-un-anova"><i class="fa fa-check"></i><b>8.1</b> ¿Por qué necesitamos un ANOVA?</a></li>
 <li class="chapter" data-level="8.2" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#el-anova-como-un-modelo-líneal-general"><i class="fa fa-check"></i><b>8.2</b> El ANOVA como un modelo líneal general</a></li>
 <li class="chapter" data-level="8.3" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#la-lógica-del-anova"><i class="fa fa-check"></i><b>8.3</b> La lógica del ANOVA</a></li>
 <li class="chapter" data-level="8.4" data-path="anova-comparar-3-grupos-o-más.html"><a href="anova-comparar-3-grupos-o-más.html#el-anova-con-r"><i class="fa fa-check"></i><b>8.4</b> El ANOVA con R</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="después-del-anova.html"><a href="después-del-anova.html"><i class="fa fa-check"></i><b>9</b> Después del ANOVA</a><ul>
+<li class="chapter" data-level="9" data-path="después-del-anova.html"><a href="después-del-anova.html"><i class="fa fa-check"></i><b>9</b> Después del ANOVA</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="después-del-anova.html"><a href="después-del-anova.html#qué-hacemos-después-de-un-anova"><i class="fa fa-check"></i><b>9.1</b> ¿Qué hacemos después de un ANOVA?</a></li>
 <li class="chapter" data-level="9.2" data-path="después-del-anova.html"><a href="después-del-anova.html#comparaciones-planificadas"><i class="fa fa-check"></i><b>9.2</b> Comparaciones planificadas</a></li>
 <li class="chapter" data-level="9.3" data-path="después-del-anova.html"><a href="después-del-anova.html#cálculos-con-r"><i class="fa fa-check"></i><b>9.3</b> Cálculos con R</a></li>
 <li class="chapter" data-level="9.4" data-path="después-del-anova.html"><a href="después-del-anova.html#pruebas-post-hoc"><i class="fa fa-check"></i><b>9.4</b> Pruebas post-hoc</a></li>
 <li class="chapter" data-level="9.5" data-path="después-del-anova.html"><a href="después-del-anova.html#cálculos-con-r-1"><i class="fa fa-check"></i><b>9.5</b> Cálculos con R</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html"><i class="fa fa-check"></i><b>10</b> Más allá del ANOVA</a><ul>
+<li class="chapter" data-level="10" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html"><i class="fa fa-check"></i><b>10</b> Más allá del ANOVA</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#tipos-de-anova"><i class="fa fa-check"></i><b>10.1</b> Tipos de ANOVA</a></li>
 <li class="chapter" data-level="10.2" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#anova-factorial"><i class="fa fa-check"></i><b>10.2</b> ANOVA factorial</a></li>
 <li class="chapter" data-level="10.3" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#anova-de-medidas-repetidas"><i class="fa fa-check"></i><b>10.3</b> ANOVA de medidas repetidas</a></li>
 <li class="chapter" data-level="10.4" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#ancova"><i class="fa fa-check"></i><b>10.4</b> ANCOVA</a></li>
 <li class="chapter" data-level="10.5" data-path="más-allá-del-anova.html"><a href="más-allá-del-anova.html#manova"><i class="fa fa-check"></i><b>10.5</b> MANOVA</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>11</b> Otros análisis</a><ul>
+<li class="chapter" data-level="11" data-path="otros-análisis.html"><a href="otros-análisis.html"><i class="fa fa-check"></i><b>11</b> Otros análisis</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="otros-análisis.html"><a href="otros-análisis.html#análisis-de-proporciones"><i class="fa fa-check"></i><b>11.1</b> Análisis de proporciones</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="recursos.html"><a href="recursos.html"><i class="fa fa-check"></i><b>12</b> Recursos</a><ul>
-<li class="chapter" data-level="12.1" data-path="recursos.html"><a href="recursos.html#apps"><i class="fa fa-check"></i><b>12.1</b> Apps</a><ul>
+<li class="chapter" data-level="12" data-path="recursos.html"><a href="recursos.html"><i class="fa fa-check"></i><b>12</b> Recursos</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="recursos.html"><a href="recursos.html#apps"><i class="fa fa-check"></i><b>12.1</b> Apps</a>
+<ul>
 <li class="chapter" data-level="12.1.1" data-path="recursos.html"><a href="recursos.html#convertidor-de-tamaños-de-efectos"><i class="fa fa-check"></i><b>12.1.1</b> Convertidor de tamaños de efectos</a></li>
 <li class="chapter" data-level="12.1.2" data-path="recursos.html"><a href="recursos.html#convertidor-de-tamaños-de-efectos-1"><i class="fa fa-check"></i><b>12.1.2</b> Convertidor de tamaños de efectos</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="recursos.html"><a href="recursos.html#librerías"><i class="fa fa-check"></i><b>12.2</b> Librerías</a><ul>
+<li class="chapter" data-level="12.2" data-path="recursos.html"><a href="recursos.html#librerías"><i class="fa fa-check"></i><b>12.2</b> Librerías</a>
+<ul>
 <li class="chapter" data-level="12.2.1" data-path="recursos.html"><a href="recursos.html#para-calcular-tamaños-de-efectos"><i class="fa fa-check"></i><b>12.2.1</b> Para calcular tamaños de efectos</a></li>
 </ul></li>
-<li class="chapter" data-level="12.3" data-path="recursos.html"><a href="recursos.html#sitios-web"><i class="fa fa-check"></i><b>12.3</b> Sitios web</a><ul>
+<li class="chapter" data-level="12.3" data-path="recursos.html"><a href="recursos.html#sitios-web"><i class="fa fa-check"></i><b>12.3</b> Sitios web</a>
+<ul>
 <li class="chapter" data-level="12.3.1" data-path="recursos.html"><a href="recursos.html#herramientas-de-estadística"><i class="fa fa-check"></i><b>12.3.1</b> Herramientas de estadística</a></li>
 </ul></li>
-<li class="chapter" data-level="12.4" data-path="recursos.html"><a href="recursos.html#cursos"><i class="fa fa-check"></i><b>12.4</b> Cursos</a><ul>
+<li class="chapter" data-level="12.4" data-path="recursos.html"><a href="recursos.html#cursos"><i class="fa fa-check"></i><b>12.4</b> Cursos</a>
+<ul>
 <li class="chapter" data-level="12.4.1" data-path="recursos.html"><a href="recursos.html#herramientas-de-estadística-1"><i class="fa fa-check"></i><b>12.4.1</b> Herramientas de estadística</a></li>
 </ul></li>
 </ul></li>
@@ -229,37 +276,39 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="gráficos" class="section level1">
+<div id="gráficos" class="section level1" number="4">
 <h1><span class="header-section-number">Capítulo 4</span> Gráficos</h1>
 <p>En este capítulo vamos a revisar algunos aspectos básicos para hacer gráficos en R.</p>
-<div id="cómo-graficamos-en-r" class="section level2">
+<div id="cómo-graficamos-en-r" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> ¿Cómo graficamos en R?</h2>
-<p>Revisa este <a href="https://www.youtube.com/watch?v=7Fr30ForPjI" target="_blank">video (16')</a> y trata de responder:</p>
+<p>Revisa este <a href="https://www.youtube.com/watch?v=7Fr30ForPjI" target="_blank">video (16’)</a> y trata de responder:</p>
 <ul>
 <li>¿Cómo se hace un buen gráfico?</li>
 <li>¿Qué significa que se usen capas para hacer gráficos en R?</li>
 </ul>
 </div>
-<div id="gráfico-de-puntos" class="section level2">
+<div id="gráfico-de-puntos" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Gráfico de puntos</h2>
 <p>Primero seteamos nuestro directorio de trabajo.</p>
-<p>Para graficar cargamos la librería <strong>ggplot2</strong> (que tiene que haber sido previamente instalada). Al mismo tiempo se cargan otras librerías que nos serviran. Si no tienes estas librerías debes instalarlas. Finalmente importamos un set de datos y lo miramos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica&quot;</span>)
-
-<span class="kw">library</span>(ggplot2)
-<span class="kw">library</span>(reshape)
-<span class="kw">library</span>(plyr)</code></pre></div>
-<pre><code>## Warning: package &#39;plyr&#39; was built under R version 4.1.3</code></pre>
+<p>Para graficar cargamos la librería <strong>ggplot2</strong> (que tiene que haber sido previamente instalada).
+Al mismo tiempo se cargan otras librerías que nos serviran. Si no tienes estas librerías debes instalarlas.
+Finalmente importamos un set de datos y lo miramos.</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="gráficos.html#cb146-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
+<span id="cb146-2"><a href="gráficos.html#cb146-2" tabindex="-1"></a></span>
+<span id="cb146-3"><a href="gráficos.html#cb146-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb146-4"><a href="gráficos.html#cb146-4" tabindex="-1"></a><span class="fu">library</span>(reshape)</span>
+<span id="cb146-5"><a href="gráficos.html#cb146-5" tabindex="-1"></a><span class="fu">library</span>(plyr)</span></code></pre></div>
+<pre><code>## Warning: package &#39;plyr&#39; was built under R version 4.3.3</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;plyr&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:reshape&#39;:
 ## 
 ##     rename, round_any</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Rmisc)</code></pre></div>
-<pre><code>## Warning: package &#39;Rmisc&#39; was built under R version 4.1.3</code></pre>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="gráficos.html#cb150-1" tabindex="-1"></a><span class="fu">library</span>(Rmisc)</span></code></pre></div>
+<pre><code>## Warning: package &#39;Rmisc&#39; was built under R version 4.3.3</code></pre>
 <pre><code>## Loading required package: lattice</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">facebookData &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;data/FacebookNarcissism.dat&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>) <span class="co"># load data</span>
-<span class="kw">head</span>(facebookData)</code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="gráficos.html#cb153-1" tabindex="-1"></a>facebookData <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">&quot;data/FacebookNarcissism.dat&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>) <span class="co"># load data</span></span>
+<span id="cb153-2"><a href="gráficos.html#cb153-2" tabindex="-1"></a><span class="fu">head</span>(facebookData)</span></code></pre></div>
 <pre><code>##   id NPQC_R_Total Rating_Type Rating
 ## 1  1           31  Attractive      2
 ## 2  1           31 Fashionable      2
@@ -267,43 +316,51 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 4  1           31        Cool      2
 ## 5  2           37  Attractive      2
 ## 6  2           37 Fashionable      2</code></pre>
-<p>En este estudio se recolectaron una serie de datos de los participantes relacionados con rasgos de personalidad y niveles de narcisimo. <em>id</em> indica la identidad del participante. <em>NPQC_R_Total</em> indica la puntuación total en el cuestionario de narcisismo. <em>Rating_Type</em> una característica de personalidad y <em>Rating</em> indica la calificación (en una escala de 1 a 5) de esa característica de personalidad.</p>
-<p>Ubcaremos <em>NPQC_R_Total</em> en el eje X y <em>Rating</em> en el eje Y. Acuérdate que para crear gráficos con ggplot debes crear un objeto dónde se encuentra la estructura base. Para visualizar el gráfico se debe invocar el objeto y al mismo debes agregar las distintas capas que constituyen el gráfico. Por ejemplo, un capa de puntos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">graph &lt;-<span class="st"> </span><span class="kw">ggplot</span>(facebookData, <span class="kw">aes</span>(NPQC_R_Total, Rating))
-graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
+<p>En este estudio se recolectaron una serie de datos de los participantes relacionados con rasgos de personalidad y niveles de narcisimo.
+<em>id</em> indica la identidad del participante.
+<em>NPQC_R_Total</em> indica la puntuación total en el cuestionario de narcisismo.
+<em>Rating_Type</em> una característica de personalidad y <em>Rating</em> indica la calificación (en una escala de 1 a 5) de esa característica de personalidad.</p>
+<p>Ubcaremos <em>NPQC_R_Total</em> en el eje X y <em>Rating</em> en el eje Y.
+Acuérdate que para crear gráficos con ggplot debes crear un objeto dónde se encuentra la estructura base.
+Para visualizar el gráfico se debe invocar el objeto y al mismo debes agregar las distintas capas que constituyen el gráfico. Por ejemplo, un capa de puntos.</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="gráficos.html#cb155-1" tabindex="-1"></a>graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(facebookData, <span class="fu">aes</span>(NPQC_R_Total, Rating))</span>
+<span id="cb155-2"><a href="gráficos.html#cb155-2" tabindex="-1"></a>graph <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
 <p>Además, puedes ir agregando otras capas. Por ejemplo, el título.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">graph &lt;-<span class="st"> </span><span class="kw">ggplot</span>(facebookData, <span class="kw">aes</span>(NPQC_R_Total, Rating))
-graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Figura 1&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="gráficos.html#cb156-1" tabindex="-1"></a>graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(facebookData, <span class="fu">aes</span>(NPQC_R_Total, Rating))</span>
+<span id="cb156-2"><a href="gráficos.html#cb156-2" tabindex="-1"></a>graph <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Figura 1&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
 <p>Podemos cambiar los puntos por triángulos, usando el parámetro <strong>shape</strong>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">17</span>)</code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="gráficos.html#cb157-1" tabindex="-1"></a>graph <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">17</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
 <p>O podemos cambiar el tamaño de los puntos, usando el parámetro <strong>size</strong>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">6</span>)</code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="gráficos.html#cb158-1" tabindex="-1"></a>graph <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">6</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
-<p>También podemos colorear los puntos en función de los diferentes puntajes. Para ello debemos definir un color dentro del parámetro <strong>aes</strong>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> Rating_Type))</code></pre></div>
+<p>También podemos colorear los puntos en función de los diferentes puntajes.
+Para ello debemos definir un color dentro del parámetro <strong>aes</strong>.</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="gráficos.html#cb159-1" tabindex="-1"></a>graph <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> Rating_Type))</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
-<p>Por último, podríamos tener un problema de &quot;sobreploteo&quot;, es decir, dado que hay un limitado número de respuestas que la personas podrían dar para valores equivalentes no se van a observar puntos diferentes. Para evitar esto podemos cambiar el parámetro <em>position</em> para agregar un retraso (o &quot;jitter).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> Rating_Type), <span class="dt">position =</span> <span class="st">&quot;jitter&quot;</span>)</code></pre></div>
+<p>Por último, podríamos tener un problema de “sobreploteo”, es decir, dado que hay un limitado número de respuestas que la personas podrían dar para valores equivalentes no se van a observar puntos diferentes.
+Para evitar esto podemos cambiar el parámetro <em>position</em> para agregar un retraso (o “jitter).</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="gráficos.html#cb160-1" tabindex="-1"></a>graph <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> Rating_Type), <span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
 <p>A veces para podríamos querear eliminar ese fondo cuadrículado gris. Para ellos podemos agregar una capa que setea estas cuadriculas.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">graph <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> Rating_Type), <span class="dt">position =</span> <span class="st">&quot;jitter&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="gráficos.html#cb161-1" tabindex="-1"></a>graph <span class="sc">+</span> </span>
+<span id="cb161-2"><a href="gráficos.html#cb161-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> Rating_Type), <span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>) <span class="sc">+</span></span>
+<span id="cb161-3"><a href="gráficos.html#cb161-3" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb161-4"><a href="gráficos.html#cb161-4" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb161-5"><a href="gráficos.html#cb161-5" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb161-6"><a href="gráficos.html#cb161-6" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 </div>
-<div id="gráfico-de-dispersión" class="section level2">
+<div id="gráfico-de-dispersión" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> Gráfico de dispersión</h2>
 <p>En un gráfico de dispersión se dibuja la puntuación de una una variable frente a la puntuación de otra variable.</p>
 <p>En este ejemplo un psicólogo estaba interesado en entender los efectos que produce el estrés sobre el rendimiento en este examen. Se diseñó y se validó un cuestionario para evaluar el estado de ansiedad relacionado con los exámenes (llamado Cuestionario de Ansiedad ante los Exámenes, o EAQ). Esta escala produce un puntaje de ansiedad desd 1 a 100. La ansiedad se midió antes de un examen, y la calificación de cada estudiante en el examen se utilizó para medir el rendimiento del examen.</p>
-<p>Primero, importemos los datos. No es necesario que carguemos la librerías si ya están cargadas.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">examData &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;data/ExamAnxiety.dat&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
-<span class="kw">head</span>(examData)</code></pre></div>
+<p>Primero, importemos los datos.
+No es necesario que carguemos la librerías si ya están cargadas.</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="gráficos.html#cb162-1" tabindex="-1"></a>examData <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">&quot;data/ExamAnxiety.dat&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb162-2"><a href="gráficos.html#cb162-2" tabindex="-1"></a><span class="fu">head</span>(examData)</span></code></pre></div>
 <pre><code>##   Code Revise Exam Anxiety Gender
 ## 1    1      4   40  86.298   Male
 ## 2    2     11   65  88.716 Female
@@ -311,94 +368,103 @@ graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_po
 ## 4    4     53   80  61.312   Male
 ## 5    5      4   40  89.522   Male
 ## 6    6     22   70  60.506 Female</code></pre>
-<p>Fíjate que en la data frame hay 5 variables: Code: Un número que indica la identidad del participante. Revise: El total de horas que los participantes dedicaron para estudiar. Exam: La nota en el examen que tuvo el participante (como porcentaje). Anxiety: La puntuación en la esclala de ansiedad. Gender: El género (masculino o femenino).</p>
+<p>Fíjate que en la data frame hay 5 variables:
+Code: Un número que indica la identidad del participante.
+Revise: El total de horas que los participantes dedicaron para estudiar.
+Exam: La nota en el examen que tuvo el participante (como porcentaje).
+Anxiety: La puntuación en la esclala de ansiedad.
+Gender: El género (masculino o femenino).</p>
 <p>Primero, vamos a crear la estructura base del gráfico.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scatter &lt;-<span class="st"> </span><span class="kw">ggplot</span>(examData, <span class="kw">aes</span>(Anxiety, Exam))</code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="gráficos.html#cb164-1" tabindex="-1"></a>scatter <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(examData, <span class="fu">aes</span>(Anxiety, Exam))</span></code></pre></div>
 <p>Fíjate que la estuctura base definimos que vamos a gráficar la relación entre la ansiedad (Anxiety) y las notas (Exam).</p>
 <p>Luego, podemos ir agregando las capas. Por ejemplo, los puntos que relfejan cada participante y los títulos en los ejes.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scatter <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Exam Anxiety&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Exam Performance %&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="gráficos.html#cb165-1" tabindex="-1"></a>scatter <span class="sc">+</span> </span>
+<span id="cb165-2"><a href="gráficos.html#cb165-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb165-3"><a href="gráficos.html#cb165-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Exam Anxiety&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Exam Performance %&quot;</span>) <span class="sc">+</span></span>
+<span id="cb165-4"><a href="gráficos.html#cb165-4" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb165-5"><a href="gráficos.html#cb165-5" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb165-6"><a href="gráficos.html#cb165-6" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb165-7"><a href="gráficos.html#cb165-7" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
 <p>En general, en los gráficos de dispersión agregamos una línea de tendencia que resume la relación entre las variables. La sombra asociada a la línea representa un intervalo de confianza (CI) al 95%.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scatter <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_smooth</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Exam Anxiety&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Exam Performance %&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="gráficos.html#cb166-1" tabindex="-1"></a>scatter <span class="sc">+</span> </span>
+<span id="cb166-2"><a href="gráficos.html#cb166-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb166-3"><a href="gráficos.html#cb166-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span> </span>
+<span id="cb166-4"><a href="gráficos.html#cb166-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Exam Anxiety&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Exam Performance %&quot;</span>) <span class="sc">+</span></span>
+<span id="cb166-5"><a href="gráficos.html#cb166-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb166-6"><a href="gráficos.html#cb166-6" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb166-7"><a href="gráficos.html#cb166-7" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb166-8"><a href="gráficos.html#cb166-8" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
 <p>Pero, en general, se agrega una linea recta. Para ello usamos la función <strong>geom_smooth</strong>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scatter <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;Red&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Exam Anxiety&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Exam Performance %&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="gráficos.html#cb168-1" tabindex="-1"></a>scatter <span class="sc">+</span></span>
+<span id="cb168-2"><a href="gráficos.html#cb168-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb168-3"><a href="gráficos.html#cb168-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;Red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb168-4"><a href="gráficos.html#cb168-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Exam Anxiety&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Exam Performance %&quot;</span>) <span class="sc">+</span></span>
+<span id="cb168-5"><a href="gráficos.html#cb168-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb168-6"><a href="gráficos.html#cb168-6" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb168-7"><a href="gráficos.html#cb168-7" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb168-8"><a href="gráficos.html#cb168-8" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
 <p>Opcionalmente se puede omitir la sombra.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scatter <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;Green&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Exam Anxiety&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Exam Performance %&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="gráficos.html#cb170-1" tabindex="-1"></a>scatter <span class="sc">+</span></span>
+<span id="cb170-2"><a href="gráficos.html#cb170-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb170-3"><a href="gráficos.html#cb170-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;Green&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb170-4"><a href="gráficos.html#cb170-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Exam Anxiety&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Exam Performance %&quot;</span>) <span class="sc">+</span></span>
+<span id="cb170-5"><a href="gráficos.html#cb170-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb170-6"><a href="gráficos.html#cb170-6" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb170-7"><a href="gráficos.html#cb170-7" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb170-8"><a href="gráficos.html#cb170-8" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
-<p>Además, podemos cambiar la transparencia de la línea, cambiando el parámetro <em>alpha</em>. Y también podamos cambiar el relleno (&quot;fill&quot;) de la sombra.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scatter <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">fill =</span> <span class="st">&quot;Blue&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Exam Anxiety&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Exam Performance %&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
+<p>Además, podemos cambiar la transparencia de la línea, cambiando el parámetro <em>alpha</em>.
+Y también podamos cambiar el relleno (“fill”) de la sombra.</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="gráficos.html#cb172-1" tabindex="-1"></a>scatter <span class="sc">+</span></span>
+<span id="cb172-2"><a href="gráficos.html#cb172-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb172-3"><a href="gráficos.html#cb172-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">&quot;Blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb172-4"><a href="gráficos.html#cb172-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Exam Anxiety&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Exam Performance %&quot;</span>) <span class="sc">+</span></span>
+<span id="cb172-5"><a href="gráficos.html#cb172-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb172-6"><a href="gráficos.html#cb172-6" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb172-7"><a href="gráficos.html#cb172-7" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb172-8"><a href="gráficos.html#cb172-8" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
-<p>¿Qué pasa si queremos hacer gráficos de dispersión en función de más de una variable? Por ejemplo, podríamos querer ver las distintas relaciones entre ansiedad y puntajes en la prueba, en función del género (hombres versus mujeres). Para ello debemos re-definir la estructura base del gráfico, y debemmos agregar la variable género dentro del parámetro aes.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scatter &lt;-<span class="st"> </span><span class="kw">ggplot</span>(examData, <span class="kw">aes</span>(Anxiety, Exam, <span class="dt">colour =</span> Gender))</code></pre></div>
+<p>¿Qué pasa si queremos hacer gráficos de dispersión en función de más de una variable?
+Por ejemplo, podríamos querer ver las distintas relaciones entre ansiedad y puntajes en la prueba, en función del género (hombres versus mujeres). Para ello debemos re-definir la estructura base del gráfico, y debemmos agregar la variable género dentro del parámetro aes.</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="gráficos.html#cb174-1" tabindex="-1"></a>scatter <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(examData, <span class="fu">aes</span>(Anxiety, Exam, <span class="at">colour =</span> Gender))</span></code></pre></div>
 <p>Luego podemos hacer un nuevo gráfico.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scatter <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="gráficos.html#cb175-1" tabindex="-1"></a>scatter <span class="sc">+</span> </span>
+<span id="cb175-2"><a href="gráficos.html#cb175-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb175-3"><a href="gráficos.html#cb175-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
+<span id="cb175-4"><a href="gráficos.html#cb175-4" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb175-5"><a href="gráficos.html#cb175-5" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb175-6"><a href="gráficos.html#cb175-6" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb175-7"><a href="gráficos.html#cb175-7" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
-<p>También podemos dibujar las líneas de acuerdo al género (y además podemos hacer las líneas transparentes). Para ello debemos definir un parámetro aes dentro de la función geom_smooth.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scatter <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="kw">aes</span>(<span class="dt">fill =</span> Gender)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Exam Anxiety&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Exam Performance %&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;Gender&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
+<p>También podemos dibujar las líneas de acuerdo al género (y además podemos hacer las líneas transparentes).
+Para ello debemos definir un parámetro aes dentro de la función geom_smooth.</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="gráficos.html#cb177-1" tabindex="-1"></a>scatter <span class="sc">+</span> </span>
+<span id="cb177-2"><a href="gráficos.html#cb177-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb177-3"><a href="gráficos.html#cb177-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="fu">aes</span>(<span class="at">fill =</span> Gender)) <span class="sc">+</span></span>
+<span id="cb177-4"><a href="gráficos.html#cb177-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Exam Anxiety&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Exam Performance %&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;Gender&quot;</span>) <span class="sc">+</span></span>
+<span id="cb177-5"><a href="gráficos.html#cb177-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb177-6"><a href="gráficos.html#cb177-6" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb177-7"><a href="gráficos.html#cb177-7" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb177-8"><a href="gráficos.html#cb177-8" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
 </div>
-<div id="histograma" class="section level2">
+<div id="histograma" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Histograma</h2>
 <p>Un histograma es una representación gráfica de una variable en forma de barras, donde la superficie de cada barra es proporcional a la frecuencia de los valores representados.</p>
 <p>En este ejemplo un biólogo estaba preocupado por los posibles efectos en la salud de los festivales de música. Un año fue al Download Music Festival y midió los niveles de higiene de 810 asistentes al concierto durante los tres días del festival. Dado que era difícil rastrear a todas las personas en esta base de datos faltaban algunos datos en los días 2 y 3. La higiene se midió utilizando una técnica estandarizada que da como resultado una puntuación que oscila entre 0 (hueles como un cadáver) y 4 (hueles a rosas dulces en un día fresco de primavera).</p>
-<p>Primero, importemos los datos. No es necesario que carguemos la librerías si ya están cargadas.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">festivalData &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;data/DownloadFestival.dat&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
-<span class="kw">head</span>(festivalData)</code></pre></div>
+<p>Primero, importemos los datos.
+No es necesario que carguemos la librerías si ya están cargadas.</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="gráficos.html#cb179-1" tabindex="-1"></a>festivalData <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">&quot;data/DownloadFestival.dat&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb179-2"><a href="gráficos.html#cb179-2" tabindex="-1"></a><span class="fu">head</span>(festivalData)</span></code></pre></div>
 <pre><code>##   ticknumb gender day1 day2 day3
 ## 1     2111   Male 2.64 1.35 1.61
 ## 2     2229 Female 0.97 1.41 0.29
@@ -407,44 +473,51 @@ graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_po
 ## 5     2401 Female 0.88 0.08   NA
 ## 6     2405   Male 0.85   NA   NA</code></pre>
 <p>Primero, vamos a crear la estructura base del gráfico.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">festivalHistogram &lt;-<span class="st"> </span><span class="kw">ggplot</span>(festivalData, <span class="kw">aes</span>(day1))</code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="gráficos.html#cb181-1" tabindex="-1"></a>festivalHistogram <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(festivalData, <span class="fu">aes</span>(day1))</span></code></pre></div>
 <p>Y luego hacemos el gráfico.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">festivalHistogram <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="gráficos.html#cb182-1" tabindex="-1"></a>festivalHistogram <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb182-2"><a href="gráficos.html#cb182-2" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb182-3"><a href="gráficos.html#cb182-3" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb182-4"><a href="gráficos.html#cb182-4" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb182-5"><a href="gráficos.html#cb182-5" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
-<p>Por defecto se realizan los agrupamientos (o &quot;bins) en grupos de 30 puntos. Hay varias cosas que podemos observar en este gráfico. Se observa inmediatamente que hay una valor mucho más alto que el resto de los valores. Podría ser un potencial outlier. También nos damos cuenta que podríamos usar una mejor definición de bins. Para ello podemos modificar el parámetro <strong>bindwith</strong>. Además, le podemos agregar unos títulos a los ejes.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">festivalHistogram <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.4</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Hygiene (Day 1 of Festival)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
+<p>Por defecto se realizan los agrupamientos (o “bins) en grupos de 30 puntos.
+Hay varias cosas que podemos observar en este gráfico.
+Se observa inmediatamente que hay una valor mucho más alto que el resto de los valores. Podría ser un potencial outlier.
+También nos damos cuenta que podríamos usar una mejor definición de bins. Para ello podemos modificar el parámetro <strong>bindwith</strong>.
+Además, le podemos agregar unos títulos a los ejes.</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="gráficos.html#cb184-1" tabindex="-1"></a>festivalHistogram <span class="sc">+</span></span>
+<span id="cb184-2"><a href="gráficos.html#cb184-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb184-3"><a href="gráficos.html#cb184-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Hygiene (Day 1 of Festival)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb184-4"><a href="gráficos.html#cb184-4" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb184-5"><a href="gráficos.html#cb184-5" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb184-6"><a href="gráficos.html#cb184-6" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb184-7"><a href="gráficos.html#cb184-7" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
-<p>Para lidiar con el outlier tenemos 2 opciones. Podemos eliminarlo de archivo original. O sea importamos un nuevo archivo.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># import data</span>
-festivalDataAlt &lt;-<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&quot;data/DownloadFestival_NoOutlier.dat&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
-
-<span class="co"># define base graph</span>
-festivalHistogramAlt &lt;-<span class="st"> </span><span class="kw">ggplot</span>(festivalDataAlt, <span class="kw">aes</span>(day1))
-
-<span class="co"># add layers</span>
-festivalHistogramAlt <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.6</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Hygiene (Day 1 of Festival)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
+<p>Para lidiar con el outlier tenemos 2 opciones.
+Podemos eliminarlo de archivo original. O sea importamos un nuevo archivo.</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="gráficos.html#cb185-1" tabindex="-1"></a><span class="co"># import data</span></span>
+<span id="cb185-2"><a href="gráficos.html#cb185-2" tabindex="-1"></a>festivalDataAlt <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">&quot;data/DownloadFestival_NoOutlier.dat&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb185-3"><a href="gráficos.html#cb185-3" tabindex="-1"></a></span>
+<span id="cb185-4"><a href="gráficos.html#cb185-4" tabindex="-1"></a><span class="co"># define base graph</span></span>
+<span id="cb185-5"><a href="gráficos.html#cb185-5" tabindex="-1"></a>festivalHistogramAlt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(festivalDataAlt, <span class="fu">aes</span>(day1))</span>
+<span id="cb185-6"><a href="gráficos.html#cb185-6" tabindex="-1"></a></span>
+<span id="cb185-7"><a href="gráficos.html#cb185-7" tabindex="-1"></a><span class="co"># add layers</span></span>
+<span id="cb185-8"><a href="gráficos.html#cb185-8" tabindex="-1"></a>festivalHistogramAlt <span class="sc">+</span></span>
+<span id="cb185-9"><a href="gráficos.html#cb185-9" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb185-10"><a href="gráficos.html#cb185-10" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Hygiene (Day 1 of Festival)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span></span>
+<span id="cb185-11"><a href="gráficos.html#cb185-11" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb185-12"><a href="gráficos.html#cb185-12" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb185-13"><a href="gráficos.html#cb185-13" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb185-14"><a href="gráficos.html#cb185-14" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
-<p>Mejor aún. Como una segunda opción podemos ubicar el outlier en la data frame. Para ello usamos la función <strong>order</strong> para order los datos de menor a mayor. Luego usamos la función <strong>tail</strong> para ver los últimos puntos de los datos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># import data</span>
-festivalData &lt;-<span class="st"> </span>festivalData[<span class="kw">order</span>(festivalData<span class="op">$</span>day1),]
-<span class="kw">tail</span>(festivalData)</code></pre></div>
+<p>Mejor aún. Como una segunda opción podemos ubicar el outlier en la data frame.
+Para ello usamos la función <strong>order</strong> para order los datos de menor a mayor.
+Luego usamos la función <strong>tail</strong> para ver los últimos puntos de los datos.</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="gráficos.html#cb186-1" tabindex="-1"></a><span class="co"># import data</span></span>
+<span id="cb186-2"><a href="gráficos.html#cb186-2" tabindex="-1"></a>festivalData <span class="ot">&lt;-</span> festivalData[<span class="fu">order</span>(festivalData<span class="sc">$</span>day1),]</span>
+<span id="cb186-3"><a href="gráficos.html#cb186-3" tabindex="-1"></a><span class="fu">tail</span>(festivalData)</span></code></pre></div>
 <pre><code>##     ticknumb gender  day1 day2 day3
 ## 774     4564 Female  3.38 3.44 3.41
 ## 300     3371 Female  3.41   NA   NA
@@ -453,74 +526,80 @@ festivalData &lt;-<span class="st"> </span>festivalData[<span class="kw">order</
 ## 574     4016 Female  3.69   NA   NA
 ## 611     4158 Female 20.02 2.44   NA</code></pre>
 <p>Aquí nos fijamos que hay un valor exageradamente alto. Se escribe 20.02, y es probable que sea un error de registro. Lo que podemos hacer es eliminar manualmente el valor o modificarlo a 2.02.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">festivalDataGood &lt;-<span class="st"> </span>festivalData
-festivalDataGood<span class="op">$</span>day1[<span class="dv">810</span>] &lt;-<span class="st"> </span><span class="fl">2.02</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="gráficos.html#cb188-1" tabindex="-1"></a>festivalDataGood <span class="ot">&lt;-</span> festivalData</span>
+<span id="cb188-2"><a href="gráficos.html#cb188-2" tabindex="-1"></a>festivalDataGood<span class="sc">$</span>day1[<span class="dv">810</span>] <span class="ot">&lt;-</span> <span class="fl">2.02</span></span></code></pre></div>
 <p>Y podemos re-hacer el gráfico.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">festivalHistogramGood &lt;-<span class="st"> </span><span class="kw">ggplot</span>(festivalDataGood, <span class="kw">aes</span>(day1))
-
-festivalHistogramGood <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.4</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Hygiene (Day 1 of Festival)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="gráficos.html#cb189-1" tabindex="-1"></a>festivalHistogramGood <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(festivalDataGood, <span class="fu">aes</span>(day1))</span>
+<span id="cb189-2"><a href="gráficos.html#cb189-2" tabindex="-1"></a></span>
+<span id="cb189-3"><a href="gráficos.html#cb189-3" tabindex="-1"></a>festivalHistogramGood <span class="sc">+</span></span>
+<span id="cb189-4"><a href="gráficos.html#cb189-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb189-5"><a href="gráficos.html#cb189-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Hygiene (Day 1 of Festival)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span></span>
+<span id="cb189-6"><a href="gráficos.html#cb189-6" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb189-7"><a href="gráficos.html#cb189-7" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb189-8"><a href="gráficos.html#cb189-8" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb189-9"><a href="gráficos.html#cb189-9" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
 </div>
-<div id="boxplot" class="section level2">
+<div id="boxplot" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> Boxplot</h2>
-<p>En un boxplot (o gráfico de cajas y bigotes) visualizamos la distribución y la asimetría en los datos mostrando los promedios y cuartiles (o percentiles) del set de datos. Vamos a usar los mismos que usamos antes. Veamos los datos originales, pero esta veámoslo en función del género. Debemos re-hacer la estructura base.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">festivalBoxplot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(festivalData, <span class="kw">aes</span>(gender, day1))
-
-festivalBoxplot <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Gender&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Hygiene (Day 1 of Festival)&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
+<p>En un boxplot (o gráfico de cajas y bigotes) visualizamos la distribución y la asimetría en los datos mostrando los promedios y cuartiles (o percentiles) del set de datos.
+Vamos a usar los mismos que usamos antes.
+Veamos los datos originales, pero esta veámoslo en función del género.
+Debemos re-hacer la estructura base.</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="gráficos.html#cb190-1" tabindex="-1"></a>festivalBoxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(festivalData, <span class="fu">aes</span>(gender, day1))</span>
+<span id="cb190-2"><a href="gráficos.html#cb190-2" tabindex="-1"></a></span>
+<span id="cb190-3"><a href="gráficos.html#cb190-3" tabindex="-1"></a>festivalBoxplot <span class="sc">+</span> </span>
+<span id="cb190-4"><a href="gráficos.html#cb190-4" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb190-5"><a href="gráficos.html#cb190-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Gender&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Hygiene (Day 1 of Festival)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb190-6"><a href="gráficos.html#cb190-6" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb190-7"><a href="gráficos.html#cb190-7" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb190-8"><a href="gráficos.html#cb190-8" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb190-9"><a href="gráficos.html#cb190-9" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
-<p>En este tipo de gráfico también se puede visualizar el outlier. Ya habíamos lidiado con este problema transformando el valor del oulier. Podemos hacer un boxplot con la nueva data frame.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define base graph</span>
-festivalBoxplotAlt &lt;-<span class="st"> </span><span class="kw">ggplot</span>(festivalDataAlt, <span class="kw">aes</span>(gender, day1))
-
-<span class="co"># add layers</span>
-festivalBoxplotAlt <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Gender&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Hygiene (Day 1 of Festival)&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
+<p>En este tipo de gráfico también se puede visualizar el outlier.
+Ya habíamos lidiado con este problema transformando el valor del oulier.
+Podemos hacer un boxplot con la nueva data frame.</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="gráficos.html#cb191-1" tabindex="-1"></a><span class="co"># define base graph</span></span>
+<span id="cb191-2"><a href="gráficos.html#cb191-2" tabindex="-1"></a>festivalBoxplotAlt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(festivalDataAlt, <span class="fu">aes</span>(gender, day1))</span>
+<span id="cb191-3"><a href="gráficos.html#cb191-3" tabindex="-1"></a></span>
+<span id="cb191-4"><a href="gráficos.html#cb191-4" tabindex="-1"></a><span class="co"># add layers</span></span>
+<span id="cb191-5"><a href="gráficos.html#cb191-5" tabindex="-1"></a>festivalBoxplotAlt <span class="sc">+</span> </span>
+<span id="cb191-6"><a href="gráficos.html#cb191-6" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb191-7"><a href="gráficos.html#cb191-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Gender&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Hygiene (Day 1 of Festival)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb191-8"><a href="gráficos.html#cb191-8" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb191-9"><a href="gráficos.html#cb191-9" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb191-10"><a href="gráficos.html#cb191-10" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb191-11"><a href="gráficos.html#cb191-11" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
 <p>Por último, podemos hacer los boxplots para el día 2.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">festivalBoxplot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(festivalData, <span class="kw">aes</span>(gender, day2))
-festivalBoxplot <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Gender&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Hygiene (Day 2 of Festival)&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
-<pre><code>## Warning: Removed 546 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="gráficos.html#cb192-1" tabindex="-1"></a>festivalBoxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(festivalData, <span class="fu">aes</span>(gender, day2))</span>
+<span id="cb192-2"><a href="gráficos.html#cb192-2" tabindex="-1"></a>festivalBoxplot <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb192-3"><a href="gráficos.html#cb192-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Gender&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Hygiene (Day 2 of Festival)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb192-4"><a href="gráficos.html#cb192-4" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb192-5"><a href="gráficos.html#cb192-5" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb192-6"><a href="gráficos.html#cb192-6" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb192-7"><a href="gráficos.html#cb192-7" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
+<pre><code>## Warning: Removed 546 rows containing non-finite outside the scale range (`stat_boxplot()`).</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-88-1.png" width="672" /></p>
 <p>Y para el día 3.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">festivalBoxplot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(festivalData, <span class="kw">aes</span>(gender, day3))
-festivalBoxplot <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Gender&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Hygiene (Day 3 of Festival)&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), 
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
-<pre><code>## Warning: Removed 687 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="gráficos.html#cb194-1" tabindex="-1"></a>festivalBoxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(festivalData, <span class="fu">aes</span>(gender, day3))</span>
+<span id="cb194-2"><a href="gráficos.html#cb194-2" tabindex="-1"></a>festivalBoxplot <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb194-3"><a href="gráficos.html#cb194-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Gender&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Hygiene (Day 3 of Festival)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb194-4"><a href="gráficos.html#cb194-4" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb194-5"><a href="gráficos.html#cb194-5" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb194-6"><a href="gráficos.html#cb194-6" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb194-7"><a href="gráficos.html#cb194-7" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
+<pre><code>## Warning: Removed 687 rows containing non-finite outside the scale range (`stat_boxplot()`).</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-89-1.png" width="672" /></p>
 </div>
-<div id="gráfico-de-barras" class="section level2">
+<div id="gráfico-de-barras" class="section level2" number="4.6">
 <h2><span class="header-section-number">4.6</span> Gráfico de barras</h2>
 <p>El gráfico de barras es el más común de las visualizaciones.</p>
-<p>En este ejemplo un el director de una compañía cinematográfica estuvo interesado en saber si realmente existía el efecto llamado &quot;chick flick&quot;, es decir, el hecho que hay películas que atraen más a las mujeres que a los hombres. Para investigar esta pregunta reclutó a 20 hombres y 20 mujeres y les mostró a la mitad de cada grupo una película que se suponía era para chicas (&quot;El diario de Bridget Jones), y a la otra mitad de cada grupo una película que no caía en esta categoría de película (Memento). En todos los casos midió la excitación fisiológica (la conductancia de la piel) como indicador de cuánto disfrutaron la película los participantes.</p>
-<p>Como siempre, primero importemos los datos. No es necesario que carguemos la librerías si ya están cargadas.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chickFlick &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/chick_flick.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
-<span class="kw">head</span>(chickFlick)</code></pre></div>
+<p>En este ejemplo un el director de una compañía cinematográfica estuvo interesado en saber si realmente existía el efecto llamado “chick flick”, es decir, el hecho que hay películas que atraen más a las mujeres que a los hombres. Para investigar esta pregunta reclutó a 20 hombres y 20 mujeres y les mostró a la mitad de cada grupo una película que se suponía era para chicas (“El diario de Bridget Jones), y a la otra mitad de cada grupo una película que no caía en esta categoría de película (Memento). En todos los casos midió la excitación fisiológica (la conductancia de la piel) como indicador de cuánto disfrutaron la película los participantes.</p>
+<p>Como siempre, primero importemos los datos.
+No es necesario que carguemos la librerías si ya están cargadas.</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="gráficos.html#cb196-1" tabindex="-1"></a>chickFlick <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/chick_flick.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb196-2"><a href="gráficos.html#cb196-2" tabindex="-1"></a><span class="fu">head</span>(chickFlick)</span></code></pre></div>
 <pre><code>##   genero             pelicula estado.de.alerta
 ## 1 Hombre Bridget Jones&#39; Diary               22
 ## 2 Hombre Bridget Jones&#39; Diary               13
@@ -528,9 +607,9 @@ festivalBoxplot <span class="op">+</span><span class="st"> </span><span class="k
 ## 4 Hombre Bridget Jones&#39; Diary               10
 ## 5 Hombre Bridget Jones&#39; Diary               18
 ## 6 Hombre Bridget Jones&#39; Diary               24</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># cambiemos los nombres</span>
-<span class="kw">colnames</span>(chickFlick) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;film&quot;</span>, <span class="st">&quot;arousal&quot;</span>)
-<span class="kw">head</span>(chickFlick)</code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="gráficos.html#cb198-1" tabindex="-1"></a><span class="co"># cambiemos los nombres</span></span>
+<span id="cb198-2"><a href="gráficos.html#cb198-2" tabindex="-1"></a><span class="fu">colnames</span>(chickFlick) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;film&quot;</span>, <span class="st">&quot;arousal&quot;</span>)</span>
+<span id="cb198-3"><a href="gráficos.html#cb198-3" tabindex="-1"></a><span class="fu">head</span>(chickFlick)</span></code></pre></div>
 <pre><code>##   gender                 film arousal
 ## 1 Hombre Bridget Jones&#39; Diary      22
 ## 2 Hombre Bridget Jones&#39; Diary      13
@@ -538,78 +617,84 @@ festivalBoxplot <span class="op">+</span><span class="st"> </span><span class="k
 ## 4 Hombre Bridget Jones&#39; Diary      10
 ## 5 Hombre Bridget Jones&#39; Diary      18
 ## 6 Hombre Bridget Jones&#39; Diary      24</code></pre>
-<p>Fíjate que hay variables: gender: El género del participante. film: La película que estaba vió el participante. arousal: El nivel de excitación del participante.</p>
-<p>Antes de crear la estructura base del gráfico vamos a hacer algunos cálculos. Para ello nos vamos a valer de algunas funciones estadísticas. La función <strong>summarySE</strong> nos permite calcular varias métricas estadísticas (N, promedio, SD, SE, CI) en función de otra variable. En este caso vamos a calcular el arousal promedio en función del tipo de film. Está función necesita de la librería Rmisc que ya está cargada.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataSumm &lt;-<span class="st"> </span><span class="kw">summarySE</span>(chickFlick, <span class="dt">measurevar=</span><span class="st">&quot;arousal&quot;</span>, <span class="dt">groupvars =</span> <span class="kw">c</span>(<span class="st">&quot;film&quot;</span>))
-dataSumm</code></pre></div>
+<p>Fíjate que hay variables:
+gender: El género del participante.
+film: La película que estaba vió el participante.
+arousal: El nivel de excitación del participante.</p>
+<p>Antes de crear la estructura base del gráfico vamos a hacer algunos cálculos.
+Para ello nos vamos a valer de algunas funciones estadísticas.
+La función <strong>summarySE</strong> nos permite calcular varias métricas estadísticas (N, promedio, SD, SE, CI) en función de otra variable. En este caso vamos a calcular el arousal promedio en función del tipo de film.
+Está función necesita de la librería Rmisc que ya está cargada.</p>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="gráficos.html#cb200-1" tabindex="-1"></a>dataSumm <span class="ot">&lt;-</span> <span class="fu">summarySE</span>(chickFlick, <span class="at">measurevar=</span><span class="st">&quot;arousal&quot;</span>, <span class="at">groupvars =</span> <span class="fu">c</span>(<span class="st">&quot;film&quot;</span>))</span>
+<span id="cb200-2"><a href="gráficos.html#cb200-2" tabindex="-1"></a>dataSumm</span></code></pre></div>
 <pre><code>##                   film  N arousal       sd       se       ci
 ## 1 Bridget Jones&#39; Diary 20   14.80 5.727128 1.280625 2.680379
 ## 2              Memento 20   25.25 7.129442 1.594192 3.336682</code></pre>
 <p>Y luego hacemos el gráfico.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># usamos la tabla que recién creamos y graficamos el promedio del arousal (eje Y) en fución del film (eje X)</span>
-<span class="kw">ggplot</span>(dataSumm, <span class="kw">aes</span>(<span class="dt">x=</span>film, <span class="dt">y=</span>arousal)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span>
-<span class="st">  </span><span class="co"># agregamos las barras dónde estan los promedios</span>
-<span class="st">  </span><span class="co"># dodge permite crear un pequeño desfase entre la posición dónde se ubican los promedios</span>
-<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>), <span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>,
-           <span class="dt">color=</span><span class="st">&quot;black&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;green&quot;</span>, <span class="dt">show.legend=</span><span class="ot">FALSE</span>) <span class="op">+</span>
-<span class="st">  </span>
-<span class="st">  </span><span class="co"># agregamos las barras de error</span>
-<span class="st">  </span><span class="co"># dodge permite crear un pequeño desfase entre la posición dónde se ubican los promedios</span>
-<span class="st">  </span><span class="co"># podemos modificar el ancho de las barras de error con &quot;width&quot;</span>
-<span class="st">  </span><span class="co"># podemos definir los mínimos y máximos de las barras de error, tipicamente el error se muestra hacia arriba</span>
-<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width=</span><span class="fl">0.9</span>), <span class="dt">width=</span><span class="fl">0.25</span>,
-                <span class="kw">aes</span>(<span class="dt">ymin=</span>arousal, <span class="dt">ymax=</span>arousal<span class="op">+</span>se)) <span class="op">+</span>
-<span class="st">  </span>
-<span class="st">  </span><span class="co"># creamos un fondo blanco para que se vea mejor</span>
-<span class="st">  </span><span class="co"># se elimina la rejilla que aparece en el fondo</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span>
-<span class="st">  </span><span class="co"># podemos cambiar los límites y las separaciones del eje Y</span>
-<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">30</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">5</span>)) <span class="op">+</span>
-<span class="st">  </span>
-<span class="st">  </span><span class="co"># también podemos renombrar la etiqueta de los ejes</span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Arousal&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Film&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="gráficos.html#cb202-1" tabindex="-1"></a><span class="co"># usamos la tabla que recién creamos y graficamos el promedio del arousal (eje Y) en fución del film (eje X)</span></span>
+<span id="cb202-2"><a href="gráficos.html#cb202-2" tabindex="-1"></a><span class="fu">ggplot</span>(dataSumm, <span class="fu">aes</span>(<span class="at">x=</span>film, <span class="at">y=</span>arousal)) <span class="sc">+</span> </span>
+<span id="cb202-3"><a href="gráficos.html#cb202-3" tabindex="-1"></a>  </span>
+<span id="cb202-4"><a href="gráficos.html#cb202-4" tabindex="-1"></a>  <span class="co"># agregamos las barras dónde estan los promedios</span></span>
+<span id="cb202-5"><a href="gráficos.html#cb202-5" tabindex="-1"></a>  <span class="co"># dodge permite crear un pequeño desfase entre la posición dónde se ubican los promedios</span></span>
+<span id="cb202-6"><a href="gráficos.html#cb202-6" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), <span class="at">stat=</span><span class="st">&quot;identity&quot;</span>,</span>
+<span id="cb202-7"><a href="gráficos.html#cb202-7" tabindex="-1"></a>           <span class="at">color=</span><span class="st">&quot;black&quot;</span>, <span class="at">fill=</span><span class="st">&quot;green&quot;</span>, <span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb202-8"><a href="gráficos.html#cb202-8" tabindex="-1"></a>  </span>
+<span id="cb202-9"><a href="gráficos.html#cb202-9" tabindex="-1"></a>  <span class="co"># agregamos las barras de error</span></span>
+<span id="cb202-10"><a href="gráficos.html#cb202-10" tabindex="-1"></a>  <span class="co"># dodge permite crear un pequeño desfase entre la posición dónde se ubican los promedios</span></span>
+<span id="cb202-11"><a href="gráficos.html#cb202-11" tabindex="-1"></a>  <span class="co"># podemos modificar el ancho de las barras de error con &quot;width&quot;</span></span>
+<span id="cb202-12"><a href="gráficos.html#cb202-12" tabindex="-1"></a>  <span class="co"># podemos definir los mínimos y máximos de las barras de error, tipicamente el error se muestra hacia arriba</span></span>
+<span id="cb202-13"><a href="gráficos.html#cb202-13" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.9</span>), <span class="at">width=</span><span class="fl">0.25</span>,</span>
+<span id="cb202-14"><a href="gráficos.html#cb202-14" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">ymin=</span>arousal, <span class="at">ymax=</span>arousal<span class="sc">+</span>se)) <span class="sc">+</span></span>
+<span id="cb202-15"><a href="gráficos.html#cb202-15" tabindex="-1"></a>  </span>
+<span id="cb202-16"><a href="gráficos.html#cb202-16" tabindex="-1"></a>  <span class="co"># creamos un fondo blanco para que se vea mejor</span></span>
+<span id="cb202-17"><a href="gráficos.html#cb202-17" tabindex="-1"></a>  <span class="co"># se elimina la rejilla que aparece en el fondo</span></span>
+<span id="cb202-18"><a href="gráficos.html#cb202-18" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb202-19"><a href="gráficos.html#cb202-19" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb202-20"><a href="gráficos.html#cb202-20" tabindex="-1"></a>  </span>
+<span id="cb202-21"><a href="gráficos.html#cb202-21" tabindex="-1"></a>  <span class="co"># podemos cambiar los límites y las separaciones del eje Y</span></span>
+<span id="cb202-22"><a href="gráficos.html#cb202-22" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">30</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb202-23"><a href="gráficos.html#cb202-23" tabindex="-1"></a>  </span>
+<span id="cb202-24"><a href="gráficos.html#cb202-24" tabindex="-1"></a>  <span class="co"># también podemos renombrar la etiqueta de los ejes</span></span>
+<span id="cb202-25"><a href="gráficos.html#cb202-25" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Arousal&quot;</span>) <span class="sc">+</span></span>
+<span id="cb202-26"><a href="gráficos.html#cb202-26" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Film&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
 <p>Para entender mejor el rol de estos parámetros en la configuración del gráfico, cámbialos.</p>
 <p>Además, podríamos querer visualizar los valores de excitación no sólo en función de las películas, sino que también en función del género.</p>
 <p>Usamos la función <strong>summarySE</strong> para calcular el arousal promedio en función del tipo de film y del género.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataSumm &lt;-<span class="st"> </span><span class="kw">summarySE</span>(chickFlick, <span class="dt">measurevar=</span><span class="st">&quot;arousal&quot;</span>, <span class="dt">groupvars =</span> <span class="kw">c</span>(<span class="st">&quot;film&quot;</span>, <span class="st">&quot;gender&quot;</span>))
-dataSumm</code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="gráficos.html#cb203-1" tabindex="-1"></a>dataSumm <span class="ot">&lt;-</span> <span class="fu">summarySE</span>(chickFlick, <span class="at">measurevar=</span><span class="st">&quot;arousal&quot;</span>, <span class="at">groupvars =</span> <span class="fu">c</span>(<span class="st">&quot;film&quot;</span>, <span class="st">&quot;gender&quot;</span>))</span>
+<span id="cb203-2"><a href="gráficos.html#cb203-2" tabindex="-1"></a>dataSumm</span></code></pre></div>
 <pre><code>##                   film gender  N arousal       sd       se       ci
 ## 1 Bridget Jones&#39; Diary Hombre 10    17.2 4.779586 1.511438 3.419110
 ## 2 Bridget Jones&#39; Diary  Mujer 10    12.4 5.796551 1.833030 4.146603
 ## 3              Memento Hombre 10    25.8 7.238784 2.289105 5.178314
 ## 4              Memento  Mujer 10    24.7 7.364328 2.328805 5.268123</code></pre>
 <p>Luego graficamos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Aquí debemos definir como ver el género dento del parámetro aes.</span>
-<span class="kw">ggplot</span>(dataSumm, <span class="kw">aes</span>(<span class="dt">x=</span>film, <span class="dt">y=</span>arousal, <span class="dt">fill=</span>gender)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span>
-<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>), <span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>,
-           <span class="dt">color=</span><span class="st">&quot;black&quot;</span>) <span class="op">+</span>
-<span class="st">  </span>
-<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width=</span><span class="fl">0.9</span>), <span class="dt">width=</span><span class="fl">0.25</span>,
-                <span class="kw">aes</span>(<span class="dt">ymin=</span>arousal, <span class="dt">ymax=</span>arousal<span class="op">+</span>se)) <span class="op">+</span>
-<span class="st">  </span>
-<span class="st">  </span><span class="co"># podemos cambiar los colores de relleno</span>
-<span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;black&quot;</span>)) <span class="op">+</span>
-<span class="st">  </span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">30</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">5</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Arousal&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Film&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="gráficos.html#cb205-1" tabindex="-1"></a><span class="co"># Aquí debemos definir como ver el género dento del parámetro aes.</span></span>
+<span id="cb205-2"><a href="gráficos.html#cb205-2" tabindex="-1"></a><span class="fu">ggplot</span>(dataSumm, <span class="fu">aes</span>(<span class="at">x=</span>film, <span class="at">y=</span>arousal, <span class="at">fill=</span>gender)) <span class="sc">+</span> </span>
+<span id="cb205-3"><a href="gráficos.html#cb205-3" tabindex="-1"></a>  </span>
+<span id="cb205-4"><a href="gráficos.html#cb205-4" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), <span class="at">stat=</span><span class="st">&quot;identity&quot;</span>,</span>
+<span id="cb205-5"><a href="gráficos.html#cb205-5" tabindex="-1"></a>           <span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb205-6"><a href="gráficos.html#cb205-6" tabindex="-1"></a>  </span>
+<span id="cb205-7"><a href="gráficos.html#cb205-7" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.9</span>), <span class="at">width=</span><span class="fl">0.25</span>,</span>
+<span id="cb205-8"><a href="gráficos.html#cb205-8" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">ymin=</span>arousal, <span class="at">ymax=</span>arousal<span class="sc">+</span>se)) <span class="sc">+</span></span>
+<span id="cb205-9"><a href="gráficos.html#cb205-9" tabindex="-1"></a>  </span>
+<span id="cb205-10"><a href="gráficos.html#cb205-10" tabindex="-1"></a>  <span class="co"># podemos cambiar los colores de relleno</span></span>
+<span id="cb205-11"><a href="gráficos.html#cb205-11" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;black&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb205-12"><a href="gráficos.html#cb205-12" tabindex="-1"></a>  </span>
+<span id="cb205-13"><a href="gráficos.html#cb205-13" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb205-14"><a href="gráficos.html#cb205-14" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb205-15"><a href="gráficos.html#cb205-15" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">30</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb205-16"><a href="gráficos.html#cb205-16" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Arousal&quot;</span>) <span class="sc">+</span></span>
+<span id="cb205-17"><a href="gráficos.html#cb205-17" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Film&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
 </div>
-<div id="gráfico-de-líneas-1-factor" class="section level2">
+<div id="gráfico-de-líneas-1-factor" class="section level2" number="4.7">
 <h2><span class="header-section-number">4.7</span> Gráfico de líneas (1 factor)</h2>
 <p>El gráfico de líneas es también muy común para visualizar datos.</p>
 <p>En este ejemplo se reclutaron 15 personas con hipo y durante un ataque de hipo se administraron tres procedimientos para detener el hipo (recibir un susto, ingerir un poco de azúcar y respirar en una bolsa) en orden aleatorio y a intervalos de 5 minutos. Además, se tomó una línea de base de cuántos hipo tuvieron por minuto. Durante al aplicación de los procedimientos para detener el hipo se contaron el numero de hipos por minuto.</p>
 <p>Como siempre, primero importemos los datos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hiccupsData &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/hipo.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
-<span class="kw">head</span>(hiccupsData)</code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="gráficos.html#cb206-1" tabindex="-1"></a>hiccupsData <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/hipo.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb206-2"><a href="gráficos.html#cb206-2" tabindex="-1"></a><span class="fu">head</span>(hiccupsData)</span></code></pre></div>
 <pre><code>##   ID Linea.base Susto Azucar Bolsa
 ## 1  1         15     9      7     2
 ## 2  2         13    18      7     4
@@ -617,8 +702,8 @@ dataSumm</code></pre></div>
 ## 4  4          7    15     10     5
 ## 5  5         11    18      7     4
 ## 6  6         14     8     10     3</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(hiccupsData)[<span class="dv">2</span>] &lt;-<span class="st"> &quot;Base&quot;</span>
-<span class="kw">head</span>(hiccupsData)</code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="gráficos.html#cb208-1" tabindex="-1"></a><span class="fu">colnames</span>(hiccupsData)[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Base&quot;</span></span>
+<span id="cb208-2"><a href="gráficos.html#cb208-2" tabindex="-1"></a><span class="fu">head</span>(hiccupsData)</span></code></pre></div>
 <pre><code>##   ID Base Susto Azucar Bolsa
 ## 1  1   15     9      7     2
 ## 2  2   13    18      7     4
@@ -626,13 +711,18 @@ dataSumm</code></pre></div>
 ## 4  4    7    15     10     5
 ## 5  5   11    18      7     4
 ## 6  6   14     8     10     3</code></pre>
-<p>Hay cuatro tratamientos: Base: el número de hipos sin ningún tratamiento. Susto: número de hipos al recibir un susto. Azucar: número de hipo al ingerir un poco de azúcar. Bolsa: número de hipos al respirar en una bolsa.</p>
+<p>Hay cuatro tratamientos:
+Base: el número de hipos sin ningún tratamiento.
+Susto: número de hipos al recibir un susto.
+Azucar: número de hipo al ingerir un poco de azúcar.
+Bolsa: número de hipos al respirar en una bolsa.</p>
 <p>Cada fila en la base de datos representa a una persona diferente. Esto refleja un diseño de medidas repetidas. Cada columna representa una condición de tratamiento diferente. Y cada persona que se somete a cada uno de los tratamientos.</p>
-<p>Antes de graficar con ggplot debemos cambiar el formato de la base de datos. El ID no nos interesa y nos podemos deshacer de él.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hiccupsData<span class="op">$</span>ID &lt;-<span class="st"> </span><span class="ot">NULL</span>
-
-hiccups &lt;-<span class="st"> </span><span class="kw">stack</span>(hiccupsData)
-<span class="kw">head</span>(hiccups)</code></pre></div>
+<p>Antes de graficar con ggplot debemos cambiar el formato de la base de datos.
+El ID no nos interesa y nos podemos deshacer de él.</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="gráficos.html#cb210-1" tabindex="-1"></a>hiccupsData<span class="sc">$</span>ID <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb210-2"><a href="gráficos.html#cb210-2" tabindex="-1"></a></span>
+<span id="cb210-3"><a href="gráficos.html#cb210-3" tabindex="-1"></a>hiccups <span class="ot">&lt;-</span> <span class="fu">stack</span>(hiccupsData)</span>
+<span id="cb210-4"><a href="gráficos.html#cb210-4" tabindex="-1"></a><span class="fu">head</span>(hiccups)</span></code></pre></div>
 <pre><code>##   values  ind
 ## 1     15 Base
 ## 2     13 Base
@@ -640,8 +730,8 @@ hiccups &lt;-<span class="st"> </span><span class="kw">stack</span>(hiccupsData)
 ## 4      7 Base
 ## 5     11 Base
 ## 6     14 Base</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(hiccups) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Hipos&quot;</span>,<span class="st">&quot;Tratamiento&quot;</span>)
-<span class="kw">head</span>(hiccups)</code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="gráficos.html#cb212-1" tabindex="-1"></a><span class="fu">colnames</span>(hiccups) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Hipos&quot;</span>,<span class="st">&quot;Tratamiento&quot;</span>)</span>
+<span id="cb212-2"><a href="gráficos.html#cb212-2" tabindex="-1"></a><span class="fu">head</span>(hiccups)</span></code></pre></div>
 <pre><code>##   Hipos Tratamiento
 ## 1    15        Base
 ## 2    13        Base
@@ -649,64 +739,63 @@ hiccups &lt;-<span class="st"> </span><span class="kw">stack</span>(hiccupsData)
 ## 4     7        Base
 ## 5    11        Base
 ## 6    14        Base</code></pre>
-<p>Para graficar una variable categórica en ggplot debemos transformarla a factor. A veces R automáticamente identifica esta variables como categóricas.</p>
+<p>Para graficar una variable categórica en ggplot debemos transformarla a factor.
+A veces R automáticamente identifica esta variables como categóricas.</p>
 <p>Además, podemos cambiar el orden en que aparecen las condiciones en el gráfico,</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Si una variable es categórica se puede ver hacia el final de los datos que existen niveles.</span>
-<span class="co"># En este caso la variable &quot;Tratamieto&quot; tiene 4 niveles.</span>
-hiccups<span class="op">$</span>Tratamiento</code></pre></div>
-<pre><code>##  [1] Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base  
-## [15] Base   Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto 
-## [29] Susto  Susto  Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar
-## [43] Azucar Azucar Azucar Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa 
-## [57] Bolsa  Bolsa  Bolsa  Bolsa 
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="gráficos.html#cb214-1" tabindex="-1"></a><span class="co"># Si una variable es categórica se puede ver hacia el final de los datos que existen niveles.</span></span>
+<span id="cb214-2"><a href="gráficos.html#cb214-2" tabindex="-1"></a><span class="co"># En este caso la variable &quot;Tratamieto&quot; tiene 4 niveles.</span></span>
+<span id="cb214-3"><a href="gráficos.html#cb214-3" tabindex="-1"></a>hiccups<span class="sc">$</span>Tratamiento</span></code></pre></div>
+<pre><code>##  [1] Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Susto 
+## [17] Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Azucar Azucar
+## [33] Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Bolsa  Bolsa  Bolsa 
+## [49] Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa 
 ## Levels: Base Susto Azucar Bolsa</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hiccups<span class="op">$</span>Tratamiento2 &lt;-<span class="st"> </span><span class="kw">factor</span>(hiccups<span class="op">$</span>Tratamiento,
-                                <span class="kw">levels</span>(hiccups<span class="op">$</span>Tratamiento)[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">3</span>)])
-
-
-hiccups<span class="op">$</span>Tratamiento2</code></pre></div>
-<pre><code>##  [1] Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base  
-## [15] Base   Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto 
-## [29] Susto  Susto  Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar
-## [43] Azucar Azucar Azucar Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa 
-## [57] Bolsa  Bolsa  Bolsa  Bolsa 
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="gráficos.html#cb216-1" tabindex="-1"></a>hiccups<span class="sc">$</span>Tratamiento2 <span class="ot">&lt;-</span> <span class="fu">factor</span>(hiccups<span class="sc">$</span>Tratamiento,</span>
+<span id="cb216-2"><a href="gráficos.html#cb216-2" tabindex="-1"></a>                                <span class="fu">levels</span>(hiccups<span class="sc">$</span>Tratamiento)[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">3</span>)])</span>
+<span id="cb216-3"><a href="gráficos.html#cb216-3" tabindex="-1"></a></span>
+<span id="cb216-4"><a href="gráficos.html#cb216-4" tabindex="-1"></a></span>
+<span id="cb216-5"><a href="gráficos.html#cb216-5" tabindex="-1"></a>hiccups<span class="sc">$</span>Tratamiento2</span></code></pre></div>
+<pre><code>##  [1] Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Base   Susto 
+## [17] Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Susto  Azucar Azucar
+## [33] Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Azucar Bolsa  Bolsa  Bolsa 
+## [49] Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa  Bolsa 
 ## Levels: Base Bolsa Susto Azucar</code></pre>
 <p>Usamos la función <strong>summarySE</strong> para calcular el número de hipos promedio en función del tratamiento.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataSumm &lt;-<span class="st"> </span><span class="kw">summarySE</span>(hiccups, <span class="dt">measurevar=</span><span class="st">&quot;Hipos&quot;</span>, <span class="dt">groupvars=</span><span class="st">&quot;Tratamiento&quot;</span>)
-dataSumm</code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="gráficos.html#cb218-1" tabindex="-1"></a>dataSumm <span class="ot">&lt;-</span> <span class="fu">summarySE</span>(hiccups, <span class="at">measurevar=</span><span class="st">&quot;Hipos&quot;</span>, <span class="at">groupvars=</span><span class="st">&quot;Tratamiento&quot;</span>)</span>
+<span id="cb218-2"><a href="gráficos.html#cb218-2" tabindex="-1"></a>dataSumm</span></code></pre></div>
 <pre><code>##   Tratamiento  N     Hipos        sd        se        ci
 ## 1        Base 15 13.133333 4.8383390 1.2492537 2.6793828
 ## 2       Susto 15 12.800000 5.4142669 1.3979577 2.9983211
 ## 3      Azucar 15  8.733333 2.3441924 0.6052679 1.2981705
 ## 4       Bolsa 15  3.533333 0.8338094 0.2152887 0.4617482</code></pre>
 <p>Luego graficamos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Para hacer un gráfico de línea debemos setear en el aes una estética de grupo igual a 1</span>
-<span class="co"># Esto nos permite agrupar puntos promedio dentro de un grupo en una línea</span>
-<span class="kw">ggplot</span>(dataSumm, <span class="kw">aes</span>(<span class="dt">x=</span>Tratamiento, <span class="dt">y=</span>Hipos, <span class="dt">group=</span><span class="dv">1</span>)) <span class="op">+</span>
-<span class="st">  </span>
-<span class="st">  </span><span class="co"># agregamos las barras de error</span>
-<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="dt">width=</span><span class="fl">0.1</span>, <span class="kw">aes</span>(<span class="dt">ymin=</span>Hipos<span class="op">-</span>se, <span class="dt">ymax=</span>Hipos<span class="op">+</span>se)) <span class="op">+</span>
-<span class="st">  </span>
-<span class="st">  </span><span class="co"># agregamos las líneas que unen los puntos</span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">colour =</span> <span class="st">&quot;Red&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span>
-<span class="st">  </span><span class="co"># agregamos los puntos que indican los promedios</span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Número de hipos&quot;</span>) <span class="op">+</span>
-<span class="st">  </span>
-<span class="st">  </span><span class="co"># coord_cartesian(ylim = c(830, 900)) +</span>
-<span class="st">  </span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>))</code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="gráficos.html#cb220-1" tabindex="-1"></a><span class="co"># Para hacer un gráfico de línea debemos setear en el aes una estética de grupo igual a 1</span></span>
+<span id="cb220-2"><a href="gráficos.html#cb220-2" tabindex="-1"></a><span class="co"># Esto nos permite agrupar puntos promedio dentro de un grupo en una línea</span></span>
+<span id="cb220-3"><a href="gráficos.html#cb220-3" tabindex="-1"></a><span class="fu">ggplot</span>(dataSumm, <span class="fu">aes</span>(<span class="at">x=</span>Tratamiento, <span class="at">y=</span>Hipos, <span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb220-4"><a href="gráficos.html#cb220-4" tabindex="-1"></a>  </span>
+<span id="cb220-5"><a href="gráficos.html#cb220-5" tabindex="-1"></a>  <span class="co"># agregamos las barras de error</span></span>
+<span id="cb220-6"><a href="gráficos.html#cb220-6" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">width=</span><span class="fl">0.1</span>, <span class="fu">aes</span>(<span class="at">ymin=</span>Hipos<span class="sc">-</span>se, <span class="at">ymax=</span>Hipos<span class="sc">+</span>se)) <span class="sc">+</span></span>
+<span id="cb220-7"><a href="gráficos.html#cb220-7" tabindex="-1"></a>  </span>
+<span id="cb220-8"><a href="gráficos.html#cb220-8" tabindex="-1"></a>  <span class="co"># agregamos las líneas que unen los puntos</span></span>
+<span id="cb220-9"><a href="gráficos.html#cb220-9" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">&quot;Red&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb220-10"><a href="gráficos.html#cb220-10" tabindex="-1"></a>  </span>
+<span id="cb220-11"><a href="gráficos.html#cb220-11" tabindex="-1"></a>  <span class="co"># agregamos los puntos que indican los promedios</span></span>
+<span id="cb220-12"><a href="gráficos.html#cb220-12" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb220-13"><a href="gráficos.html#cb220-13" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Número de hipos&quot;</span>) <span class="sc">+</span></span>
+<span id="cb220-14"><a href="gráficos.html#cb220-14" tabindex="-1"></a>  </span>
+<span id="cb220-15"><a href="gráficos.html#cb220-15" tabindex="-1"></a>  <span class="co"># coord_cartesian(ylim = c(830, 900)) +</span></span>
+<span id="cb220-16"><a href="gráficos.html#cb220-16" tabindex="-1"></a>  </span>
+<span id="cb220-17"><a href="gráficos.html#cb220-17" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb220-18"><a href="gráficos.html#cb220-18" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
 </div>
-<div id="gráfico-de-líneas-2-factores" class="section level2">
+<div id="gráfico-de-líneas-2-factores" class="section level2" number="4.8">
 <h2><span class="header-section-number">4.8</span> Gráfico de líneas (2 factores)</h2>
 <p>Imagina que llevamos a cabo un experimento en el que a un grupo de 25 niños se les pidió enviar mensajes de texto vía sus teléfonos móviles durante un período de seis meses. A un segundo grupo de 25 niños se le prohibió enviar mensajes de texto por el mismo período. A estos dos grupos se les aplicó una pueba gramatical para medir el efecto de enviar mensajes de texto sobre su habilidades gramaticales.</p>
 <p>La primera variable independiente fue el uso de mensajes de texto (uso de mensajes de texto versus controles) y la segunda variable independiente fue el tiempo (línea de base versus después de 6 meses).</p>
 <p>Importemos los datos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">textData &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/usuarios_de_whatsapp.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
-<span class="kw">head</span>(textData)</code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="gráficos.html#cb221-1" tabindex="-1"></a>textData <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/usuarios_de_whatsapp.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb221-2"><a href="gráficos.html#cb221-2" tabindex="-1"></a><span class="fu">head</span>(textData)</span></code></pre></div>
 <pre><code>##                 Grupo Linea.base X6.meses
 ## 1 Usarios de Whatsapp         52       32
 ## 2 Usarios de Whatsapp         68       48
@@ -714,9 +803,9 @@ dataSumm</code></pre></div>
 ## 4 Usarios de Whatsapp         47       16
 ## 5 Usarios de Whatsapp         73       63
 ## 6 Usarios de Whatsapp         57       53</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># missing something!</span>
-<span class="kw">colnames</span>(textData) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Group&quot;</span>, <span class="st">&quot;Baseline&quot;</span>, <span class="st">&quot;Six_months&quot;</span>)
-<span class="kw">head</span>(textData)</code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="gráficos.html#cb223-1" tabindex="-1"></a><span class="co"># missing something!</span></span>
+<span id="cb223-2"><a href="gráficos.html#cb223-2" tabindex="-1"></a><span class="fu">colnames</span>(textData) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Group&quot;</span>, <span class="st">&quot;Baseline&quot;</span>, <span class="st">&quot;Six_months&quot;</span>)</span>
+<span id="cb223-3"><a href="gráficos.html#cb223-3" tabindex="-1"></a><span class="fu">head</span>(textData)</span></code></pre></div>
 <pre><code>##                 Group Baseline Six_months
 ## 1 Usarios de Whatsapp       52         32
 ## 2 Usarios de Whatsapp       68         48
@@ -725,12 +814,14 @@ dataSumm</code></pre></div>
 ## 5 Usarios de Whatsapp       73         63
 ## 6 Usarios de Whatsapp       57         53</code></pre>
 <p>Hay 3 variables:</p>
-<p>Grupo: especifica si estaban en el grupo de mensajes de texto o en el grupo de control. Baseline: puntajes de gramática en la línea de base. Six_months: puntajes de gramática después de 6 meses.</p>
+<p>Grupo: especifica si estaban en el grupo de mensajes de texto o en el grupo de control.
+Baseline: puntajes de gramática en la línea de base.
+Six_months: puntajes de gramática después de 6 meses.</p>
 <p>Cada fila en la base de datos representa a una persona diferente. Estos datos están nuevamente en el formato incorrecto para ggplot. En lugar del formato wide actual necesitamos los datos en formato long. Entonces necesitamos reestructurar los datos a una nueva data frame.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">textMessages &lt;-<span class="st"> </span><span class="kw">melt</span>(textData,
-                     <span class="dt">id =</span> <span class="kw">c</span>(<span class="st">&quot;Group&quot;</span>),
-                     <span class="dt">measured =</span> <span class="kw">c</span>(<span class="st">&quot;Baseline&quot;</span>, <span class="st">&quot;Six_months&quot;</span>))
-<span class="kw">head</span>(textMessages)</code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="gráficos.html#cb225-1" tabindex="-1"></a>textMessages <span class="ot">&lt;-</span> <span class="fu">melt</span>(textData,</span>
+<span id="cb225-2"><a href="gráficos.html#cb225-2" tabindex="-1"></a>                     <span class="at">id =</span> <span class="fu">c</span>(<span class="st">&quot;Group&quot;</span>),</span>
+<span id="cb225-3"><a href="gráficos.html#cb225-3" tabindex="-1"></a>                     <span class="at">measured =</span> <span class="fu">c</span>(<span class="st">&quot;Baseline&quot;</span>, <span class="st">&quot;Six_months&quot;</span>))</span>
+<span id="cb225-4"><a href="gráficos.html#cb225-4" tabindex="-1"></a><span class="fu">head</span>(textMessages)</span></code></pre></div>
 <pre><code>##                 Group variable value
 ## 1 Usarios de Whatsapp Baseline    52
 ## 2 Usarios de Whatsapp Baseline    68
@@ -738,8 +829,8 @@ dataSumm</code></pre></div>
 ## 4 Usarios de Whatsapp Baseline    47
 ## 5 Usarios de Whatsapp Baseline    73
 ## 6 Usarios de Whatsapp Baseline    57</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(textMessages)[<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Time&quot;</span>, <span class="st">&quot;Grammar_Score&quot;</span>)
-<span class="kw">head</span>(textMessages)</code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="gráficos.html#cb227-1" tabindex="-1"></a><span class="fu">colnames</span>(textMessages)[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Time&quot;</span>, <span class="st">&quot;Grammar_Score&quot;</span>)</span>
+<span id="cb227-2"><a href="gráficos.html#cb227-2" tabindex="-1"></a><span class="fu">head</span>(textMessages)</span></code></pre></div>
 <pre><code>##                 Group     Time Grammar_Score
 ## 1 Usarios de Whatsapp Baseline            52
 ## 2 Usarios de Whatsapp Baseline            68
@@ -747,8 +838,9 @@ dataSumm</code></pre></div>
 ## 4 Usarios de Whatsapp Baseline            47
 ## 5 Usarios de Whatsapp Baseline            73
 ## 6 Usarios de Whatsapp Baseline            57</code></pre>
-<p>A esta altura podríamos querer cambiar los nombres de las condiciones. También podemos hacer eso.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(textMessages)</code></pre></div>
+<p>A esta altura podríamos querer cambiar los nombres de las condiciones.
+También podemos hacer eso.</p>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="gráficos.html#cb229-1" tabindex="-1"></a><span class="fu">head</span>(textMessages)</span></code></pre></div>
 <pre><code>##                 Group     Time Grammar_Score
 ## 1 Usarios de Whatsapp Baseline            52
 ## 2 Usarios de Whatsapp Baseline            68
@@ -756,8 +848,8 @@ dataSumm</code></pre></div>
 ## 4 Usarios de Whatsapp Baseline            47
 ## 5 Usarios de Whatsapp Baseline            73
 ## 6 Usarios de Whatsapp Baseline            57</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">textMessages<span class="op">$</span>Time &lt;-<span class="st"> </span><span class="kw">factor</span>(textMessages<span class="op">$</span>Time, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Baseline&quot;</span>, <span class="st">&quot;6 Months&quot;</span>))
-<span class="kw">tail</span>(textMessages)</code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="gráficos.html#cb231-1" tabindex="-1"></a>textMessages<span class="sc">$</span>Time <span class="ot">&lt;-</span> <span class="fu">factor</span>(textMessages<span class="sc">$</span>Time, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Baseline&quot;</span>, <span class="st">&quot;6 Months&quot;</span>))</span>
+<span id="cb231-2"><a href="gráficos.html#cb231-2" tabindex="-1"></a><span class="fu">tail</span>(textMessages)</span></code></pre></div>
 <pre><code>##         Group     Time Grammar_Score
 ## 95  Controles 6 Months            78
 ## 96  Controles 6 Months            62
@@ -765,48 +857,55 @@ dataSumm</code></pre></div>
 ## 98  Controles 6 Months            55
 ## 99  Controles 6 Months            46
 ## 100 Controles 6 Months            79</code></pre>
-<p>En esta base de datos tenemos las siguientes variables: Grupo: especifica si estaban en el grupo de mensajes de texto o en el grupo de control. Time: especifica si la puntuación se relaciona con la línea de base o después de 6 meses. Grammar_Score: especifica las puntuaciones de gramática.</p>
+<p>En esta base de datos tenemos las siguientes variables:
+Grupo: especifica si estaban en el grupo de mensajes de texto o en el grupo de control.
+Time: especifica si la puntuación se relaciona con la línea de base o después de 6 meses.
+Grammar_Score: especifica las puntuaciones de gramática.</p>
 <p>Enseguida, Usamos la función <strong>summarySE</strong> para calcular los puntajes de grámatica promedio en función de la condición y el tiempo.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataSumm &lt;-<span class="st"> </span><span class="kw">summarySE</span>(textMessages, <span class="dt">measurevar=</span><span class="st">&quot;Grammar_Score&quot;</span>, <span class="dt">groupvars=</span><span class="kw">c</span>(<span class="st">&quot;Group&quot;</span>, <span class="st">&quot;Time&quot;</span>))
-dataSumm</code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="gráficos.html#cb233-1" tabindex="-1"></a>dataSumm <span class="ot">&lt;-</span> <span class="fu">summarySE</span>(textMessages, <span class="at">measurevar=</span><span class="st">&quot;Grammar_Score&quot;</span>, <span class="at">groupvars=</span><span class="fu">c</span>(<span class="st">&quot;Group&quot;</span>, <span class="st">&quot;Time&quot;</span>))</span>
+<span id="cb233-2"><a href="gráficos.html#cb233-2" tabindex="-1"></a>dataSumm</span></code></pre></div>
 <pre><code>##                 Group     Time  N Grammar_Score        sd       se       ci
 ## 1           Controles Baseline 25         65.60 10.835897 2.167179 4.472839
 ## 2           Controles 6 Months 25         61.84  9.410455 1.882091 3.884445
 ## 3 Usarios de Whatsapp Baseline 25         64.84 10.679732 2.135946 4.408377
 ## 4 Usarios de Whatsapp 6 Months 25         52.96 16.331156 3.266231 6.741170</code></pre>
 <p>Luego graficamos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># En este caso debemos decirle a R que coloree las líneas en función de las condiciones experimentales.</span>
-<span class="kw">ggplot</span>(dataSumm, <span class="kw">aes</span>(<span class="dt">x=</span>Time, <span class="dt">y=</span>Grammar_Score, <span class="dt">colour=</span>Group)) <span class="op">+</span>
-<span class="st">  </span>
-<span class="st">  </span><span class="co"># agregamos las barras de error</span>
-<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>Grammar_Score<span class="op">-</span>se, <span class="dt">ymax=</span>Grammar_Score<span class="op">+</span>se), 
-                <span class="dt">width=</span>.<span class="dv">1</span>, <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.1</span>)) <span class="op">+</span>
-<span class="st">  </span>
-<span class="st">  </span><span class="co"># agregamos las líneas que unen los puntos</span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.1</span>),
-            <span class="kw">aes</span>(<span class="dt">group=</span>Group), <span class="dt">show.legend=</span><span class="ot">FALSE</span>) <span class="op">+</span>
-<span class="st">  </span>
-<span class="st">  </span><span class="co"># agregamos los puntos que indican los promedios</span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.1</span>),
-             <span class="kw">aes</span>(<span class="dt">group=</span>Group), <span class="dt">show.legend=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="op">+</span>
-<span class="st">  </span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Mean Grammar Score&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_colour_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">45</span>, <span class="dv">70</span>))</code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="gráficos.html#cb235-1" tabindex="-1"></a><span class="co"># En este caso debemos decirle a R que coloree las líneas en función de las condiciones experimentales.</span></span>
+<span id="cb235-2"><a href="gráficos.html#cb235-2" tabindex="-1"></a><span class="fu">ggplot</span>(dataSumm, <span class="fu">aes</span>(<span class="at">x=</span>Time, <span class="at">y=</span>Grammar_Score, <span class="at">colour=</span>Group)) <span class="sc">+</span></span>
+<span id="cb235-3"><a href="gráficos.html#cb235-3" tabindex="-1"></a>  </span>
+<span id="cb235-4"><a href="gráficos.html#cb235-4" tabindex="-1"></a>  <span class="co"># agregamos las barras de error</span></span>
+<span id="cb235-5"><a href="gráficos.html#cb235-5" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>Grammar_Score<span class="sc">-</span>se, <span class="at">ymax=</span>Grammar_Score<span class="sc">+</span>se), </span>
+<span id="cb235-6"><a href="gráficos.html#cb235-6" tabindex="-1"></a>                <span class="at">width=</span>.<span class="dv">1</span>, <span class="at">position=</span><span class="fu">position_dodge</span>(<span class="fl">0.1</span>)) <span class="sc">+</span></span>
+<span id="cb235-7"><a href="gráficos.html#cb235-7" tabindex="-1"></a>  </span>
+<span id="cb235-8"><a href="gráficos.html#cb235-8" tabindex="-1"></a>  <span class="co"># agregamos las líneas que unen los puntos</span></span>
+<span id="cb235-9"><a href="gráficos.html#cb235-9" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">position=</span><span class="fu">position_dodge</span>(<span class="fl">0.1</span>),</span>
+<span id="cb235-10"><a href="gráficos.html#cb235-10" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">group=</span>Group), <span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb235-11"><a href="gráficos.html#cb235-11" tabindex="-1"></a>  </span>
+<span id="cb235-12"><a href="gráficos.html#cb235-12" tabindex="-1"></a>  <span class="co"># agregamos los puntos que indican los promedios</span></span>
+<span id="cb235-13"><a href="gráficos.html#cb235-13" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span><span class="fu">position_dodge</span>(<span class="fl">0.1</span>),</span>
+<span id="cb235-14"><a href="gráficos.html#cb235-14" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">group=</span>Group), <span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb235-15"><a href="gráficos.html#cb235-15" tabindex="-1"></a>  </span>
+<span id="cb235-16"><a href="gráficos.html#cb235-16" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb235-17"><a href="gráficos.html#cb235-17" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb235-18"><a href="gráficos.html#cb235-18" tabindex="-1"></a>  </span>
+<span id="cb235-19"><a href="gráficos.html#cb235-19" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Mean Grammar Score&quot;</span>) <span class="sc">+</span></span>
+<span id="cb235-20"><a href="gráficos.html#cb235-20" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb235-21"><a href="gráficos.html#cb235-21" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">70</span>))</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-104-1.png" width="672" /></p>
 </div>
-<div id="guardar-una-figura" class="section level2">
+<div id="guardar-una-figura" class="section level2" number="4.9">
 <h2><span class="header-section-number">4.9</span> Guardar una figura</h2>
-<p>Para guardar una figura se puede usar la interfaz gráfica de RStudio, pero es aún mas útil si lo podemos hacer de manera automática. Para ello bastan dos líneas de comando. Imagina si hubieramos querido guardar la primera figura que hicimos. Antes de pedirle a R que cree el gráfico agregamos una línea de código para usar la función <strong>png</strong>. En esta función indicamos el nombre que el queremos dar al archivo (incluimos la exentsión) y luego definimos el tamaño y la calidad de la imagen. Luego del código propio de la gráfico debemos agregar <em>dev.off()</em> para que R seap que estamos Ok con la imagen. El archivo se guardará en directorio actual que se este usando.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">png</span>(<span class="st">&quot;fig_ejemplo_1.png&quot;</span>, <span class="dt">width =</span> <span class="dv">500</span>, <span class="dt">height =</span> <span class="dv">500</span>, <span class="dt">res =</span> <span class="dv">100</span>)
-
-graph &lt;-<span class="st"> </span><span class="kw">ggplot</span>(facebookData, <span class="kw">aes</span>(NPQC_R_Total, Rating))
-graph <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()
-
-<span class="kw">dev.off</span>()</code></pre></div>
+<p>Para guardar una figura se puede usar la interfaz gráfica de RStudio, pero es aún mas útil si lo podemos hacer de manera automática. Para ello bastan dos líneas de comando.
+Imagina si hubieramos querido guardar la primera figura que hicimos.
+Antes de pedirle a R que cree el gráfico agregamos una línea de código para usar la función <strong>png</strong>.
+En esta función indicamos el nombre que el queremos dar al archivo (incluimos la exentsión) y luego definimos el tamaño y la calidad de la imagen. Luego del código propio de la gráfico debemos agregar <em>dev.off()</em> para que R seap que estamos Ok con la imagen.
+El archivo se guardará en directorio actual que se este usando.</p>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="gráficos.html#cb236-1" tabindex="-1"></a><span class="fu">png</span>(<span class="st">&quot;fig_ejemplo_1.png&quot;</span>, <span class="at">width =</span> <span class="dv">500</span>, <span class="at">height =</span> <span class="dv">500</span>, <span class="at">res =</span> <span class="dv">100</span>)</span>
+<span id="cb236-2"><a href="gráficos.html#cb236-2" tabindex="-1"></a></span>
+<span id="cb236-3"><a href="gráficos.html#cb236-3" tabindex="-1"></a>graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(facebookData, <span class="fu">aes</span>(NPQC_R_Total, Rating))</span>
+<span id="cb236-4"><a href="gráficos.html#cb236-4" tabindex="-1"></a>graph <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb236-5"><a href="gráficos.html#cb236-5" tabindex="-1"></a></span>
+<span id="cb236-6"><a href="gráficos.html#cb236-6" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
 <pre><code>## png 
 ##   2</code></pre>
 

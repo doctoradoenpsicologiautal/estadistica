@@ -321,7 +321,7 @@ Para importar datos puedes usar distintas funciones.
 Por ejemplo, para importar datos de tipo .txt debemos usar la función **read.delim**
 
 ```{r}
-setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+setwd(Sys.getenv("BOOKDOWN_PROJECT_PATH"))
 dat <- read.delim(file = "data/facebook_friends_1.txt")
 dat
 ```
@@ -333,7 +333,7 @@ Es decir, el parámetro llamado "header" esta fijado en "TRUE"", que significa q
 Para corregir esto debes explícitamente decirle a R que no hay header, así:
 
 ```{r}
-setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+setwd(Sys.getenv("BOOKDOWN_PROJECT_PATH"))
 dat <- read.delim(file = "data/facebook_friends_1.txt", header = FALSE)
 dat
 ```
@@ -351,7 +351,7 @@ Cuando tus datos ya tienen un encabezado te ahorras estos problemas.
 Fjate que para importar este otro archivo no necesitas definir que el header a FALSE.
 
 ```{r}
-setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+setwd(Sys.getenv("BOOKDOWN_PROJECT_PATH"))
 dat <- read.delim(file = "data/facebook_friends_2.txt")
 dat
 ```
@@ -360,7 +360,7 @@ Típicamente vas a importar que has registrado en archivos de tipo Excel (.xls o
 El archivo Excel se puede transformar en un archivo de tipo csv. Este arhivo csv se importa de la siguiente manera:
 
 ```{r}
-setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+setwd(Sys.getenv("BOOKDOWN_PROJECT_PATH"))
 dat2 <- read.csv("data/facebook_friends_1.csv", header = FALSE)
 dat2
 ```
@@ -378,9 +378,7 @@ Trata de importar algún archivo csv a tu sesión de R.
 
 Un truco en RStudio para trabajar rápidamente con los archivos que uno tiene en la misma carpeta es usar la siguiente línea de comando. De esta manera se setea el path al lugar dónde está el script.
 
-```{r}
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
-```
 
 ## Seleccionar datos
 
@@ -389,7 +387,7 @@ Uno de los aspectos fundamentales de esta manipulación es la selección de dato
 Primero, importemos alguna base de datos.
 
 ```{r}
-setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+setwd(Sys.getenv("BOOKDOWN_PROJECT_PATH"))
 lecturerDat <- read.csv("data/lecturer_data.csv")
 lecturerDat
 ```
@@ -440,7 +438,7 @@ Otro aspecto muy importante que debes entender es como transformar de un formato
 En R hay dos formatos típicos. Cuando hay múltiples mediciones de un mismo sujeto, por ejemplo, a lo largo del tiempo o cuando se realizan distintas mediciones los datos a menudo se anotan en formato *wide*. En un formato *wide* la data frame contiene valores que no se repiten en la primera columna. En un formato *long* la data frame contiene valores que se repiten en la primera columna. Por ejemplo, importemos un set de datos que está en formato *wide*:
 
 ```{r}
-setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+setwd(Sys.getenv("BOOKDOWN_PROJECT_PATH"))
 satisfactionData <-  read.csv("data/Honeymoon_Period.csv")
 head(satisfactionData)
 ```
@@ -553,7 +551,7 @@ write.csv(lightAlcoholics, "datoExportado.csv")
 Veamos que información podemos sacar de datos que importamos.
 
 ```{r}
-setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Estadistica_Bookdown/estadistica")
+setwd(Sys.getenv("BOOKDOWN_PROJECT_PATH"))
 
 library(ggplot2)
 ```
@@ -594,8 +592,8 @@ dat <- read.csv("data/demografia_salud.csv", header = TRUE) # load data
 table(dat$Sexo)
 table(dat$Estado.Civil)
 
-mean(dat$Número.de.hijos)
-sd(dat$Número.de.hijos)
+mean(dat$Numero.de.hijos)
+sd(dat$Numero.de.hijos)
 ```
 
 ```{r}
@@ -610,8 +608,8 @@ aggregate(Altura ~ Sexo, data = dat, sd)
 ```
 
 ```{r}
-dat$PA.Min <- dat$Pr.Arter.Máx
-dat$PA.Max <- dat$Pr.Arter.Mín
+dat$PA.Min <- dat$Pr.Arter.Max
+dat$PA.Max <- dat$Pr.Arter.Min
 
 aggregate(PA.Max ~ Estado.Civil, data = dat, mean)
 aggregate(PA.Max ~ Estado.Civil, data = dat, sd)
