@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2024-04-04" />
+<meta name="date" content="2024-11-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,7 +53,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -300,23 +300,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="cálculos-con-r" class="section level2" number="9.3">
 <h2><span class="header-section-number">9.3</span> Cálculos con R</h2>
 <p>Ahora vamos a hacer el análisis. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).</p>
-<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="después-del-anova.html#cb444-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
-<span id="cb444-2"><a href="después-del-anova.html#cb444-2" tabindex="-1"></a></span>
-<span id="cb444-3"><a href="después-del-anova.html#cb444-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb444-4"><a href="después-del-anova.html#cb444-4" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
-<span id="cb444-5"><a href="después-del-anova.html#cb444-5" tabindex="-1"></a><span class="fu">library</span>(Rmisc)</span>
-<span id="cb444-6"><a href="después-del-anova.html#cb444-6" tabindex="-1"></a><span class="fu">library</span>(effsize)</span>
-<span id="cb444-7"><a href="después-del-anova.html#cb444-7" tabindex="-1"></a><span class="fu">library</span>(pastecs)</span>
-<span id="cb444-8"><a href="después-del-anova.html#cb444-8" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
-<span id="cb444-9"><a href="después-del-anova.html#cb444-9" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb444-10"><a href="después-del-anova.html#cb444-10" tabindex="-1"></a><span class="fu">library</span>(effsize)</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="después-del-anova.html#cb392-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
+<span id="cb392-2"><a href="después-del-anova.html#cb392-2" tabindex="-1"></a></span>
+<span id="cb392-3"><a href="después-del-anova.html#cb392-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb392-4"><a href="después-del-anova.html#cb392-4" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
+<span id="cb392-5"><a href="después-del-anova.html#cb392-5" tabindex="-1"></a><span class="fu">library</span>(Rmisc)</span>
+<span id="cb392-6"><a href="después-del-anova.html#cb392-6" tabindex="-1"></a><span class="fu">library</span>(effsize)</span>
+<span id="cb392-7"><a href="después-del-anova.html#cb392-7" tabindex="-1"></a><span class="fu">library</span>(pastecs)</span>
+<span id="cb392-8"><a href="después-del-anova.html#cb392-8" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb392-9"><a href="después-del-anova.html#cb392-9" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb392-10"><a href="después-del-anova.html#cb392-10" tabindex="-1"></a><span class="fu">library</span>(effsize)</span></code></pre></div>
 <p>Primero, vamos a revisar el código para realizar los contrastes planificados.
 Recuerda que se utiliza un dummy coding en un modelo de regresión para que los valores b representen las diferencias entre los promedios de los contrastes que se quieren evaluar.</p>
 <p>Importamos el set de datos. Aprovechamos de agregar unas etiquetas que nos sirvan a visualizar las condiciones experimentales. Y le damos una mirada.</p>
-<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="después-del-anova.html#cb445-1" tabindex="-1"></a>contrastData <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/inteligencia_c_Contrast_Planif.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb445-2"><a href="después-del-anova.html#cb445-2" tabindex="-1"></a>contrastData<span class="sc">$</span>Dosis <span class="ot">&lt;-</span> <span class="fu">factor</span>(contrastData<span class="sc">$</span>Dosis, </span>
-<span id="cb445-3"><a href="después-del-anova.html#cb445-3" tabindex="-1"></a>                             <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))</span>
-<span id="cb445-4"><a href="después-del-anova.html#cb445-4" tabindex="-1"></a>contrastData</span></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="después-del-anova.html#cb393-1" tabindex="-1"></a>contrastData <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/inteligencia_c_Contrast_Planif.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb393-2"><a href="después-del-anova.html#cb393-2" tabindex="-1"></a>contrastData<span class="sc">$</span>Dosis <span class="ot">&lt;-</span> <span class="fu">factor</span>(contrastData<span class="sc">$</span>Dosis, </span>
+<span id="cb393-3"><a href="después-del-anova.html#cb393-3" tabindex="-1"></a>                             <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))</span>
+<span id="cb393-4"><a href="después-del-anova.html#cb393-4" tabindex="-1"></a>contrastData</span></code></pre></div>
 <pre><code>##      Dosis Inteligencia Compars1 Compars2
 ## 1  Placebo            3       -2        0
 ## 2  Placebo            2       -2        0
@@ -336,8 +336,8 @@ Recuerda que se utiliza un dummy coding en un modelo de regresión para que los 
 <p>Usemos las columnas que corresponden a las variables dummy.
 Compars1 refleja la diferencia para los niveles de inteligencia entre el placebo y cualquier dosis de droga (en realidad el promedio de ambas).
 Compars2 refleja la diferencia para los niveles de inteligencia entre la dosis baja y la dosis alta.</p>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="después-del-anova.html#cb447-1" tabindex="-1"></a>m_contrastedAOV <span class="ot">&lt;-</span> <span class="fu">lm</span>(Inteligencia <span class="sc">~</span> Compars1 <span class="sc">+</span> Compars2, <span class="at">data =</span> contrastData)</span>
-<span id="cb447-2"><a href="después-del-anova.html#cb447-2" tabindex="-1"></a><span class="fu">summary</span>(m_contrastedAOV)</span></code></pre></div>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="después-del-anova.html#cb395-1" tabindex="-1"></a>m_contrastedAOV <span class="ot">&lt;-</span> <span class="fu">lm</span>(Inteligencia <span class="sc">~</span> Compars1 <span class="sc">+</span> Compars2, <span class="at">data =</span> contrastData)</span>
+<span id="cb395-2"><a href="después-del-anova.html#cb395-2" tabindex="-1"></a><span class="fu">summary</span>(m_contrastedAOV)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Inteligencia ~ Compars1 + Compars2, data = contrastData)
@@ -359,43 +359,41 @@ Compars2 refleja la diferencia para los niveles de inteligencia entre la dosis b
 ## F-statistic: 5.119 on 2 and 12 DF,  p-value: 0.02469</code></pre>
 <p>¿Qué nos dice este modelo? El F es el mismo. Lo que cambia son los coeficientes de regresión.
 Primero. El intercepto es el gran promedio (3.467). Verifiquemos.</p>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="después-del-anova.html#cb449-1" tabindex="-1"></a><span class="co"># promedio a través de todas las condiciones</span></span>
-<span id="cb449-2"><a href="después-del-anova.html#cb449-2" tabindex="-1"></a><span class="fu">mean</span>(contrastData<span class="sc">$</span>Inteligencia)</span></code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="después-del-anova.html#cb397-1" tabindex="-1"></a><span class="co"># promedio a través de todas las condiciones</span></span>
+<span id="cb397-2"><a href="después-del-anova.html#cb397-2" tabindex="-1"></a><span class="fu">mean</span>(contrastData<span class="sc">$</span>Inteligencia)</span></code></pre></div>
 <pre><code>## [1] 3.466667</code></pre>
-<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="después-del-anova.html#cb451-1" tabindex="-1"></a><span class="co"># promedio a través de todas las condiciones experimentales</span></span>
-<span id="cb451-2"><a href="después-del-anova.html#cb451-2" tabindex="-1"></a>varX <span class="ot">&lt;-</span> contrastData[contrastData<span class="sc">$</span>Dosis <span class="sc">!=</span> <span class="st">&quot;Placebo&quot;</span>,]</span>
-<span id="cb451-3"><a href="después-del-anova.html#cb451-3" tabindex="-1"></a><span class="fu">mean</span>(varX<span class="sc">$</span>Inteligencia)</span></code></pre></div>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="después-del-anova.html#cb399-1" tabindex="-1"></a><span class="co"># promedio a través de todas las condiciones experimentales</span></span>
+<span id="cb399-2"><a href="después-del-anova.html#cb399-2" tabindex="-1"></a>varX <span class="ot">&lt;-</span> contrastData[contrastData<span class="sc">$</span>Dosis <span class="sc">!=</span> <span class="st">&quot;Placebo&quot;</span>,]</span>
+<span id="cb399-3"><a href="después-del-anova.html#cb399-3" tabindex="-1"></a><span class="fu">mean</span>(varX<span class="sc">$</span>Inteligencia)</span></code></pre></div>
 <pre><code>## [1] 4.1</code></pre>
 <p>El contraste 1 (o b1) refleja la diferencia en los niveles de inteligencia entre la aplicación de la droga y el placebo. El coeficiente de regresión (0.63) para el contraste 1 es 1/3 de esta diferencia (1.9/3 = 0.633). El FWE se controla haciendo que el coeficiente de regresión sea igual a la diferencia real dividida por el número de grupos en el contraste (en este caso 3).</p>
 <p>El contraste 2 (o b2) refleja la diferencia en los niveles de inteligencia entre la aplicación de una dosis alta droga y una dosis baja de droga. El coeficiente de regresión (0.9) para el contraste 1 es 1/2 de esta diferencia (1.8/2 = 0.9). El FWE se controla haciendo que el coeficiente de regresión sea igual a la diferencia real dividida por el número de grupos en el contraste (en este caso 3).</p>
 <p>Uno podría pensar que siempre hay que crear las dos columnas del dummy coding en los datos. En realidad eso se puede hacer en R.</p>
 <p>Importemos los datos originales.</p>
-<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="después-del-anova.html#cb453-1" tabindex="-1"></a>inteligData2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/inteligencia.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb453-2"><a href="después-del-anova.html#cb453-2" tabindex="-1"></a>inteligData2<span class="sc">$</span>Dosis <span class="ot">&lt;-</span> <span class="fu">factor</span>(inteligData2<span class="sc">$</span>Dosis, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>),</span>
-<span id="cb453-3"><a href="después-del-anova.html#cb453-3" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="después-del-anova.html#cb401-1" tabindex="-1"></a>inteligData2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/inteligencia.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb401-2"><a href="después-del-anova.html#cb401-2" tabindex="-1"></a>inteligData2<span class="sc">$</span>Dosis <span class="ot">&lt;-</span> <span class="fu">factor</span>(inteligData2<span class="sc">$</span>Dosis, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>),</span>
+<span id="cb401-3"><a href="después-del-anova.html#cb401-3" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))</span></code></pre></div>
 <p>Si revisas los valores de dosis encontrarás que tienen los nombres correspondientes a las condiciones experimentales, y al final veras que tiene 3 niveles: Placebo, Baja y Alta</p>
-<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="después-del-anova.html#cb454-1" tabindex="-1"></a>inteligData2<span class="sc">$</span>Dosis</span></code></pre></div>
-<pre><code>##  [1] Placebo Placebo Placebo Placebo Placebo Baja    Baja    Baja    Baja    Baja    Alta    Alta    Alta    Alta   
-## [15] Alta   
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="después-del-anova.html#cb402-1" tabindex="-1"></a>inteligData2<span class="sc">$</span>Dosis</span></code></pre></div>
+<pre><code>##  [1] Placebo Placebo Placebo Placebo Placebo Baja    Baja    Baja    Baja    Baja    Alta    Alta    Alta    Alta    Alta   
 ## Levels: Placebo Baja Alta</code></pre>
 <p>Por defecto R toma el primer grupo base y crea dos variables dummy que se comparan con ese grupo base. Puedes mirar estos contrastes con la función <strong>contrasts</strong>.</p>
-<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="después-del-anova.html#cb456-1" tabindex="-1"></a><span class="fu">contrasts</span>(inteligData2<span class="sc">$</span>Dosis)</span></code></pre></div>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="después-del-anova.html#cb404-1" tabindex="-1"></a><span class="fu">contrasts</span>(inteligData2<span class="sc">$</span>Dosis)</span></code></pre></div>
 <pre><code>##         Baja Alta
 ## Placebo    0    0
 ## Baja       1    0
 ## Alta       0    1</code></pre>
 <p>Pero, tu puedes crear manualmente contrastes específicos. Por ejemplo, con la función <strong>contr.treatment</strong> puedes crear 2 variables dummy (a partir de 3 condiciones exprimentales) dónde decidas que el grupo base es el segundo.</p>
-<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="después-del-anova.html#cb458-1" tabindex="-1"></a><span class="fu">contr.treatment</span>(<span class="dv">3</span>, <span class="at">base =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="después-del-anova.html#cb406-1" tabindex="-1"></a><span class="fu">contr.treatment</span>(<span class="dv">3</span>, <span class="at">base =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##   1 3
 ## 1 1 0
 ## 2 0 0
 ## 3 0 1</code></pre>
 <p>Luego para que estos contraste surgan efecto lo inyectas como contrastes</p>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="después-del-anova.html#cb460-1" tabindex="-1"></a><span class="fu">contrasts</span>(inteligData2<span class="sc">$</span>Dosis) <span class="ot">&lt;-</span> <span class="fu">contr.treatment</span>(<span class="dv">3</span>, <span class="at">base =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="después-del-anova.html#cb408-1" tabindex="-1"></a><span class="fu">contrasts</span>(inteligData2<span class="sc">$</span>Dosis) <span class="ot">&lt;-</span> <span class="fu">contr.treatment</span>(<span class="dv">3</span>, <span class="at">base =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p>Luego verificas como quedaron los contrastes.</p>
-<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="después-del-anova.html#cb461-1" tabindex="-1"></a>inteligData2<span class="sc">$</span>Dosis</span></code></pre></div>
-<pre><code>##  [1] Placebo Placebo Placebo Placebo Placebo Baja    Baja    Baja    Baja    Baja    Alta    Alta    Alta    Alta   
-## [15] Alta   
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="después-del-anova.html#cb409-1" tabindex="-1"></a>inteligData2<span class="sc">$</span>Dosis</span></code></pre></div>
+<pre><code>##  [1] Placebo Placebo Placebo Placebo Placebo Baja    Baja    Baja    Baja    Baja    Alta    Alta    Alta    Alta    Alta   
 ## attr(,&quot;contrasts&quot;)
 ##         1 3
 ## Placebo 1 0
@@ -403,8 +401,8 @@ Primero. El intercepto es el gran promedio (3.467). Verifiquemos.</p>
 ## Alta    0 1
 ## Levels: Placebo Baja Alta</code></pre>
 <p>Y finalmente realizas el ANOVA nuevamente.</p>
-<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="después-del-anova.html#cb463-1" tabindex="-1"></a>m_AOV3 <span class="ot">&lt;-</span> <span class="fu">aov</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> inteligData2)</span>
-<span id="cb463-2"><a href="después-del-anova.html#cb463-2" tabindex="-1"></a><span class="fu">summary.lm</span>(m_AOV3)</span></code></pre></div>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="después-del-anova.html#cb411-1" tabindex="-1"></a>m_AOV3 <span class="ot">&lt;-</span> <span class="fu">aov</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> inteligData2)</span>
+<span id="cb411-2"><a href="después-del-anova.html#cb411-2" tabindex="-1"></a><span class="fu">summary.lm</span>(m_AOV3)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## aov(formula = Inteligencia ~ Dosis, data = inteligData2)
@@ -428,15 +426,14 @@ Primero. El intercepto es el gran promedio (3.467). Verifiquemos.</p>
 <p>Ahora, en R hay ciertos contrastes que ya están preparados. Uno de ellos es el contraste Helmert.
 Trata de entender que contrastes se hacen en este caso.
 Igual que antes creas el contraste lo inyectas en la base de datos y verificas.</p>
-<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="después-del-anova.html#cb465-1" tabindex="-1"></a><span class="fu">contr.helmert</span>(<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="después-del-anova.html#cb413-1" tabindex="-1"></a><span class="fu">contr.helmert</span>(<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##   [,1] [,2]
 ## 1   -1   -1
 ## 2    1   -1
 ## 3    0    2</code></pre>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="después-del-anova.html#cb467-1" tabindex="-1"></a><span class="fu">contrasts</span>(inteligData2<span class="sc">$</span>Dosis) <span class="ot">&lt;-</span> <span class="fu">contr.helmert</span>(<span class="dv">3</span>)</span>
-<span id="cb467-2"><a href="después-del-anova.html#cb467-2" tabindex="-1"></a>inteligData2<span class="sc">$</span>Dosis</span></code></pre></div>
-<pre><code>##  [1] Placebo Placebo Placebo Placebo Placebo Baja    Baja    Baja    Baja    Baja    Alta    Alta    Alta    Alta   
-## [15] Alta   
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="después-del-anova.html#cb415-1" tabindex="-1"></a><span class="fu">contrasts</span>(inteligData2<span class="sc">$</span>Dosis) <span class="ot">&lt;-</span> <span class="fu">contr.helmert</span>(<span class="dv">3</span>)</span>
+<span id="cb415-2"><a href="después-del-anova.html#cb415-2" tabindex="-1"></a>inteligData2<span class="sc">$</span>Dosis</span></code></pre></div>
+<pre><code>##  [1] Placebo Placebo Placebo Placebo Placebo Baja    Baja    Baja    Baja    Baja    Alta    Alta    Alta    Alta    Alta   
 ## attr(,&quot;contrasts&quot;)
 ##         [,1] [,2]
 ## Placebo   -1   -1
@@ -444,8 +441,8 @@ Igual que antes creas el contraste lo inyectas en la base de datos y verificas.<
 ## Alta       0    2
 ## Levels: Placebo Baja Alta</code></pre>
 <p>Luego calculas el ANOVA nuevamente.</p>
-<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="después-del-anova.html#cb469-1" tabindex="-1"></a>m_AOV4 <span class="ot">&lt;-</span> <span class="fu">aov</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> inteligData2)</span>
-<span id="cb469-2"><a href="después-del-anova.html#cb469-2" tabindex="-1"></a><span class="fu">summary.lm</span>(m_AOV4)</span></code></pre></div>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="después-del-anova.html#cb417-1" tabindex="-1"></a>m_AOV4 <span class="ot">&lt;-</span> <span class="fu">aov</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> inteligData2)</span>
+<span id="cb417-2"><a href="después-del-anova.html#cb417-2" tabindex="-1"></a><span class="fu">summary.lm</span>(m_AOV4)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## aov(formula = Inteligencia ~ Dosis, data = inteligData2)
@@ -470,13 +467,13 @@ Para ello, te recomiendo darles nombres que te permitan entender esos contrastes
 Por ejemplo, siguiendo nuestro ejemplo anterior podríamos tener dos hipótesis específicas.
 Primero, comparamos el efecto del tratamiento de la droga versus el grupo placebo.
 Para ello concatenamos -2, 1 y 1, que corresponden respectivamente a Placebo, Low y High.</p>
-<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="después-del-anova.html#cb471-1" tabindex="-1"></a>C_vs_Treatment <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="después-del-anova.html#cb419-1" tabindex="-1"></a>C_vs_Treatment <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span></code></pre></div>
 <p>Segundo, comparamos el efecto del dosis alta versus la dsis baja. Para ello concatenamos 0, -1 y 1, que corresponden respectivamente a Placebo, Low y High.</p>
-<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="después-del-anova.html#cb472-1" tabindex="-1"></a>Low_vs_High <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="después-del-anova.html#cb420-1" tabindex="-1"></a>Low_vs_High <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)</span></code></pre></div>
 <p>Luego ponemos los dos contrastes en la base de datos y calculamos un nuevo ANOVA.</p>
-<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="después-del-anova.html#cb473-1" tabindex="-1"></a><span class="fu">contrasts</span>(inteligData2<span class="sc">$</span>Dosis) <span class="ot">&lt;-</span> <span class="fu">cbind</span>(C_vs_Treatment, Low_vs_High)</span>
-<span id="cb473-2"><a href="después-del-anova.html#cb473-2" tabindex="-1"></a>m_AOV4 <span class="ot">&lt;-</span> <span class="fu">aov</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> inteligData2)</span>
-<span id="cb473-3"><a href="después-del-anova.html#cb473-3" tabindex="-1"></a><span class="fu">summary.lm</span>(m_AOV4)</span></code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="después-del-anova.html#cb421-1" tabindex="-1"></a><span class="fu">contrasts</span>(inteligData2<span class="sc">$</span>Dosis) <span class="ot">&lt;-</span> <span class="fu">cbind</span>(C_vs_Treatment, Low_vs_High)</span>
+<span id="cb421-2"><a href="después-del-anova.html#cb421-2" tabindex="-1"></a>m_AOV4 <span class="ot">&lt;-</span> <span class="fu">aov</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> inteligData2)</span>
+<span id="cb421-3"><a href="después-del-anova.html#cb421-3" tabindex="-1"></a><span class="fu">summary.lm</span>(m_AOV4)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## aov(formula = Inteligencia ~ Dosis, data = inteligData2)
@@ -500,20 +497,20 @@ Para ello concatenamos -2, 1 y 1, que corresponden respectivamente a Placebo, Lo
 <p>Por último, algo que también podriamos hacer es un análisis de tendencia líneal.
 Si pensamos en los efectos de las drogas (vean el gráfico arriba) esperaríamos que a medida que aumenta la dosis aumentará su efecto de manera lineal.
 Para ello podemos crear un contraste que de cuenta de este efecto lineal. Para ello usamos la función <strong>contr.poly</strong> y lo inyectamos en la base de datos.</p>
-<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="después-del-anova.html#cb475-1" tabindex="-1"></a><span class="fu">contr.poly</span>(<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="después-del-anova.html#cb423-1" tabindex="-1"></a><span class="fu">contr.poly</span>(<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##                 .L         .Q
 ## [1,] -7.071068e-01  0.4082483
 ## [2,] -7.850462e-17 -0.8164966
 ## [3,]  7.071068e-01  0.4082483</code></pre>
-<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="después-del-anova.html#cb477-1" tabindex="-1"></a><span class="fu">contrasts</span>(inteligData2<span class="sc">$</span>Dosis) <span class="ot">&lt;-</span> <span class="fu">contr.poly</span>(<span class="dv">3</span>)</span>
-<span id="cb477-2"><a href="después-del-anova.html#cb477-2" tabindex="-1"></a><span class="fu">contrasts</span>(inteligData2<span class="sc">$</span>Dosis)</span></code></pre></div>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="después-del-anova.html#cb425-1" tabindex="-1"></a><span class="fu">contrasts</span>(inteligData2<span class="sc">$</span>Dosis) <span class="ot">&lt;-</span> <span class="fu">contr.poly</span>(<span class="dv">3</span>)</span>
+<span id="cb425-2"><a href="después-del-anova.html#cb425-2" tabindex="-1"></a><span class="fu">contrasts</span>(inteligData2<span class="sc">$</span>Dosis)</span></code></pre></div>
 <pre><code>##                    .L         .Q
 ## Placebo -7.071068e-01  0.4082483
 ## Baja    -7.850462e-17 -0.8164966
 ## Alta     7.071068e-01  0.4082483</code></pre>
 <p>Finalmente, calculamos el ANOVA nuevamente</p>
-<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="después-del-anova.html#cb479-1" tabindex="-1"></a>trend_M <span class="ot">&lt;-</span> <span class="fu">aov</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> inteligData2)</span>
-<span id="cb479-2"><a href="después-del-anova.html#cb479-2" tabindex="-1"></a><span class="fu">summary.lm</span>(trend_M)</span></code></pre></div>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="después-del-anova.html#cb427-1" tabindex="-1"></a>trend_M <span class="ot">&lt;-</span> <span class="fu">aov</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> inteligData2)</span>
+<span id="cb427-2"><a href="después-del-anova.html#cb427-2" tabindex="-1"></a><span class="fu">summary.lm</span>(trend_M)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## aov(formula = Inteligencia ~ Dosis, data = inteligData2)
@@ -549,12 +546,12 @@ Para ello podemos crear un contraste que de cuenta de este efecto lineal. Para e
 <h2><span class="header-section-number">9.5</span> Cálculos con R</h2>
 <p>Ahora vamos a revisar el código para realizar las pruebas post-hoc.</p>
 <p>Usemos el set de datos originales. Aprovechamos de agregar unas etiquetas que nos sirvan a visualizar las condiciones experimentales. Y le damos una mirada.</p>
-<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="después-del-anova.html#cb481-1" tabindex="-1"></a>dat1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/inteligencia.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb481-2"><a href="después-del-anova.html#cb481-2" tabindex="-1"></a>dat1<span class="sc">$</span>Dosis <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat1<span class="sc">$</span>Dosis, </span>
-<span id="cb481-3"><a href="después-del-anova.html#cb481-3" tabindex="-1"></a>                            <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="después-del-anova.html#cb429-1" tabindex="-1"></a>dat1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/inteligencia.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb429-2"><a href="después-del-anova.html#cb429-2" tabindex="-1"></a>dat1<span class="sc">$</span>Dosis <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat1<span class="sc">$</span>Dosis, </span>
+<span id="cb429-3"><a href="después-del-anova.html#cb429-3" tabindex="-1"></a>                            <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))</span></code></pre></div>
 <p>En las pruebas post-hoc comparamos todo con todo. Para ello usamos la función <strong>pairwise.t.test</strong>. Pero, además podemos aplicar una corrección (en el parámetro <em>p.adjust.method</em>) para lidiar con el error de tipo 1.</p>
 <p>Veamos que pasa cuando no agregamos ninguna corrección.</p>
-<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="después-del-anova.html#cb482-1" tabindex="-1"></a><span class="fu">pairwise.t.test</span>(dat1<span class="sc">$</span>Inteligencia, dat1<span class="sc">$</span>Dosis, <span class="at">p.adjust.method =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="después-del-anova.html#cb430-1" tabindex="-1"></a><span class="fu">pairwise.t.test</span>(dat1<span class="sc">$</span>Inteligencia, dat1<span class="sc">$</span>Dosis, <span class="at">p.adjust.method =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Pairwise comparisons using t tests with pooled SD 
 ## 
@@ -566,7 +563,7 @@ Para ello podemos crear un contraste que de cuenta de este efecto lineal. Para e
 ## 
 ## P value adjustment method: none</code></pre>
 <p>Veamos que pasa cuando usamos una corrección de Bonferroni.</p>
-<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="después-del-anova.html#cb484-1" tabindex="-1"></a><span class="fu">pairwise.t.test</span>(dat1<span class="sc">$</span>Inteligencia, dat1<span class="sc">$</span>Dosis, <span class="at">p.adjust.method =</span> <span class="st">&quot;bonferroni&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="después-del-anova.html#cb432-1" tabindex="-1"></a><span class="fu">pairwise.t.test</span>(dat1<span class="sc">$</span>Inteligencia, dat1<span class="sc">$</span>Dosis, <span class="at">p.adjust.method =</span> <span class="st">&quot;bonferroni&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Pairwise comparisons using t tests with pooled SD 
 ## 
@@ -578,7 +575,7 @@ Para ello podemos crear un contraste que de cuenta de este efecto lineal. Para e
 ## 
 ## P value adjustment method: bonferroni</code></pre>
 <p>Veamos que pasa cuando usamos una corrección de Benjamini-Hochberg.</p>
-<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="después-del-anova.html#cb486-1" tabindex="-1"></a><span class="fu">pairwise.t.test</span>(dat1<span class="sc">$</span>Inteligencia, dat1<span class="sc">$</span>Dosis, <span class="at">p.adjust.method =</span> <span class="st">&quot;BH&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="después-del-anova.html#cb434-1" tabindex="-1"></a><span class="fu">pairwise.t.test</span>(dat1<span class="sc">$</span>Inteligencia, dat1<span class="sc">$</span>Dosis, <span class="at">p.adjust.method =</span> <span class="st">&quot;BH&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Pairwise comparisons using t tests with pooled SD 
 ## 

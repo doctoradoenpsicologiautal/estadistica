@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2024-04-04" />
+<meta name="date" content="2024-11-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,7 +53,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -363,39 +363,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Para verificar estas suposiciones se pueden realizar gráficos (histogramas o diagramas de dispersión) y pruebas estadísticas (la prueba de normalidad de Shapiro-Wilk o la prueba de Levene para varianzas iguales).</p>
 <p>Ahora vamos a hacer estos análisis. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas). Luego importamos el set de datos y le damos una mirada.</p>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="caracterizar-datos.html#cb238-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
-<span id="cb238-2"><a href="caracterizar-datos.html#cb238-2" tabindex="-1"></a></span>
-<span id="cb238-3"><a href="caracterizar-datos.html#cb238-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb238-4"><a href="caracterizar-datos.html#cb238-4" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span></code></pre></div>
-<pre><code>## Warning: package &#39;Hmisc&#39; was built under R version 4.3.3</code></pre>
-<pre><code>## 
-## Attaching package: &#39;Hmisc&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:plyr&#39;:
-## 
-##     is.discrete, summarize</code></pre>
-<pre><code>## The following object is masked from &#39;package:ggm&#39;:
-## 
-##     rcorr</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     format.pval, units</code></pre>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="caracterizar-datos.html#cb244-1" tabindex="-1"></a><span class="fu">library</span>(Rmisc)</span>
-<span id="cb244-2"><a href="caracterizar-datos.html#cb244-2" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span></code></pre></div>
-<pre><code>## Warning: package &#39;reshape2&#39; was built under R version 4.3.3</code></pre>
-<pre><code>## 
-## Attaching package: &#39;reshape2&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:reshape&#39;:
-## 
-##     colsplit, melt, recast</code></pre>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="caracterizar-datos.html#cb248-1" tabindex="-1"></a><span class="fu">library</span>(pastecs)</span></code></pre></div>
-<pre><code>## Warning: package &#39;pastecs&#39; was built under R version 4.3.3</code></pre>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="caracterizar-datos.html#cb250-1" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
-<pre><code>## Warning: package &#39;car&#39; was built under R version 4.3.3</code></pre>
-<pre><code>## Loading required package: carData</code></pre>
-<pre><code>## Warning: package &#39;carData&#39; was built under R version 4.3.3</code></pre>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="caracterizar-datos.html#cb229-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
+<span id="cb229-2"><a href="caracterizar-datos.html#cb229-2" tabindex="-1"></a></span>
+<span id="cb229-3"><a href="caracterizar-datos.html#cb229-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb229-4"><a href="caracterizar-datos.html#cb229-4" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
+<span id="cb229-5"><a href="caracterizar-datos.html#cb229-5" tabindex="-1"></a><span class="fu">library</span>(Rmisc)</span>
+<span id="cb229-6"><a href="caracterizar-datos.html#cb229-6" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb229-7"><a href="caracterizar-datos.html#cb229-7" tabindex="-1"></a><span class="fu">library</span>(pastecs)</span>
+<span id="cb229-8"><a href="caracterizar-datos.html#cb229-8" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
 <p>Para un estudio se investigaron los niveles de higiene de personas que asistieron a distintos días de un festival de música. Mientras más alto es el valor hay mayores niveles de higiene.</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="caracterizar-datos.html#cb254-1" tabindex="-1"></a>dlf <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/DownloadFestival.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb254-2"><a href="caracterizar-datos.html#cb254-2" tabindex="-1"></a><span class="fu">head</span>(dlf)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="caracterizar-datos.html#cb230-1" tabindex="-1"></a>dlf <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/DownloadFestival.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb230-2"><a href="caracterizar-datos.html#cb230-2" tabindex="-1"></a><span class="fu">head</span>(dlf)</span></code></pre></div>
 <pre><code>##   ticknumb gender day1 day2 day3
 ## 1     2111   Male 2.64 1.35 1.61
 ## 2     2229 Female 0.97 1.41 0.29
@@ -404,73 +382,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5     2401 Female 0.88 0.08   NA
 ## 6     2405   Male 0.85   NA   NA</code></pre>
 <p>En seguida podemos hacer un gráfico</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="caracterizar-datos.html#cb256-1" tabindex="-1"></a>festivalHistogram <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dlf, <span class="fu">aes</span>(day1))</span>
-<span id="cb256-2"><a href="caracterizar-datos.html#cb256-2" tabindex="-1"></a>festivalHistogram <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="caracterizar-datos.html#cb232-1" tabindex="-1"></a>festivalHistogram <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dlf, <span class="fu">aes</span>(day1))</span>
+<span id="cb232-2"><a href="caracterizar-datos.html#cb232-2" tabindex="-1"></a>festivalHistogram <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-108-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
 <p>Ya sabíamos de un antiguo capítulo que tenemos un outlier en esta base de datos.
 Para eliminarlo podemos usar la función <strong>ifelse</strong>. En esta función le decimos a R que todos los valores mayores a 20 se conviertan en 0.</p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="caracterizar-datos.html#cb258-1" tabindex="-1"></a>dlf<span class="sc">$</span>day1 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dlf<span class="sc">$</span>day1 <span class="sc">&gt;</span> <span class="dv">20</span>, <span class="cn">NA</span>, dlf<span class="sc">$</span>day1)</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="caracterizar-datos.html#cb234-1" tabindex="-1"></a>dlf<span class="sc">$</span>day1 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dlf<span class="sc">$</span>day1 <span class="sc">&gt;</span> <span class="dv">20</span>, <span class="cn">NA</span>, dlf<span class="sc">$</span>day1)</span></code></pre></div>
 <p>Luego, hacer de nuevo un histograma.</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="caracterizar-datos.html#cb259-1" tabindex="-1"></a>festivalHistogram <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dlf, <span class="fu">aes</span>(day1))</span>
-<span id="cb259-2"><a href="caracterizar-datos.html#cb259-2" tabindex="-1"></a>festivalHistogram <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="caracterizar-datos.html#cb235-1" tabindex="-1"></a>festivalHistogram <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dlf, <span class="fu">aes</span>(day1))</span>
+<span id="cb235-2"><a href="caracterizar-datos.html#cb235-2" tabindex="-1"></a>festivalHistogram <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <pre><code>## Warning: Removed 1 row containing non-finite outside the scale range (`stat_bin()`).</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-109-1.png" width="672" /></p>
 <p>En esta misma línea, podemos hacer unos ajustes.
 Podemos ajustar el eje Y para que se muestre la densidad (es sólo un re-escalamiento).
 Y podemos hacer el gráfico un poco mas claro.</p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="caracterizar-datos.html#cb262-1" tabindex="-1"></a>hist.day1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dlf, <span class="fu">aes</span>(day1)) <span class="sc">+</span> </span>
-<span id="cb262-2"><a href="caracterizar-datos.html#cb262-2" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb262-3"><a href="caracterizar-datos.html#cb262-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..), <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb262-4"><a href="caracterizar-datos.html#cb262-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Hygiene score on day 1&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Density&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb262-5"><a href="caracterizar-datos.html#cb262-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
-<span id="cb262-6"><a href="caracterizar-datos.html#cb262-6" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb262-7"><a href="caracterizar-datos.html#cb262-7" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
-<span id="cb262-8"><a href="caracterizar-datos.html#cb262-8" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span>
-<span id="cb262-9"><a href="caracterizar-datos.html#cb262-9" tabindex="-1"></a>hist.day1</span></code></pre></div>
-<pre><code>## Warning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.
-## ℹ Please use `after_stat(density)` instead.
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="caracterizar-datos.html#cb238-1" tabindex="-1"></a>hist.day1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dlf, <span class="fu">aes</span>(day1)) <span class="sc">+</span> </span>
+<span id="cb238-2"><a href="caracterizar-datos.html#cb238-2" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb238-3"><a href="caracterizar-datos.html#cb238-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..), <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb238-4"><a href="caracterizar-datos.html#cb238-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Hygiene score on day 1&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Density&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb238-5"><a href="caracterizar-datos.html#cb238-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb238-6"><a href="caracterizar-datos.html#cb238-6" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb238-7"><a href="caracterizar-datos.html#cb238-7" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb238-8"><a href="caracterizar-datos.html#cb238-8" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span>
+<span id="cb238-9"><a href="caracterizar-datos.html#cb238-9" tabindex="-1"></a>hist.day1</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>## Warning: Removed 1 row containing non-finite outside the scale range (`stat_bin()`).</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
+<p>Para evaluar la normalidad podemos superponer una curva normal (en rojo) que se base en el promedio y la dispersión de los datos.</p>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="caracterizar-datos.html#cb241-1" tabindex="-1"></a>hist.day1 <span class="sc">+</span></span>
+<span id="cb241-2"><a href="caracterizar-datos.html#cb241-2" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, </span>
+<span id="cb241-3"><a href="caracterizar-datos.html#cb241-3" tabindex="-1"></a>                <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(dlf<span class="sc">$</span>day1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb241-4"><a href="caracterizar-datos.html#cb241-4" tabindex="-1"></a>                            <span class="at">sd =</span> <span class="fu">sd</span>(dlf<span class="sc">$</span>day1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)), </span>
+<span id="cb241-5"><a href="caracterizar-datos.html#cb241-5" tabindex="-1"></a>                <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <pre><code>## Warning: Removed 1 row containing non-finite outside the scale range (`stat_bin()`).</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
-<p>Para evaluar la normalidad podemos superponer una curva normal (en rojo) que se base en el promedio y la dispersión de los datos.</p>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="caracterizar-datos.html#cb266-1" tabindex="-1"></a>hist.day1 <span class="sc">+</span></span>
-<span id="cb266-2"><a href="caracterizar-datos.html#cb266-2" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, </span>
-<span id="cb266-3"><a href="caracterizar-datos.html#cb266-3" tabindex="-1"></a>                <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(dlf<span class="sc">$</span>day1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb266-4"><a href="caracterizar-datos.html#cb266-4" tabindex="-1"></a>                            <span class="at">sd =</span> <span class="fu">sd</span>(dlf<span class="sc">$</span>day1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)), </span>
-<span id="cb266-5"><a href="caracterizar-datos.html#cb266-5" tabindex="-1"></a>                <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>)</span></code></pre></div>
-<pre><code>## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-## ℹ Please use `linewidth` instead.
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
-<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<pre><code>## Warning: Removed 1 row containing non-finite outside the scale range (`stat_bin()`).</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
 <p>Para este set de datos la distribución de los datos se ve bastante normal si lo comparamos con la línea.
 Otra manera gráfica de revisar la normalidad es hacer un gráfico Q-Q</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="caracterizar-datos.html#cb270-1" tabindex="-1"></a>qqplot.day1 <span class="ot">&lt;-</span> <span class="fu">qplot</span>(<span class="at">sample =</span> dlf<span class="sc">$</span>day1)</span></code></pre></div>
-<pre><code>## Warning: `qplot()` was deprecated in ggplot2 3.4.0.
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="caracterizar-datos.html#cb272-1" tabindex="-1"></a>qqplot.day1</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="caracterizar-datos.html#cb244-1" tabindex="-1"></a>qqplot.day1 <span class="ot">&lt;-</span> <span class="fu">qplot</span>(<span class="at">sample =</span> dlf<span class="sc">$</span>day1)</span>
+<span id="cb244-2"><a href="caracterizar-datos.html#cb244-2" tabindex="-1"></a>qqplot.day1</span></code></pre></div>
 <pre><code>## Warning: Removed 1 row containing non-finite outside the scale range (`stat_qq()`).</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-113-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
 <p>Si los datos están normalmente distribuidos deberíamos ver una línea diagonal contínua.</p>
 <p>Además de observar gráficamente podemos aplicar analisis de normalidad. Por ejemplo, usando la función <strong>stat.desc</strong> podemos describir los datos y testear la normalidad. Debemos fijarnos en el valor de p del test (“normtest.p”). Si es significativo significa que los datos no poseen una distribución normal.</p>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="caracterizar-datos.html#cb274-1" tabindex="-1"></a><span class="fu">stat.desc</span>(dlf<span class="sc">$</span>day1, </span>
-<span id="cb274-2"><a href="caracterizar-datos.html#cb274-2" tabindex="-1"></a>          <span class="at">basic =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb274-3"><a href="caracterizar-datos.html#cb274-3" tabindex="-1"></a>          <span class="at">norm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="caracterizar-datos.html#cb246-1" tabindex="-1"></a><span class="fu">stat.desc</span>(dlf<span class="sc">$</span>day1, </span>
+<span id="cb246-2"><a href="caracterizar-datos.html#cb246-2" tabindex="-1"></a>          <span class="at">basic =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb246-3"><a href="caracterizar-datos.html#cb246-3" tabindex="-1"></a>          <span class="at">norm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness     skew.2SE 
 ##  1.790000000  1.770828183  0.024396670  0.047888328  0.481514784  0.693912663  0.391857702 -0.003155393 -0.018353763 
 ##     kurtosis     kurt.2SE   normtest.W   normtest.p 
 ## -0.423991408 -1.234611514  0.995907065  0.031838626</code></pre>
 <p>Podemos aplicar esta función a varias columnas al mismo tiempo.</p>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="caracterizar-datos.html#cb276-1" tabindex="-1"></a><span class="fu">stat.desc</span>(<span class="fu">cbind</span>(dlf<span class="sc">$</span>day1, dlf<span class="sc">$</span>day2, dlf<span class="sc">$</span>day3),</span>
-<span id="cb276-2"><a href="caracterizar-datos.html#cb276-2" tabindex="-1"></a>          <span class="at">basic =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb276-3"><a href="caracterizar-datos.html#cb276-3" tabindex="-1"></a>          <span class="at">norm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="caracterizar-datos.html#cb248-1" tabindex="-1"></a><span class="fu">stat.desc</span>(<span class="fu">cbind</span>(dlf<span class="sc">$</span>day1, dlf<span class="sc">$</span>day2, dlf<span class="sc">$</span>day3),</span>
+<span id="cb248-2"><a href="caracterizar-datos.html#cb248-2" tabindex="-1"></a>          <span class="at">basic =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb248-3"><a href="caracterizar-datos.html#cb248-3" tabindex="-1"></a>          <span class="at">norm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##                        V1           V2           V3
 ## median        1.790000000 7.900000e-01 7.600000e-01
 ## mean          1.770828183 9.609091e-01 9.765041e-01
@@ -486,10 +453,10 @@ Otra manera gráfica de revisar la normalidad es hacer un gráfico Q-Q</p>
 ## normtest.W    0.995907065 9.083191e-01 9.077516e-01
 ## normtest.p    0.031838626 1.281630e-11 3.804486e-07</code></pre>
 <p>Y podemos definir el número de cifras significativas para tener una tabla mas leíble.</p>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="caracterizar-datos.html#cb278-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">stat.desc</span>(dlf[, <span class="fu">c</span>(<span class="st">&quot;day1&quot;</span>, <span class="st">&quot;day2&quot;</span>, <span class="st">&quot;day3&quot;</span>)],</span>
-<span id="cb278-2"><a href="caracterizar-datos.html#cb278-2" tabindex="-1"></a>                <span class="at">basic =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb278-3"><a href="caracterizar-datos.html#cb278-3" tabindex="-1"></a>                <span class="at">norm =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb278-4"><a href="caracterizar-datos.html#cb278-4" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="caracterizar-datos.html#cb250-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">stat.desc</span>(dlf[, <span class="fu">c</span>(<span class="st">&quot;day1&quot;</span>, <span class="st">&quot;day2&quot;</span>, <span class="st">&quot;day3&quot;</span>)],</span>
+<span id="cb250-2"><a href="caracterizar-datos.html#cb250-2" tabindex="-1"></a>                <span class="at">basic =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb250-3"><a href="caracterizar-datos.html#cb250-3" tabindex="-1"></a>                <span class="at">norm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb250-4"><a href="caracterizar-datos.html#cb250-4" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##                day1  day2  day3
 ## median        1.790 0.790 0.760
 ## mean          1.771 0.961 0.977
@@ -505,7 +472,7 @@ Otra manera gráfica de revisar la normalidad es hacer un gráfico Q-Q</p>
 ## normtest.W    0.996 0.908 0.908
 ## normtest.p    0.032 0.000 0.000</code></pre>
 <p>Utlizar esta función es equivalente a usar la función <strong>shapiro.test</strong>.</p>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="caracterizar-datos.html#cb280-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(dlf<span class="sc">$</span>day1)</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="caracterizar-datos.html#cb252-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(dlf<span class="sc">$</span>day1)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -513,10 +480,10 @@ Otra manera gráfica de revisar la normalidad es hacer un gráfico Q-Q</p>
 ## W = 0.99591, p-value = 0.03184</code></pre>
 <p>veamos otra base de datos para destacar un aspecto importante de este análisis.</p>
 <p>Para este otro estudio se investigaron distintos dominios de conocimiento y hábitos en una cohorte de estudiantes: desempeño en los examenes (exam), habilidades computacionales (computer), número de clases asistidas (lectures) y habilidad númerica (numeracy). Esta medición se realizó en 2 instituciones diferentes (uni).</p>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="caracterizar-datos.html#cb282-1" tabindex="-1"></a>rexam <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">&quot;data/rexam.dat&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb282-2"><a href="caracterizar-datos.html#cb282-2" tabindex="-1"></a>rexam<span class="sc">$</span>uni <span class="ot">&lt;-</span> <span class="fu">factor</span>(rexam<span class="sc">$</span>uni, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>), </span>
-<span id="cb282-3"><a href="caracterizar-datos.html#cb282-3" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Duncetown University&quot;</span>, <span class="st">&quot;Sussex University&quot;</span>))</span>
-<span id="cb282-4"><a href="caracterizar-datos.html#cb282-4" tabindex="-1"></a><span class="fu">head</span>(rexam)</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="caracterizar-datos.html#cb254-1" tabindex="-1"></a>rexam <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">&quot;data/rexam.dat&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb254-2"><a href="caracterizar-datos.html#cb254-2" tabindex="-1"></a>rexam<span class="sc">$</span>uni <span class="ot">&lt;-</span> <span class="fu">factor</span>(rexam<span class="sc">$</span>uni, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>), </span>
+<span id="cb254-3"><a href="caracterizar-datos.html#cb254-3" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Duncetown University&quot;</span>, <span class="st">&quot;Sussex University&quot;</span>))</span>
+<span id="cb254-4"><a href="caracterizar-datos.html#cb254-4" tabindex="-1"></a><span class="fu">head</span>(rexam)</span></code></pre></div>
 <pre><code>##   exam computer lectures numeracy                  uni
 ## 1   18       54     75.0        7 Duncetown University
 ## 2   30       47      8.5        1 Duncetown University
@@ -525,38 +492,38 @@ Otra manera gráfica de revisar la normalidad es hacer un gráfico Q-Q</p>
 ## 5   40       53     44.5        2 Duncetown University
 ## 6   15       48     76.5        8 Duncetown University</code></pre>
 <p>Primero graficamos.</p>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="caracterizar-datos.html#cb284-1" tabindex="-1"></a>hexam <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(rexam, <span class="fu">aes</span>(exam)) <span class="sc">+</span></span>
-<span id="cb284-2"><a href="caracterizar-datos.html#cb284-2" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb284-3"><a href="caracterizar-datos.html#cb284-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..), <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb284-4"><a href="caracterizar-datos.html#cb284-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Exam&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Density&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb284-5"><a href="caracterizar-datos.html#cb284-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
-<span id="cb284-6"><a href="caracterizar-datos.html#cb284-6" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb284-7"><a href="caracterizar-datos.html#cb284-7" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
-<span id="cb284-8"><a href="caracterizar-datos.html#cb284-8" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span>
-<span id="cb284-9"><a href="caracterizar-datos.html#cb284-9" tabindex="-1"></a>hexam</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="caracterizar-datos.html#cb256-1" tabindex="-1"></a>hexam <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(rexam, <span class="fu">aes</span>(exam)) <span class="sc">+</span></span>
+<span id="cb256-2"><a href="caracterizar-datos.html#cb256-2" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb256-3"><a href="caracterizar-datos.html#cb256-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..), <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb256-4"><a href="caracterizar-datos.html#cb256-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Exam&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Density&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb256-5"><a href="caracterizar-datos.html#cb256-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb256-6"><a href="caracterizar-datos.html#cb256-6" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb256-7"><a href="caracterizar-datos.html#cb256-7" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb256-8"><a href="caracterizar-datos.html#cb256-8" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span>
+<span id="cb256-9"><a href="caracterizar-datos.html#cb256-9" tabindex="-1"></a>hexam</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-119-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-118-1.png" width="672" /></p>
 <p>El gráfico sugiere que los valores de desempeño en los examenes no siguen una distribución normal.</p>
 <p>Nuevamente para evaluar la normalidad podemos superponer una curva normal (en rojo) que se base en el promedio y la dispersión de los datos.</p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="caracterizar-datos.html#cb286-1" tabindex="-1"></a>hexam <span class="sc">+</span></span>
-<span id="cb286-2"><a href="caracterizar-datos.html#cb286-2" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, </span>
-<span id="cb286-3"><a href="caracterizar-datos.html#cb286-3" tabindex="-1"></a>                <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(rexam<span class="sc">$</span>exam, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb286-4"><a href="caracterizar-datos.html#cb286-4" tabindex="-1"></a>                            <span class="at">sd =</span> <span class="fu">sd</span>(rexam<span class="sc">$</span>exam, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)), </span>
-<span id="cb286-5"><a href="caracterizar-datos.html#cb286-5" tabindex="-1"></a>                <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="caracterizar-datos.html#cb258-1" tabindex="-1"></a>hexam <span class="sc">+</span></span>
+<span id="cb258-2"><a href="caracterizar-datos.html#cb258-2" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, </span>
+<span id="cb258-3"><a href="caracterizar-datos.html#cb258-3" tabindex="-1"></a>                <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(rexam<span class="sc">$</span>exam, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb258-4"><a href="caracterizar-datos.html#cb258-4" tabindex="-1"></a>                            <span class="at">sd =</span> <span class="fu">sd</span>(rexam<span class="sc">$</span>exam, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)), </span>
+<span id="cb258-5"><a href="caracterizar-datos.html#cb258-5" tabindex="-1"></a>                <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-120-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-119-1.png" width="672" /></p>
 <p>De hecho parece que hubieran una distribución bimodal, perteneciente a distribuciones de dos grupos diferentes.</p>
 <p>Veamos el gráfico Q-Q.</p>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="caracterizar-datos.html#cb288-1" tabindex="-1"></a>qqplot.exam <span class="ot">&lt;-</span> <span class="fu">qplot</span>(<span class="at">sample =</span> rexam<span class="sc">$</span>exam)</span>
-<span id="cb288-2"><a href="caracterizar-datos.html#cb288-2" tabindex="-1"></a>qqplot.exam</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="caracterizar-datos.html#cb260-1" tabindex="-1"></a>qqplot.exam <span class="ot">&lt;-</span> <span class="fu">qplot</span>(<span class="at">sample =</span> rexam<span class="sc">$</span>exam)</span>
+<span id="cb260-2"><a href="caracterizar-datos.html#cb260-2" tabindex="-1"></a>qqplot.exam</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-120-1.png" width="672" /></p>
 <p>Describamos los datos y apliquemos un analisis de normalidad con la función <strong>stat.desc</strong>. Debemos fijarnos en el valor de p del test (“normtest.p”). Si es significativo significa que los datos no poseen una distribución normal.</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="caracterizar-datos.html#cb289-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">stat.desc</span>(rexam[, <span class="fu">c</span>(<span class="st">&quot;exam&quot;</span>,</span>
-<span id="cb289-2"><a href="caracterizar-datos.html#cb289-2" tabindex="-1"></a>                          <span class="st">&quot;computer&quot;</span>,</span>
-<span id="cb289-3"><a href="caracterizar-datos.html#cb289-3" tabindex="-1"></a>                          <span class="st">&quot;lectures&quot;</span>,</span>
-<span id="cb289-4"><a href="caracterizar-datos.html#cb289-4" tabindex="-1"></a>                          <span class="st">&quot;numeracy&quot;</span>)],</span>
-<span id="cb289-5"><a href="caracterizar-datos.html#cb289-5" tabindex="-1"></a>                <span class="at">basic =</span> <span class="cn">FALSE</span>, <span class="at">norm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb289-6"><a href="caracterizar-datos.html#cb289-6" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">2</span>)  </span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="caracterizar-datos.html#cb261-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">stat.desc</span>(rexam[, <span class="fu">c</span>(<span class="st">&quot;exam&quot;</span>,</span>
+<span id="cb261-2"><a href="caracterizar-datos.html#cb261-2" tabindex="-1"></a>                          <span class="st">&quot;computer&quot;</span>,</span>
+<span id="cb261-3"><a href="caracterizar-datos.html#cb261-3" tabindex="-1"></a>                          <span class="st">&quot;lectures&quot;</span>,</span>
+<span id="cb261-4"><a href="caracterizar-datos.html#cb261-4" tabindex="-1"></a>                          <span class="st">&quot;numeracy&quot;</span>)],</span>
+<span id="cb261-5"><a href="caracterizar-datos.html#cb261-5" tabindex="-1"></a>                <span class="at">basic =</span> <span class="cn">FALSE</span>, <span class="at">norm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb261-6"><a href="caracterizar-datos.html#cb261-6" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">2</span>)  </span></code></pre></div>
 <pre><code>##                exam computer lectures numeracy
 ## median        60.00    51.50    62.00     4.00
 ## mean          58.10    50.71    59.76     4.85
@@ -574,40 +541,40 @@ Otra manera gráfica de revisar la normalidad es hacer un gráfico Q-Q</p>
 <p>En este punto es importante destacar que todos estos análisis dependen netamente de la pregunta de investigación.
 En el caso que queramos comparar el desempeño en los examenes entre las 2 instituciones académicas entonces lo que importa es la distribución de los valores dentro de cada grupo.</p>
 <p>Para hacer una descripción de los datos por grupo podemos usar la función <strong>by</strong>.</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="caracterizar-datos.html#cb291-1" tabindex="-1"></a><span class="fu">by</span>(<span class="at">data =</span> rexam<span class="sc">$</span>exam, <span class="at">INDICES =</span> rexam<span class="sc">$</span>uni, <span class="at">FUN =</span> describe)</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="caracterizar-datos.html#cb263-1" tabindex="-1"></a><span class="fu">by</span>(<span class="at">data =</span> rexam<span class="sc">$</span>exam, <span class="at">INDICES =</span> rexam<span class="sc">$</span>uni, <span class="at">FUN =</span> describe)</span></code></pre></div>
 <pre><code>## rexam$uni: Duncetown University
 ## dd[x, ] 
 ##        n  missing distinct     Info     Mean      Gmd      .05      .10      .25      .50      .75      .90      .95 
 ##       50        0       33    0.999    40.18    14.41    22.00    25.90    31.25    38.00    47.75    59.00    61.65 
 ## 
 ## lowest : 15 18 22 25 26, highest: 59 60 63 65 66
-## ------------------------------------------------------------------------------------------ 
+## ----------------------------------------------------------------------------------------------- 
 ## rexam$uni: Sussex University
 ## dd[x, ] 
 ##        n  missing distinct     Info     Mean      Gmd      .05      .10      .25      .50      .75      .90      .95 
 ##       50        0       30    0.998    76.02    11.64    60.00    63.80    69.00    75.00    81.00    89.30    94.55 
 ## 
 ## lowest : 56 58 60 62 64, highest: 92 94 95 97 99</code></pre>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="caracterizar-datos.html#cb293-1" tabindex="-1"></a><span class="co"># o lo que es lo mismo: by(rexam$exam, rexam$uni, describe)</span></span></code></pre></div>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="caracterizar-datos.html#cb294-1" tabindex="-1"></a><span class="fu">by</span>(<span class="at">data =</span> rexam<span class="sc">$</span>exam, <span class="at">INDICES =</span> rexam<span class="sc">$</span>uni, <span class="at">FUN =</span> stat.desc)</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="caracterizar-datos.html#cb265-1" tabindex="-1"></a><span class="co"># o lo que es lo mismo: by(rexam$exam, rexam$uni, describe)</span></span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="caracterizar-datos.html#cb266-1" tabindex="-1"></a><span class="fu">by</span>(<span class="at">data =</span> rexam<span class="sc">$</span>exam, <span class="at">INDICES =</span> rexam<span class="sc">$</span>uni, <span class="at">FUN =</span> stat.desc)</span></code></pre></div>
 <pre><code>## rexam$uni: Duncetown University
 ##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median         mean 
 ##   50.0000000    0.0000000    0.0000000   15.0000000   66.0000000   51.0000000 2009.0000000   38.0000000   40.1800000 
 ##      SE.mean CI.mean.0.95          var      std.dev     coef.var 
 ##    1.7803210    3.5776890  158.4771429   12.5887705    0.3133094 
-## ------------------------------------------------------------------------------------------ 
+## ----------------------------------------------------------------------------------------------- 
 ## rexam$uni: Sussex University
 ##      nbr.val     nbr.null       nbr.na          min          max        range          sum       median         mean 
 ##   50.0000000    0.0000000    0.0000000   56.0000000   99.0000000   43.0000000 3801.0000000   75.0000000   76.0200000 
 ##      SE.mean CI.mean.0.95          var      std.dev     coef.var 
 ##    1.4432079    2.9002348  104.1424490   10.2050208    0.1342413</code></pre>
-<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="caracterizar-datos.html#cb296-1" tabindex="-1"></a><span class="co"># o lo que es lo mismo: by(rexam$exam, rexam$uni, stat.desc)</span></span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="caracterizar-datos.html#cb268-1" tabindex="-1"></a><span class="co"># o lo que es lo mismo: by(rexam$exam, rexam$uni, stat.desc)</span></span></code></pre></div>
 <p>También se pueden describir simultáneamente varias variables.</p>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="caracterizar-datos.html#cb297-1" tabindex="-1"></a><span class="fu">by</span>(rexam[, <span class="fu">c</span>(<span class="st">&quot;exam&quot;</span>, <span class="st">&quot;computer&quot;</span>, <span class="st">&quot;lectures&quot;</span>, <span class="st">&quot;numeracy&quot;</span>)],</span>
-<span id="cb297-2"><a href="caracterizar-datos.html#cb297-2" tabindex="-1"></a>   rexam<span class="sc">$</span>uni, </span>
-<span id="cb297-3"><a href="caracterizar-datos.html#cb297-3" tabindex="-1"></a>   stat.desc,</span>
-<span id="cb297-4"><a href="caracterizar-datos.html#cb297-4" tabindex="-1"></a>   <span class="at">basic =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb297-5"><a href="caracterizar-datos.html#cb297-5" tabindex="-1"></a>   <span class="at">norm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="caracterizar-datos.html#cb269-1" tabindex="-1"></a><span class="fu">by</span>(rexam[, <span class="fu">c</span>(<span class="st">&quot;exam&quot;</span>, <span class="st">&quot;computer&quot;</span>, <span class="st">&quot;lectures&quot;</span>, <span class="st">&quot;numeracy&quot;</span>)],</span>
+<span id="cb269-2"><a href="caracterizar-datos.html#cb269-2" tabindex="-1"></a>   rexam<span class="sc">$</span>uni, </span>
+<span id="cb269-3"><a href="caracterizar-datos.html#cb269-3" tabindex="-1"></a>   stat.desc,</span>
+<span id="cb269-4"><a href="caracterizar-datos.html#cb269-4" tabindex="-1"></a>   <span class="at">basic =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb269-5"><a href="caracterizar-datos.html#cb269-5" tabindex="-1"></a>   <span class="at">norm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## rexam$uni: Duncetown University
 ##                     exam   computer    lectures    numeracy
 ## median        38.0000000 49.0000000  60.5000000  4.00000000
@@ -623,7 +590,7 @@ En el caso que queramos comparar el desempeño en los examenes entre las 2 insti
 ## kurt.2SE      -0.5462122 -0.5121147  -0.4256518 -0.49226083
 ## normtest.W     0.9721662  0.9776351   0.9697413  0.94081692
 ## normtest.p     0.2828984  0.4571105   0.2259072  0.01451518
-## ------------------------------------------------------------------------------------------ 
+## ----------------------------------------------------------------------------------------------- 
 ## rexam$uni: Sussex University
 ##                     exam    computer    lectures     numeracy
 ## median        75.0000000 54.00000000  65.7500000  5.000000000
@@ -641,14 +608,14 @@ En el caso que queramos comparar el desempeño en los examenes entre las 2 insti
 ## normtest.p     0.7151182  0.01931372   0.6262649  0.006786803</code></pre>
 <p>Estos análisis son equivalentes a usar la función <strong>shapiro.test</strong>.
 Nuevamente, dependiendo de la pregunta de investigación miramos la normalidad de todos los datos de desempeño en el examen.</p>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="caracterizar-datos.html#cb299-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(rexam<span class="sc">$</span>exam)</span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="caracterizar-datos.html#cb271-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(rexam<span class="sc">$</span>exam)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  rexam$exam
 ## W = 0.96131, p-value = 0.004991</code></pre>
 <p>O miramos los datos de desempeño en el examen en función de los grupos.</p>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="caracterizar-datos.html#cb301-1" tabindex="-1"></a><span class="fu">by</span>(rexam<span class="sc">$</span>exam, rexam<span class="sc">$</span>uni, shapiro.test)</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="caracterizar-datos.html#cb273-1" tabindex="-1"></a><span class="fu">by</span>(rexam<span class="sc">$</span>exam, rexam<span class="sc">$</span>uni, shapiro.test)</span></code></pre></div>
 <pre><code>## rexam$uni: Duncetown University
 ## 
 ##  Shapiro-Wilk normality test
@@ -656,7 +623,7 @@ Nuevamente, dependiendo de la pregunta de investigación miramos la normalidad d
 ## data:  dd[x, ]
 ## W = 0.97217, p-value = 0.2829
 ## 
-## ------------------------------------------------------------------------------------------ 
+## ----------------------------------------------------------------------------------------------- 
 ## rexam$uni: Sussex University
 ## 
 ##  Shapiro-Wilk normality test
@@ -664,23 +631,23 @@ Nuevamente, dependiendo de la pregunta de investigación miramos la normalidad d
 ## data:  dd[x, ]
 ## W = 0.98371, p-value = 0.7151</code></pre>
 <p>Para graficar podemos separar los datos en función de las instituciones.</p>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="caracterizar-datos.html#cb303-1" tabindex="-1"></a>dunceData <span class="ot">&lt;-</span> rexam[rexam<span class="sc">$</span>uni<span class="sc">==</span><span class="st">&quot;Duncetown University&quot;</span>,]</span>
-<span id="cb303-2"><a href="caracterizar-datos.html#cb303-2" tabindex="-1"></a>sussexData <span class="ot">&lt;-</span> rexam[rexam<span class="sc">$</span>uni<span class="sc">==</span><span class="st">&quot;Sussex University&quot;</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="caracterizar-datos.html#cb275-1" tabindex="-1"></a>dunceData <span class="ot">&lt;-</span> rexam[rexam<span class="sc">$</span>uni<span class="sc">==</span><span class="st">&quot;Duncetown University&quot;</span>,]</span>
+<span id="cb275-2"><a href="caracterizar-datos.html#cb275-2" tabindex="-1"></a>sussexData <span class="ot">&lt;-</span> rexam[rexam<span class="sc">$</span>uni<span class="sc">==</span><span class="st">&quot;Sussex University&quot;</span>,]</span></code></pre></div>
 <p>Luego podemos graficar por ejemplo los valores en el desempeño del examen para una de las instituciones.</p>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="caracterizar-datos.html#cb304-1" tabindex="-1"></a>hist.exam.duncetown <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dunceData, <span class="fu">aes</span>(exam)) <span class="sc">+</span></span>
-<span id="cb304-2"><a href="caracterizar-datos.html#cb304-2" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb304-3"><a href="caracterizar-datos.html#cb304-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..), <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb304-4"><a href="caracterizar-datos.html#cb304-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Numeracy Score&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Density&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb304-5"><a href="caracterizar-datos.html#cb304-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Duncetown&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb304-6"><a href="caracterizar-datos.html#cb304-6" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun=</span>dnorm, </span>
-<span id="cb304-7"><a href="caracterizar-datos.html#cb304-7" tabindex="-1"></a>                <span class="at">args=</span><span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(dunceData<span class="sc">$</span>exam, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb304-8"><a href="caracterizar-datos.html#cb304-8" tabindex="-1"></a>                          <span class="at">sd =</span> <span class="fu">sd</span>(dunceData<span class="sc">$</span>exam, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)), </span>
-<span id="cb304-9"><a href="caracterizar-datos.html#cb304-9" tabindex="-1"></a>                <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">1</span>)</span>
-<span id="cb304-10"><a href="caracterizar-datos.html#cb304-10" tabindex="-1"></a>hist.exam.duncetown</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="caracterizar-datos.html#cb276-1" tabindex="-1"></a>hist.exam.duncetown <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dunceData, <span class="fu">aes</span>(exam)) <span class="sc">+</span></span>
+<span id="cb276-2"><a href="caracterizar-datos.html#cb276-2" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb276-3"><a href="caracterizar-datos.html#cb276-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..), <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb276-4"><a href="caracterizar-datos.html#cb276-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Numeracy Score&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Density&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb276-5"><a href="caracterizar-datos.html#cb276-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Duncetown&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb276-6"><a href="caracterizar-datos.html#cb276-6" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun=</span>dnorm, </span>
+<span id="cb276-7"><a href="caracterizar-datos.html#cb276-7" tabindex="-1"></a>                <span class="at">args=</span><span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(dunceData<span class="sc">$</span>exam, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb276-8"><a href="caracterizar-datos.html#cb276-8" tabindex="-1"></a>                          <span class="at">sd =</span> <span class="fu">sd</span>(dunceData<span class="sc">$</span>exam, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)), </span>
+<span id="cb276-9"><a href="caracterizar-datos.html#cb276-9" tabindex="-1"></a>                <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">1</span>)</span>
+<span id="cb276-10"><a href="caracterizar-datos.html#cb276-10" tabindex="-1"></a>hist.exam.duncetown</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
 <p>Otro supuesto que debemos testear es la homogenidad de la varianza.
 Para ello aplicamos un test de Levene.</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="caracterizar-datos.html#cb305-1" tabindex="-1"></a><span class="fu">leveneTest</span>(rexam<span class="sc">$</span>exam, rexam<span class="sc">$</span>uni)</span></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="caracterizar-datos.html#cb277-1" tabindex="-1"></a><span class="fu">leveneTest</span>(rexam<span class="sc">$</span>exam, rexam<span class="sc">$</span>uni)</span></code></pre></div>
 <pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
 ##       Df F value Pr(&gt;F)
 ## group  1  2.0886 0.1516

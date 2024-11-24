@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2024-04-04" />
+<meta name="date" content="2024-11-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,7 +53,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -525,11 +525,17 @@ Para ello cuando trabajes en R debes decirle en que carpeta de tu computador est
 Es decir, debes definir tu directorio de trabajo con la función <strong>setwd</strong></p>
 <p>Por ejemplo, para mí sería algo así:
 setwd(“C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Stats_UTalca/database_2020_DocPsychol”)</p>
-<p>La función <strong>getwd()</strong> (sin nada entre paréntesis) te permite sabes cual es tu directorio actual.</p>
+<p>Pone atención a esto porque es muy importante.
+Lo que está entre comillas es tu directorio de trabajo y tienes que setearlo de acuerdo a donde están tus datos en <strong>tu computador</strong>. Para este tutorial yo lo estaré seteando como <em>Sys.getenv(“BOOKDOWN_PROJECT_PATH”)</em> porque es una manera que mi computador reconozca un directorio que he definido en mi computador.<br />
+En tu caso debes setearlo de acuerdo a donde están los datos en tu computador. Por ejemplo, si tu disco duro se llama “Jose”, y tus datos están en una carpeta “Datos” en una carpeta “Tutorial” tu directorio sería algo así como: “C:/Jose/Tutorial/Datos”. Ojo, debes verificar esto en tu propio computador.</p>
+<p>La función <strong>getwd()</strong> (sin nada entre paréntesis) te permite sabes cual es tu directorio actual.<br />
+</p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="programación.html#cb73-1" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
 <pre><code>## [1] &quot;C:/Users/Usuario/Documents/R_estadistica_con_R/estadistica&quot;</code></pre>
 <p>Para importar datos puedes usar distintas funciones.
-Por ejemplo, para importar datos de tipo .txt debemos usar la función <strong>read.delim</strong></p>
+Por ejemplo, para importar datos de tipo .txt debemos usar la función <strong>read.delim</strong>.<br />
+Acuérdate de setear tu directorio de trabajo en <em>setwd</em> de acuerdo a tu organización de archivos.
+Debería parecerse algo como a: setwd(“C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Stats_UTalca/database_2020_DocPsychol”)</p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="programación.html#cb75-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
 <span id="cb75-2"><a href="programación.html#cb75-2" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="at">file =</span> <span class="st">&quot;data/facebook_friends_1.txt&quot;</span>)</span>
 <span id="cb75-3"><a href="programación.html#cb75-3" tabindex="-1"></a>dat</span></code></pre></div>
@@ -770,18 +776,17 @@ newDataFrame &lt;- melt(oldDataFrame,
 id = c(constant_variables),
 measured = c(variables_that_change_across_columns))</p>
 <p>En nuestro ejemplo podemos hacerlo así:</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="programación.html#cb106-1" tabindex="-1"></a><span class="fu">library</span>(reshape)</span></code></pre></div>
-<pre><code>## Warning: package &#39;reshape&#39; was built under R version 4.3.3</code></pre>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="programación.html#cb108-1" tabindex="-1"></a>restructuredData <span class="ot">&lt;-</span> <span class="fu">melt</span>(satisfactionData,</span>
-<span id="cb108-2"><a href="programación.html#cb108-2" tabindex="-1"></a>                         <span class="at">id =</span> <span class="fu">c</span>(<span class="st">&quot;Person&quot;</span>, <span class="st">&quot;Gender&quot;</span>),</span>
-<span id="cb108-3"><a href="programación.html#cb108-3" tabindex="-1"></a>                         <span class="at">measured =</span> <span class="fu">c</span>(<span class="st">&quot;Satisfaction_Base&quot;</span>,</span>
-<span id="cb108-4"><a href="programación.html#cb108-4" tabindex="-1"></a>                                      <span class="st">&quot;Satisfaction_6_Months&quot;</span>,</span>
-<span id="cb108-5"><a href="programación.html#cb108-5" tabindex="-1"></a>                                      <span class="st">&quot;Satisfaction_12_Months&quot;</span>,</span>
-<span id="cb108-6"><a href="programación.html#cb108-6" tabindex="-1"></a>                                      <span class="st">&quot;Satisfaction_18_Months&quot;</span>))</span>
-<span id="cb108-7"><a href="programación.html#cb108-7" tabindex="-1"></a></span>
-<span id="cb108-8"><a href="programación.html#cb108-8" tabindex="-1"></a><span class="fu">colnames</span>(restructuredData)[<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SatisfType&quot;</span>, <span class="st">&quot;Values&quot;</span>) <span class="co"># cambiamos los encabezados</span></span>
-<span id="cb108-9"><a href="programación.html#cb108-9" tabindex="-1"></a></span>
-<span id="cb108-10"><a href="programación.html#cb108-10" tabindex="-1"></a><span class="fu">head</span>(restructuredData)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="programación.html#cb106-1" tabindex="-1"></a><span class="fu">library</span>(reshape)</span>
+<span id="cb106-2"><a href="programación.html#cb106-2" tabindex="-1"></a>restructuredData <span class="ot">&lt;-</span> <span class="fu">melt</span>(satisfactionData,</span>
+<span id="cb106-3"><a href="programación.html#cb106-3" tabindex="-1"></a>                         <span class="at">id =</span> <span class="fu">c</span>(<span class="st">&quot;Person&quot;</span>, <span class="st">&quot;Gender&quot;</span>),</span>
+<span id="cb106-4"><a href="programación.html#cb106-4" tabindex="-1"></a>                         <span class="at">measured =</span> <span class="fu">c</span>(<span class="st">&quot;Satisfaction_Base&quot;</span>,</span>
+<span id="cb106-5"><a href="programación.html#cb106-5" tabindex="-1"></a>                                      <span class="st">&quot;Satisfaction_6_Months&quot;</span>,</span>
+<span id="cb106-6"><a href="programación.html#cb106-6" tabindex="-1"></a>                                      <span class="st">&quot;Satisfaction_12_Months&quot;</span>,</span>
+<span id="cb106-7"><a href="programación.html#cb106-7" tabindex="-1"></a>                                      <span class="st">&quot;Satisfaction_18_Months&quot;</span>))</span>
+<span id="cb106-8"><a href="programación.html#cb106-8" tabindex="-1"></a></span>
+<span id="cb106-9"><a href="programación.html#cb106-9" tabindex="-1"></a><span class="fu">colnames</span>(restructuredData)[<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SatisfType&quot;</span>, <span class="st">&quot;Values&quot;</span>) <span class="co"># cambiamos los encabezados</span></span>
+<span id="cb106-10"><a href="programación.html#cb106-10" tabindex="-1"></a></span>
+<span id="cb106-11"><a href="programación.html#cb106-11" tabindex="-1"></a><span class="fu">head</span>(restructuredData)</span></code></pre></div>
 <pre><code>##   Person Gender        SatisfType Values
 ## 1      1      0 Satisfaction_Base      6
 ## 2      2      1 Satisfaction_Base      7
@@ -791,9 +796,9 @@ measured = c(variables_that_change_across_columns))</p>
 ## 6      6      1 Satisfaction_Base      5</code></pre>
 <p>Bonus.También podemos aprovechar de reordenar los datos.
 Para ello usamos la función <strong>order</strong>.</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="programación.html#cb110-1" tabindex="-1"></a>reorder2 <span class="ot">&lt;-</span> restructuredData[<span class="fu">order</span>(restructuredData<span class="sc">$</span>Person),]</span>
-<span id="cb110-2"><a href="programación.html#cb110-2" tabindex="-1"></a></span>
-<span id="cb110-3"><a href="programación.html#cb110-3" tabindex="-1"></a><span class="fu">head</span>(reorder2)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="programación.html#cb108-1" tabindex="-1"></a>reorder2 <span class="ot">&lt;-</span> restructuredData[<span class="fu">order</span>(restructuredData<span class="sc">$</span>Person),]</span>
+<span id="cb108-2"><a href="programación.html#cb108-2" tabindex="-1"></a></span>
+<span id="cb108-3"><a href="programación.html#cb108-3" tabindex="-1"></a><span class="fu">head</span>(reorder2)</span></code></pre></div>
 <pre><code>##     Person Gender             SatisfType Values
 ## 1        1      0      Satisfaction_Base      6
 ## 116      1      0  Satisfaction_6_Months      6
@@ -808,9 +813,9 @@ newData &lt;- cast(longData,
 variables_coded_within_a_single_column ~ variables_coded_across_many_columns,
 value = “outcome_variable”)</p>
 <p>En nuestro ejemplo podemos hacerlo así:</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="programación.html#cb112-1" tabindex="-1"></a>wideData <span class="ot">&lt;-</span> <span class="fu">cast</span>(restructuredData, Person <span class="sc">+</span> Gender <span class="sc">~</span> SatisfType, <span class="at">value =</span> <span class="st">&quot;Values&quot;</span>)</span>
-<span id="cb112-2"><a href="programación.html#cb112-2" tabindex="-1"></a></span>
-<span id="cb112-3"><a href="programación.html#cb112-3" tabindex="-1"></a><span class="fu">head</span>(wideData)</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="programación.html#cb110-1" tabindex="-1"></a>wideData <span class="ot">&lt;-</span> <span class="fu">cast</span>(restructuredData, Person <span class="sc">+</span> Gender <span class="sc">~</span> SatisfType, <span class="at">value =</span> <span class="st">&quot;Values&quot;</span>)</span>
+<span id="cb110-2"><a href="programación.html#cb110-2" tabindex="-1"></a></span>
+<span id="cb110-3"><a href="programación.html#cb110-3" tabindex="-1"></a><span class="fu">head</span>(wideData)</span></code></pre></div>
 <pre><code>##   Person Gender Satisfaction_Base Satisfaction_6_Months Satisfaction_12_Months Satisfaction_18_Months
 ## 1      1      0                 6                     6                      5                      2
 ## 2      2      1                 7                     7                      8                      4
@@ -824,68 +829,67 @@ value = “outcome_variable”)</p>
 <p>Finalmente podrías querer exportar estos datos seleccionados.
 Para ello puede crear archivos de tipo txt o csv aplicado algunas funciones.
 Los archivos se crearán en tu actual directorio (para saber cual es puedes hacer <strong>getwd()</strong>)</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="programación.html#cb114-1" tabindex="-1"></a><span class="fu">write.table</span>(lightAlcoholics, <span class="st">&quot;datoExportado.txt&quot;</span>, <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)</span>
-<span id="cb114-2"><a href="programación.html#cb114-2" tabindex="-1"></a><span class="fu">write.csv</span>(lightAlcoholics, <span class="st">&quot;datoExportado.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="programación.html#cb112-1" tabindex="-1"></a><span class="fu">write.table</span>(lightAlcoholics, <span class="st">&quot;datoExportado.txt&quot;</span>, <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)</span>
+<span id="cb112-2"><a href="programación.html#cb112-2" tabindex="-1"></a><span class="fu">write.csv</span>(lightAlcoholics, <span class="st">&quot;datoExportado.csv&quot;</span>)</span></code></pre></div>
 </div>
 <div id="en-la-práctica" class="section level2" number="3.10">
 <h2><span class="header-section-number">3.10</span> En la práctica</h2>
 <p>Veamos que información podemos sacar de datos que importamos.</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="programación.html#cb115-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
-<span id="cb115-2"><a href="programación.html#cb115-2" tabindex="-1"></a></span>
-<span id="cb115-3"><a href="programación.html#cb115-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
-<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.3.3</code></pre>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="programación.html#cb113-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
+<span id="cb113-2"><a href="programación.html#cb113-2" tabindex="-1"></a></span>
+<span id="cb113-3"><a href="programación.html#cb113-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
 <p>Primero importemos datos.</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="programación.html#cb117-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/latidos_cardiacos.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>) <span class="co"># load data</span></span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="programación.html#cb114-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/latidos_cardiacos.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>) <span class="co"># load data</span></span></code></pre></div>
 <p>Luego calculemos algunos estadísticos.</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="programación.html#cb118-1" tabindex="-1"></a><span class="fu">mean</span>(dat<span class="sc">$</span>latidos)</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="programación.html#cb115-1" tabindex="-1"></a><span class="fu">mean</span>(dat<span class="sc">$</span>latidos)</span></code></pre></div>
 <pre><code>## [1] 79.08</code></pre>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="programación.html#cb120-1" tabindex="-1"></a><span class="fu">sd</span>(dat<span class="sc">$</span>latidos)</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="programación.html#cb117-1" tabindex="-1"></a><span class="fu">sd</span>(dat<span class="sc">$</span>latidos)</span></code></pre></div>
 <pre><code>## [1] 7.674075</code></pre>
 <p>Y hagamos algunos gráficos (más de esto luego).</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="programación.html#cb122-1" tabindex="-1"></a>h1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(latidos))</span>
-<span id="cb122-2"><a href="programación.html#cb122-2" tabindex="-1"></a>h1 <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="programación.html#cb119-1" tabindex="-1"></a>h1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(latidos))</span>
+<span id="cb119-2"><a href="programación.html#cb119-2" tabindex="-1"></a>h1 <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="programación.html#cb121-1" tabindex="-1"></a>h1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="st">&quot;&quot;</span>, latidos))</span>
+<span id="cb121-2"><a href="programación.html#cb121-2" tabindex="-1"></a>h1 <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="programación.html#cb124-1" tabindex="-1"></a>h1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="st">&quot;&quot;</span>, latidos))</span>
-<span id="cb124-2"><a href="programación.html#cb124-2" tabindex="-1"></a>h1 <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
 <p>Veámos otros datos.</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="programación.html#cb125-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/demografia_salud.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>) <span class="co"># load data</span></span></code></pre></div>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="programación.html#cb126-1" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>Sexo)</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="programación.html#cb122-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/demografia_salud.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>) <span class="co"># load data</span></span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="programación.html#cb123-1" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>Sexo)</span></code></pre></div>
 <pre><code>## 
 ## Hombre  Mujer 
 ##     24     16</code></pre>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="programación.html#cb128-1" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>Estado.Civil)</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="programación.html#cb125-1" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>Estado.Civil)</span></code></pre></div>
 <pre><code>## 
 ##     Casado Divorciado    Soltero      Viudo 
 ##         24          6          6          4</code></pre>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="programación.html#cb130-1" tabindex="-1"></a><span class="fu">mean</span>(dat<span class="sc">$</span>Numero.de.hijos)</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="programación.html#cb127-1" tabindex="-1"></a><span class="fu">mean</span>(dat<span class="sc">$</span>Numero.de.hijos)</span></code></pre></div>
 <pre><code>## [1] 1.475</code></pre>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="programación.html#cb132-1" tabindex="-1"></a><span class="fu">sd</span>(dat<span class="sc">$</span>Numero.de.hijos)</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="programación.html#cb129-1" tabindex="-1"></a><span class="fu">sd</span>(dat<span class="sc">$</span>Numero.de.hijos)</span></code></pre></div>
 <pre><code>## [1] 1.154423</code></pre>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="programación.html#cb134-1" tabindex="-1"></a><span class="fu">min</span>(dat<span class="sc">$</span>Peso)</span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="programación.html#cb131-1" tabindex="-1"></a><span class="fu">min</span>(dat<span class="sc">$</span>Peso)</span></code></pre></div>
 <pre><code>## [1] 58</code></pre>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="programación.html#cb136-1" tabindex="-1"></a><span class="fu">max</span>(dat<span class="sc">$</span>Peso)</span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="programación.html#cb133-1" tabindex="-1"></a><span class="fu">max</span>(dat<span class="sc">$</span>Peso)</span></code></pre></div>
 <pre><code>## [1] 89</code></pre>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="programación.html#cb138-1" tabindex="-1"></a>dat<span class="sc">$</span>Altura <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">&quot;,&quot;</span>, <span class="st">&quot;.&quot;</span>, dat<span class="sc">$</span>Altura))</span>
-<span id="cb138-2"><a href="programación.html#cb138-2" tabindex="-1"></a><span class="fu">aggregate</span>(Altura <span class="sc">~</span> Sexo, <span class="at">data =</span> dat, mean)</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="programación.html#cb135-1" tabindex="-1"></a>dat<span class="sc">$</span>Altura <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">&quot;,&quot;</span>, <span class="st">&quot;.&quot;</span>, dat<span class="sc">$</span>Altura))</span>
+<span id="cb135-2"><a href="programación.html#cb135-2" tabindex="-1"></a><span class="fu">aggregate</span>(Altura <span class="sc">~</span> Sexo, <span class="at">data =</span> dat, mean)</span></code></pre></div>
 <pre><code>##     Sexo   Altura
 ## 1 Hombre 1.703333
 ## 2  Mujer 1.646875</code></pre>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="programación.html#cb140-1" tabindex="-1"></a><span class="fu">aggregate</span>(Altura <span class="sc">~</span> Sexo, <span class="at">data =</span> dat, sd)</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="programación.html#cb137-1" tabindex="-1"></a><span class="fu">aggregate</span>(Altura <span class="sc">~</span> Sexo, <span class="at">data =</span> dat, sd)</span></code></pre></div>
 <pre><code>##     Sexo     Altura
 ## 1 Hombre 0.07653738
 ## 2  Mujer 0.06279265</code></pre>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="programación.html#cb142-1" tabindex="-1"></a>dat<span class="sc">$</span>PA.Min <span class="ot">&lt;-</span> dat<span class="sc">$</span>Pr.Arter.Max</span>
-<span id="cb142-2"><a href="programación.html#cb142-2" tabindex="-1"></a>dat<span class="sc">$</span>PA.Max <span class="ot">&lt;-</span> dat<span class="sc">$</span>Pr.Arter.Min</span>
-<span id="cb142-3"><a href="programación.html#cb142-3" tabindex="-1"></a></span>
-<span id="cb142-4"><a href="programación.html#cb142-4" tabindex="-1"></a><span class="fu">aggregate</span>(PA.Max <span class="sc">~</span> Estado.Civil, <span class="at">data =</span> dat, mean)</span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="programación.html#cb139-1" tabindex="-1"></a>dat<span class="sc">$</span>PA.Min <span class="ot">&lt;-</span> dat<span class="sc">$</span>Pr.Arter.Max</span>
+<span id="cb139-2"><a href="programación.html#cb139-2" tabindex="-1"></a>dat<span class="sc">$</span>PA.Max <span class="ot">&lt;-</span> dat<span class="sc">$</span>Pr.Arter.Min</span>
+<span id="cb139-3"><a href="programación.html#cb139-3" tabindex="-1"></a></span>
+<span id="cb139-4"><a href="programación.html#cb139-4" tabindex="-1"></a><span class="fu">aggregate</span>(PA.Max <span class="sc">~</span> Estado.Civil, <span class="at">data =</span> dat, mean)</span></code></pre></div>
 <pre><code>##   Estado.Civil   PA.Max
 ## 1       Casado 141.7917
 ## 2   Divorciado 137.1667
 ## 3      Soltero 142.0000
 ## 4        Viudo 144.2500</code></pre>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="programación.html#cb144-1" tabindex="-1"></a><span class="fu">aggregate</span>(PA.Max <span class="sc">~</span> Estado.Civil, <span class="at">data =</span> dat, sd)</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="programación.html#cb141-1" tabindex="-1"></a><span class="fu">aggregate</span>(PA.Max <span class="sc">~</span> Estado.Civil, <span class="at">data =</span> dat, sd)</span></code></pre></div>
 <pre><code>##   Estado.Civil    PA.Max
 ## 1       Casado  9.002315
 ## 2   Divorciado 10.553041

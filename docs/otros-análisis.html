@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2024-04-04" />
+<meta name="date" content="2024-11-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,7 +53,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -283,12 +283,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">11.1</span> Análisis de proporciones</h2>
 <p>Imagina que estás analizando una base de datos dónde los participantes tenían que elegir entre dos tipos de chocolates.</p>
 <p>Primero seteamos nuestro directorio de trabajo y graficar los datos. Cargamos la librería <strong>ggplot2</strong> y otras librerías que nos serviran. Si no tienes estas librerías debes instalarlas. Luego importamos nuestro set de datos y lo miramos.</p>
-<div class="sourceCode" id="cb657"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb657-1"><a href="otros-análisis.html#cb657-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
-<span id="cb657-2"><a href="otros-análisis.html#cb657-2" tabindex="-1"></a></span>
-<span id="cb657-3"><a href="otros-análisis.html#cb657-3" tabindex="-1"></a>prefsAB <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/prefsAB.csv&quot;</span>)</span>
-<span id="cb657-4"><a href="otros-análisis.html#cb657-4" tabindex="-1"></a>prefsAB<span class="sc">$</span>Participante <span class="ot">&lt;-</span> <span class="fu">factor</span>(prefsAB<span class="sc">$</span>Participante) <span class="co"># convertimos Participante a factor</span></span>
-<span id="cb657-5"><a href="otros-análisis.html#cb657-5" tabindex="-1"></a>prefsAB<span class="sc">$</span>Preferencia <span class="ot">&lt;-</span> <span class="fu">factor</span>(prefsAB<span class="sc">$</span>Preferencia) <span class="co"># convertimos Preferencia a factor</span></span>
-<span id="cb657-6"><a href="otros-análisis.html#cb657-6" tabindex="-1"></a><span class="fu">head</span>(prefsAB)</span></code></pre></div>
+<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb580-1"><a href="otros-análisis.html#cb580-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
+<span id="cb580-2"><a href="otros-análisis.html#cb580-2" tabindex="-1"></a></span>
+<span id="cb580-3"><a href="otros-análisis.html#cb580-3" tabindex="-1"></a>prefsAB <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/prefsAB.csv&quot;</span>)</span>
+<span id="cb580-4"><a href="otros-análisis.html#cb580-4" tabindex="-1"></a>prefsAB<span class="sc">$</span>Participante <span class="ot">&lt;-</span> <span class="fu">factor</span>(prefsAB<span class="sc">$</span>Participante) <span class="co"># convertimos Participante a factor</span></span>
+<span id="cb580-5"><a href="otros-análisis.html#cb580-5" tabindex="-1"></a>prefsAB<span class="sc">$</span>Preferencia <span class="ot">&lt;-</span> <span class="fu">factor</span>(prefsAB<span class="sc">$</span>Preferencia) <span class="co"># convertimos Preferencia a factor</span></span>
+<span id="cb580-6"><a href="otros-análisis.html#cb580-6" tabindex="-1"></a><span class="fu">head</span>(prefsAB)</span></code></pre></div>
 <pre><code>##   Participante Preferencia
 ## 1            1  Sahne-Nuss
 ## 2            2  Sahne-Nuss
@@ -297,26 +297,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5            5  Sahne-Nuss
 ## 6            6  Sahne-Nuss</code></pre>
 <p>Luego realizamos un gráfico para visualizar diferencias en las preferencias.</p>
-<div class="sourceCode" id="cb659"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb659-1"><a href="otros-análisis.html#cb659-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb659-2"><a href="otros-análisis.html#cb659-2" tabindex="-1"></a></span>
-<span id="cb659-3"><a href="otros-análisis.html#cb659-3" tabindex="-1"></a><span class="fu">ggplot</span>(prefsAB, <span class="fu">aes</span>(Preferencia, ..count..)) <span class="sc">+</span> </span>
-<span id="cb659-4"><a href="otros-análisis.html#cb659-4" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Preferencia), <span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
-<span id="cb659-5"><a href="otros-análisis.html#cb659-5" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Número de personas&quot;</span>) </span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-290-1.png" width="672" /></p>
+<div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb582-1"><a href="otros-análisis.html#cb582-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb582-2"><a href="otros-análisis.html#cb582-2" tabindex="-1"></a></span>
+<span id="cb582-3"><a href="otros-análisis.html#cb582-3" tabindex="-1"></a><span class="fu">ggplot</span>(prefsAB, <span class="fu">aes</span>(Preferencia, ..count..)) <span class="sc">+</span> </span>
+<span id="cb582-4"><a href="otros-análisis.html#cb582-4" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Preferencia), <span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
+<span id="cb582-5"><a href="otros-análisis.html#cb582-5" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Número de personas&quot;</span>) </span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-289-1.png" width="672" /></p>
 <p>Podemos usar la función <strong>xtabs</strong> para obtener una tabla de contigencia.
 Luego con la función <strong>chisq.test</strong> cálculamos la probabilidad que estas dos preferencias esten igualmente distribuidas (una prueba clásica de chi cuadrado).</p>
-<div class="sourceCode" id="cb660"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb660-1"><a href="otros-análisis.html#cb660-1" tabindex="-1"></a>(tabla.contingencia <span class="ot">&lt;-</span> <span class="fu">xtabs</span>( <span class="sc">~</span> Preferencia, prefsAB))</span></code></pre></div>
+<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="otros-análisis.html#cb583-1" tabindex="-1"></a>(tabla.contingencia <span class="ot">&lt;-</span> <span class="fu">xtabs</span>( <span class="sc">~</span> Preferencia, prefsAB))</span></code></pre></div>
 <pre><code>## Preferencia
 ## Sahne-Nuss   Trencito 
 ##         46         14</code></pre>
-<div class="sourceCode" id="cb662"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb662-1"><a href="otros-análisis.html#cb662-1" tabindex="-1"></a><span class="fu">chisq.test</span>(tabla.contingencia)</span></code></pre></div>
+<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="otros-análisis.html#cb585-1" tabindex="-1"></a><span class="fu">chisq.test</span>(tabla.contingencia)</span></code></pre></div>
 <pre><code>## 
 ##  Chi-squared test for given probabilities
 ## 
 ## data:  tabla.contingencia
 ## X-squared = 17.067, df = 1, p-value = 3.609e-05</code></pre>
 <p>Otro test parecido, pero mas exacto es un test binomial.</p>
-<div class="sourceCode" id="cb664"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb664-1"><a href="otros-análisis.html#cb664-1" tabindex="-1"></a><span class="fu">binom.test</span>(tabla.contingencia)</span></code></pre></div>
+<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb587-1"><a href="otros-análisis.html#cb587-1" tabindex="-1"></a><span class="fu">binom.test</span>(tabla.contingencia)</span></code></pre></div>
 <pre><code>## 
 ##  Exact binomial test
 ## 
@@ -330,11 +330,11 @@ Luego con la función <strong>chisq.test</strong> cálculamos la probabilidad qu
 ##              0.7666667</code></pre>
 <p>Ahora imagina que estás analizando una base de datos dónde los participantes tenían que elegir entre 3 tipos de chocolates.</p>
 <p>Nuevamente, importamos primero nuestro set de datos.</p>
-<div class="sourceCode" id="cb666"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb666-1"><a href="otros-análisis.html#cb666-1" tabindex="-1"></a>prefsABC <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/prefsABC.csv&quot;</span>)</span>
-<span id="cb666-2"><a href="otros-análisis.html#cb666-2" tabindex="-1"></a></span>
-<span id="cb666-3"><a href="otros-análisis.html#cb666-3" tabindex="-1"></a>prefsABC<span class="sc">$</span>Participante <span class="ot">&lt;-</span> <span class="fu">factor</span>(prefsABC<span class="sc">$</span>Participante) <span class="co"># convertimos Participante a factor</span></span>
-<span id="cb666-4"><a href="otros-análisis.html#cb666-4" tabindex="-1"></a>prefsABC<span class="sc">$</span>Preferencia <span class="ot">&lt;-</span> <span class="fu">factor</span>(prefsABC<span class="sc">$</span>Preferencia) <span class="co"># convertimos Preferencia a factor</span></span>
-<span id="cb666-5"><a href="otros-análisis.html#cb666-5" tabindex="-1"></a><span class="fu">head</span>(prefsABC)</span></code></pre></div>
+<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="otros-análisis.html#cb589-1" tabindex="-1"></a>prefsABC <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/prefsABC.csv&quot;</span>)</span>
+<span id="cb589-2"><a href="otros-análisis.html#cb589-2" tabindex="-1"></a></span>
+<span id="cb589-3"><a href="otros-análisis.html#cb589-3" tabindex="-1"></a>prefsABC<span class="sc">$</span>Participante <span class="ot">&lt;-</span> <span class="fu">factor</span>(prefsABC<span class="sc">$</span>Participante) <span class="co"># convertimos Participante a factor</span></span>
+<span id="cb589-4"><a href="otros-análisis.html#cb589-4" tabindex="-1"></a>prefsABC<span class="sc">$</span>Preferencia <span class="ot">&lt;-</span> <span class="fu">factor</span>(prefsABC<span class="sc">$</span>Preferencia) <span class="co"># convertimos Preferencia a factor</span></span>
+<span id="cb589-5"><a href="otros-análisis.html#cb589-5" tabindex="-1"></a><span class="fu">head</span>(prefsABC)</span></code></pre></div>
 <pre><code>##   Participante Preferencia
 ## 1            1 Golden-Nuss
 ## 2            2 Golden-Nuss
@@ -343,46 +343,46 @@ Luego con la función <strong>chisq.test</strong> cálculamos la probabilidad qu
 ## 5            5 Golden-Nuss
 ## 6            6  Sahne-Nuss</code></pre>
 <p>Realizamos el gráfico para visualizar diferencias en las preferencias.</p>
-<div class="sourceCode" id="cb668"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb668-1"><a href="otros-análisis.html#cb668-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb668-2"><a href="otros-análisis.html#cb668-2" tabindex="-1"></a></span>
-<span id="cb668-3"><a href="otros-análisis.html#cb668-3" tabindex="-1"></a><span class="fu">ggplot</span>(prefsABC, <span class="fu">aes</span>(Preferencia, ..count..)) <span class="sc">+</span></span>
-<span id="cb668-4"><a href="otros-análisis.html#cb668-4" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Preferencia), <span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
-<span id="cb668-5"><a href="otros-análisis.html#cb668-5" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Número de personas&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-294-1.png" width="672" /></p>
+<div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb591-1"><a href="otros-análisis.html#cb591-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb591-2"><a href="otros-análisis.html#cb591-2" tabindex="-1"></a></span>
+<span id="cb591-3"><a href="otros-análisis.html#cb591-3" tabindex="-1"></a><span class="fu">ggplot</span>(prefsABC, <span class="fu">aes</span>(Preferencia, ..count..)) <span class="sc">+</span></span>
+<span id="cb591-4"><a href="otros-análisis.html#cb591-4" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Preferencia), <span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
+<span id="cb591-5"><a href="otros-análisis.html#cb591-5" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Número de personas&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-293-1.png" width="672" /></p>
 <p>Podemos usar la función <strong>xtabs</strong> para obtener una tabla de contigencia.
 Luego con la función <strong>chisq.test</strong> cálculamos la probabilidad que estas dos preferencias esten igualmente distribuidas (una prueba clásica de chi cuadrado).</p>
-<div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb669-1"><a href="otros-análisis.html#cb669-1" tabindex="-1"></a>(tabla.contingencia <span class="ot">&lt;-</span> <span class="fu">xtabs</span>( <span class="sc">~</span> Preferencia, prefsABC))</span></code></pre></div>
+<div class="sourceCode" id="cb592"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb592-1"><a href="otros-análisis.html#cb592-1" tabindex="-1"></a>(tabla.contingencia <span class="ot">&lt;-</span> <span class="fu">xtabs</span>( <span class="sc">~</span> Preferencia, prefsABC))</span></code></pre></div>
 <pre><code>## Preferencia
 ## Golden-Nuss  Sahne-Nuss    Trencito 
 ##          31          21           8</code></pre>
-<div class="sourceCode" id="cb671"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb671-1"><a href="otros-análisis.html#cb671-1" tabindex="-1"></a><span class="fu">chisq.test</span>(tabla.contingencia)</span></code></pre></div>
+<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb594-1"><a href="otros-análisis.html#cb594-1" tabindex="-1"></a><span class="fu">chisq.test</span>(tabla.contingencia)</span></code></pre></div>
 <pre><code>## 
 ##  Chi-squared test for given probabilities
 ## 
 ## data:  tabla.contingencia
 ## X-squared = 13.3, df = 2, p-value = 0.001294</code></pre>
 <p>Otro test parecido, pero mas exacto es un test multinomial.</p>
-<div class="sourceCode" id="cb673"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb673-1"><a href="otros-análisis.html#cb673-1" tabindex="-1"></a><span class="fu">library</span>(XNomial)</span></code></pre></div>
-<pre><code>## Warning: package &#39;XNomial&#39; was built under R version 4.3.3</code></pre>
-<div class="sourceCode" id="cb675"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb675-1"><a href="otros-análisis.html#cb675-1" tabindex="-1"></a><span class="fu">xmulti</span>(tabla.contingencia, <span class="fu">c</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>), <span class="at">statName =</span> <span class="st">&quot;Prob&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb596-1"><a href="otros-análisis.html#cb596-1" tabindex="-1"></a><span class="fu">library</span>(XNomial)</span>
+<span id="cb596-2"><a href="otros-análisis.html#cb596-2" tabindex="-1"></a></span>
+<span id="cb596-3"><a href="otros-análisis.html#cb596-3" tabindex="-1"></a><span class="fu">xmulti</span>(tabla.contingencia, <span class="fu">c</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>), <span class="at">statName =</span> <span class="st">&quot;Prob&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## P value (Prob) = 0.0008024</code></pre>
 <p>Luego que pesquisamos diferencias generales podemos hacer comparaciones más específicas entre pares de elementos.
 Podemos usar la función <strong>p.adjust</strong> para ajustar el valor de p para tener en cuenta el problema de comparaciones múltiples.</p>
-<div class="sourceCode" id="cb677"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb677-1"><a href="otros-análisis.html#cb677-1" tabindex="-1"></a>PrefA <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="fu">sum</span>(prefsABC<span class="sc">$</span>Preferencia <span class="sc">==</span> <span class="st">&quot;Trencito&quot;</span>), <span class="fu">nrow</span>(prefsABC), <span class="at">p=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
-<span id="cb677-2"><a href="otros-análisis.html#cb677-2" tabindex="-1"></a>PrefB <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="fu">sum</span>(prefsABC<span class="sc">$</span>Preferencia <span class="sc">==</span> <span class="st">&quot;Sahne-Nuss&quot;</span>), <span class="fu">nrow</span>(prefsABC), <span class="at">p=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
-<span id="cb677-3"><a href="otros-análisis.html#cb677-3" tabindex="-1"></a>PrefC <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="fu">sum</span>(prefsABC<span class="sc">$</span>Preferencia <span class="sc">==</span> <span class="st">&quot;Golden-Nuss&quot;</span>), <span class="fu">nrow</span>(prefsABC), <span class="at">p=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
-<span id="cb677-4"><a href="otros-análisis.html#cb677-4" tabindex="-1"></a><span class="fu">p.adjust</span>(<span class="fu">c</span>(PrefA<span class="sc">$</span>p.value, PrefB<span class="sc">$</span>p.value, PrefC<span class="sc">$</span>p.value), <span class="at">method=</span><span class="st">&quot;holm&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb598"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb598-1"><a href="otros-análisis.html#cb598-1" tabindex="-1"></a>PrefA <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="fu">sum</span>(prefsABC<span class="sc">$</span>Preferencia <span class="sc">==</span> <span class="st">&quot;Trencito&quot;</span>), <span class="fu">nrow</span>(prefsABC), <span class="at">p=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
+<span id="cb598-2"><a href="otros-análisis.html#cb598-2" tabindex="-1"></a>PrefB <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="fu">sum</span>(prefsABC<span class="sc">$</span>Preferencia <span class="sc">==</span> <span class="st">&quot;Sahne-Nuss&quot;</span>), <span class="fu">nrow</span>(prefsABC), <span class="at">p=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
+<span id="cb598-3"><a href="otros-análisis.html#cb598-3" tabindex="-1"></a>PrefC <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="fu">sum</span>(prefsABC<span class="sc">$</span>Preferencia <span class="sc">==</span> <span class="st">&quot;Golden-Nuss&quot;</span>), <span class="fu">nrow</span>(prefsABC), <span class="at">p=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
+<span id="cb598-4"><a href="otros-análisis.html#cb598-4" tabindex="-1"></a><span class="fu">p.adjust</span>(<span class="fu">c</span>(PrefA<span class="sc">$</span>p.value, PrefB<span class="sc">$</span>p.value, PrefC<span class="sc">$</span>p.value), <span class="at">method=</span><span class="st">&quot;holm&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] 0.001659954 0.785201685 0.007446980</code></pre>
 <p>En un siguiente nivel de complejidad imagina que ahora estás analizando una base de datos dónde los participantes tenían que elegir entre 2 tipos de chocolates, pero además se registró si era un hombre o una mujer.</p>
 <p>Nuevamente, importamos primero nuestro set de datos.</p>
-<div class="sourceCode" id="cb679"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb679-1"><a href="otros-análisis.html#cb679-1" tabindex="-1"></a>prefsABsex <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/prefsABsex.csv&quot;</span>)</span>
-<span id="cb679-2"><a href="otros-análisis.html#cb679-2" tabindex="-1"></a></span>
-<span id="cb679-3"><a href="otros-análisis.html#cb679-3" tabindex="-1"></a>prefsABsex<span class="sc">$</span>Participante <span class="ot">&lt;-</span> <span class="fu">factor</span>(prefsABsex<span class="sc">$</span>Participante) <span class="co"># convertimos a factor</span></span>
-<span id="cb679-4"><a href="otros-análisis.html#cb679-4" tabindex="-1"></a>prefsABsex<span class="sc">$</span>Preferencia <span class="ot">&lt;-</span> <span class="fu">factor</span>(prefsABsex<span class="sc">$</span>Preferencia) <span class="co"># convertimos a factor</span></span>
-<span id="cb679-5"><a href="otros-análisis.html#cb679-5" tabindex="-1"></a>prefsABsex<span class="sc">$</span>Genero <span class="ot">&lt;-</span> <span class="fu">factor</span>(prefsABsex<span class="sc">$</span>Genero) <span class="co"># convertimos a factor</span></span>
-<span id="cb679-6"><a href="otros-análisis.html#cb679-6" tabindex="-1"></a></span>
-<span id="cb679-7"><a href="otros-análisis.html#cb679-7" tabindex="-1"></a><span class="fu">head</span>(prefsABsex)</span></code></pre></div>
+<div class="sourceCode" id="cb600"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb600-1"><a href="otros-análisis.html#cb600-1" tabindex="-1"></a>prefsABsex <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/prefsABsex.csv&quot;</span>)</span>
+<span id="cb600-2"><a href="otros-análisis.html#cb600-2" tabindex="-1"></a></span>
+<span id="cb600-3"><a href="otros-análisis.html#cb600-3" tabindex="-1"></a>prefsABsex<span class="sc">$</span>Participante <span class="ot">&lt;-</span> <span class="fu">factor</span>(prefsABsex<span class="sc">$</span>Participante) <span class="co"># convertimos a factor</span></span>
+<span id="cb600-4"><a href="otros-análisis.html#cb600-4" tabindex="-1"></a>prefsABsex<span class="sc">$</span>Preferencia <span class="ot">&lt;-</span> <span class="fu">factor</span>(prefsABsex<span class="sc">$</span>Preferencia) <span class="co"># convertimos a factor</span></span>
+<span id="cb600-5"><a href="otros-análisis.html#cb600-5" tabindex="-1"></a>prefsABsex<span class="sc">$</span>Genero <span class="ot">&lt;-</span> <span class="fu">factor</span>(prefsABsex<span class="sc">$</span>Genero) <span class="co"># convertimos a factor</span></span>
+<span id="cb600-6"><a href="otros-análisis.html#cb600-6" tabindex="-1"></a></span>
+<span id="cb600-7"><a href="otros-análisis.html#cb600-7" tabindex="-1"></a><span class="fu">head</span>(prefsABsex)</span></code></pre></div>
 <pre><code>##   Participante Preferencia    Genero
 ## 1            1  Sahne-Nuss  Femenino
 ## 2            2  Sahne-Nuss  Femenino
@@ -391,28 +391,28 @@ Podemos usar la función <strong>p.adjust</strong> para ajustar el valor de p pa
 ## 5            5  Sahne-Nuss  Femenino
 ## 6            6  Sahne-Nuss Masculino</code></pre>
 <p>Realizamos el gráfico para visualizar diferencias en las preferencias.</p>
-<div class="sourceCode" id="cb681"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb681-1"><a href="otros-análisis.html#cb681-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb681-2"><a href="otros-análisis.html#cb681-2" tabindex="-1"></a></span>
-<span id="cb681-3"><a href="otros-análisis.html#cb681-3" tabindex="-1"></a><span class="fu">ggplot</span>(prefsABsex, <span class="fu">aes</span>(Preferencia, ..count..)) <span class="sc">+</span> </span>
-<span id="cb681-4"><a href="otros-análisis.html#cb681-4" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Preferencia), <span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
-<span id="cb681-5"><a href="otros-análisis.html#cb681-5" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> Genero) <span class="sc">+</span></span>
-<span id="cb681-6"><a href="otros-análisis.html#cb681-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Número de personas&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-299-1.png" width="672" /></p>
+<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb602-1"><a href="otros-análisis.html#cb602-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb602-2"><a href="otros-análisis.html#cb602-2" tabindex="-1"></a></span>
+<span id="cb602-3"><a href="otros-análisis.html#cb602-3" tabindex="-1"></a><span class="fu">ggplot</span>(prefsABsex, <span class="fu">aes</span>(Preferencia, ..count..)) <span class="sc">+</span> </span>
+<span id="cb602-4"><a href="otros-análisis.html#cb602-4" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Preferencia), <span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
+<span id="cb602-5"><a href="otros-análisis.html#cb602-5" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> Genero) <span class="sc">+</span></span>
+<span id="cb602-6"><a href="otros-análisis.html#cb602-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Número de personas&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-298-1.png" width="672" /></p>
 <p>Podemos usar la función <strong>xtabs</strong> para obtener una tabla de contigencia.
 Luego con la función <strong>chisq.test</strong> cálculamos la probabilidad que estas dos preferencias en función del género esten igualmente distribuidas.</p>
-<div class="sourceCode" id="cb682"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb682-1"><a href="otros-análisis.html#cb682-1" tabindex="-1"></a>(tabla.contingencia <span class="ot">&lt;-</span> <span class="fu">xtabs</span>( <span class="sc">~</span> Preferencia <span class="sc">+</span> Genero, prefsABsex))</span></code></pre></div>
+<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb603-1"><a href="otros-análisis.html#cb603-1" tabindex="-1"></a>(tabla.contingencia <span class="ot">&lt;-</span> <span class="fu">xtabs</span>( <span class="sc">~</span> Preferencia <span class="sc">+</span> Genero, prefsABsex))</span></code></pre></div>
 <pre><code>##             Genero
 ## Preferencia  Femenino Masculino
 ##   Sahne-Nuss       29        17
 ##   Trencito          2        12</code></pre>
-<div class="sourceCode" id="cb684"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb684-1"><a href="otros-análisis.html#cb684-1" tabindex="-1"></a><span class="fu">chisq.test</span>(tabla.contingencia)</span></code></pre></div>
+<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb605-1"><a href="otros-análisis.html#cb605-1" tabindex="-1"></a><span class="fu">chisq.test</span>(tabla.contingencia)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test with Yates&#39; continuity correction
 ## 
 ## data:  tabla.contingencia
 ## X-squared = 8.3588, df = 1, p-value = 0.003838</code></pre>
 <p>Otro test parecido, pero mas exacto es un test de Fisher</p>
-<div class="sourceCode" id="cb686"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb686-1"><a href="otros-análisis.html#cb686-1" tabindex="-1"></a><span class="fu">fisher.test</span>(tabla.contingencia)</span></code></pre></div>
+<div class="sourceCode" id="cb607"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb607-1"><a href="otros-análisis.html#cb607-1" tabindex="-1"></a><span class="fu">fisher.test</span>(tabla.contingencia)</span></code></pre></div>
 <pre><code>## 
 ##  Fisher&#39;s Exact Test for Count Data
 ## 
@@ -426,13 +426,13 @@ Luego con la función <strong>chisq.test</strong> cálculamos la probabilidad qu
 ##   9.844814</code></pre>
 <p>Finalmente, imagina que ahora estás analizando una base de datos dónde los participantes tenían que elegir entre 3 tipos de chocolates, pero además se registró si era un hombre o una mujer.</p>
 <p>Nuevamente, importamos primero nuestro set de datos.</p>
-<div class="sourceCode" id="cb688"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb688-1"><a href="otros-análisis.html#cb688-1" tabindex="-1"></a>prefsABCsex <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/prefsABCsex.csv&quot;</span>)</span>
-<span id="cb688-2"><a href="otros-análisis.html#cb688-2" tabindex="-1"></a></span>
-<span id="cb688-3"><a href="otros-análisis.html#cb688-3" tabindex="-1"></a>prefsABCsex<span class="sc">$</span>Participante <span class="ot">&lt;-</span> <span class="fu">factor</span>(prefsABCsex<span class="sc">$</span>Participante) <span class="co"># convertimos a factor</span></span>
-<span id="cb688-4"><a href="otros-análisis.html#cb688-4" tabindex="-1"></a>prefsABCsex<span class="sc">$</span>Preferencia <span class="ot">&lt;-</span> <span class="fu">factor</span>(prefsABCsex<span class="sc">$</span>Preferencia) <span class="co"># convertimos a factor</span></span>
-<span id="cb688-5"><a href="otros-análisis.html#cb688-5" tabindex="-1"></a>prefsABCsex<span class="sc">$</span>Genero <span class="ot">&lt;-</span> <span class="fu">factor</span>(prefsABCsex<span class="sc">$</span>Genero) <span class="co"># convertimos a factor</span></span>
-<span id="cb688-6"><a href="otros-análisis.html#cb688-6" tabindex="-1"></a></span>
-<span id="cb688-7"><a href="otros-análisis.html#cb688-7" tabindex="-1"></a><span class="fu">head</span>(prefsABCsex)</span></code></pre></div>
+<div class="sourceCode" id="cb609"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb609-1"><a href="otros-análisis.html#cb609-1" tabindex="-1"></a>prefsABCsex <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/prefsABCsex.csv&quot;</span>)</span>
+<span id="cb609-2"><a href="otros-análisis.html#cb609-2" tabindex="-1"></a></span>
+<span id="cb609-3"><a href="otros-análisis.html#cb609-3" tabindex="-1"></a>prefsABCsex<span class="sc">$</span>Participante <span class="ot">&lt;-</span> <span class="fu">factor</span>(prefsABCsex<span class="sc">$</span>Participante) <span class="co"># convertimos a factor</span></span>
+<span id="cb609-4"><a href="otros-análisis.html#cb609-4" tabindex="-1"></a>prefsABCsex<span class="sc">$</span>Preferencia <span class="ot">&lt;-</span> <span class="fu">factor</span>(prefsABCsex<span class="sc">$</span>Preferencia) <span class="co"># convertimos a factor</span></span>
+<span id="cb609-5"><a href="otros-análisis.html#cb609-5" tabindex="-1"></a>prefsABCsex<span class="sc">$</span>Genero <span class="ot">&lt;-</span> <span class="fu">factor</span>(prefsABCsex<span class="sc">$</span>Genero) <span class="co"># convertimos a factor</span></span>
+<span id="cb609-6"><a href="otros-análisis.html#cb609-6" tabindex="-1"></a></span>
+<span id="cb609-7"><a href="otros-análisis.html#cb609-7" tabindex="-1"></a><span class="fu">head</span>(prefsABCsex)</span></code></pre></div>
 <pre><code>##   Participante Preferencia    Genero
 ## 1            1 Golden-Nuss  Femenino
 ## 2            2 Golden-Nuss Masculino
@@ -441,22 +441,22 @@ Luego con la función <strong>chisq.test</strong> cálculamos la probabilidad qu
 ## 5            5 Golden-Nuss Masculino
 ## 6            6  Sahne-Nuss  Femenino</code></pre>
 <p>Realizamos el gráfico para visualizar diferencias en las preferencias.</p>
-<div class="sourceCode" id="cb690"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb690-1"><a href="otros-análisis.html#cb690-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb690-2"><a href="otros-análisis.html#cb690-2" tabindex="-1"></a></span>
-<span id="cb690-3"><a href="otros-análisis.html#cb690-3" tabindex="-1"></a><span class="fu">ggplot</span>(prefsABCsex, <span class="fu">aes</span>(Preferencia, ..count..)) <span class="sc">+</span> </span>
-<span id="cb690-4"><a href="otros-análisis.html#cb690-4" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Preferencia), <span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
-<span id="cb690-5"><a href="otros-análisis.html#cb690-5" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> Genero) <span class="sc">+</span></span>
-<span id="cb690-6"><a href="otros-análisis.html#cb690-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Número de personas&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-303-1.png" width="672" /></p>
+<div class="sourceCode" id="cb611"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb611-1"><a href="otros-análisis.html#cb611-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb611-2"><a href="otros-análisis.html#cb611-2" tabindex="-1"></a></span>
+<span id="cb611-3"><a href="otros-análisis.html#cb611-3" tabindex="-1"></a><span class="fu">ggplot</span>(prefsABCsex, <span class="fu">aes</span>(Preferencia, ..count..)) <span class="sc">+</span> </span>
+<span id="cb611-4"><a href="otros-análisis.html#cb611-4" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Preferencia), <span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
+<span id="cb611-5"><a href="otros-análisis.html#cb611-5" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> Genero) <span class="sc">+</span></span>
+<span id="cb611-6"><a href="otros-análisis.html#cb611-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Número de personas&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-302-1.png" width="672" /></p>
 <p>Podemos usar la función <strong>xtabs</strong> para obtener una tabla de contigencia.
 Luego con la función <strong>chisq.test</strong> cálculamos la probabilidad que estas dos preferencias en función del género esten igualmente distribuidas.</p>
-<div class="sourceCode" id="cb691"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb691-1"><a href="otros-análisis.html#cb691-1" tabindex="-1"></a>(tabla.contingencia <span class="ot">&lt;-</span> <span class="fu">xtabs</span>( <span class="sc">~</span> Preferencia <span class="sc">+</span> Genero, prefsABCsex))</span></code></pre></div>
+<div class="sourceCode" id="cb612"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb612-1"><a href="otros-análisis.html#cb612-1" tabindex="-1"></a>(tabla.contingencia <span class="ot">&lt;-</span> <span class="fu">xtabs</span>( <span class="sc">~</span> Preferencia <span class="sc">+</span> Genero, prefsABCsex))</span></code></pre></div>
 <pre><code>##              Genero
 ## Preferencia   Femenino Masculino
 ##   Golden-Nuss       11        20
 ##   Sahne-Nuss        15         6
 ##   Trencito           3         5</code></pre>
-<div class="sourceCode" id="cb693"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb693-1"><a href="otros-análisis.html#cb693-1" tabindex="-1"></a><span class="fu">chisq.test</span>(tabla.contingencia)</span></code></pre></div>
+<div class="sourceCode" id="cb614"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb614-1"><a href="otros-análisis.html#cb614-1" tabindex="-1"></a><span class="fu">chisq.test</span>(tabla.contingencia)</span></code></pre></div>
 <pre><code>## Warning in chisq.test(tabla.contingencia): Chi-squared approximation may be incorrect</code></pre>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test
@@ -464,7 +464,7 @@ Luego con la función <strong>chisq.test</strong> cálculamos la probabilidad qu
 ## data:  tabla.contingencia
 ## X-squared = 6.9111, df = 2, p-value = 0.03157</code></pre>
 <p>Otro test parecido, pero mas exacto es un test de Fisher</p>
-<div class="sourceCode" id="cb696"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb696-1"><a href="otros-análisis.html#cb696-1" tabindex="-1"></a><span class="fu">fisher.test</span>(tabla.contingencia)</span></code></pre></div>
+<div class="sourceCode" id="cb617"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb617-1"><a href="otros-análisis.html#cb617-1" tabindex="-1"></a><span class="fu">fisher.test</span>(tabla.contingencia)</span></code></pre></div>
 <pre><code>## 
 ##  Fisher&#39;s Exact Test for Count Data
 ## 
@@ -474,31 +474,31 @@ Luego con la función <strong>chisq.test</strong> cálculamos la probabilidad qu
 <p>Luego que pesquisamos diferencias generales podemos hacer comparaciones más específicas entre pares de elementos.</p>
 <p>Primero, podemos hacer test binomiales sólo para los hombres.
 Hay diferencias significativas entre las preferencias de los hombres?</p>
-<div class="sourceCode" id="cb698"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb698-1"><a href="otros-análisis.html#cb698-1" tabindex="-1"></a>male_A <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="fu">sum</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Masculino&quot;</span>,]<span class="sc">$</span>Preferencia <span class="sc">==</span> <span class="st">&quot;Trencito&quot;</span>),</span>
-<span id="cb698-2"><a href="otros-análisis.html#cb698-2" tabindex="-1"></a>                 <span class="fu">nrow</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Masculino&quot;</span>,]), <span class="at">p=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
-<span id="cb698-3"><a href="otros-análisis.html#cb698-3" tabindex="-1"></a></span>
-<span id="cb698-4"><a href="otros-análisis.html#cb698-4" tabindex="-1"></a>male_B <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="fu">sum</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Masculino&quot;</span>,]<span class="sc">$</span>Preferencia <span class="sc">==</span> <span class="st">&quot;Sahne-Nuss&quot;</span>), </span>
-<span id="cb698-5"><a href="otros-análisis.html#cb698-5" tabindex="-1"></a>                 <span class="fu">nrow</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Masculino&quot;</span>,]), <span class="at">p=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
-<span id="cb698-6"><a href="otros-análisis.html#cb698-6" tabindex="-1"></a></span>
-<span id="cb698-7"><a href="otros-análisis.html#cb698-7" tabindex="-1"></a>male_C <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="fu">sum</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Masculino&quot;</span>,]<span class="sc">$</span>Preferencia <span class="sc">==</span> <span class="st">&quot;Golden-Nuss&quot;</span>), </span>
-<span id="cb698-8"><a href="otros-análisis.html#cb698-8" tabindex="-1"></a>                 <span class="fu">nrow</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Masculino&quot;</span>,]), <span class="at">p=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
-<span id="cb698-9"><a href="otros-análisis.html#cb698-9" tabindex="-1"></a></span>
-<span id="cb698-10"><a href="otros-análisis.html#cb698-10" tabindex="-1"></a>pvalues <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(<span class="fu">c</span>(male_A<span class="sc">$</span>p.value, male_B<span class="sc">$</span>p.value, male_C<span class="sc">$</span>p.value), <span class="at">method=</span><span class="st">&quot;holm&quot;</span>)</span>
-<span id="cb698-11"><a href="otros-análisis.html#cb698-11" tabindex="-1"></a><span class="fu">formatC</span>(pvalues, <span class="at">format =</span> <span class="st">&quot;f&quot;</span>, <span class="at">digits =</span> <span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb619-1"><a href="otros-análisis.html#cb619-1" tabindex="-1"></a>male_A <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="fu">sum</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Masculino&quot;</span>,]<span class="sc">$</span>Preferencia <span class="sc">==</span> <span class="st">&quot;Trencito&quot;</span>),</span>
+<span id="cb619-2"><a href="otros-análisis.html#cb619-2" tabindex="-1"></a>                 <span class="fu">nrow</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Masculino&quot;</span>,]), <span class="at">p=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
+<span id="cb619-3"><a href="otros-análisis.html#cb619-3" tabindex="-1"></a></span>
+<span id="cb619-4"><a href="otros-análisis.html#cb619-4" tabindex="-1"></a>male_B <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="fu">sum</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Masculino&quot;</span>,]<span class="sc">$</span>Preferencia <span class="sc">==</span> <span class="st">&quot;Sahne-Nuss&quot;</span>), </span>
+<span id="cb619-5"><a href="otros-análisis.html#cb619-5" tabindex="-1"></a>                 <span class="fu">nrow</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Masculino&quot;</span>,]), <span class="at">p=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
+<span id="cb619-6"><a href="otros-análisis.html#cb619-6" tabindex="-1"></a></span>
+<span id="cb619-7"><a href="otros-análisis.html#cb619-7" tabindex="-1"></a>male_C <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="fu">sum</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Masculino&quot;</span>,]<span class="sc">$</span>Preferencia <span class="sc">==</span> <span class="st">&quot;Golden-Nuss&quot;</span>), </span>
+<span id="cb619-8"><a href="otros-análisis.html#cb619-8" tabindex="-1"></a>                 <span class="fu">nrow</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Masculino&quot;</span>,]), <span class="at">p=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
+<span id="cb619-9"><a href="otros-análisis.html#cb619-9" tabindex="-1"></a></span>
+<span id="cb619-10"><a href="otros-análisis.html#cb619-10" tabindex="-1"></a>pvalues <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(<span class="fu">c</span>(male_A<span class="sc">$</span>p.value, male_B<span class="sc">$</span>p.value, male_C<span class="sc">$</span>p.value), <span class="at">method=</span><span class="st">&quot;holm&quot;</span>)</span>
+<span id="cb619-11"><a href="otros-análisis.html#cb619-11" tabindex="-1"></a><span class="fu">formatC</span>(pvalues, <span class="at">format =</span> <span class="st">&quot;f&quot;</span>, <span class="at">digits =</span> <span class="dv">6</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;0.109474&quot; &quot;0.126622&quot; &quot;0.001297&quot;</code></pre>
 <p>Segundo, podemos hacer test binomiales sólo para las mujeres.
 Hay diferencias significativas entre las preferencias de las mujeres?</p>
-<div class="sourceCode" id="cb700"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb700-1"><a href="otros-análisis.html#cb700-1" tabindex="-1"></a>female_A <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="fu">sum</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Femenino&quot;</span>,]<span class="sc">$</span>Preferencia <span class="sc">==</span> <span class="st">&quot;Trencito&quot;</span>),</span>
-<span id="cb700-2"><a href="otros-análisis.html#cb700-2" tabindex="-1"></a>                 <span class="fu">nrow</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Femenino&quot;</span>,]), <span class="at">p=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
-<span id="cb700-3"><a href="otros-análisis.html#cb700-3" tabindex="-1"></a></span>
-<span id="cb700-4"><a href="otros-análisis.html#cb700-4" tabindex="-1"></a>female_B <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="fu">sum</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Femenino&quot;</span>,]<span class="sc">$</span>Preferencia <span class="sc">==</span> <span class="st">&quot;Sahne-Nuss&quot;</span>),</span>
-<span id="cb700-5"><a href="otros-análisis.html#cb700-5" tabindex="-1"></a>                 <span class="fu">nrow</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Femenino&quot;</span>,]), <span class="at">p=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
-<span id="cb700-6"><a href="otros-análisis.html#cb700-6" tabindex="-1"></a></span>
-<span id="cb700-7"><a href="otros-análisis.html#cb700-7" tabindex="-1"></a>female_C <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="fu">sum</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Femenino&quot;</span>,]<span class="sc">$</span>Preferencia <span class="sc">==</span> <span class="st">&quot;Golden-Nuss&quot;</span>),</span>
-<span id="cb700-8"><a href="otros-análisis.html#cb700-8" tabindex="-1"></a>                 <span class="fu">nrow</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Femenino&quot;</span>,]), <span class="at">p=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
-<span id="cb700-9"><a href="otros-análisis.html#cb700-9" tabindex="-1"></a></span>
-<span id="cb700-10"><a href="otros-análisis.html#cb700-10" tabindex="-1"></a>pvalues <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(<span class="fu">c</span>(female_A<span class="sc">$</span>p.value, female_B<span class="sc">$</span>p.value, female_C<span class="sc">$</span>p.value), <span class="at">method=</span><span class="st">&quot;holm&quot;</span>)</span>
-<span id="cb700-11"><a href="otros-análisis.html#cb700-11" tabindex="-1"></a><span class="fu">formatC</span>(pvalues, <span class="at">format =</span> <span class="st">&quot;f&quot;</span>, <span class="at">digits =</span> <span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb621-1"><a href="otros-análisis.html#cb621-1" tabindex="-1"></a>female_A <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="fu">sum</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Femenino&quot;</span>,]<span class="sc">$</span>Preferencia <span class="sc">==</span> <span class="st">&quot;Trencito&quot;</span>),</span>
+<span id="cb621-2"><a href="otros-análisis.html#cb621-2" tabindex="-1"></a>                 <span class="fu">nrow</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Femenino&quot;</span>,]), <span class="at">p=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
+<span id="cb621-3"><a href="otros-análisis.html#cb621-3" tabindex="-1"></a></span>
+<span id="cb621-4"><a href="otros-análisis.html#cb621-4" tabindex="-1"></a>female_B <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="fu">sum</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Femenino&quot;</span>,]<span class="sc">$</span>Preferencia <span class="sc">==</span> <span class="st">&quot;Sahne-Nuss&quot;</span>),</span>
+<span id="cb621-5"><a href="otros-análisis.html#cb621-5" tabindex="-1"></a>                 <span class="fu">nrow</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Femenino&quot;</span>,]), <span class="at">p=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
+<span id="cb621-6"><a href="otros-análisis.html#cb621-6" tabindex="-1"></a></span>
+<span id="cb621-7"><a href="otros-análisis.html#cb621-7" tabindex="-1"></a>female_C <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="fu">sum</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Femenino&quot;</span>,]<span class="sc">$</span>Preferencia <span class="sc">==</span> <span class="st">&quot;Golden-Nuss&quot;</span>),</span>
+<span id="cb621-8"><a href="otros-análisis.html#cb621-8" tabindex="-1"></a>                 <span class="fu">nrow</span>(prefsABCsex[prefsABCsex<span class="sc">$</span>Genero <span class="sc">==</span> <span class="st">&quot;Femenino&quot;</span>,]), <span class="at">p=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span>
+<span id="cb621-9"><a href="otros-análisis.html#cb621-9" tabindex="-1"></a></span>
+<span id="cb621-10"><a href="otros-análisis.html#cb621-10" tabindex="-1"></a>pvalues <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(<span class="fu">c</span>(female_A<span class="sc">$</span>p.value, female_B<span class="sc">$</span>p.value, female_C<span class="sc">$</span>p.value), <span class="at">method=</span><span class="st">&quot;holm&quot;</span>)</span>
+<span id="cb621-11"><a href="otros-análisis.html#cb621-11" tabindex="-1"></a><span class="fu">formatC</span>(pvalues, <span class="at">format =</span> <span class="st">&quot;f&quot;</span>, <span class="at">digits =</span> <span class="dv">6</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;0.027033&quot; &quot;0.094478&quot; &quot;0.693970&quot;</code></pre>
 
 </div>

@@ -310,7 +310,11 @@ Es decir, debes definir tu directorio de trabajo con la función **setwd**
 Por ejemplo, para mí sería algo así:
 setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Stats_UTalca/database_2020_DocPsychol")
 
-La función **getwd()** (sin nada entre paréntesis) te permite sabes cual es tu directorio actual.
+Pone atención a esto porque es muy importante.
+Lo que está entre comillas es tu directorio de trabajo y tienes que setearlo de acuerdo a donde están tus datos en **tu computador**. Para este tutorial yo lo estaré seteando como *Sys.getenv("BOOKDOWN_PROJECT_PATH")* porque es una manera que mi computador reconozca un directorio que he definido en mi computador.\
+En tu caso debes setearlo de acuerdo a donde están los datos en tu computador. Por ejemplo, si tu disco duro se llama "Jose", y tus datos están en una carpeta "Datos" en una carpeta "Tutorial" tu directorio sería algo así como: "C:/Jose/Tutorial/Datos". Ojo, debes verificar esto en tu propio computador.
+
+La función **getwd()** (sin nada entre paréntesis) te permite sabes cual es tu directorio actual.\
 
 ```{r}
 getwd()
@@ -318,7 +322,9 @@ getwd()
 ```
 
 Para importar datos puedes usar distintas funciones.
-Por ejemplo, para importar datos de tipo .txt debemos usar la función **read.delim**
+Por ejemplo, para importar datos de tipo .txt debemos usar la función **read.delim**.\
+Acuérdate de setear tu directorio de trabajo en *setwd* de acuerdo a tu organización de archivos.
+Debería parecerse algo como a: setwd("C:/Users/Usuario/Documents/JoseLuis/UTalca_2018/Stats_UTalca/database_2020_DocPsychol")
 
 ```{r}
 setwd(Sys.getenv("BOOKDOWN_PROJECT_PATH"))

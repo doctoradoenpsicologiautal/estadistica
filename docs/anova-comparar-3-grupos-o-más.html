@@ -23,7 +23,7 @@
 <meta name="author" content="Facultad de Psicología, Universidad de Talca" />
 
 
-<meta name="date" content="2024-04-04" />
+<meta name="date" content="2024-11-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,7 +53,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -321,25 +321,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="el-anova-con-r" class="section level2" number="8.4">
 <h2><span class="header-section-number">8.4</span> El ANOVA con R</h2>
 <p>Ahora vamos a hacer el análisis. Primero seteamos nuestro directorio de trabajo y cargamos las librerías que necesitemos (si no las tienes instaladas debes instalarlas).</p>
-<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="anova-comparar-3-grupos-o-más.html#cb404-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
-<span id="cb404-2"><a href="anova-comparar-3-grupos-o-más.html#cb404-2" tabindex="-1"></a></span>
-<span id="cb404-3"><a href="anova-comparar-3-grupos-o-más.html#cb404-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb404-4"><a href="anova-comparar-3-grupos-o-más.html#cb404-4" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
-<span id="cb404-5"><a href="anova-comparar-3-grupos-o-más.html#cb404-5" tabindex="-1"></a><span class="fu">library</span>(Rmisc)</span>
-<span id="cb404-6"><a href="anova-comparar-3-grupos-o-más.html#cb404-6" tabindex="-1"></a><span class="fu">library</span>(effsize)</span>
-<span id="cb404-7"><a href="anova-comparar-3-grupos-o-más.html#cb404-7" tabindex="-1"></a><span class="fu">library</span>(pastecs)</span>
-<span id="cb404-8"><a href="anova-comparar-3-grupos-o-más.html#cb404-8" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
-<span id="cb404-9"><a href="anova-comparar-3-grupos-o-más.html#cb404-9" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb404-10"><a href="anova-comparar-3-grupos-o-más.html#cb404-10" tabindex="-1"></a><span class="fu">library</span>(effsize)</span>
-<span id="cb404-11"><a href="anova-comparar-3-grupos-o-más.html#cb404-11" tabindex="-1"></a><span class="fu">library</span>(effectsize)</span></code></pre></div>
-<pre><code>## Warning: package &#39;effectsize&#39; was built under R version 4.3.3</code></pre>
-<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="anova-comparar-3-grupos-o-más.html#cb406-1" tabindex="-1"></a><span class="fu">library</span>(lsr)</span></code></pre></div>
-<pre><code>## Warning: package &#39;lsr&#39; was built under R version 4.3.3</code></pre>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="anova-comparar-3-grupos-o-más.html#cb355-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">Sys.getenv</span>(<span class="st">&quot;BOOKDOWN_PROJECT_PATH&quot;</span>))</span>
+<span id="cb355-2"><a href="anova-comparar-3-grupos-o-más.html#cb355-2" tabindex="-1"></a></span>
+<span id="cb355-3"><a href="anova-comparar-3-grupos-o-más.html#cb355-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb355-4"><a href="anova-comparar-3-grupos-o-más.html#cb355-4" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
+<span id="cb355-5"><a href="anova-comparar-3-grupos-o-más.html#cb355-5" tabindex="-1"></a><span class="fu">library</span>(Rmisc)</span>
+<span id="cb355-6"><a href="anova-comparar-3-grupos-o-más.html#cb355-6" tabindex="-1"></a><span class="fu">library</span>(effsize)</span>
+<span id="cb355-7"><a href="anova-comparar-3-grupos-o-más.html#cb355-7" tabindex="-1"></a><span class="fu">library</span>(pastecs)</span>
+<span id="cb355-8"><a href="anova-comparar-3-grupos-o-más.html#cb355-8" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb355-9"><a href="anova-comparar-3-grupos-o-más.html#cb355-9" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb355-10"><a href="anova-comparar-3-grupos-o-más.html#cb355-10" tabindex="-1"></a><span class="fu">library</span>(effsize)</span>
+<span id="cb355-11"><a href="anova-comparar-3-grupos-o-más.html#cb355-11" tabindex="-1"></a><span class="fu">library</span>(effectsize)</span>
+<span id="cb355-12"><a href="anova-comparar-3-grupos-o-más.html#cb355-12" tabindex="-1"></a><span class="fu">library</span>(lsr)</span></code></pre></div>
 <p>Luego importamos el set de datos. Aprovechamos de agregar unas etiquetas que nos sirvan a visualizar las condiciones experimentales. Y le damos una mirada.</p>
-<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="anova-comparar-3-grupos-o-más.html#cb408-1" tabindex="-1"></a>dat1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/inteligencia.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb408-2"><a href="anova-comparar-3-grupos-o-más.html#cb408-2" tabindex="-1"></a>dat1<span class="sc">$</span>Dosis <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat1<span class="sc">$</span>Dosis, </span>
-<span id="cb408-3"><a href="anova-comparar-3-grupos-o-más.html#cb408-3" tabindex="-1"></a>                            <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))</span>
-<span id="cb408-4"><a href="anova-comparar-3-grupos-o-más.html#cb408-4" tabindex="-1"></a>dat1</span></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="anova-comparar-3-grupos-o-más.html#cb356-1" tabindex="-1"></a>dat1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/inteligencia.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb356-2"><a href="anova-comparar-3-grupos-o-más.html#cb356-2" tabindex="-1"></a>dat1<span class="sc">$</span>Dosis <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat1<span class="sc">$</span>Dosis, </span>
+<span id="cb356-3"><a href="anova-comparar-3-grupos-o-más.html#cb356-3" tabindex="-1"></a>                            <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))</span>
+<span id="cb356-4"><a href="anova-comparar-3-grupos-o-más.html#cb356-4" tabindex="-1"></a>dat1</span></code></pre></div>
 <pre><code>##      Dosis Inteligencia
 ## 1  Placebo            3
 ## 2  Placebo            2
@@ -357,26 +355,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 14    Alta            3
 ## 15    Alta            6</code></pre>
 <p>Luego, mirar los datos siempre es bueno graficar.</p>
-<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="anova-comparar-3-grupos-o-más.html#cb410-1" tabindex="-1"></a><span class="co"># Podemos usar esta función para calcular los estadísticos a través de los participantes.</span></span>
-<span id="cb410-2"><a href="anova-comparar-3-grupos-o-más.html#cb410-2" tabindex="-1"></a>datac <span class="ot">&lt;-</span> <span class="fu">summarySE</span>(dat1, </span>
-<span id="cb410-3"><a href="anova-comparar-3-grupos-o-más.html#cb410-3" tabindex="-1"></a>                   <span class="at">measurevar=</span><span class="st">&quot;Inteligencia&quot;</span>, </span>
-<span id="cb410-4"><a href="anova-comparar-3-grupos-o-más.html#cb410-4" tabindex="-1"></a>                   <span class="at">groupvars=</span><span class="st">&quot;Dosis&quot;</span>)</span>
-<span id="cb410-5"><a href="anova-comparar-3-grupos-o-más.html#cb410-5" tabindex="-1"></a></span>
-<span id="cb410-6"><a href="anova-comparar-3-grupos-o-más.html#cb410-6" tabindex="-1"></a><span class="co"># Luego hacemos el gráfico</span></span>
-<span id="cb410-7"><a href="anova-comparar-3-grupos-o-más.html#cb410-7" tabindex="-1"></a><span class="fu">ggplot</span>(datac, <span class="fu">aes</span>(<span class="at">x=</span>Dosis, <span class="at">y=</span>Inteligencia, <span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb410-8"><a href="anova-comparar-3-grupos-o-más.html#cb410-8" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">width=</span>.<span class="dv">1</span>, <span class="fu">aes</span>(<span class="at">ymin=</span>Inteligencia<span class="sc">-</span>se, <span class="at">ymax=</span>Inteligencia<span class="sc">+</span>se)) <span class="sc">+</span></span>
-<span id="cb410-9"><a href="anova-comparar-3-grupos-o-más.html#cb410-9" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">&quot;Red&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb410-10"><a href="anova-comparar-3-grupos-o-más.html#cb410-10" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb410-11"><a href="anova-comparar-3-grupos-o-más.html#cb410-11" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Niveles de inteligencia&quot;</span>) <span class="sc">+</span></span>
-<span id="cb410-12"><a href="anova-comparar-3-grupos-o-más.html#cb410-12" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb410-13"><a href="anova-comparar-3-grupos-o-más.html#cb410-13" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-172-1.png" width="672" /></p>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="anova-comparar-3-grupos-o-más.html#cb358-1" tabindex="-1"></a><span class="co"># Podemos usar esta función para calcular los estadísticos a través de los participantes.</span></span>
+<span id="cb358-2"><a href="anova-comparar-3-grupos-o-más.html#cb358-2" tabindex="-1"></a>datac <span class="ot">&lt;-</span> <span class="fu">summarySE</span>(dat1, </span>
+<span id="cb358-3"><a href="anova-comparar-3-grupos-o-más.html#cb358-3" tabindex="-1"></a>                   <span class="at">measurevar=</span><span class="st">&quot;Inteligencia&quot;</span>, </span>
+<span id="cb358-4"><a href="anova-comparar-3-grupos-o-más.html#cb358-4" tabindex="-1"></a>                   <span class="at">groupvars=</span><span class="st">&quot;Dosis&quot;</span>)</span>
+<span id="cb358-5"><a href="anova-comparar-3-grupos-o-más.html#cb358-5" tabindex="-1"></a></span>
+<span id="cb358-6"><a href="anova-comparar-3-grupos-o-más.html#cb358-6" tabindex="-1"></a><span class="co"># Luego hacemos el gráfico</span></span>
+<span id="cb358-7"><a href="anova-comparar-3-grupos-o-más.html#cb358-7" tabindex="-1"></a><span class="fu">ggplot</span>(datac, <span class="fu">aes</span>(<span class="at">x=</span>Dosis, <span class="at">y=</span>Inteligencia, <span class="at">group=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb358-8"><a href="anova-comparar-3-grupos-o-más.html#cb358-8" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">width=</span>.<span class="dv">1</span>, <span class="fu">aes</span>(<span class="at">ymin=</span>Inteligencia<span class="sc">-</span>se, <span class="at">ymax=</span>Inteligencia<span class="sc">+</span>se)) <span class="sc">+</span></span>
+<span id="cb358-9"><a href="anova-comparar-3-grupos-o-más.html#cb358-9" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">&quot;Red&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb358-10"><a href="anova-comparar-3-grupos-o-más.html#cb358-10" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb358-11"><a href="anova-comparar-3-grupos-o-más.html#cb358-11" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Niveles de inteligencia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb358-12"><a href="anova-comparar-3-grupos-o-más.html#cb358-12" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(), <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb358-13"><a href="anova-comparar-3-grupos-o-más.html#cb358-13" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>(), <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-171-1.png" width="672" /></p>
 <p>Luego podemos hacer una descripción de los datos.</p>
-<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="anova-comparar-3-grupos-o-más.html#cb411-1" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">by</span>(dat1<span class="sc">$</span>Inteligencia, </span>
-<span id="cb411-2"><a href="anova-comparar-3-grupos-o-más.html#cb411-2" tabindex="-1"></a>           dat1<span class="sc">$</span>Dosis, </span>
-<span id="cb411-3"><a href="anova-comparar-3-grupos-o-más.html#cb411-3" tabindex="-1"></a>           stat.desc, <span class="at">basic =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb411-4"><a href="anova-comparar-3-grupos-o-más.html#cb411-4" tabindex="-1"></a>           <span class="at">norm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb411-5"><a href="anova-comparar-3-grupos-o-más.html#cb411-5" tabindex="-1"></a><span class="fu">lapply</span>(test,round,<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="anova-comparar-3-grupos-o-más.html#cb359-1" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">by</span>(dat1<span class="sc">$</span>Inteligencia, </span>
+<span id="cb359-2"><a href="anova-comparar-3-grupos-o-más.html#cb359-2" tabindex="-1"></a>           dat1<span class="sc">$</span>Dosis, </span>
+<span id="cb359-3"><a href="anova-comparar-3-grupos-o-más.html#cb359-3" tabindex="-1"></a>           stat.desc, <span class="at">basic =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb359-4"><a href="anova-comparar-3-grupos-o-más.html#cb359-4" tabindex="-1"></a>           <span class="at">norm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb359-5"><a href="anova-comparar-3-grupos-o-más.html#cb359-5" tabindex="-1"></a><span class="fu">lapply</span>(test,round,<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## $Placebo
 ##       median         mean      SE.mean CI.mean.0.95          var      std.dev     coef.var     skewness     skew.2SE 
 ##         2.00         2.20         0.58         1.62         1.70         1.30         0.59         0.26         0.14 
@@ -396,15 +394,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##        -1.91        -0.48         0.99         0.97</code></pre>
 <p>La función <strong>by</strong> permite calcular los estadísticos. La función <strong>round</strong> redondea los valores a dos décimas. Y la función <strong>lapply</strong> permite aplicar la función round de forma másiva.</p>
 <p>Antes de hacer el ANOVA verificamos si existen problemas de homgeneidad de varianza. Podemos hacerlo con la función <strong>leveneTest</strong></p>
-<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="anova-comparar-3-grupos-o-más.html#cb413-1" tabindex="-1"></a><span class="fu">leveneTest</span>(dat1<span class="sc">$</span>Inteligencia, dat1<span class="sc">$</span>Dosis, <span class="at">center =</span> mean)</span></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="anova-comparar-3-grupos-o-más.html#cb361-1" tabindex="-1"></a><span class="fu">leveneTest</span>(dat1<span class="sc">$</span>Inteligencia, dat1<span class="sc">$</span>Dosis, <span class="at">center =</span> mean)</span></code></pre></div>
 <pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = mean)
 ##       Df F value Pr(&gt;F)
 ## group  2  0.0917  0.913
 ##       12</code></pre>
 <p>Si la prueba de Levene es significativa entonces las varianzas son diferentes entre los grupos.
 En ese caso podemos aplicar la F de Welch a los datos. Esta prueba hace ajustes por las diferencias que hay entre las varianzas de cada grupo.</p>
-<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="anova-comparar-3-grupos-o-más.html#cb415-1" tabindex="-1"></a>AOV_W <span class="ot">&lt;-</span> <span class="fu">oneway.test</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> dat1)</span>
-<span id="cb415-2"><a href="anova-comparar-3-grupos-o-más.html#cb415-2" tabindex="-1"></a>AOV_W</span></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="anova-comparar-3-grupos-o-más.html#cb363-1" tabindex="-1"></a>AOV_W <span class="ot">&lt;-</span> <span class="fu">oneway.test</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> dat1)</span>
+<span id="cb363-2"><a href="anova-comparar-3-grupos-o-más.html#cb363-2" tabindex="-1"></a>AOV_W</span></code></pre></div>
 <pre><code>## 
 ##  One-way analysis of means (not assuming equal variances)
 ## 
@@ -412,8 +410,8 @@ En ese caso podemos aplicar la F de Welch a los datos. Esta prueba hace ajustes 
 ## F = 4.3205, num df = 2.0000, denom df = 7.9434, p-value = 0.05374</code></pre>
 <p>En nuestro caso no tuvimos problema en relación a la homgeneidad de varianza. Podemos hacer entonces el análisis estadístico, aplicando la función <strong>aov</strong>.
 Enseguida aplicamos la función <strong>sumary</strong> para visualizar los resultados del test.</p>
-<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="anova-comparar-3-grupos-o-más.html#cb417-1" tabindex="-1"></a>m_AOV <span class="ot">&lt;-</span> <span class="fu">aov</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> dat1)</span>
-<span id="cb417-2"><a href="anova-comparar-3-grupos-o-más.html#cb417-2" tabindex="-1"></a><span class="fu">summary</span>(m_AOV)</span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="anova-comparar-3-grupos-o-más.html#cb365-1" tabindex="-1"></a>m_AOV <span class="ot">&lt;-</span> <span class="fu">aov</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> dat1)</span>
+<span id="cb365-2"><a href="anova-comparar-3-grupos-o-más.html#cb365-2" tabindex="-1"></a><span class="fu">summary</span>(m_AOV)</span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)  
 ## Dosis        2  20.13  10.067   5.119 0.0247 *
 ## Residuals   12  23.60   1.967                 
@@ -425,10 +423,10 @@ Enseguida aplicamos la función <strong>sumary</strong> para visualizar los resu
 ¿Te acuerdas que reflejan el intercepto y la pendiente (o beta) de una ecuación que represente el ANOVA?</p>
 <p>Vamos a usar el dummy coding para desarrollar esta idea.
 Primero carguemos uno base de datos idéntica a la anterior pero con una columna extra con el dumming coding.</p>
-<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="anova-comparar-3-grupos-o-más.html#cb419-1" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/inteligencia_c_Variables.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb419-2"><a href="anova-comparar-3-grupos-o-más.html#cb419-2" tabindex="-1"></a>dat2<span class="sc">$</span>Dosis <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat2<span class="sc">$</span>Dosis, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>),</span>
-<span id="cb419-3"><a href="anova-comparar-3-grupos-o-más.html#cb419-3" tabindex="-1"></a>                         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))</span>
-<span id="cb419-4"><a href="anova-comparar-3-grupos-o-más.html#cb419-4" tabindex="-1"></a>dat2</span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="anova-comparar-3-grupos-o-más.html#cb367-1" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/inteligencia_c_Variables.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb367-2"><a href="anova-comparar-3-grupos-o-más.html#cb367-2" tabindex="-1"></a>dat2<span class="sc">$</span>Dosis <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat2<span class="sc">$</span>Dosis, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>),</span>
+<span id="cb367-3"><a href="anova-comparar-3-grupos-o-más.html#cb367-3" tabindex="-1"></a>                         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Alta&quot;</span>))</span>
+<span id="cb367-4"><a href="anova-comparar-3-grupos-o-más.html#cb367-4" tabindex="-1"></a>dat2</span></code></pre></div>
 <pre><code>##      Dosis Inteligencia Baja Alta
 ## 1  Placebo            3    0    0
 ## 2  Placebo            2    0    0
@@ -446,8 +444,8 @@ Primero carguemos uno base de datos idéntica a la anterior pero con una columna
 ## 14    Alta            3    0    1
 ## 15    Alta            6    0    1</code></pre>
 <p>Vamos a hacer un modelo lineal dónde tratemos de predecir los niveles de inteligencia en base a nuestro dummy coding (que en el fondo refleja los efectos que resultan de comparar los grupos experimentales con un grupo base).</p>
-<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="anova-comparar-3-grupos-o-más.html#cb421-1" tabindex="-1"></a>m_dummy1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Inteligencia <span class="sc">~</span> Baja <span class="sc">+</span> Alta, <span class="at">data =</span> dat2)</span>
-<span id="cb421-2"><a href="anova-comparar-3-grupos-o-más.html#cb421-2" tabindex="-1"></a><span class="fu">summary</span>(m_dummy1)</span></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="anova-comparar-3-grupos-o-más.html#cb369-1" tabindex="-1"></a>m_dummy1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Inteligencia <span class="sc">~</span> Baja <span class="sc">+</span> Alta, <span class="at">data =</span> dat2)</span>
+<span id="cb369-2"><a href="anova-comparar-3-grupos-o-más.html#cb369-2" tabindex="-1"></a><span class="fu">summary</span>(m_dummy1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Inteligencia ~ Baja + Alta, data = dat2)
@@ -468,7 +466,7 @@ Primero carguemos uno base de datos idéntica a la anterior pero con una columna
 ## Multiple R-squared:  0.4604, Adjusted R-squared:  0.3704 
 ## F-statistic: 5.119 on 2 and 12 DF,  p-value: 0.02469</code></pre>
 <p>Al mismo tiempo aprovechemos de calcular los promedios para los valores de inteligencia de acuerdo a cada grupo experimental</p>
-<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="anova-comparar-3-grupos-o-más.html#cb423-1" tabindex="-1"></a><span class="fu">aggregate</span>(dat2<span class="sc">$</span>Inteligencia, <span class="fu">list</span>(dat2<span class="sc">$</span>Dosis), mean)</span></code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="anova-comparar-3-grupos-o-más.html#cb371-1" tabindex="-1"></a><span class="fu">aggregate</span>(dat2<span class="sc">$</span>Inteligencia, <span class="fu">list</span>(dat2<span class="sc">$</span>Dosis), mean)</span></code></pre></div>
 <pre><code>##   Group.1   x
 ## 1 Placebo 2.2
 ## 2    Baja 3.2
@@ -480,8 +478,8 @@ Primero carguemos uno base de datos idéntica a la anterior pero con una columna
 <p>Tal como lo habíamos concebido anteriormente!
 ¿Necesitamos definir un dummy coding para hacer esto? En realidad R lo hace por defecto.</p>
 <p>Si hacemos un modelo para predecir los niveles de inteligencia directamente de la columna que indica las dosis obtenemos exactamente el mismo modelo.</p>
-<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="anova-comparar-3-grupos-o-más.html#cb425-1" tabindex="-1"></a>m_dummy2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> dat2)</span>
-<span id="cb425-2"><a href="anova-comparar-3-grupos-o-más.html#cb425-2" tabindex="-1"></a><span class="fu">summary</span>(m_dummy2)</span></code></pre></div>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="anova-comparar-3-grupos-o-más.html#cb373-1" tabindex="-1"></a>m_dummy2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> dat2)</span>
+<span id="cb373-2"><a href="anova-comparar-3-grupos-o-más.html#cb373-2" tabindex="-1"></a><span class="fu">summary</span>(m_dummy2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Inteligencia ~ Dosis, data = dat2)
@@ -502,7 +500,7 @@ Primero carguemos uno base de datos idéntica a la anterior pero con una columna
 ## Multiple R-squared:  0.4604, Adjusted R-squared:  0.3704 
 ## F-statistic: 5.119 on 2 and 12 DF,  p-value: 0.02469</code></pre>
 <p>Por úlitmo, fíjate que cuando usamos la función <strong>aov</strong> para hacer el ANOVA obtuvimos una versión resumida de lo que obtenemos al realizar el modelo lineal con la función <strong>lm</strong>. En el fondo esto refleja que una ANOVA es un modelo lineal que esta disfrazado. Esto es lo que se llama una función <em>wraper</em>. De hecho podemos ver el modelo completo si al resultado del <strong>aov</strong> le aplicamos la función <strong>summary.lm</strong>.</p>
-<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="anova-comparar-3-grupos-o-más.html#cb427-1" tabindex="-1"></a><span class="fu">summary.lm</span>(m_AOV)</span></code></pre></div>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="anova-comparar-3-grupos-o-más.html#cb375-1" tabindex="-1"></a><span class="fu">summary.lm</span>(m_AOV)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## aov(formula = Inteligencia ~ Dosis, data = dat1)
@@ -523,38 +521,38 @@ Primero carguemos uno base de datos idéntica a la anterior pero con una columna
 ## Multiple R-squared:  0.4604, Adjusted R-squared:  0.3704 
 ## F-statistic: 5.119 on 2 and 12 DF,  p-value: 0.02469</code></pre>
 <p>Finalmente, podemos hacer algunos gráficos que podemos extraer del modelo de ANOVA.</p>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="anova-comparar-3-grupos-o-más.html#cb429-1" tabindex="-1"></a><span class="fu">plot</span>(m_AOV)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-182-1.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-182-2.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-182-3.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-182-4.png" width="672" /></p>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="anova-comparar-3-grupos-o-más.html#cb377-1" tabindex="-1"></a><span class="fu">plot</span>(m_AOV)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-181-1.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-181-2.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-181-3.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-181-4.png" width="672" /></p>
 <p>Los dos primeros gráficos son los mas importantes.
 El gráfico 1 muestra la homogeneidad de varianza. Si ves una forma de embudo entonces hay en problemas en la homgeneidad de varianza. La idea es que los puntos estén igualmente repartidos. Es decir, las variaciones son similares entre los grupos.
 El gráfico 2 es un gráfico Q-Q. Si los puntos están sobre la diagonal entonces se cumple el suspuesto de la normalidad de los datos.</p>
 <p>Para terminar siempre es bueno calcular el tamaño del efecto.
 Recuerda que hicimos en el ANOVA.</p>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="anova-comparar-3-grupos-o-más.html#cb430-1" tabindex="-1"></a>m_AOV <span class="ot">&lt;-</span> <span class="fu">aov</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> dat1)</span>
-<span id="cb430-2"><a href="anova-comparar-3-grupos-o-más.html#cb430-2" tabindex="-1"></a>summModel <span class="ot">&lt;-</span> <span class="fu">summary.lm</span>(m_AOV)</span></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="anova-comparar-3-grupos-o-más.html#cb378-1" tabindex="-1"></a>m_AOV <span class="ot">&lt;-</span> <span class="fu">aov</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> dat1)</span>
+<span id="cb378-2"><a href="anova-comparar-3-grupos-o-más.html#cb378-2" tabindex="-1"></a>summModel <span class="ot">&lt;-</span> <span class="fu">summary.lm</span>(m_AOV)</span></code></pre></div>
 <p>En el contexto de ANOVA, r^2 generalmente se llama eta cuadrado.
 Se puede obtener desde el modelo.</p>
-<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="anova-comparar-3-grupos-o-más.html#cb431-1" tabindex="-1"></a>summModel<span class="sc">$</span>r.squared</span></code></pre></div>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="anova-comparar-3-grupos-o-más.html#cb379-1" tabindex="-1"></a>summModel<span class="sc">$</span>r.squared</span></code></pre></div>
 <pre><code>## [1] 0.4603659</code></pre>
 <p>Pero también se puede calcular con la función <strong>etaSquared</strong> (de la librería <em>effsize</em>).</p>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="anova-comparar-3-grupos-o-más.html#cb433-1" tabindex="-1"></a><span class="fu">etaSquared</span>(m_AOV)</span></code></pre></div>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="anova-comparar-3-grupos-o-más.html#cb381-1" tabindex="-1"></a><span class="fu">etaSquared</span>(m_AOV)</span></code></pre></div>
 <pre><code>##          eta.sq eta.sq.part
 ## Dosis 0.4603659   0.4603659</code></pre>
 <p>Alternativamente también podemos calcular Omega cuadrado usando una función.</p>
-<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="anova-comparar-3-grupos-o-más.html#cb435-1" tabindex="-1"></a>omega <span class="ot">&lt;-</span> <span class="cf">function</span>(SSm, SSr, dfm, MSr)</span>
-<span id="cb435-2"><a href="anova-comparar-3-grupos-o-más.html#cb435-2" tabindex="-1"></a>{</span>
-<span id="cb435-3"><a href="anova-comparar-3-grupos-o-más.html#cb435-3" tabindex="-1"></a>  SSt <span class="ot">=</span> SSm <span class="sc">+</span> SSr</span>
-<span id="cb435-4"><a href="anova-comparar-3-grupos-o-más.html#cb435-4" tabindex="-1"></a>  omega <span class="ot">=</span> (SSm<span class="sc">-</span>(dfm<span class="sc">*</span>MSr))<span class="sc">/</span>(SSt<span class="sc">+</span>MSr)</span>
-<span id="cb435-5"><a href="anova-comparar-3-grupos-o-más.html#cb435-5" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Omega-Squared: &quot;</span>, omega))</span>
-<span id="cb435-6"><a href="anova-comparar-3-grupos-o-más.html#cb435-6" tabindex="-1"></a>  omega</span>
-<span id="cb435-7"><a href="anova-comparar-3-grupos-o-más.html#cb435-7" tabindex="-1"></a>}</span>
-<span id="cb435-8"><a href="anova-comparar-3-grupos-o-más.html#cb435-8" tabindex="-1"></a></span>
-<span id="cb435-9"><a href="anova-comparar-3-grupos-o-más.html#cb435-9" tabindex="-1"></a>omega1 <span class="ot">&lt;-</span> <span class="fu">omega</span>(<span class="fl">20.133</span>, <span class="fl">23.600</span>, <span class="dv">2</span>, <span class="fl">1.9667</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="anova-comparar-3-grupos-o-más.html#cb383-1" tabindex="-1"></a>omega <span class="ot">&lt;-</span> <span class="cf">function</span>(SSm, SSr, dfm, MSr)</span>
+<span id="cb383-2"><a href="anova-comparar-3-grupos-o-más.html#cb383-2" tabindex="-1"></a>{</span>
+<span id="cb383-3"><a href="anova-comparar-3-grupos-o-más.html#cb383-3" tabindex="-1"></a>  SSt <span class="ot">=</span> SSm <span class="sc">+</span> SSr</span>
+<span id="cb383-4"><a href="anova-comparar-3-grupos-o-más.html#cb383-4" tabindex="-1"></a>  omega <span class="ot">=</span> (SSm<span class="sc">-</span>(dfm<span class="sc">*</span>MSr))<span class="sc">/</span>(SSt<span class="sc">+</span>MSr)</span>
+<span id="cb383-5"><a href="anova-comparar-3-grupos-o-más.html#cb383-5" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Omega-Squared: &quot;</span>, omega))</span>
+<span id="cb383-6"><a href="anova-comparar-3-grupos-o-más.html#cb383-6" tabindex="-1"></a>  omega</span>
+<span id="cb383-7"><a href="anova-comparar-3-grupos-o-más.html#cb383-7" tabindex="-1"></a>}</span>
+<span id="cb383-8"><a href="anova-comparar-3-grupos-o-más.html#cb383-8" tabindex="-1"></a></span>
+<span id="cb383-9"><a href="anova-comparar-3-grupos-o-más.html#cb383-9" tabindex="-1"></a>omega1 <span class="ot">&lt;-</span> <span class="fu">omega</span>(<span class="fl">20.133</span>, <span class="fl">23.600</span>, <span class="dv">2</span>, <span class="fl">1.9667</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Omega-Squared:  0.35447935106795&quot;</code></pre>
-<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="anova-comparar-3-grupos-o-más.html#cb437-1" tabindex="-1"></a>omega1</span></code></pre></div>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="anova-comparar-3-grupos-o-más.html#cb385-1" tabindex="-1"></a>omega1</span></code></pre></div>
 <pre><code>## [1] 0.3544794</code></pre>
 <p>O también usar la función <strong>omega_squared</strong> (de la librería <em>effectsize</em>).</p>
-<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="anova-comparar-3-grupos-o-más.html#cb439-1" tabindex="-1"></a><span class="fu">omega_squared</span>(m_AOV)</span></code></pre></div>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="anova-comparar-3-grupos-o-más.html#cb387-1" tabindex="-1"></a><span class="fu">omega_squared</span>(m_AOV)</span></code></pre></div>
 <pre><code>## For one-way between subjects designs, partial omega squared is equivalent to omega squared. Returning omega
 ##   squared.</code></pre>
 <pre><code>## # Effect Size for ANOVA
@@ -566,7 +564,7 @@ Se puede obtener desde el modelo.</p>
 ## - One-sided CIs: upper bound fixed at [1.00].</code></pre>
 <p>Por último, para realizar un ANOVA no paramétrico puedes usar la función <strong>kruskal.test</strong>.
 Supongamos que para nuestros datos no logramos cumplir con los supuestos para aplicar estadística paramétrica.</p>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="anova-comparar-3-grupos-o-más.html#cb442-1" tabindex="-1"></a><span class="fu">kruskal.test</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> dat1)</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="anova-comparar-3-grupos-o-más.html#cb390-1" tabindex="-1"></a><span class="fu">kruskal.test</span>(Inteligencia <span class="sc">~</span> Dosis, <span class="at">data =</span> dat1)</span></code></pre></div>
 <pre><code>## 
 ##  Kruskal-Wallis rank sum test
 ## 
